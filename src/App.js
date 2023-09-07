@@ -5,7 +5,7 @@ import Buttons from "./components/globals/Buttons";
 function App() {
   return (
     <div>
-      <Buttons size={"large"} type={"outlined"} color={"dark"}>
+      <Buttons size={"large"} light={true} type={"contained"} color={"primary"}>
           مشاهده همه
       </Buttons>
     </div>
