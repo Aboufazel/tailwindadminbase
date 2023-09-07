@@ -1,9 +1,12 @@
+import {Typography} from "@material-tailwind/react";
 
-import('preline');
+
 function App() {
   return (
     <div>
-      <p>سلام به همه</p>
+      <Typography className={"font-bold"}>
+          سلام به همه
+      </Typography>
     </div>
   );
 }
