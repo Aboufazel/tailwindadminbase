@@ -7,9 +7,20 @@ module.exports = withMT({
     "path-to-your-node_modules/@material-tailwind/react/theme/components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      boxShadow:{
+        'primary':'0px 2px 4px  rgba(58, 87, 232, 0.30)',
+        'secondary':'0px 2px 4px  rgba(108, 117, 125, 0.30)',
+        'info':'0px 2px 4px  rgba(7, 154, 162, 0.30)',
+        'success':'0px 2px 4px  rgba(26, 160, 83, 0.30)',
+        'danger':'0px 2px 4px  rgba(192, 50, 33, 0.30)',
+        'warning':'0px 2px 4px  rgba(241, 106, 27, 0.30)',
+        'light':'0px 2px 4px rgba(222, 226, 230, 0.30)',
+        'dark':'0px 2px 4px rgba(33, 37, 41, 0.30)',
+      }
+    },
     fontFamily: {
-      sans: ["Estedad", "sans-serif"],
+      sans: ["Estedad"],
     },
     colors:{
       'primary':{

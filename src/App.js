@@ -1,12 +1,13 @@
-import {Typography} from "@material-tailwind/react";
+
+import Buttons from "./components/globals/Buttons";
 
 
 function App() {
   return (
     <div>
-      <Typography className={"text-base font-bold"}>
-          سلام به همه
-      </Typography>
+      <Buttons size={"large"} type={"outlined"} color={"dark"}>
+          مشاهده همه
+      </Buttons>
     </div>
   );
 }
