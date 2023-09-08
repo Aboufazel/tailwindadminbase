@@ -1,5 +1,4 @@
 
-import Buttons from "./components/globals/Buttons";
 import Root from "./Root";
 
 
