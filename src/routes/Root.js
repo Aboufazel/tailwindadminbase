@@ -1,6 +1,6 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import AuthLayouts from "./layouts/authLayouts";
-import SignUp from "./layouts/auth/signUp";
+import AuthLayouts from "../layouts/authLayouts";
+import SignUp from "../layouts/auth/signUp";
 
 const Root = () => {
 
@@ -13,7 +13,7 @@ const Root = () => {
                     path: '/signUp',
                     element: <SignUp/>
                 }
-            ]
+            ],
         }
     ])
 
