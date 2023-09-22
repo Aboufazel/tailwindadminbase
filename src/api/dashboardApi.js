@@ -5,7 +5,6 @@ const BaseUrl = axios.create({
 })
 
 export const LoginApi = (data) =>{
-    console.log(data , "api admin send data")
     return BaseUrl.post(`api/login` , {email:data.email , password:data.password})
 }
 

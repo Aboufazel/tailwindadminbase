@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import {Outlet} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
 import React, {useState} from "react";
 import LoginPic from "../assets/img/Login/Graphic Side.png";
 import waterMark from "../assets/img/Login/waterMark.png";
@@ -11,8 +11,14 @@ import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup"
 import EventEmitter from "reactjs-eventemitter";
 import {LoginApi} from "../api/dashboardApi";
+import useStorage from "../hooks/useStorage";
 const AuthLayouts = () => {
     const [loading, setLoading] = useState(false);
+    const [, setAuthInfo] = useStorage("auth", {
+        userId: "",
+        accessToken: "",
+    })
+    const navigate = useNavigate()
 
     const formValidate = yup.object().shape({
         email:yup.string().required("وارد کردن ایمیل اجباری است"),
@@ -32,11 +38,13 @@ const AuthLayouts = () => {
             setLoading(false);
             EventEmitter.emit('reload_captcha')
         })
+        setAuthInfo({
+            userId: res.data.id,
+            accessToken: res.data.token,
+        })
+        navigate('/main')
         setLoading(false);
         reset()
-
-
-        console.log(res)
     }
 
 

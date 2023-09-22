@@ -1,7 +1,9 @@
 const Admin = () => {
 
     return(
-        "admin"
+        <div className={"bg-pink-200 text-black"}>
+            admin
+        </div>
     )
 }
 
