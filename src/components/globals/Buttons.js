@@ -1,6 +1,6 @@
 
 import {Button} from "@material-tailwind/react";
-const Buttons = ({children , variant='contained' , cls ,size='normal' , icon=false , color='primary' ,fullWidth=false , rounded=false , light=false , ...props }) => {
+const Buttons = ({children , variant='contained',loading=false , cls ,size='normal' , icon=false , color='primary' ,fullWidth=false , rounded=false , light=false , ...props }) => {
 
     const sizes = {
         exSmall: `px-[8px] py-[2px] text-[13px] ${rounded ? "rounded-full" : "rounded-[2px]"}`,
@@ -34,7 +34,7 @@ const Buttons = ({children , variant='contained' , cls ,size='normal' , icon=fal
 
 
     return(
-        <Button {...props} size={sizes}  className={`font-normal ${cls} ${colors[variant][color]} ${sizes[size]}`} >
+        <Button {...props} size={sizes} onLoad={loading} className={`font-normal ${cls} ${colors[variant][color]} ${sizes[size]}`} >
             {children}
         </Button>
     )
