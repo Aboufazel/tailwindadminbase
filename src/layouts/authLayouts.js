@@ -12,6 +12,7 @@ import {yupResolver} from "@hookform/resolvers/yup"
 import EventEmitter from "reactjs-eventemitter";
 import {LoginApi} from "../api/dashboardApi";
 import useStorage from "../hooks/useStorage";
+import {toast} from "react-toastify";
 const AuthLayouts = () => {
     const [loading, setLoading] = useState(false);
     const [, setAuthInfo] = useStorage("auth", {
@@ -42,6 +43,7 @@ const AuthLayouts = () => {
             userId: res.data.id,
             accessToken: res.data.token,
         })
+        toast.success("با موفقیت وارد شدید")
         navigate('/main')
         setLoading(false);
         reset()
