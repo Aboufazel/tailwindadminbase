@@ -53,10 +53,10 @@ const AuthLayouts = () => {
     return(
         <div className={"flex flex-row w-full overflow-hidden"}>
             <div className={"w-1/2"}>
-               <img src={LoginPic} alt={"admin login pic"}/>
+               <img src={LoginPic} alt={"adminHeader login pic"}/>
             </div>
             <div className={"flex flex-col w-1/2 items-center relative"}>
-                <img src={waterMark} alt={"admin water mark"}  className={"xl:w-[350px] absolute -top-0 -left-0"}/>
+                <img src={waterMark} alt={"adminHeader water mark"}  className={"xl:w-[350px] absolute -top-0 -left-0"}/>
                 <Logo cls={"xl:mt-[200px]"}/>
                 <p className={"font-bold text-center mt-[40px] text-[33px] text-black"}>
                     {" ورود به پنل "}
