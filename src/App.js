@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
       <QueryClientProvider client={queryClient}>
-          <ToastContainer position="top-right"
+          <ToastContainer position="bottom-left"
                           autoClose={5000}
                           hideProgressBar={false}
                           newestOnTop={false}
