@@ -34,6 +34,7 @@ const AuthLayouts = () => {
     });
 
     const onFormSubmit = async (data) =>{
+        console.log(data , 'data')
         setLoading(true);
         const res = await LoginApi(data).catch(() => {
             setLoading(false);

@@ -73,6 +73,11 @@ module.exports = withMT({
         '600':'#212529',
       }
     },
+    shadow:{
+      boxShadow:{
+        'primary25':'0 2px 4px 0px rgba(138, 146, 166, 0.3)',
+      },
+    },
   },
   plugins: [],
 });

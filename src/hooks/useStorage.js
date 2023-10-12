@@ -27,7 +27,7 @@ function useStorage(
             const value = JSON.parse(rawValue);
             setState(value);
         }
-    }, [key, initialValue, rawInitialValue]);
+    }, [key]);
 
     return [state, setStorage];
 }
