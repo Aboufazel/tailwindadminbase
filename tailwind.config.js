@@ -38,6 +38,11 @@ module.exports = withMT({
         '3':'#adb5bd',
       },
 
+      'bg':{
+        '2':'#e9ecef',
+        '3':'#e3e3e3',
+      },
+
       'secondary':{
         '100':'#6C757D33',
         '600':'#6C757D',
@@ -76,6 +81,8 @@ module.exports = withMT({
     shadow:{
       boxShadow:{
         'primary25':'0 2px 4px 0px rgba(138, 146, 166, 0.3)',
+        'card1':'0 10px 30px 0px rgba(17, 38, 146, 0.05)',
+        'cards':'0 10px 30px 0px rgba(17,38,146,0.5)',
       },
     },
   },

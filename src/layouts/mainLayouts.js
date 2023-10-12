@@ -1,9 +1,9 @@
 import {Outlet} from "react-router-dom";
 import AdminHeader from "../components/adminHeader/adminHeader";
-import MainImg from "../assets/img/GraphicSide (1).png"
 import SideMenu from "../components/sideMenu/sideMenu";
 import {ArrowRight} from "react-iconly";
 import {useState} from "react";
+import ServicesBriflyBlock from "../components/servicesBriflyBlock/servicesBriflyBlock";
 const MainLayouts = () => {
 const [closeSide , setCloseSide] = useState(false)
 
@@ -18,12 +18,14 @@ const [closeSide , setCloseSide] = useState(false)
                 </div>
                 <SideMenu manageOpenAndClose={closeSide}/>
             </div>
-            <div className={`${closeSide ? "w-11/12" : "w-10/12"} overflow-y-scroll bg-light-600`}>
+            <div className={`${closeSide ? "w-11/12" : "w-10/12"} transition-all duration-300 overflow-y-scroll bg-light-600`}>
                 <div className={"sticky top-0 w-full"}>
                     <AdminHeader/>
                 </div>
-                <img src={MainImg} alt={"dash main elements"}/>
-                <Outlet/>
+                <ServicesBriflyBlock/>
+                <div className={"w-full px-[40px]"}>
+                    <Outlet/>
+                </div>
             </div>
         </div>
     )

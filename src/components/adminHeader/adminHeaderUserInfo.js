@@ -22,7 +22,7 @@ const AdminHeaderUserInfo = ({userData}) => {
             accessToken: "",
         })
         navigate('/')
-        toast.warning("از حساب خود خارج شدید!")
+        toast.info("از حساب خود خارج شدید!")
     }
     const MenuRenderFunction = () =>{
         return(
