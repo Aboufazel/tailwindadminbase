@@ -9,7 +9,6 @@ import Inputs from "../components/globals/inputs/inputs";
 import Buttons from "../components/globals/Buttons";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup"
-import EventEmitter from "reactjs-eventemitter";
 import {LoginApi} from "../api/dashboardApi";
 import useStorage from "../hooks/useStorage";
 import {toast} from "react-toastify";
@@ -34,14 +33,13 @@ const AuthLayouts = () => {
     });
 
     const onFormSubmit = async (data) =>{
-        console.log(data , 'data')
         setLoading(true);
-        const res = await LoginApi(data).catch(() => {
+        const res = await LoginApi(data).catch((e) => {
+            toast.error(e)
             setLoading(false);
-            EventEmitter.emit('reload_captcha')
         })
         setAuthInfo({
-            userId: res.data.id,
+            userId: data.email,
             accessToken: res.data.token,
         })
         toast.success("با موفقیت وارد شدید")

@@ -10,19 +10,21 @@ import {Edit, Logout, User} from "react-iconly";
 import useStorage from "../../hooks/useStorage";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
+import Storage from "../../services/storage";
 const AdminHeaderUserInfo = ({userData}) => {
     const [, setAuthInfo] = useStorage("auth", {
         userId: "",
         accessToken: "",
     })
     const navigate = useNavigate();
+    const storage = Storage()
     const manageLogOut = ()=>{
         setAuthInfo({
             userId: "",
             accessToken: "",
         })
         navigate('/')
-        toast.info("از حساب خود خارج شدید!")
+        toast.error("از حساب خود خارج شدید!")
     }
     const MenuRenderFunction = () =>{
         return(
@@ -31,20 +33,20 @@ const AdminHeaderUserInfo = ({userData}) => {
                     <img src={userIcon} alt={"admin user icon"} className={"w-[45px]"}/>
                 </MenuHandler>
                 <MenuList>
-                    <MenuItem className="flex items-center gap-2">
+                    <MenuItem className="flex hover:!bg-primary-main hover:!text-white items-center gap-2">
                         <User set={"bulk"}/>
                         <Typography variant="small" className="font-medium">
                             {"پروفایل"}
                         </Typography>
                     </MenuItem>
-                    <MenuItem className="flex items-center gap-2">
+                    <MenuItem className="flex hover:!bg-primary-main hover:!text-white  items-center gap-2">
                         <Edit set={"bulk"}/>
                         <Typography variant="small" className="font-normal">
                             {"ویرایش پروفایل"}
                         </Typography>
                     </MenuItem>
                     <hr className="my-2 border-blue-gray-50" />
-                    <MenuItem onClick={manageLogOut} className="flex items-center gap-2 ">
+                    <MenuItem onClick={manageLogOut} className="flex hover:!bg-red-500 hover:!text-white items-center gap-2 ">
                         <Logout set={"bulk"}/>
                         <Typography variant="small" className="font-normal">
                             {"خروج از حساب"}
@@ -58,12 +60,12 @@ const AdminHeaderUserInfo = ({userData}) => {
 
 
     return(
-        <div className={"flex flex-row w-1/3 gap-[16px] items-center"}>
+        <div className={"flex flex-row max-w-max ml-3 gap-[16px] items-center"}>
             <MenuRenderFunction/>
             <p className={"text-text-color-1 text-[14px]"}>
-                {"ابوفاضل عباسی خوشمکانی"}
+                {storage.userId}{/*{"ابوفاضل عباسی خوشمکانی"}*/}
                 <span className={"block text-text-color-2 mt-1"}>
-                    {"برنامه نویس"}
+                    {"مدیر"}
                 </span>
             </p>
         </div>

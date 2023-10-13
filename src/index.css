@@ -15,3 +15,8 @@
         overflow-y: hidden;
     }
 }
+
+/* toast configure custom font */
+.Toastify__toast{
+    font-family: Estedad , sans-serif !important;
+}
