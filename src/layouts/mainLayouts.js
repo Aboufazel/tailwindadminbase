@@ -3,7 +3,6 @@ import AdminHeader from "../components/adminHeader/adminHeader";
 import SideMenu from "../components/sideMenu/sideMenu";
 import {ArrowRight} from "react-iconly";
 import {useState} from "react";
-import ServicesBriflyBlock from "../components/servicesBriflyBlock/servicesBriflyBlock";
 const MainLayouts = () => {
 const [closeSide , setCloseSide] = useState(false)
 
