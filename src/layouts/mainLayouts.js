@@ -22,8 +22,7 @@ const [closeSide , setCloseSide] = useState(false)
                 <div className={"sticky top-0 w-full"}>
                     <AdminHeader/>
                 </div>
-                <ServicesBriflyBlock/>
-                <div className={"w-full px-[40px]"}>
+                <div className={"w-full"}>
                     <Outlet/>
                 </div>
             </div>

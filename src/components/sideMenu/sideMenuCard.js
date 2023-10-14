@@ -1,10 +1,12 @@
 import {Tooltip} from "@material-tailwind/react";
+import {useNavigate} from "react-router-dom";
 
 const SideMenuCard = ({data , index , manageOpenAndClose}) => {
+const navigate = useNavigate()
 
     return(
         <Tooltip content={data.title}  className={manageOpenAndClose ? "bg-primary-main text-white" : "hidden"} placement="left">
-            <div key={data.id + index}
+            <div onClick={()=>navigate(data.link)} key={data.id + index}
                  className={`flex flex-row items-center
              ${manageOpenAndClose ? "justify-center" : ""}
              transition-all
