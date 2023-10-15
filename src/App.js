@@ -3,9 +3,15 @@ import {QueryClientProvider} from "@tanstack/react-query";
 import {queryClient} from "./client";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import buildProviderTree from "./hooks/buildProviderTree";
+
+const ProviderTree = buildProviderTree([
+    [QueryClientProvider , {client:queryClient}],
+])
 function App() {
+
   return (
-      <QueryClientProvider client={queryClient}>
+      <ProviderTree>
           <ToastContainer position="bottom-left"
                           autoClose={5000}
                           style={{fontFamily:"Estedad"}}
@@ -17,7 +23,7 @@ function App() {
                           pauseOnHover
                           theme="light" rtl={true}/>
         <Root/>
-      </QueryClientProvider>
+      </ProviderTree>
   );
 }
 
