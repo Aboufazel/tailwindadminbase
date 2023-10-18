@@ -9,7 +9,6 @@ export const LoginApi = (data) =>{
 }
 
 export const UserDetail = (id) =>{
-
     return BaseUrl.get(`/api/users/${id}`)
 }
 

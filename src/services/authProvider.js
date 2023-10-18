@@ -7,13 +7,12 @@ const AuthProvider = ({children}) => {
 
 
     const storage = Storage()
-
     if (!storage.accessToken) {
         return <Navigate to={"/"} />;
     }
     return (
         <>
-            {children}
+         {children}
         </>
     )
 
