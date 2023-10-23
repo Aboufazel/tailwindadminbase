@@ -12,7 +12,7 @@ const [closeSide , setCloseSide] = useState(false)
             <div className={`relative ${closeSide ? "w-1/12" : "w-2/12"} transition-all duration-300  bg-white`}>
                 <div
                     onClick={()=>setCloseSide(!closeSide)}
-                    className={`flex items-center absolute shadow shadow-primary25 cursor-pointer ${closeSide ? "rotate-180" : ""} transition-all duration-300 top-[22px] -left-[12px] z-10 justify-center w-[30px] h-[30px] bg-primary-main font-bold text-white rounded-full`}>
+                    className={`flex items-center absolute shadow shadow-primary25 cursor-pointer ${closeSide ? "rotate-180" : ""} transition-all duration-300 top-[22px] -left-[12px] z-50 justify-center w-[30px] h-[30px] bg-primary-main font-bold text-white rounded-full`}>
                     <ArrowRight set={"light"} size={18}/>
                 </div>
                 <SideMenu manageOpenAndClose={closeSide}/>

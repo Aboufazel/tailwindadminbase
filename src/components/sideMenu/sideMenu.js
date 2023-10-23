@@ -1,13 +1,13 @@
 import {adminSideMenuData} from "../../data/adminSideMenuData";
 import AdminLogo from "../globals/adminLogo/adminLogo";
 import SideMenuCard from "./sideMenuCard";
-
 const SideMenu = ({manageOpenAndClose}) => {
 
-    console.log(Object.keys(adminSideMenuData).length)
+
+
 
     return(
-       <div className={"w-full pt-[32px] px-[12px]"}>
+       <div className={"w-full pt-[32px] z-10 px-[12px]"}>
            <AdminLogo manageOpenAndClose={manageOpenAndClose}/>
            {
                Object.keys(adminSideMenuData).map((items , index) => (

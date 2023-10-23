@@ -12,7 +12,12 @@ import {yupResolver} from "@hookform/resolvers/yup"
 import {LoginApi} from "../api/dashboardApi";
 import useStorage from "../hooks/useStorage";
 import {toast} from "react-toastify";
+import Storage from "../services/storage";
+import {Navigate} from "react-router-dom";
+import {routes} from "../data/routes";
 const AuthLayouts = () => {
+    const storage = Storage()
+
     const [loading, setLoading] = useState(false);
     const [, setAuthInfo] = useStorage("auth", {
         userId: "",
@@ -48,6 +53,9 @@ const AuthLayouts = () => {
         reset()
     }
 
+    if(storage.accessToken){
+        return <Navigate to={routes.business}/>
+    }
 
     return(
         <div className={"flex flex-row w-full overflow-hidden"}>
