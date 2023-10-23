@@ -5,7 +5,7 @@ export const adminSideMenuData = {
         {id:'dashboard' , icon:<Category set={"bulk"}/> , title:'داشبورد' , child:false, link: routes.main , subMenu:[]},
     ],
     "مدیریت کسب و کار":[
-        {id:"business" , title:"کسب و کارها" , icon:<Bag set={"bulk"}/> , subMenu:[]}
+        {id:"business" , title:"کسب و کارها" , icon:<Bag set={"bulk"}/> , link: routes.business ,  subMenu:[]}
     ],
     "حسابداری":[
         {id:"coding-jobs" , title:"جامع بازرگانی" , icon:<Work set={"bulk"}/> , subMenu:[]},

@@ -6,6 +6,7 @@ import Admin from "../layouts/main/admin";
 import MainLayouts from "../layouts/mainLayouts";
 import {routes} from "../data/routes";
 import UserList from "../layouts/userList/userList";
+import BusinessLayout from "../layouts/business/businessLayout";
 
 const Root = () => {
 
@@ -36,6 +37,13 @@ const Root = () => {
                 element: (
                     <AuthProvider>
                         <UserList/>
+                    </AuthProvider>
+                )
+                },{
+                path: routes.business,
+                element:(
+                    <AuthProvider>
+                        <BusinessLayout/>
                     </AuthProvider>
                 )
                 }
