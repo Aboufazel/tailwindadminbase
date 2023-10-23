@@ -64,9 +64,10 @@ const AuthLayouts = () => {
                     </span>
                 </p>
                 <form onSubmit={handleSubmit(onFormSubmit)} className={"flex flex-col w-[436px] items-center mt-[16px]"}>
-                    {authInputsData.map(item => (
+                    {authInputsData.map((item , index) => (
                         <Inputs type={item.type}
                                 iClass={item.width}
+                                key={"input-value"+index}
                                 error={errors[item.inputName] ? errors[item.inputName].message : false}
                                 register={register}
                                 name={item.inputName}
