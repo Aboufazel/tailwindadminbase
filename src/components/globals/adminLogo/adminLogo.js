@@ -9,7 +9,7 @@ const AdminLogo = ({manageOpenAndClose}) => {
                 <rect x="10.5566" y="-0.554688" width="28" height="4" rx="2" transform="rotate(45 10.5566 -0.554688)" fill="#3A57E8"/>
             </svg>
             <h2 className={`${manageOpenAndClose ? "hidden" : ""} font-bold text-[24px] text-text-color-1`}>
-                {"پنل مدیدیت"}
+                {"مدیریت روال"}
             </h2>
         </div>
     )

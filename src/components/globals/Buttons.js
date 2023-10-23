@@ -11,7 +11,7 @@ const Buttons = ({children , variant='contained',loading=false , cls ,size='norm
 
     const colors = {
         contained: {
-            primary: `${light ? `bg-primary-100 text-primary-600 shadow-primary` : `bg-primary-600 text-white  shadow-primary`}`,
+            primary: `${light ? `bg-primary-100 text-primary-600 shadow-primary` : `bg-primary-main text-white  shadow-primary`}`,
             secondary: `${light ? `bg-secondary-100 text-secondary-600 shadow-secondary` : `bg-secondary-600 text-white shadow-secondary`}`,
             info: `${light ? `bg-info-100 text-info-600  shadow-info` : `bg-info-600 text-white shadow-info`}`,
             success: `${light ? `bg-success-100 text-success-600 shadow-success` : `bg-success-600 text-white shadow-success`}`,

@@ -24,9 +24,10 @@ module.exports = withMT({
     },
     colors:{
       'primary':{
-        'light':'#c4ccf8',
-        'main':'#3a57e8',
-        'dark':'#0048b2',
+        'light':'#ABCDFF',
+        'main':'#0D6DFD',
+        'dark':'#005AE0',
+        'extraLight':"#F2F6FB",
         'veryDark':'#001f4d',
         '100': '#3A57E833',
         '600':'#3A57E8',
