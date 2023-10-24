@@ -30,7 +30,7 @@ const AdminHeaderUserInfo = ({userData}) => {
         return(
             <Menu>
                 <MenuHandler>
-                    <img src={userIcon} alt={"admin user icon"} className={"w-[45px]"}/>
+                    <img src={userIcon} alt={"admin user icon"} className={"cursor-pointer w-[45px]"}/>
                 </MenuHandler>
                 <MenuList>
                     <MenuItem className="flex hover:!bg-primary-main hover:!text-white items-center gap-2">
