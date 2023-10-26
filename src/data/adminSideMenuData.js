@@ -1,4 +1,4 @@
-import {Bag, Category, Plus, Work, TwoUsers, Edit, Document, Buy} from "react-iconly";
+import {Bag, Category, Plus , Edit, Document} from "react-iconly";
 import {routes} from "./routes";
 export const adminSideMenuData = {
     "داشبورد":[
@@ -7,10 +7,7 @@ export const adminSideMenuData = {
     "مدیریت کسب و کار":[
         {id:"business" , title:"کسب و کارها" , icon:<Bag set={"bulk"}/> , link: routes.business ,  subMenu:[]}
     ],
-    "حسابداری":[
-        {id:"coding-jobs" , title:"جامع بازرگانی" , icon:<Work set={"bulk"}/> , subMenu:[]},
-        {id:"coding-store" , title:"فروشگاهی" , icon:<Buy set={"bulk"}/> , subMenu:[]},
-        {id:"coding-personal" , title:"حسابداری شخصی" , icon:<TwoUsers set={"bulk"}/> , subMenu:[]},
+    "کدینگ حسابداری":[
         {id:"coding-new-accounting" , title:"حسابداری جدید" , icon:<Plus set={"bulk"}/> , subMenu:[]},
     ],
     "مدیریت":[

@@ -4,7 +4,6 @@ import {useLocation, useNavigate} from "react-router-dom";
 const SideMenuCard = ({data , index , manageOpenAndClose}) => {
 const navigate = useNavigate()
     const location = useLocation()
-    console.log(location.pathname)
 
     return(
         <Tooltip content={data.title}  className={manageOpenAndClose ? "bg-primary-main text-white" : "hidden"} placement="left">

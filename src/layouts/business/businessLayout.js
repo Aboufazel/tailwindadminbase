@@ -1,4 +1,5 @@
 import BreadCrumbs from "../../components/breadCrumbs/breadCrumbs";
+import Tables from "../../components/globals/tables/tables";
 
 const BusinessLayout = () => {
  const breadCrumbsData = [
@@ -7,12 +8,10 @@ const BusinessLayout = () => {
  ]
 
     return(
-        <div className={"w-full"}>
-            <div className={"w-full mt-[40px] px-[40px]"}>
-                <div className={"w-full h-full shadow-cards p-[24px] rounded-[8px] bg-white"}>
-                    <BreadCrumbs data={breadCrumbsData}/>
-                </div>
-            </div>
+        <div className={"w-full h-full shadow-cards p-[24px] rounded-[8px] bg-white"}>
+            <BreadCrumbs data={breadCrumbsData}/>
+
+            <Tables/>
         </div>
     )
 }
