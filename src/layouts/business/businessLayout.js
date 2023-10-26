@@ -8,11 +8,11 @@ const BusinessLayout = () => {
  ]
 
     return(
-        <div className={"w-full h-full shadow-cards p-[24px] rounded-[8px] bg-white"}>
+        <>
             <BreadCrumbs data={breadCrumbsData}/>
 
             <Tables/>
-        </div>
+        </>
     )
 }
 

@@ -8,10 +8,6 @@ export const adminSideMenuData = {
         {id:"business" , title:"کسب و کارها" , icon:<Bag set={"bulk"}/> , link: routes.business ,  subMenu:[]}
     ],
     "کدینگ حسابداری":[
-        {id:"coding-new-accounting" , title:"حسابداری جدید" , icon:<Plus set={"bulk"}/> , subMenu:[]},
-    ],
-    "مدیریت":[
-        {id:"change-info" , title:"تغییر اطلاعات" , icon:<Document set={"bulk"}/> , subMenu:[]},
-        {id:"change-userName" , title:"تغییر نام کاربری" , icon:<Edit set={"bulk"}/> , subMenu:[]},
+        {id:"coding-new-accounting" , title:"حسابداری جدید" , icon:<Plus set={"bulk"}/> , link:routes.define ,  subMenu:[]},
     ],
 }

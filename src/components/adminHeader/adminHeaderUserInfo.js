@@ -39,7 +39,7 @@ const AdminHeaderUserInfo = ({userData}) => {
                             {"پروفایل"}
                         </Typography>
                     </MenuItem>
-                    <MenuItem className="flex hover:!bg-primary-main hover:!text-white  items-center gap-2">
+                    <MenuItem className="flex hover:!bg-warning-600 hover:!text-white  items-center gap-2">
                         <Edit set={"bulk"}/>
                         <Typography variant="small" className="font-normal">
                             {"ویرایش پروفایل"}

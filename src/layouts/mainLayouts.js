@@ -24,8 +24,8 @@ const MainLayouts = () => {
                 <div className={"sticky top-0 w-full"}>
                     <AdminHeader/>
                 </div>
-                <div className={"w-full"}>
-                    <div className={"w-full p-[20px]"}>
+                <div className={"w-full p-[20px]"}>
+                    <div className={"w-full  h-full shadow-cards p-[24px] rounded-[8px] bg-white"}>
                         <Outlet/>
                     </div>
                 </div>
