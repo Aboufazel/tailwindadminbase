@@ -1,4 +1,4 @@
-import {Bag, Category, Plus , Edit, Document} from "react-iconly";
+import {Bag, Category, Plus} from "react-iconly";
 import {routes} from "./routes";
 export const adminSideMenuData = {
     "داشبورد":[
