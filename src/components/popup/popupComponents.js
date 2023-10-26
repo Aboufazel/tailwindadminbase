@@ -9,7 +9,7 @@ import {
 import popupDataStore from "../../zustand/popupDataStore";
 import {Plus} from "react-iconly";
 const PopupComponents = () => {
-    const popupStatus = popupStore(state => state.accountType);
+    const popupStatus = popupStore(state => state.popupStatus);
     const managePopup = popupStore(state => state.manageOpenPopUp)
     const popupHeader = popupDataStore(state => state.popupHeader);
     const popupBody = popupDataStore(state => state.popupBodyData);

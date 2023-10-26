@@ -1,8 +1,8 @@
 import {create} from 'zustand'
 
 const popupStore = create((set)=>({
-    accountType:false,
-    manageOpenPopUp:()=>set((state)=>({accountType:state.accountType !== true})),
+    popupStatus:false,
+    manageOpenPopUp:()=>set((state)=>({popupStatus:state.popupStatus !== true})),
 }))
 
 export default popupStore;
