@@ -7,6 +7,7 @@ import {
     DialogFooter,
 } from "@material-tailwind/react";
 import popupDataStore from "../../zustand/popupDataStore";
+import {Plus} from "react-iconly";
 const PopupComponents = () => {
     const popupStatus = popupStore(state => state.accountType);
     const managePopup = popupStore(state => state.manageOpenPopUp)
@@ -16,8 +17,10 @@ const PopupComponents = () => {
     console.log(popupHeader , popupBody , "header and body")
 
     return(
-        <Dialog open={popupStatus} handler={managePopup}>
-            <DialogHeader>{popupHeader}</DialogHeader>
+        <Dialog open={popupStatus} size={"lg"} handler={managePopup}>
+            <DialogHeader className={"flex flex-row items-center gap-[8px]"}>
+                <Plus set={"bulk"} style={{color:"#0D6DFD"}}/>{popupHeader}
+            </DialogHeader>
             <DialogBody>
                 {
                     popupBody[0]
@@ -29,13 +32,13 @@ const PopupComponents = () => {
             <DialogFooter className={"flex flex-row items-center gap-[10px]"}>
                 <Button
                     variant="text"
-                    color="red"
+                    color="black"
                     onClick={managePopup}
                     className="mr-1"
                 >
                     <span>{"انصراف"}</span>
                 </Button>
-                <Button variant="gradient" color="green" onClick={managePopup}>
+                <Button variant="gradient" color="blue" onClick={managePopup}>
                     <span>{"تایید"}</span>
                 </Button>
             </DialogFooter>

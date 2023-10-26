@@ -16,7 +16,9 @@ const tabsView = {
 
 const DefineTabsBody = ({role}) => {
     return(
-        tabsView[role]
+        <div className={"w-full mt-[34px] px-[20px]"}>
+            {tabsView[role]}
+        </div>
     )
 }
 

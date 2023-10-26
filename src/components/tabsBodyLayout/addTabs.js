@@ -17,7 +17,7 @@ const AddTabs = () => {
     ]
 
     return(
-        <div className={"w-full mt-[34px]"}>
+        <>
             {
                 bodyData.map(items => (
                     <div key={"add-tabs-body" + items.id}
@@ -27,12 +27,12 @@ const AddTabs = () => {
                              updatePopupBody(["test body" + items.title])
                          }}
                          className={"flex flex-row hover:text-primary-main text-text-color-1 transition-all ease-in-out duration-150 hover:font-bold items-center my-[20px] cursor-pointer gap-[12px]"}>
-                        <Plus/> {items.title}
+                        <Plus set={"bulk"} style={{color:"#0D6DFD"}}/> {items.title}
                     </div>
                 ))
             }
             <PopupComponents/>
-        </div>
+        </>
     )
 }
 
