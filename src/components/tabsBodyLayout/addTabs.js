@@ -26,7 +26,7 @@ const AddTabs = () => {
                              updatePopupHeader(items.title)
                              updatePopupBody(["test body" + items.title])
                          }}
-                         className={"flex flex-row hover:text-primary-main text-text-color-1 transition-all ease-in-out duration-150 hover:font-bold items-center my-[20px] cursor-pointer gap-[12px]"}>
+                         className={"flex flex-row hover:text-primary-main max-w-max text-text-color-1 transition-all ease-in-out duration-150 hover:font-bold items-center my-[20px] cursor-pointer gap-[12px]"}>
                         <Plus set={"bulk"} style={{color:"#0D6DFD"}}/> {items.title}
                     </div>
                 ))

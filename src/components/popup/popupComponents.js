@@ -8,7 +8,7 @@ import {
 } from "@material-tailwind/react";
 import popupDataStore from "../../zustand/popupDataStore";
 import {Plus} from "react-iconly";
-const PopupComponents = () => {
+const PopupComponents = ({children}) => {
     const popupStatus = popupStore(state => state.popupStatus);
     const managePopup = popupStore(state => state.manageOpenPopUp)
     const popupHeader = popupDataStore(state => state.popupHeader);

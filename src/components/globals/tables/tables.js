@@ -1,3 +1,7 @@
+import popupStore from "../../../zustand/popupStore";
+import PopupComponents from "../../popup/popupComponents";
+import popupDataStore from "../../../zustand/popupDataStore";
+
 const TABLE_HEAD = ["عنوان", "نام", "وضعیت"];
 const TABLE_ROWS = [
     {
@@ -26,13 +30,17 @@ const TABLE_ROWS = [
         date: "04/10/21",
     },
 ];
-const Tables = ({tableData , tableHead}) => {
+const Tables = ({tableData=[] , tableHead=[]}) => {
+
+    const managePopup = popupStore(state => state.manageOpenPopUp);
+    const updatePopupHeader = popupDataStore((state) => state.updatePopupHeader);
+    const updatePopupBody = popupDataStore((state) => state.updatePopupBodyData);
 
     return(
             <table className="w-full min-w-max table-auto mt-[40px]">
                 <thead>
                 <tr>
-                    {TABLE_HEAD.map((head) => (
+                    {tableHead && tableHead.map((head) => (
                         <th key={head} className="text-right w-[50px] text-white bg-primary-main p-4">
                             <p  className="font-medium leading-none">
                                 {head}
@@ -42,11 +50,15 @@ const Tables = ({tableData , tableHead}) => {
                 </tr>
                 </thead>
                 <tbody>
-                {TABLE_ROWS.map(({ name, job, date }, index) => (
-                    <tr key={name} className="even:bg-blue-gray-50/50">
+                {tableData && tableData.map(({ title, job, status }, index) => (
+                    <tr key={title} onClick={()=>{
+                        managePopup()
+                        updatePopupHeader(job)
+                        updatePopupBody(status)
+                    }} className="cursor-pointer even:bg-blue-gray-50/50">
                         <td className="p-4">
                             <p className="font-normal">
-                                {name}
+                                {title}
                             </p>
                         </td>
                         <td className="p-4">
@@ -56,12 +68,13 @@ const Tables = ({tableData , tableHead}) => {
                         </td>
                         <td className="p-4">
                             <p className="font-normal">
-                                {date}
+                                {status}
                             </p>
                         </td>
                     </tr>
                 ))}
                 </tbody>
+                <PopupComponents/>
             </table>
     )
 }
