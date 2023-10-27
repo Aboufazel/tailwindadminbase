@@ -1,6 +1,5 @@
 import BreadCrumbs from "../../components/breadCrumbs/breadCrumbs";
 import Tables from "../../components/globals/tables/tables";
-import popupDataStore from "../../zustand/popupDataStore";
 
 const BusinessLayout = () => {
     const breadCrumbsData = [
