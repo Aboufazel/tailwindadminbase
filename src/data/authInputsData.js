@@ -4,7 +4,7 @@ export const authInputsData = [
         inputPlaceholder:"ایمیل خود را وار نمایید...",
         required:true,
         type:"input",
-        inputType:"email",
+        inputType:"text",
         inputName:"email",
         width:'xl:w-[436px]'
     },{

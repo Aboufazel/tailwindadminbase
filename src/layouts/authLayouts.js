@@ -43,9 +43,12 @@ const AuthLayouts = () => {
             toast.error(e)
             setLoading(false);
         })
+
+        console.log(res , "response data")
         setAuthInfo({
-            userId: data.email,
-            accessToken: res.data.token,
+            userId: res.data.token.userId,
+            accessToken: res.data.token.token,
+            role:res.data.user.kind,
         })
         toast.success("با موفقیت وارد شدید")
         navigate('/main')

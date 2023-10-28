@@ -1,11 +1,30 @@
 import axios from "axios";
 
-const BaseUrl = axios.create({
-    baseURL: 'https://reqres.in/'
+export const BaseUrl = axios.create({
+    baseURL: 'http://siavashma.ir/userservice/api/users/'
 })
 
+const storageData = localStorage.getItem("auth")
+const userAuthData = JSON.parse(storageData);
+
 export const LoginApi = (data) =>{
-    return BaseUrl.post(`api/login` , {email:data.email , password:data.password})
+
+    return BaseUrl.get(`GetByUsernamePassword?username=${data.email}&password=${data.password}`);
+}
+
+export const forgetPass = (data)=>{
+   return BaseUrl ({
+       method:'put',
+       url:'Forgetpassword',
+       headers:{
+           "selfUserId": userAuthData.userId,
+           "Authorization": userAuthData.accessToken,
+           'Content-Type': 'application/json'
+       },
+       data:{
+         "userName":data.userName,
+       }
+   })
 }
 
 export const UserDetail = (id) =>{

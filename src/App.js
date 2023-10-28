@@ -7,10 +7,16 @@ import buildProviderTree from "./hooks/buildProviderTree";
 import useWindowSize from "./hooks/useWindowSize";
 import {useEffect, useState} from "react";
 import MobileAccess from "./components/access/mobileAccess";
+import AccessDenide from "./components/access/accessDenide";
 
 const ProviderTree = buildProviderTree([
     [QueryClientProvider , {client:queryClient}],
 ])
+
+const storageData = localStorage.getItem("auth")
+const userAuthData = JSON.parse(storageData);
+
+console.log(userAuthData , "role auth data")
 function App() {
     const {isTabletOrMobile} =useWindowSize();
     const [isMobile,setIsMobile]=useState(false);
@@ -23,6 +29,8 @@ function App() {
       return(
          <MobileAccess/>
       )
+  } else if(userAuthData.role !== 4){
+      return <AccessDenide/>
   }
   else {
       return (
