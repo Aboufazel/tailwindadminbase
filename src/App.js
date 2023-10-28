@@ -20,7 +20,6 @@ console.log(userAuthData , "role auth data")
 function App() {
     const {isTabletOrMobile} =useWindowSize();
     const [isMobile,setIsMobile]=useState(false);
-
     useEffect(()=>{
         setIsMobile(isTabletOrMobile);
     },[isTabletOrMobile])
