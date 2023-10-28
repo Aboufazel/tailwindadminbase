@@ -5,8 +5,6 @@ const DefineTabs = ({tabsData=[]}) => {
     const updateTabs = useStore((state) => state.updateTabs)
     const defineTabs = useStore(state => state.defineTabs)
 
-    console.log(defineTabs , "tabs")
-
     useEffect(() => {
        tabsData.length > 0 && updateTabs(tabsData[0].id)
     } , []);

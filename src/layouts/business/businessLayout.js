@@ -29,7 +29,7 @@ const BusinessLayout = () => {
     return(
         <>
             <BreadCrumbs data={breadCrumbsData}/>
-            <Tables tableHead={tableHead} tableData={tableBody}/>
+            <Tables tableHead={tableHead} tableData={tableBody} bodyId={"business"}/>
         </>
     )
 }

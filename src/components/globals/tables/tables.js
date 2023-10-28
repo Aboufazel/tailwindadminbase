@@ -1,7 +1,14 @@
 import popupStore from "../../../zustand/popupStore";
 import PopupComponents from "../../popup/popupComponents";
 import popupDataStore from "../../../zustand/popupDataStore";
-const Tables = ({tableData=[] , tableHead=[]}) => {
+import ReviewTabs from "../../tabsBodyLayout/reviewTabs";
+import BusinessPopupBody from "../../popupBody/businessPopupBody";
+const Tables = ({tableData=[] , tableHead=[] , bodyId}) => {
+
+    const bodyView = {
+        'business':<BusinessPopupBody/>,
+        'coding':<ReviewTabs/>,
+    }
 
     const managePopup = popupStore(state => state.manageOpenPopUp);
     const updatePopupHeader = popupDataStore((state) => state.updatePopupHeader);
@@ -25,7 +32,7 @@ const Tables = ({tableData=[] , tableHead=[]}) => {
                     <tr key={title} onClick={()=>{
                         managePopup()
                         updatePopupHeader(job)
-                        updatePopupBody(status)
+                        updatePopupBody([status  +  "وضعیت"])
                     }} className="cursor-pointer even:bg-blue-gray-50/50">
                         <td className="p-4">
                             <p className="font-normal">
@@ -45,7 +52,9 @@ const Tables = ({tableData=[] , tableHead=[]}) => {
                     </tr>
                 ))}
                 </tbody>
-                <PopupComponents/>
+                <PopupComponents>
+                    {bodyView[bodyId]}
+                </PopupComponents>
             </table>
     )
 }
