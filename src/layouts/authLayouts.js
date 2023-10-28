@@ -15,6 +15,7 @@ import {toast} from "react-toastify";
 import Storage from "../services/storage";
 import {Navigate} from "react-router-dom";
 import {routes} from "../data/routes";
+import {Spinner} from "@material-tailwind/react";
 const AuthLayouts = () => {
     const storage = Storage()
 
@@ -22,6 +23,7 @@ const AuthLayouts = () => {
     const [, setAuthInfo] = useStorage("auth", {
         userId: "",
         accessToken: "",
+        role:""
     })
     const navigate = useNavigate()
 
@@ -87,7 +89,12 @@ const AuthLayouts = () => {
                     ))}
 
                     <Buttons loading={loading} type={"submit"} cls={"w-[188px] mt-[56px]"}>
-                        {" ورود به پنل "}
+                        {loading ?
+                            <p className={"flex flex-row items-center justify-center gap-3"}>
+                             <Spinner/>
+                             {"ورود به پنل"}
+                            </p>
+                            :"ورود به پنل"}
                     </Buttons>
                 </form>
                 <Outlet/>
