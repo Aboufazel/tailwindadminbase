@@ -1,35 +1,18 @@
 import BreadCrumbs from "../../components/breadCrumbs/breadCrumbs";
 import Tables from "../../components/globals/tables/tables";
+import {businessBreadCrumbsData, businessTableHead} from "../../data/businessLayoutData";
 
 const BusinessLayout = () => {
-    const breadCrumbsData = [
-        {id: "business", title: "داشبورد", link: "/main"},
-        {id: "business", title: "کسب و کارها", link: "#"},
-    ]
 
-    const tableHead = ["عنوان", "نام", "وضعیت"]
-    const tableBody = [
-        {
-            title: "John Michael",
-            job: "Manager",
-            status: "فعال",
-        },
-        {
-            title: "Alexa Liras",
-            job: "Developer",
-            status: "غیر فعال",
-        },
-        {
-            title: "Laurent Perrier",
-            job: "Executive",
-            status: "قعال",
-        },
-    ]
+    const users = [
+        { id: 1, username: "ali", email: "akpa125@gmail.com", isAdmin: true },
+        { id: 2, username: "saeed", email: "saeed@yahoo.com", isAdmin: false },
+    ];
 
     return(
         <>
-            <BreadCrumbs data={breadCrumbsData}/>
-            <Tables tableHead={tableHead} tableData={tableBody} bodyId={"business"}/>
+            <BreadCrumbs data={businessBreadCrumbsData}/>
+            <Tables  headers={businessTableHead} data={users} bodyId={"business"}/>
         </>
     )
 }
