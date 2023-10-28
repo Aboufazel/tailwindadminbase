@@ -16,11 +16,13 @@ import Storage from "../services/storage";
 import {Navigate} from "react-router-dom";
 import {routes} from "../data/routes";
 import {Spinner} from "@material-tailwind/react";
+import userStore from "../zustand/userStore";
 const AuthLayouts = () => {
     const storage = Storage()
+    const updateUserName = userStore(state=>state.updateUserName)
 
     const [loading, setLoading] = useState(false);
-    const [, setAuthInfo] = useStorage("auth", {
+    const [,setAuthInfo] = useStorage("auth", {
         userId: "",
         accessToken: "",
         role:""
@@ -45,7 +47,7 @@ const AuthLayouts = () => {
             toast.error(e)
             setLoading(false);
         })
-
+        updateUserName(res.data.user.userName)
         console.log(res , "response data")
         setAuthInfo({
             userId: res.data.token.userId,

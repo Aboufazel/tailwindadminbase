@@ -1,6 +1,6 @@
 import React from "react";
 import AdminHeaderUserInfo from "./adminHeaderUserInfo";
-import {Message, Notification, Search} from "react-iconly";
+import {Message, Notification} from "react-iconly";
 
 const AdminHeader = () => {
 

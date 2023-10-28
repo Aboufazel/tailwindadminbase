@@ -2,18 +2,18 @@ import popupStore from "../../../zustand/popupStore";
 import PopupComponents from "../../popup/popupComponents";
 import popupDataStore from "../../../zustand/popupDataStore";
 import ReviewTabs from "../../tabsBodyLayout/reviewTabs";
-import BusinessPopupBody from "../../popupBody/businessPopupBody";
+import DrawerComponents from "../../drawer/drawerComponents";
+import drawerStore from "../../../zustand/drawerStore";
 const Tables = ({headers , data ,bodyId}) => {
 
     const bodyView = {
-        'business':<BusinessPopupBody/>,
         'coding':<ReviewTabs/>,
     }
 
     const managePopup = popupStore(state => state.manageOpenPopUp);
-    // const updatePopupHeader = popupDataStore((state) => state.updatePopupHeader);
+    const updatePopupHeader = popupDataStore((state) => state.updatePopupHeader);
     // const updatePopupBody = popupDataStore((state) => state.updatePopupBodyData);
-
+    const manageDrawer = drawerStore(state => state.manageOpenDrawer)
     return(
             <table className="w-full min-w-max table-auto mt-[40px]">
                 <thead>
@@ -26,41 +26,25 @@ const Tables = ({headers , data ,bodyId}) => {
                 <tbody>
                 {data.map((row, index) => (
                     <tr key={index} className="cursor-pointer even:bg-blue-gray-50/50" onClick={()=>{
-                        managePopup()
+                        if(bodyId === "business")
+                            manageDrawer()
+                        else managePopup()
+                        updatePopupHeader(row.username)
                     }}>
                         {headers.map((header) => (
                             <td className={"p-4 font-normal"} key={header.name.toString()}>{header.render(row)}</td>
                         ))}
                     </tr>
                 ))}
-
-                {/*{tableData && tableData.map(({ title, job, status }, index) => (*/}
-                {/*    <tr key={title} onClick={()=>{*/}
-                {/*        managePopup()*/}
-                {/*        updatePopupHeader(job)*/}
-                {/*        updatePopupBody([status  +  "وضعیت"])*/}
-                {/*    }} className="cursor-pointer even:bg-blue-gray-50/50">*/}
-                {/*        <td className="p-4">*/}
-                {/*            <p className="font-normal">*/}
-                {/*                {title}*/}
-                {/*            </p>*/}
-                {/*        </td>*/}
-                {/*        <td className="p-4">*/}
-                {/*            <p className="font-normal">*/}
-                {/*                {job}*/}
-                {/*            </p>*/}
-                {/*        </td>*/}
-                {/*        <td className="p-4">*/}
-                {/*            <p className="font-normal">*/}
-                {/*                {status}*/}
-                {/*            </p>*/}
-                {/*        </td>*/}
-                {/*    </tr>*/}
-                {/*))}*/}
                 </tbody>
-                <PopupComponents>
-                    {bodyView[bodyId]}
-                </PopupComponents>
+                {
+                    bodyId === "business" ?
+                        <DrawerComponents/>
+                        :
+                        <PopupComponents>
+                            {bodyView[bodyId]}
+                        </PopupComponents>
+                }
             </table>
     )
 }

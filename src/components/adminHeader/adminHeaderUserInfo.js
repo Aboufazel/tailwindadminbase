@@ -11,13 +11,18 @@ import useStorage from "../../hooks/useStorage";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
 import Storage from "../../services/storage";
+import userStore from "../../zustand/userStore";
 const AdminHeaderUserInfo = ({userData}) => {
+    const userName = userStore(state=>state.userName)
+    const navigate = useNavigate();
+    const storage = Storage()
     const [, setAuthInfo] = useStorage("auth", {
         userId: "",
         accessToken: "",
     })
-    const navigate = useNavigate();
-    const storage = Storage()
+    const roleTitle ={
+        4:"مدیر"
+    }
     const manageLogOut = ()=>{
         setAuthInfo({
             userId: "",
@@ -58,14 +63,13 @@ const AdminHeaderUserInfo = ({userData}) => {
     }
 
 
-
     return(
         <div className={"flex flex-row max-w-max ml-3 gap-[16px] items-center"}>
             <MenuRenderFunction/>
             <p className={"text-text-color-1 text-[14px]"}>
-                {storage.userId}{/*{"ابوفاضل عباسی خوشمکانی"}*/}
+                {userName}
                 <span className={"block text-text-color-2 mt-1"}>
-                    {"مدیر"}
+                    {roleTitle[storage.role]}
                 </span>
             </p>
         </div>
