@@ -35,7 +35,7 @@ const BusinessPopupBody = () => {
                 <div className={"w-full px-3 py-2 rounded-[5px] font-bold bg-primary-main/10 text-text-color-1 text-[13px]"}>
                     {" اطلاعات "}
                 </div>
-                <ul className={"mt-5"}>
+                <ul className={"mt-5 px-5"}>
                     {
                         informationList.map((items , index) =>(
                             <li key={"business-list-info"+index} className={"flex flex-row items-center w-full justify-between mb-3"}>
@@ -48,7 +48,7 @@ const BusinessPopupBody = () => {
                 <div className={"w-full px-3 py-2 rounded-[5px] font-bold bg-primary-main/10 text-text-color-1 text-[13px]"}>
                     {" کاربران "}
                 </div>
-                <ul className={"mt-5"}>
+                <ul className={"mt-5 px-5"}>
                     {
                         businessUserInfo.map((items , index) =>(
                             <li key={"user-business-list-info"+index} className={"flex flex-row items-center font-normal w-full justify-between mb-3"}>
