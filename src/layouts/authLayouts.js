@@ -44,11 +44,10 @@ const AuthLayouts = () => {
     const onFormSubmit = async (data) =>{
         setLoading(true);
         const res = await LoginApi(data).catch((e) => {
-            toast.error(e)
+            toast.error("لطفا اتصال خودتون دو بررسی کنید")
             setLoading(false);
         })
         updateUserName(res.data.user.userName)
-        console.log(res , "response data")
         setAuthInfo({
             userId: res.data.token.userId,
             accessToken: res.data.token.token,

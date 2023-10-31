@@ -16,7 +16,6 @@ const ProviderTree = buildProviderTree([
 const storageData = localStorage.getItem("auth")
 const userAuthData = JSON.parse(storageData);
 
-console.log(userAuthData , "role auth data")
 function App() {
     const {isTabletOrMobile} =useWindowSize();
     const [isMobile,setIsMobile]=useState(false);

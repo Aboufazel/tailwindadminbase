@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const BaseUrl = axios.create({
-    baseURL: 'http://siavashma.ir/userservice/api/users/'
+    baseURL: 'http://siavashma.ir'
 })
 
 const storageData = localStorage.getItem("auth")
@@ -9,13 +9,13 @@ const userAuthData = JSON.parse(storageData);
 
 export const LoginApi = (data) =>{
 
-    return BaseUrl.get(`GetByUsernamePassword?username=${data.email}&password=${data.password}`);
+    return BaseUrl.get(`/userservice/api/users/GetByUsernamePassword?username=${data.email}&password=${data.password}`);
 }
 
 export const forgetPass = (data)=>{
    return BaseUrl ({
        method:'put',
-       url:'Forgetpassword',
+       url:'/userservice/api/users/Forgetpassword',
        headers:{
            "selfUserId": userAuthData.userId,
            "Authorization": userAuthData.accessToken,

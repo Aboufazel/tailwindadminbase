@@ -1,27 +1,25 @@
 import BreadCrumbs from "../../components/breadCrumbs/breadCrumbs";
 import Tables from "../../components/globals/tables/tables";
 import {businessBreadCrumbsData, businessTableHead} from "../../data/businessLayoutData";
+import {getAllBusiness} from "../../api/businessApi";
+import {useEffect, useState} from "react";
 
 const BusinessLayout = () => {
+    const [user , setUser] = useState([])
+    const getAll = async ()=>{
+        const res = await getAllBusiness();
+        setUser(res.data.businesses)
+    }
 
-    const users = [
-        { id: 1, jobs: "ali", status: true },
-        { id: 2, jobs: "saeed", status: false },
-        { id: 1, jobs: "ali", status: true },
-        { id: 2, jobs: "saeed", status: false },
-        { id: 1, jobs: "ali", status: true },
-        { id: 2, jobs: "saeed", status: false },
-        { id: 1, jobs: "ali", status: true },
-        { id: 2, jobs: "saeed", status: false },
-        { id: 1, jobs: "ali", status: true },
-        { id: 2, jobs: "saeed", status: false },
-    ];
+    useEffect(() => {
+        getAll()
+    }, []);
 
     return(
-        <>
-            <BreadCrumbs data={businessBreadCrumbsData}/>
-            <Tables  headers={businessTableHead} data={users} bodyId={"business"}/>
-        </>
+            <>
+                <BreadCrumbs data={businessBreadCrumbsData}/>
+                <Tables  headers={businessTableHead} bodyId={"business"} data={user}/>
+            </>
     )
 }
 
