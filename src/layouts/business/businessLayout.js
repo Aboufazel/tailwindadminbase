@@ -5,8 +5,16 @@ import {businessBreadCrumbsData, businessTableHead} from "../../data/businessLay
 const BusinessLayout = () => {
 
     const users = [
-        { id: 1, username: "ali", email: "akpa125@gmail.com", isAdmin: true },
-        { id: 2, username: "saeed", email: "saeed@yahoo.com", isAdmin: false },
+        { id: 1, jobs: "ali", status: true },
+        { id: 2, jobs: "saeed", status: false },
+        { id: 1, jobs: "ali", status: true },
+        { id: 2, jobs: "saeed", status: false },
+        { id: 1, jobs: "ali", status: true },
+        { id: 2, jobs: "saeed", status: false },
+        { id: 1, jobs: "ali", status: true },
+        { id: 2, jobs: "saeed", status: false },
+        { id: 1, jobs: "ali", status: true },
+        { id: 2, jobs: "saeed", status: false },
     ];
 
     return(

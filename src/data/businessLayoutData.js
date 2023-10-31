@@ -1,19 +1,18 @@
 export const businessTableHead = [
     {
         name: "id",
-        title: "ID",
+        title: "کد",
         render: (row) => row.id
     },
     {
-        name: "username",
-        title: "Username",
-        render: (row) => row.username,
+        name: "jobs",
+        title: "نام کسب و کار",
+        render: (row) => row.jobs,
     },
-    {name: "email", title: "Email", render: (row) => row.email},
     {
-        name: "isAdmin",
-        title: "Is Admin",
-        render: (row) => (row.isAdmin ? "Yes" : "No"),
+        name: "status",
+        title: "وضعیت",
+        render: (row) => (row.status ? "فعال" : "غیر فعال"),
     },
 ]
 
