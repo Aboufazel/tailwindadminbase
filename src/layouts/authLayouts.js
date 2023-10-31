@@ -43,8 +43,8 @@ const AuthLayouts = () => {
 
     const onFormSubmit = async (data) =>{
         setLoading(true);
-        const res = await LoginApi(data).catch((e) => {
-            toast.error("لطفا اتصال خودتون دو بررسی کنید")
+        const res = await LoginApi(data).catch(() => {
+            toast.error("لطفا اتصال خودتون رو بررسی کنید")
             setLoading(false);
         })
         updateUserName(res.data.user.userName)

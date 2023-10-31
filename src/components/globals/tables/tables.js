@@ -2,8 +2,6 @@ import popupStore from "../../../zustand/popupStore";
 import PopupComponents from "../../popup/popupComponents";
 import popupDataStore from "../../../zustand/popupDataStore";
 import ReviewTabs from "../../tabsBodyLayout/reviewTabs";
-import DrawerComponents from "../../drawer/drawerComponents";
-import drawerStore from "../../../zustand/drawerStore";
 import BusinessPopupBody from "../../popupBody/businessPopupBody";
 const Tables = ({headers , data ,bodyId}) => {
 

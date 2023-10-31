@@ -73,7 +73,10 @@ const BusinessPopupBody = () => {
                             </p>
                             <div className={"flex flex-row justify-end items-center w-1/3"}>
                                 <Buttons color={"danger"} light={true} cls={"mr-5"} onClick={manageActionStatus}>{"انصراف"}</Buttons>
-                                <Buttons color={"success"} cls={"mr-5"}>{"تایید"}</Buttons>
+                                <Buttons color={"success"} cls={"mr-5"} onClick={()=> {
+                                    managePopup()
+                                    manageActionStatus()
+                                }}>{"تایید"}</Buttons>
                             </div>
                         </div>
                         :
