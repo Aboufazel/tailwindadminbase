@@ -20,7 +20,7 @@ const BusinessLayout = () => {
             <>
                 <BreadCrumbs data={businessBreadCrumbsData}/>
                 <div className={"flex items-center gap-3 mt-7"}>
-                    <Spinner/>
+                    <Spinner color={"blue"}/>
                     <p className={"text-text-color-2 font-medium"}>در حال دریافت اطلاعات...</p>
                 </div>
             </>
