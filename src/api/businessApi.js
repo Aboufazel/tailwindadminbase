@@ -4,7 +4,7 @@ export const getAllBusiness = ()=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
-        method:'GET',
+        method:'post',
         url:'/BusinessService/api/businesses/getAll',
         headers:{
             "selfUserId": userAuthData.userId,

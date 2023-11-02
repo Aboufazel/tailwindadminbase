@@ -4,9 +4,7 @@ import {useQuery} from "@tanstack/react-query";
 
 
 const useAllData = (queryKey) => {
-  return useQuery([queryKey] , api.UserLists , {
-      cacheTime:6*1000*60,
-  });
+  return useQuery([queryKey] , api.UserLists);
 }
 
 const useDetailData = (queryKey , id) =>{

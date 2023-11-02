@@ -8,8 +8,17 @@ const storageData = localStorage.getItem("auth")
 const userAuthData = JSON.parse(storageData);
 
 export const LoginApi = (data) =>{
-
-    return BaseUrl.get(`/userservice/api/users/GetByUsernamePassword?username=${data.email}&password=${data.password}`);
+    return BaseUrl({
+        method:"post",
+        url:`/userservice/api/users/GetByUsernamePassword`,
+        headers:{
+            "Content-Type":"application/json"
+        },
+        data:{
+            "username":data.email,
+            "password":data.password,
+        }
+    });
 }
 
 export const forgetPass = (data)=>{

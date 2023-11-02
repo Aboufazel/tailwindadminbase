@@ -1,9 +1,9 @@
 import {useQuery} from "@tanstack/react-query";
-import * as api from "../api/businessApi"
+import {getAllBusiness} from "../api/businessApi";
 const useAllBusiness = (queryKey) => {
-    return useQuery([queryKey] , api.getAllBusiness , {
-        cacheTime:6*1000*60,
-        enabled:false,
+    return useQuery({
+        queryKey:[queryKey],
+        queryFn:getAllBusiness,
     });
 }
 
