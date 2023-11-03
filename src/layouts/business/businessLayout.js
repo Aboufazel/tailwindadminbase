@@ -1,19 +1,12 @@
 import BreadCrumbs from "../../components/breadCrumbs/breadCrumbs";
 import Tables from "../../components/globals/tables/tables";
 import {businessBreadCrumbsData, businessTableHead} from "../../data/businessLayoutData";
-import {getAllBusiness} from "../../api/businessApi";
-import {useQuery} from "@tanstack/react-query";
 import {Spinner} from "@material-tailwind/react";
+import {useAllBusiness} from "../../hooks/businessServicesActions";
 
 const BusinessLayout = () => {
 
-    const { isLoading, isError, data , error } = useQuery({
-        queryKey: ['business'],
-        queryFn: getAllBusiness,
-        cacheTime:5*60*1000,
-        enabled:true,
-        refetchIntervalInBackground:false,
-    })
+    const {isLoading, isError, data , error} = useAllBusiness("business")
 
     if(isLoading){
         return (
