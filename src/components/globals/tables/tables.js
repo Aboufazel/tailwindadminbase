@@ -10,7 +10,7 @@ const Tables = ({headers , data ,bodyId}) => {
 
 
     const [currentPage , setCurrentPage] = useState(1);
-    const recordPerPage = 15;
+    const recordPerPage = 8;
     const lastIndex = currentPage * recordPerPage;
     const firstIndex = lastIndex - recordPerPage;
     const records = data.slice(firstIndex,lastIndex);
@@ -43,7 +43,7 @@ console.log(numbers , "paginate numbers")
     const updatePopupBody = popupDataStore((state) => state.updatePopupBodyData);
     return(
            <>
-               <div className={"h-[550px] overflow-y-auto"}>
+               <div className={"h-[540px] overflow-y-auto"}>
                    <table className="w-full min-w-max table-auto mt-[40px]">
                        <thead>
                        <tr className={"text-right w-[50px] text-white bg-primary-main"}>

@@ -2,22 +2,31 @@ import {Plus} from "react-iconly";
 import popupStore from "../../zustand/popupStore";
 import PopupComponents from "../popup/popupComponents";
 import popupDataStore from "../../zustand/popupDataStore";
-import AccountGroupPopupBody from "../popupBody/definePopupBody/AccountGroupPopupBody";
+import AddCodingKind from "../popupBody/definePopupBody/addCodingKind";
+import {create} from "zustand";
 
+const usePopupBody = create((set)=>({
+    activeSelect:"",
+    updateActiveSelect: (activeSelect) => set(() => ({ activeSelect: activeSelect })),
+}))
 const AddTabs = () => {
     const managePopup = popupStore(state => state.manageOpenPopUp);
     const updatePopupBody = popupDataStore((state) => state.updatePopupBodyData);
+    const {activeSelect , updateActiveSelect} = usePopupBody()
 
+
+    console.log(activeSelect , "selecy actions")
     const bodyData = [
         {id:'account-group' , title:'گروه حساب' , action:''},
         {id:'account-main' , title:'حساب کل' , action:''},
         {id:'account-person' , title:'حساب معین' , action:''},
         {id:'account-define' , title:'حساب تفضیلی پیش فرض' , action:''},
         {id:'account-type' , title:'نوع حساب' , action:''},
+        {id:'add-coding' , title:'افزودن کدینگ جدید' , action:''},
     ]
 
     const popupBody = {
-        "account-group":<AccountGroupPopupBody/>,
+        "add-coding":<AddCodingKind/>,
     }
 
     return(
@@ -27,6 +36,7 @@ const AddTabs = () => {
                     <div key={"add-tabs-body" + items.id}
                          onClick={()=>{
                              managePopup()
+                             updateActiveSelect(items.id)
                              updatePopupBody(["test body" + items.title])
                          }}
                          className={"flex flex-row hover:text-primary-main max-w-max text-text-color-1 transition-all ease-in-out duration-150 hover:font-bold items-center my-[20px] cursor-pointer gap-[12px]"}>
@@ -35,7 +45,7 @@ const AddTabs = () => {
                 ))
             }
             <PopupComponents>
-
+                {popupBody[activeSelect]}
             </PopupComponents>
         </>
     )
