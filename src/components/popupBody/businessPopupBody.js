@@ -23,7 +23,7 @@ const BusinessPopupBody = () => {
     ]
 
     const manageStatusEdit = async (data)=>{
-        const res =await editUserStatus(data).catch(e=>{
+        const res =await editUserStatus(data).catch(()=>{
             toast.error("ویرایش موفق نبود")
         })
         if (res.status === 200){
