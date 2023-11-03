@@ -3,6 +3,8 @@ import popupStore from "../../zustand/popupStore";
 import Buttons from "../globals/Buttons";
 import popupDataStore from "../../zustand/popupDataStore";
 import {create} from "zustand";
+import {editUserStatus} from "../../api/businessApi";
+import {toast} from "react-toastify";
 
 const useState = create((set)=>({
     actionStatus:false,
@@ -11,9 +13,6 @@ const useState = create((set)=>({
 const BusinessPopupBody = () => {
     const managePopup = popupStore(state => state.manageOpenPopUp);
     const popupBody = popupDataStore(state => state.popupBodyData);
-
-
-
     const { actionStatus, manageActionStatus } = useState()
 
     const informationList = [
@@ -22,6 +21,17 @@ const BusinessPopupBody = () => {
         {title:"وضعیت کسب و کار" , data:popupBody.status === 0 ? "غیر فعال" : "فعال"},
         {title:"نوع کدینگ" , data:popupBody.accountCodingKindName},
     ]
+
+    const manageStatusEdit = async (data)=>{
+        const res =await editUserStatus(data).catch(e=>{
+            toast.error("ویرایش موفق نبود")
+        })
+        if (res.status === 200){
+            toast.success("ویرایش با موفقیت انجام شد")
+            manageActionStatus()
+        }
+
+    }
 
     const businessUserInfo = [
         {title:"مدیر کسب و کار" , data:popupBody.userName},
@@ -52,8 +62,17 @@ const BusinessPopupBody = () => {
                     {
                         businessUserInfo.map((items , index) =>(
                             <li key={"user-business-list-info"+index} className={"flex flex-row items-center font-normal w-full justify-between mb-3"}>
-                                <p>{items.title}</p>
-                                <p className={"font-medium text-text-color-1"}>{items.data}</p>
+                                <p className={"w-1/2"}>{items.title}</p>
+                                <div className={"flex flex-row items-center justify-end gap-3 w-1/2"}>
+                                    <p className={"font-medium text-text-color-1"}>{items.data}</p>
+                                    {
+                                        actionStatus?
+                                            "" :
+                                            <Buttons light={true} onClick={manageActionStatus}>
+                                                {popupBody.status === 0 ? "فعال سازی" : "غیر فعال سازی"}
+                                            </Buttons>
+                                    }
+                                </div>
                             </li>
                         ))
                     }
@@ -75,14 +94,15 @@ const BusinessPopupBody = () => {
                                 <Buttons color={"danger"} light={true} cls={"mr-5"} onClick={manageActionStatus}>{"انصراف"}</Buttons>
                                 <Buttons color={"success"} cls={"mr-5"} onClick={()=> {
                                     managePopup()
-                                    manageActionStatus()
+                                    manageStatusEdit({
+                                        userId: popupBody.userId,
+                                         status: popupBody.status === 0 ? 1 : 0
+                                    }).then()
                                 }}>{"تایید"}</Buttons>
                             </div>
                         </div>
                         :
-                        <Buttons light={true} onClick={manageActionStatus}>
-                            {popupBody.status === 0 ? "فعال سازی حساب" : "غیر فعال سازی حساب"}
-                        </Buttons>
+                        ""
                 }
             </DialogFooter>
         </>

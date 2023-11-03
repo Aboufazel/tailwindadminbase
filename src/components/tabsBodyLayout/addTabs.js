@@ -2,10 +2,10 @@ import {Plus} from "react-iconly";
 import popupStore from "../../zustand/popupStore";
 import PopupComponents from "../popup/popupComponents";
 import popupDataStore from "../../zustand/popupDataStore";
+import AccountGroupPopupBody from "../popupBody/definePopupBody/AccountGroupPopupBody";
 
 const AddTabs = () => {
     const managePopup = popupStore(state => state.manageOpenPopUp);
-    const updatePopupHeader = popupDataStore((state) => state.updatePopupHeader);
     const updatePopupBody = popupDataStore((state) => state.updatePopupBodyData);
 
     const bodyData = [
@@ -16,6 +16,10 @@ const AddTabs = () => {
         {id:'account-type' , title:'نوع حساب' , action:''},
     ]
 
+    const popupBody = {
+        "account-group":<AccountGroupPopupBody/>,
+    }
+
     return(
         <>
             {
@@ -23,7 +27,6 @@ const AddTabs = () => {
                     <div key={"add-tabs-body" + items.id}
                          onClick={()=>{
                              managePopup()
-                             updatePopupHeader(items.title)
                              updatePopupBody(["test body" + items.title])
                          }}
                          className={"flex flex-row hover:text-primary-main max-w-max text-text-color-1 transition-all ease-in-out duration-150 hover:font-bold items-center my-[20px] cursor-pointer gap-[12px]"}>
@@ -31,7 +34,9 @@ const AddTabs = () => {
                     </div>
                 ))
             }
-            <PopupComponents/>
+            <PopupComponents>
+
+            </PopupComponents>
         </>
     )
 }
