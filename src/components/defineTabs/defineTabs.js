@@ -3,16 +3,31 @@ import {useEffect} from "react";
 import {Delete, EditSquare, MoreSquare} from "react-iconly";
 import {create} from "zustand";
 import Buttons from "../globals/Buttons";
+import PopupComponents from "../popup/popupComponents";
+import EditCoding from "../popupBody/definePopupBody/editCoding";
+import DeleteCoding from "../popupBody/definePopupBody/deleteCoding";
+import popupStore from "../../zustand/popupStore";
 
 const defineState = create((set)=>({
     actionStatus:false,
+    editOrDeleteStatus:'',
+    updateEditOrDelete:(editOrDeleteStatus) => set(() => ({ editOrDeleteStatus: editOrDeleteStatus })),
     manageActionStatus:()=>set((state)=>({actionStatus:state.actionStatus !== true})),
 }))
 const DefineTabs = ({tabsData=[]}) => {
     const updateTabs = useStore((state) => state.updateTabs)
     const defineTabs = useStore(state => state.defineTabs)
-    const { actionStatus, manageActionStatus } = defineState()
+    const managePopup = popupStore(state => state.manageOpenPopUp);
+    const { actionStatus,
+        manageActionStatus , updateEditOrDelete , editOrDeleteStatus } = defineState()
 
+
+    const popupView = {
+        "edit-coding":<EditCoding/>,
+        "delete-coding":<DeleteCoding/>,
+    }
+
+    console.log(editOrDeleteStatus ," status")
     useEffect(() => {
        tabsData.length > 0 && updateTabs(tabsData[0].id)
     } , []);
@@ -26,17 +41,32 @@ const DefineTabs = ({tabsData=[]}) => {
                 {
                     actionStatus ?
                         <div className={"flex flex-row mt-3 items-center gap-3"}>
-                           <Buttons cls={"flex flex-row gap-3 items-center !text-[12px] font-bold"} color={"warning"} light={true}>
+                           <Buttons cls={"flex flex-row gap-3 items-center !text-[12px] font-bold"}
+                                    onClick={()=> {
+                                        managePopup()
+                                        updateEditOrDelete("edit-coding")
+                                    }}
+                                    color={"warning"}
+                                    light={true}>
                                <EditSquare set={"bulk"} size={18}/>
                                {"ویرایش"}
                            </Buttons>
-                           <Buttons cls={"flex flex-row gap-3 items-center !text-[12px] font-bold"} color={"danger"} light={true}>
+                           <Buttons cls={"flex flex-row gap-3 items-center !text-[12px] font-bold"}
+                                    onClick={()=> {
+                                        managePopup()
+                                        updateEditOrDelete("delete-coding")
+                                    }}
+                                    color={"danger"}
+                                    light={true}>
                                <Delete set={"bulk"} size={18}/>
                                {"حذف"}
                            </Buttons>
                         </div>
                         :""
                 }
+                <PopupComponents>
+                    {popupView[editOrDeleteStatus]}
+                </PopupComponents>
             </div>
         )
     }

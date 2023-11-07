@@ -18,7 +18,6 @@ const Tables = ({headers , data ,bodyId}) => {
     const numbers = [...Array(npage + 1).keys()].slice(1)
 
 
-console.log(numbers , "paginate numbers")
     const bodyView = {
         'coding':<ReviewTabs/>,
         'business':<BusinessPopupBody/>

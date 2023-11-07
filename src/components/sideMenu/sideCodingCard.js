@@ -1,14 +1,20 @@
 import {useLocation, useNavigate} from "react-router-dom";
 import {Tooltip} from "@material-tailwind/react";
 import {Folder} from "react-iconly";
+import useStore from "../../zustand/store";
 
 const SideCodingCard = ({data , index , manageOpenAndClose}) => {
     const navigate = useNavigate()
     const location = useLocation()
+    const updateCodingDefineTitle = useStore((state) => state.updateCodingTitle)
+    console.log(data , "coding side data")
 
     return(
         <Tooltip content={data.accountCodingKindName}  className={manageOpenAndClose ? "bg-primary-main text-white" : "hidden"} placement="left">
-            <div onClick={()=>navigate('/define')} key={data.accountCodingKindName + index}
+            <div onClick={()=> {
+                updateCodingDefineTitle(data.accountCodingKindName)
+                navigate('/define')
+            }} key={data.accountCodingKindName + index}
                  className={`flex flex-row items-center
              ${manageOpenAndClose ? "justify-center" : " justify-between"}
              transition-all
