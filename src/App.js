@@ -23,7 +23,6 @@ function App() {
         setIsMobile(isTabletOrMobile);
     },[isTabletOrMobile])
 
-
   if(isMobile){
       return(
          <MobileAccess/>

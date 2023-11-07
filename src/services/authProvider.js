@@ -6,6 +6,8 @@ import {Navigate} from "react-router-dom";
 const AuthProvider = ({children}) => {
     const storage = Storage()
 
+
+
     if (!storage.accessToken) {
         return <Navigate to={"/"} />;
     }

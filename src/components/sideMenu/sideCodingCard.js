@@ -7,7 +7,6 @@ const SideCodingCard = ({data , index , manageOpenAndClose}) => {
     const navigate = useNavigate()
     const location = useLocation()
     const updateCodingDefineTitle = useStore((state) => state.updateCodingTitle)
-    console.log(data , "coding side data")
 
     return(
         <Tooltip content={data.accountCodingKindName}  className={manageOpenAndClose ? "bg-primary-main text-white" : "hidden"} placement="left">
