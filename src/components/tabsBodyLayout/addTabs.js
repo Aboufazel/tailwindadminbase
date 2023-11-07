@@ -13,8 +13,6 @@ const AddTabs = () => {
     const updatePopupBody = popupDataStore((state) => state.updatePopupBodyData);
     const {activeSelect , updateActiveSelect} = usePopupBody()
 
-
-    console.log(activeSelect , "selecy actions")
     const bodyData = [
         {id:'account-group' , title:'گروه حساب' , action:''},
         {id:'account-main' , title:'حساب کل' , action:''},

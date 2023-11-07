@@ -4,9 +4,43 @@ import SideMenuCard from "./sideMenuCard";
 import {useAllCodingAccount} from "../../hooks/coding";
 import SideCodingCard from "./sideCodingCard";
 import {Spinner} from "@material-tailwind/react";
+import {toast} from "react-toastify";
+import {useNavigate} from "react-router-dom";
+import useStorage from "../../hooks/useStorage";
+import {useEffect} from "react";
+import Storage from "../../services/storage";
 const SideMenu = ({manageOpenAndClose}) => {
+    const navigate = useNavigate()
+    const storage = Storage()
+    const {data:codingdata , isLoading, isError , error , isRefetching} = useAllCodingAccount("getAllSideCoding")
+    const [,setAuthInfo] = useStorage("auth", {
+        userId: "",
+        accessToken: "",
+        role:""
+    })
 
-    const {data:codingdata , isLoading , isRefetching} = useAllCodingAccount("getAllSideCoding")
+
+    useEffect(() => {
+        if (isError){
+            if(storage.accessToken && error.response.status === 403){
+                toast.error("توکن منقضی شده است")
+                setAuthInfo({
+                    userId: "",
+                    accessToken: "",
+                    role:"",
+                })
+                navigate('/')
+            } else if (storage.accessToken && error?.response.status >=400 && error?.response.status <=500){
+                toast.error("توکن منقضی شده است")
+                setAuthInfo({
+                    userId: "",
+                    accessToken: "",
+                    role:"",
+                })
+                navigate('/')
+            }
+        }
+    }, [isError]);
 
     return(
        <div className={"w-full pt-[32px] z-10 px-[12px]"}>

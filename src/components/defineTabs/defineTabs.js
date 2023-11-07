@@ -27,7 +27,6 @@ const DefineTabs = ({tabsData=[]}) => {
         "delete-coding":<DeleteCoding/>,
     }
 
-    console.log(editOrDeleteStatus ," status")
     useEffect(() => {
        tabsData.length > 0 && updateTabs(tabsData[0].id)
     } , []);

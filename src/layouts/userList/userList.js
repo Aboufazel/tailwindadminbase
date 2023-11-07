@@ -5,8 +5,6 @@ const UserList = () => {
 
     const {isLoading , data} = useAllData("all user")
 
-    console.log(data , "data featching");
-
     return(
         <div className={"flex flex-col items-center gap-10 p-10 w-full"}>
 
