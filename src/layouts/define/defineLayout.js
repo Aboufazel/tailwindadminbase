@@ -4,9 +4,8 @@ import {DefineTabsData} from "../../data/defineTabsData";
 import DefineTabsBody from "../../components/defineTabsBody/defineTabsBody";
 import useStore from "../../zustand/store";
 
-const DefineLayout = ({codingName}) => {
+const DefineLayout = () => {
     const breadCrumbsData = [
-        {id:"business" , title:"داشبورد" , link:"/main"},
         {id:"business" , title:"کدینگ حسابداری جدید" , link:"#"},
     ]
     const defineTabs = useStore(state => state.defineTabs)
