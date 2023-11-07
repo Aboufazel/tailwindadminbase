@@ -3,7 +3,6 @@ import Tables from "../../components/globals/tables/tables";
 import {businessBreadCrumbsData, businessTableHead} from "../../data/businessLayoutData";
 import {Spinner} from "@material-tailwind/react";
 import {useAllBusiness} from "../../hooks/businessServicesActions";
-import {useEffect} from "react";
 import {toast} from "react-toastify";
 import useStorage from "../../hooks/useStorage";
 import {useNavigate} from "react-router-dom";
