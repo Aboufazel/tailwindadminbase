@@ -1,13 +1,13 @@
-import {Bag, Category, Plus} from "react-iconly";
+import {Bag, Category, Plus, Work} from "react-iconly";
 import {routes} from "./routes";
 export const adminSideMenuData = {
     "داشبورد":[
         {id:'dashboard' , icon:<Category set={"bulk"}/> , title:'داشبورد' , child:false, link: routes.main , subMenu:[]},
     ],
     "مدیریت کسب و کار":[
-        {id:"business" , title:"کسب و کارها" , icon:<Bag set={"bulk"}/> , link: routes.business ,  subMenu:[]}
+        {id:"business" , title:"کسب و کارها" , icon:<Work set={"bulk"}/> , link: routes.business ,  subMenu:[]}
     ],
-    "کدینگ حسابداری":[
-        {id:"coding-new-accounting" , title:"حسابداری جدید" , icon:<Plus set={"bulk"}/> , link:routes.define ,  subMenu:[]},
+    "تعریف کدینگ":[
+        {id:"coding-new-accounting" , title:"حسابداری جدید" , icon:<Plus set={"bulk"}/> , link:routes.createCoding ,  subMenu:[]},
     ],
 }

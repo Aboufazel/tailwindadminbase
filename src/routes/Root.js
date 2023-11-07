@@ -8,6 +8,7 @@ import {routes} from "../data/routes";
 import UserList from "../layouts/userList/userList";
 import BusinessLayout from "../layouts/business/businessLayout";
 import DefineLayout from "../layouts/define/defineLayout";
+import CreateNewCoding from "../layouts/define/createNewCoding";
 
 const Root = () => {
 
@@ -48,10 +49,10 @@ const Root = () => {
                     </AuthProvider>
                 )
                 },{
-                    path: routes.define,
+                    path: routes.createCoding,
                     element:(
                         <AuthProvider>
-                            <DefineLayout/>
+                            <CreateNewCoding/>
                         </AuthProvider>
                     )
                 }

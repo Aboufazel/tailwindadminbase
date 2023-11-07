@@ -5,7 +5,7 @@ import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import buildProviderTree from "./hooks/buildProviderTree";
 import useWindowSize from "./hooks/useWindowSize";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import MobileAccess from "./components/access/mobileAccess";
 import AccessDenide from "./components/access/accessDenide";
 
@@ -22,6 +22,7 @@ function App() {
     useEffect(()=>{
         setIsMobile(isTabletOrMobile);
     },[isTabletOrMobile])
+
 
   if(isMobile){
       return(

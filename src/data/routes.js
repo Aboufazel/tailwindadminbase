@@ -3,5 +3,5 @@ export const routes = {
   userList:'/userList',
   mobileAccess:'/access',
   business:'/business',
-  define:'/define',
+  createCoding:'/createCoding',
 }

@@ -2,7 +2,6 @@ import {Plus} from "react-iconly";
 import popupStore from "../../zustand/popupStore";
 import PopupComponents from "../popup/popupComponents";
 import popupDataStore from "../../zustand/popupDataStore";
-import AddCodingKind from "../popupBody/definePopupBody/addCodingKind";
 import {create} from "zustand";
 
 const usePopupBody = create((set)=>({
@@ -22,11 +21,10 @@ const AddTabs = () => {
         {id:'account-person' , title:'حساب معین' , action:''},
         {id:'account-define' , title:'حساب تفضیلی پیش فرض' , action:''},
         {id:'account-type' , title:'نوع حساب' , action:''},
-        {id:'add-coding' , title:'افزودن کدینگ جدید' , action:''},
     ]
 
     const popupBody = {
-        "add-coding":<AddCodingKind/>,
+        "add-coding":"",
     }
 
     return(
