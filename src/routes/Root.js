@@ -55,6 +55,13 @@ const Root = () => {
                             <CreateNewCoding/>
                         </AuthProvider>
                     )
+                },{
+                    path: routes.define,
+                    element:(
+                        <AuthProvider>
+                            <DefineLayout/>
+                        </AuthProvider>
+                    )
                 }
             ]
         }

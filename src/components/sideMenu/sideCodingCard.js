@@ -8,7 +8,7 @@ const SideCodingCard = ({data , index , manageOpenAndClose}) => {
 
     return(
         <Tooltip content={data.accountCodingKindName}  className={manageOpenAndClose ? "bg-primary-main text-white" : "hidden"} placement="left">
-            <div onClick={()=>navigate(data.link)} key={data.accountCodingKindName + index}
+            <div onClick={()=>navigate('/define')} key={data.accountCodingKindName + index}
                  className={`flex flex-row items-center
              ${manageOpenAndClose ? "justify-center" : " justify-between"}
              transition-all

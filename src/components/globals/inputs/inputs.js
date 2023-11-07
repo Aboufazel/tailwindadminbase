@@ -41,7 +41,7 @@ const Inputs = ({
     const sizes= {
         normal: "h-[44px]",
     }
-
+    console.log(error)
     const inputClass = `w-full ${sizes[size]} block  outline-0 shadow-none font-medium border-none text-[14px] focus:outline-0 shadow-none text-secondary-600 !bg-transparent !active:bg-transparent active:bg-transparent !focus:bg-transparent ${
         style === 'contained' ? " placeholder-secondary-100  " :
             " placeholder-dark-600 placeholder-opacity-[50%]  outline-0   "} ${iClass}`;

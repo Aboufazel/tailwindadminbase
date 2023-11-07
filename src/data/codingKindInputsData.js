@@ -6,7 +6,7 @@ export const addAccountCodingKindInputs = [
         type:"input",
         inputType:"text",
         inputName:"accountCodingKindName",
-        width:''
+        width:'w-1/2'
     },{
         inputLabel:"کد *",
         inputPlaceholder:"کد را وارد نمایید...",
@@ -14,7 +14,7 @@ export const addAccountCodingKindInputs = [
         type:"input",
         inputType:"text",
         inputName:"accountCodingKindCode",
-        width:''
+        width:'w-1/2'
     },{
         inputLabel:"توضیحات کدینگ",
         inputPlaceholder:"نوشتن توضیحات...",
@@ -22,6 +22,6 @@ export const addAccountCodingKindInputs = [
         type:"input",
         inputType:"textarea",
         inputName:"accountCodingKindDesc",
-        width:''
+        width:'w-full'
     },
 ]

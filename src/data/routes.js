@@ -4,4 +4,5 @@ export const routes = {
   mobileAccess:'/access',
   business:'/business',
   createCoding:'/createCoding',
+  define:'/define'
 }

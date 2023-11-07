@@ -6,7 +6,7 @@ import SideCodingCard from "./sideCodingCard";
 import {Spinner} from "@material-tailwind/react";
 const SideMenu = ({manageOpenAndClose}) => {
 
-    const {data:codingdata , isLoading} = useAllCodingAccount()
+    const {data:codingdata , isLoading , isRefetching} = useAllCodingAccount("getAllSideCoding")
 
     return(
        <div className={"w-full pt-[32px] z-10 px-[12px]"}>
@@ -40,10 +40,10 @@ const SideMenu = ({manageOpenAndClose}) => {
            }
            <div className={"h-[300px] overflow-y-auto"}>
            {
-               isLoading ?
+               (isRefetching || isLoading) ?
                    <div className={"flex flex-row items-center w-full"}>
                        <Spinner color={"blue"}/>
-                       <p className={"text-text-color-2 font-medium"}>دربافت کدینگ...</p>
+                       <p className={"text-text-color-2 mr-2 font-medium"}>دریافت کدینگ...</p>
                    </div>
                    :
 
