@@ -1,5 +1,4 @@
 import {create} from "zustand";
-import useStore from "./store";
 
 const useActionType = create((set)=>({
     actionType:'',
