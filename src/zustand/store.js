@@ -5,6 +5,8 @@ const useStore = create((set)=>({
     defineTabs:'',
     reloadData:false,
     codingTitle:'',
+    codingKindId:'',
+    updateCodingKindId:(codingKindId) => set(() => ({ codingKindId: codingKindId })),
     updateCodingTitle:(codingTitle) => set(() => ({ codingTitle: codingTitle })),
     manageReloadData:()=>set((state)=>({reloadData:state.reloadData !== true})),
     manageOpenAndCloseSide: ()=>set((state)=>({sideMenuStatus:state.sideMenuStatus !== true})),

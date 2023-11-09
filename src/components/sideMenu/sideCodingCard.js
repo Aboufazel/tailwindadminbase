@@ -6,11 +6,13 @@ import useStore from "../../zustand/store";
 const SideCodingCard = ({data , index , manageOpenAndClose}) => {
     const navigate = useNavigate()
     const location = useLocation()
-    const updateCodingDefineTitle = useStore((state) => state.updateCodingTitle)
+    const updateCodingDefineTitle = useStore((state) => state.updateCodingTitle);
+    const updateCodingKindId = useStore(state => state.updateCodingKindId)
 
     return(
         <Tooltip content={data.accountCodingKindName}  className={manageOpenAndClose ? "bg-primary-main text-white" : "hidden"} placement="left">
             <div onClick={()=> {
+                updateCodingKindId(data.accountCodingKindId)
                 updateCodingDefineTitle(data.accountCodingKindName)
                 navigate('/define')
             }} key={data.accountCodingKindName + index}
