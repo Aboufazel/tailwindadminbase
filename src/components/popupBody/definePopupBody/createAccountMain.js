@@ -37,11 +37,8 @@ const CreateAccountMain = () => {
         resolver:yupResolver(formValidate)
     });
 
-    console.log(type.length , instinct.length)
-
     const onFormSubmit = async (data) =>{
         setLoading(true)
-        console.log(data)
         const res = await addAccountMain(data , instinct , type).catch(() => {
             toast.error("ثبت انجام نشد")
             setLoading(false)
