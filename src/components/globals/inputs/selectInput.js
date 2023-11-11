@@ -1,6 +1,6 @@
 import React from "react";
 
-const SelectInput = ({data , type= '' , label , register}) => {
+const SelectInput = ({data , type= '' , register}) => {
 
     const SelectAccountGroupOptions = ()=>{
 
