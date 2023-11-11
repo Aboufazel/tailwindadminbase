@@ -24,7 +24,7 @@ const formStore = create((set)=>({
         {id:'creditor' , title:'بستانکار', value:'2'},
     ],
     type:'',
-    instinct: '0',
+    instinct: '',
     updateInstinct:(instinct) => set(() => ({ instinct: instinct })),
     updateType:(type)=>set(()=>({type:type}))
 }))
@@ -44,6 +44,8 @@ const CreateAccountMain = () => {
         resolver:yupResolver(formValidate)
     });
 
+    console.log(type.length , instinct.length)
+
     const onFormSubmit = async (data) =>{
         setLoading(true)
         console.log(data)
@@ -53,6 +55,8 @@ const CreateAccountMain = () => {
         })
         if (res?.status === 200){
             reset()
+            updateType('')
+            updateInstinct('')
             toast.success("حساب کل با موفقیت ایجاد شد")
             setLoading(false)
         }
@@ -115,7 +119,7 @@ const CreateAccountMain = () => {
                 }
             </div>
             <div className={"flex flex-row justify-end w-full mt-5"}>
-                <Buttons type={"submit"}>
+                <Buttons disabled={(instinct.length <= 0 && type.length <= 0)} type={"submit"}>
                     {
                         loading ?
                             <p className={"flex flex-row items-center justify-center gap-3"}>
