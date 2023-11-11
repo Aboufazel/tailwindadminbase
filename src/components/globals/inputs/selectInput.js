@@ -10,7 +10,7 @@ const SelectInput = ({data , type= '' , label , register}) => {
                 <select className={"bg-transparent border border-text-color-3 px-3 py-2 rounded-[8px] mt-3"}
                         name={'accountGroupId'} id={'accountGroupId'} {...register("accountGroupId")}>
                     {
-                        data && data.map((items,index)=>(
+                        data && data.map((items)=>(
                             <option
                                 value={items.accountGroupId}
                             >{items.accountGroupName}</option>

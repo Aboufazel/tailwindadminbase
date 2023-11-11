@@ -13,7 +13,7 @@ const usePopupBody = create((set)=>({
 
 
 const AddTabs = () => {
-    const {actionStatus, manageActionStatus ,selectType , updateSelectType} = usePopupBody()
+    const {actionStatus, manageActionStatus , updateSelectType} = usePopupBody()
     const actionType = useActionType(state => state.actionType)
     const updateActionType = useActionType(state => state.updateActionType)
     const bodyData = [
