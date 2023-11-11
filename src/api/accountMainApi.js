@@ -1,8 +1,8 @@
 import {BaseUrl} from "./dashboardApi";
-
+const storageData = localStorage.getItem("auth")
+const userAuthData = JSON.parse(storageData);
 export const addAccountMain = (data , instinct , type)=>{
-    const storageData = localStorage.getItem("auth")
-    const userAuthData = JSON.parse(storageData);
+
 
     return BaseUrl({
         method:'post',
@@ -20,4 +20,19 @@ export const addAccountMain = (data , instinct , type)=>{
             "instinct":instinct,
             "type":type}
     })
+}
+
+export const getAllAccountMain = ()=>{
+   return BaseUrl({
+       method:'post',
+       url:'/AccountMainservice/api/AccountMains/getall',
+       headers:{
+           "selfUserId": userAuthData.userId,
+           "Authorization": userAuthData.accessToken,
+           'Content-Type': 'application/json'
+       },
+       data:{
+           "group":true,
+       }
+   })
 }

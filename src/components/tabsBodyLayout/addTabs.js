@@ -3,6 +3,7 @@ import {create} from "zustand";
 import CreateAccountGroup from "../popupBody/definePopupBody/createAccountGroup";
 import useActionType from "../../zustand/actionTypeStore";
 import CreateAccountMain from "../popupBody/definePopupBody/createAccountMain";
+import CreateAccountSpeac from "../popupBody/definePopupBody/createAccountSpeac";
 
 const usePopupBody = create((set)=>({
     selectType:"",
@@ -19,7 +20,7 @@ const AddTabs = () => {
     const bodyData = [
         {id:'account-group' , title:'گروه حساب' , action:'form'},
         {id:'account-main' , title:'حساب کل' , action:'form'},
-        {id:'account-person' , title:'حساب معین' , action:'form'},
+        {id:'account-speac' , title:'حساب معین' , action:'form'},
         {id:'account-define' , title:'حساب تفضیلی پیش فرض' , action:'list'},
         {id:'account-type' , title:'نوع حساب' , action:'form'},
     ]
@@ -27,7 +28,7 @@ const AddTabs = () => {
     const actionBody = {
         "account-group": <CreateAccountGroup/>,
         "account-main": <CreateAccountMain/>,
-        "account-person": <p>account person</p>,
+        "account-speac": <CreateAccountSpeac/>,
         "account-define": <p>account define</p>,
         "account-type": <p>account type</p>,
     }
