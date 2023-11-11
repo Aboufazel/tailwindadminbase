@@ -22,7 +22,7 @@ export const addAccountMain = (data , instinct , type)=>{
     })
 }
 
-export const getAllAccountMain = ()=>{
+export const getAllAccountMain = (codingId)=>{
    return BaseUrl({
        method:'post',
        url:'/AccountMainservice/api/AccountMains/getall',

@@ -13,6 +13,7 @@ import {Spinner} from "@material-tailwind/react";
 import {addAccountMain} from "../../../api/accountMainApi";
 import ActionCodingTitle from "../../actionCodingTitle/actionCodingTitle";
 import formStore from "../../../zustand/formStore";
+import useStore from "../../../zustand/store";
 
 const CreateAccountMain = () => {
     const instinct = formStore(state => state.instinct)
@@ -54,8 +55,11 @@ const CreateAccountMain = () => {
         }
     }
 
-
-    const {isLoading,isRefetching , isError , data} = useAllAccountGroup('accountsGroup')
+    const accountCodingKindId = useStore(state => state.codingKindId)
+    const {isLoading,
+        isRefetching ,
+        isError ,
+        data} = useAllAccountGroup('accountsGroup' , accountCodingKindId)
 
     if (isError){
         return (

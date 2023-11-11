@@ -37,17 +37,20 @@ export const getAllCoding = ()=>{
 }
 
 
-export const getAllAccountGroup = ()=>{
+export const getAllAccountGroup = (codingKindId)=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
         method:'post',
-        url:'/accountGroupService/api/accountGroups/getAll',
+        url:'/accountGroupService/api/accountGroups/GetAccountGroupCodingKindId',
         headers:{
             "selfUserId": userAuthData.userId,
             "Authorization": userAuthData.accessToken,
             "Content-Type":"application/json"
         },
+        data:{
+            "accountCodingKindId":codingKindId,
+        }
     })
 }
 
