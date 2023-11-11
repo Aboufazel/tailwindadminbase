@@ -7,7 +7,7 @@ const SelectInput = ({data , type= '' , register}) => {
         return (
             <div className={"flex flex-col mt-3"}>
                 <label>{renderOptionLabel[type]}</label>
-                <select className={"bg-transparent border border-text-color-3 px-3 py-2 rounded-[8px] mt-3"}
+                <select required={true} className={"bg-transparent border border-text-color-3 px-3 py-2 rounded-[8px] mt-3"}
                         name={'accountGroupId'} id={'accountGroupId'} {...register("accountGroupId")}>
                     {
                         data && data.map((items)=>(
@@ -26,7 +26,7 @@ const SelectInput = ({data , type= '' , register}) => {
         return (
             <div className={"flex flex-col mt-3"}>
                 <label>{renderOptionLabel[type]}</label>
-                <select className={"bg-transparent border border-text-color-3 px-3 py-2 rounded-[8px] mt-3"}
+                <select required={true} className={"bg-transparent border border-text-color-3 px-3 py-2 rounded-[8px] mt-3"}
                         name={'accountGroupId'} id={'accountGroupId'} {...register("accountGroupId")}>
                     {
                         data && data.map((items)=>(

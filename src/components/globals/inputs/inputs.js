@@ -55,25 +55,11 @@ const Inputs = ({
                 className={parentClass}>
 
                 <div className="w-full transition ">
-
                     {
                         (type === 'input' && inputType !== 'file') &&
                         <Input {...props} className={inputClass} type={inputType} register={register} name={name}
                         />
                     }
-
-                    {/*{*/}
-                    {/*    type === 'select' &&*/}
-                    {/*    <Select  {...props} width={dropDownWidth} title={label} effect={true} fnItem={value => fnCallbackValue(value)} className={inputClass}*/}
-                    {/*             register={register} name={name} options={selectOptions} />*/}
-                    {/*}*/}
-
-                    {/*{*/}
-                    {/*    (type === 'input' && inputType === 'file') &&*/}
-                    {/*    <File {...props} className={inputClass} type={inputType} register={register} name={name}*/}
-                    {/*    />*/}
-                    {/*}*/}
-
                 </div>
                 {
                     captcha

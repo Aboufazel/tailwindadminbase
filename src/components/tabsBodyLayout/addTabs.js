@@ -4,6 +4,7 @@ import CreateAccountGroup from "../popupBody/definePopupBody/createAccountGroup"
 import useActionType from "../../zustand/actionTypeStore";
 import CreateAccountMain from "../popupBody/definePopupBody/createAccountMain";
 import CreateAccountSpeac from "../popupBody/definePopupBody/createAccountSpeac";
+import CreateAccountType from "../popupBody/definePopupBody/createAccountType";
 
 const usePopupBody = create((set)=>({
     selectType:"",
@@ -30,7 +31,7 @@ const AddTabs = () => {
         "account-main": <CreateAccountMain/>,
         "account-speac": <CreateAccountSpeac/>,
         "account-define": <p>account define</p>,
-        "account-type": <p>account type</p>,
+        "account-type": <CreateAccountType/>,
     }
 
     return(

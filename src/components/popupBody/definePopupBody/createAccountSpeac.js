@@ -39,8 +39,6 @@ const CreateAccountSpeac = () => {
         resolver:yupResolver(formValidate)
     });
 
-    console.log(type.length , instinct.length)
-
     const onFormSubmit = async (data) =>{
         setLoading(true)
         const res = await addAccountMain(data , instinct , type).catch(() => {
@@ -71,8 +69,6 @@ const CreateAccountSpeac = () => {
             <LoadingComponents title={'دریافت اطلاعات'}/>
         )
     }
-
-    console.log(allAccountMain , "get all account main data fetch");
 
     return(
         <>
