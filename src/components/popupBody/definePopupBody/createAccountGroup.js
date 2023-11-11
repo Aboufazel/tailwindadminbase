@@ -9,9 +9,9 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {toast} from "react-toastify";
 import {addAccountGroup} from "../../../api/accountGroupApi";
 import {addAccountGroupInputs} from "../../../data/accountGroupInputsData";
+import ActionCodingTitle from "../../actionCodingTitle/actionCodingTitle";
 
 const CreateAccountGroup = () => {
-    const codingTitle = useStore(state=>state.codingTitle);
     const [loading, setLoading] = useState(false);
     const accountCodingKindId = useStore(state => state.codingKindId)
     const formValidate = yup.object().shape({
@@ -40,14 +40,7 @@ const CreateAccountGroup = () => {
     }
     return(
         <>
-            <div className={"flex flex-row  w-full items-center gap-[8px]"}>
-                <h2 className={"flex flex-row items-center text-text-color-1 text-[18px]"}>
-                   {`افزودن گروه حساب به`}
-                   <span className={"text-primary-main font-bold mr-3"}>
-                       {codingTitle}
-                   </span>
-                </h2>
-            </div>
+            <ActionCodingTitle title={'افزودن گروه حساب به'}/>
             <div className={"w-full"}>
                 <form onSubmit={handleSubmit(onFormSubmit)} className={"flex flex-col w-full items-center mt-[16px]"}>
                     <div className={"flex flex-col w-full"}>
