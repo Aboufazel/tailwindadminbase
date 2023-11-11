@@ -9,6 +9,7 @@ import {useNavigate} from "react-router-dom";
 import useStorage from "../../hooks/useStorage";
 import {useEffect} from "react";
 import Storage from "../../services/storage";
+import LoadingComponents from "../loading/loadingComponents";
 const SideMenu = ({manageOpenAndClose}) => {
     const navigate = useNavigate()
     const storage = Storage()
@@ -75,10 +76,7 @@ const SideMenu = ({manageOpenAndClose}) => {
            <div className={"h-[300px] overflow-y-auto"}>
            {
                (isRefetching || isLoading) ?
-                   <div className={"flex flex-row items-center w-full"}>
-                       <Spinner color={"blue"}/>
-                       <p className={"text-text-color-2 mr-2 font-medium"}>دریافت کدینگ...</p>
-                   </div>
+                   <LoadingComponents title={'دریافت کدینگ...'}/>
                    :
 
                    codingdata && codingdata.data.accountCodingKinds.map((data , index)=> (

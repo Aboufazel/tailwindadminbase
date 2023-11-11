@@ -2,6 +2,7 @@ import {ArrowLeft, Plus} from "react-iconly";
 import {create} from "zustand";
 import CreateAccountGroup from "../popupBody/definePopupBody/createAccountGroup";
 import useActionType from "../../zustand/actionTypeStore";
+import CreateAccountMain from "../popupBody/definePopupBody/createAccountMain";
 
 const usePopupBody = create((set)=>({
     selectType:"",
@@ -25,7 +26,7 @@ const AddTabs = () => {
 
     const actionBody = {
         "account-group": <CreateAccountGroup/>,
-        "account-main": <p>account main</p>,
+        "account-main": <CreateAccountMain/>,
         "account-person": <p>account person</p>,
         "account-define": <p>account define</p>,
         "account-type": <p>account type</p>,

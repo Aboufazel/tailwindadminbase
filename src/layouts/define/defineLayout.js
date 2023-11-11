@@ -12,13 +12,17 @@ const DefineLayout = () => {
     ]
     const defineTabs = useStore(state => state.defineTabs)
 
-    return(
-        <>
-            <BreadCrumbs data={breadCrumbsData}/>
-            <DefineTabs tabsData={DefineTabsData}/>
-            <DefineTabsBody role={defineTabs}/>
-        </>
-    )
+    if (codingTitle.length <= 0){
+        return (<p className={"font-medium text-text-color-2"}>یک کدینگ را انتخاب نمایید</p>)
+    } else {
+        return(
+            <>
+                <BreadCrumbs data={breadCrumbsData}/>
+                <DefineTabs tabsData={DefineTabsData}/>
+                <DefineTabsBody role={defineTabs}/>
+            </>
+        )
+    }
 }
 
 export default DefineLayout;

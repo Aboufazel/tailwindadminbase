@@ -35,3 +35,19 @@ export const getAllCoding = ()=>{
         },
     })
 }
+
+
+export const getAllAccountGroup = ()=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:'post',
+        url:'/accountGroupService/api/accountGroups/getAll',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            "Content-Type":"application/json"
+        },
+    })
+}
+

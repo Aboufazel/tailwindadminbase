@@ -7,6 +7,7 @@ import {toast} from "react-toastify";
 import useStorage from "../../hooks/useStorage";
 import {useNavigate} from "react-router-dom";
 import Storage from "../../services/storage";
+import LoadingComponents from "../../components/loading/loadingComponents";
 
 const BusinessLayout = () => {
     const [,setAuthInfo] = useStorage("auth", {
@@ -22,10 +23,7 @@ const BusinessLayout = () => {
         return (
             <>
                 <BreadCrumbs data={businessBreadCrumbsData}/>
-                <div className={"flex items-center gap-3 mt-7"}>
-                    <Spinner color={"blue"}/>
-                    <p className={"text-text-color-2 font-medium"}>در حال دریافت اطلاعات...</p>
-                </div>
+                <LoadingComponents title={'در حال دریافت کسب و کار...'}/>
             </>
         )
     }
