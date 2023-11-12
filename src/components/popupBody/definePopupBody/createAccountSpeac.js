@@ -2,11 +2,9 @@ import React, {useState} from "react";
 import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {addAccountMain} from "../../../api/accountMainApi";
 import {toast} from "react-toastify";
 import LoadingComponents from "../../loading/loadingComponents";
 import SelectInput from "../../globals/inputs/selectInput";
-import {addAccountMainInputs} from "../../../data/accountMainInputsData";
 import Inputs from "../../globals/inputs/inputs";
 import Buttons from "../../globals/Buttons";
 import {Spinner} from "@material-tailwind/react";
@@ -17,6 +15,8 @@ import {useQuery} from "@tanstack/react-query";
 import {getAllAccountGroup} from "../../../api/codingKind";
 import {useSelectId} from "./createAccountMain";
 import {useAllAccountMain} from "../../../hooks/coding";
+import {addAccountSpec} from "../../../api/accountSpecApi";
+import {addAccountSpecInputs} from "../../../data/accountSpecInputsData";
 
 
 const CreateAccountSpeac = () => {
@@ -31,9 +31,9 @@ const CreateAccountSpeac = () => {
     const [loading, setLoading] = useState(false);
     const {accountGroupId} = useSelectId()
     const formValidate = yup.object().shape({
-        accountGroupId:yup.string(),
-        accountMainName:yup.string().required("وارد کردن نام اجباری است"),
-        accountMainCode:yup.string().required("وارد کردن کد اجباری است"),
+        accountMainId:yup.string(),
+        accountSpecName:yup.string().required("وارد کردن نام اجباری است"),
+        accountSpecCode:yup.string().required("وارد کردن کد اجباری است"),
     });
     const {register ,
         handleSubmit,
@@ -45,7 +45,7 @@ const CreateAccountSpeac = () => {
 
     const onFormSubmit = async (data) =>{
         setLoading(true)
-        const res = await addAccountMain(data , instinct , type).catch(() => {
+        const res = await addAccountSpec(data , instinct , type).catch(() => {
             toast.error("ثبت انجام نشد")
             setLoading(false)
         })
@@ -64,8 +64,6 @@ const CreateAccountSpeac = () => {
         isError ,
         data} = useQuery(['accountsGroupForSpecs'] ,()=>getAllAccountGroup(accountCodingKindId) )
 
-
-    console.log(accountGroupId)
 
     const {data:allAccountMain , refetch , isRefetching:mainRefetching} = useAllAccountMain('accountMainsByGroup' , accountGroupId);
 
@@ -110,7 +108,7 @@ const CreateAccountSpeac = () => {
                 </div>
                 <div className={"flex flex-col w-full"}>
                     {
-                        addAccountMainInputs.map((item, index) => (
+                        addAccountSpecInputs.map((item, index) => (
                             <Inputs type={item.type}
                                     iClass={item.width}
                                     key={"input-value" + index}

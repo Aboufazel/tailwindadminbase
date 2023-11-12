@@ -34,12 +34,12 @@ const SelectInput = ({data , type= '' , register , step  , refetch}) => {
             <div className={"flex flex-col mt-3"}>
                 <label>{renderOptionLabel[type]}</label>
                 <select required={true} className={"bg-transparent border border-text-color-3 px-3 py-2 rounded-[8px] mt-3"}
-                        name={'accountGroupId'} id={'accountGroupId'} {...register("accountGroupId")}>
+                        name={'accountMainId'} id={'accountMainId'} {...register("accountMainId")}>
                     {
                         data && data.map((items)=>(
                             <option
-                                value={items.accountGroupId}
-                            >{items.accountGroupName}</option>
+                                value={items.accountMainId}
+                            >{items.accountMainName}</option>
                         ))
                     }
                 </select>
