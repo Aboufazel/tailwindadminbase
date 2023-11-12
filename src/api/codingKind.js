@@ -38,6 +38,8 @@ export const getAllCoding = ()=>{
 
 
 export const getAllAccountGroup = (codingKindId)=>{
+
+    console.log(codingKindId)
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({

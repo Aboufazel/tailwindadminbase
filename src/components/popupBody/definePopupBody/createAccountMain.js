@@ -56,13 +56,15 @@ const CreateAccountMain = () => {
     const {isLoading,
         isRefetching ,
         isError ,
-        data} = useAllAccountGroup('accountsGroup' , accountCodingKindId)
+        data} = useAllAccountGroup('accountsGroup' , `${accountCodingKindId}`)
 
     if (isError){
         return (
             toast.error('دریافت اطلاعات با مشکل مواجه شد!')
         )
     }
+
+    console.log(data , 'all account groups data')
 
     if (isLoading || isRefetching){
         return (

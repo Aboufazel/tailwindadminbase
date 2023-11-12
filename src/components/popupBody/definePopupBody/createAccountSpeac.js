@@ -59,7 +59,7 @@ const CreateAccountSpeac = () => {
     const {isLoading,
         isRefetching ,
         isError ,
-        data} = useAllAccountGroup('accountsGroup' , accountCodingKindId)
+        data} = useAllAccountGroup('accountsGroup' , `${accountCodingKindId}`)
 
     const {data:allAccountMain} = useAllAccountMain('accountMains');
     if (isError){
