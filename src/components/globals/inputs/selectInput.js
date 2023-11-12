@@ -10,6 +10,7 @@ const SelectInput = ({data , type= '' , register , step  , refetch}) => {
                 <label>{renderOptionLabel[type]}</label>
                 <select required={true} className={"bg-transparent border border-text-color-3 px-3 py-2 rounded-[8px] mt-3"}
                         name={'accountGroupId'} id={'accountGroupId'} {...register("accountGroupId")}>
+                    <option value={''}>{'گروه حساب را انتخاب کنید...'}</option>
                     {
                         data && data.map((items)=>(
                             <option
@@ -35,6 +36,7 @@ const SelectInput = ({data , type= '' , register , step  , refetch}) => {
                 <label>{renderOptionLabel[type]}</label>
                 <select required={true} className={"bg-transparent border border-text-color-3 px-3 py-2 rounded-[8px] mt-3"}
                         name={'accountMainId'} id={'accountMainId'} {...register("accountMainId")}>
+                    <option value={''}>{'حساب کل را انتخاب کنید...'}</option>
                     {
                         data && data.map((items)=>(
                             <option

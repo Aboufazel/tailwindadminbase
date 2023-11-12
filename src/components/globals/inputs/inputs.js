@@ -57,8 +57,7 @@ const Inputs = ({
                 <div className="w-full transition ">
                     {
                         (type === 'input' && inputType !== 'file') &&
-                        <Input {...props} className={inputClass} type={inputType} register={register} name={name}
-                        />
+                        <Input {...props} className={inputClass} type={inputType} register={register} name={name}/>
                     }
                 </div>
                 {

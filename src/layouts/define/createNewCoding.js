@@ -34,9 +34,9 @@ const CreateNewCoding = () => {
     const onFormSubmit = async (data) =>{
         setLoading(!loading)
         const res = await addCoding(data).catch(() => {
+            refetch()
             toast.error("ثبت انجام نشد")
             setLoading(false)
-            refetch()
         })
         if (res?.status === 200){
             toast.success("کدینگ با موفقیت ثبت شد")
