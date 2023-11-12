@@ -15,7 +15,9 @@ const SelectInput = ({data , type= '' , register , step  , refetch}) => {
                             <option
                                 onClick={()=> {
                                     updateAccountGroupId(items.accountGroupId)
-                                    refetch()
+                                    if(step === 'account-spec'){
+                                        refetch()
+                                    }
                                 }}
                                 value={items.accountGroupId}
                             >{items.accountGroupName}</option>
