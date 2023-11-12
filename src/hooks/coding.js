@@ -17,10 +17,10 @@ const useAllAccountGroup = (queryKey , codingId) => {
     })
 }
 
-const useAllAccountMain = (queryKey)=>{
+const useAllAccountMain = (queryKey , groupId )=>{
     return useQuery({
         queryKey:[queryKey],
-        queryFn:getAllAccountMain,
+        queryFn:()=>getAllAccountMain(`${groupId}`),
     })
 }
 

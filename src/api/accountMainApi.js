@@ -1,9 +1,7 @@
 import {BaseUrl} from "./dashboardApi";
-const storageData = localStorage.getItem("auth")
-const userAuthData = JSON.parse(storageData);
 export const addAccountMain = (data , instinct , type)=>{
-
-
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
     return BaseUrl({
         method:'post',
         url:'/AccountMainservice/api/AccountMains/add',
@@ -22,17 +20,20 @@ export const addAccountMain = (data , instinct , type)=>{
     })
 }
 
-export const getAllAccountMain = (codingId)=>{
+export const getAllAccountMain = (accountGroupId)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
    return BaseUrl({
        method:'post',
-       url:'/AccountMainservice/api/AccountMains/getall',
+       url:'/AccountMainservice/api/AccountMains/GetAccountMainByGroupId',
        headers:{
            "selfUserId": userAuthData.userId,
            "Authorization": userAuthData.accessToken,
            'Content-Type': 'application/json'
        },
        data:{
-           "group":true,
+           "accountGroupId":accountGroupId,
+           "group":true
        }
    })
 }

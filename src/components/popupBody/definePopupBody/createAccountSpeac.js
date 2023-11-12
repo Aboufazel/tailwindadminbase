@@ -4,7 +4,6 @@ import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {addAccountMain} from "../../../api/accountMainApi";
 import {toast} from "react-toastify";
-import {useAllAccountGroup, useAllAccountMain} from "../../../hooks/coding";
 import LoadingComponents from "../../loading/loadingComponents";
 import SelectInput from "../../globals/inputs/selectInput";
 import {addAccountMainInputs} from "../../../data/accountMainInputsData";
@@ -14,6 +13,10 @@ import {Spinner} from "@material-tailwind/react";
 import ActionCodingTitle from "../../actionCodingTitle/actionCodingTitle";
 import formStore from "../../../zustand/formStore";
 import useStore from "../../../zustand/store";
+import {useQuery} from "@tanstack/react-query";
+import {getAllAccountGroup} from "../../../api/codingKind";
+import {useSelectId} from "./createAccountMain";
+import {useAllAccountMain} from "../../../hooks/coding";
 
 
 const CreateAccountSpeac = () => {
@@ -26,7 +29,7 @@ const CreateAccountSpeac = () => {
     const instinct = formStore(state => state.instinct)
     const instinctButton = formStore(state => state.instinctButton)
     const [loading, setLoading] = useState(false);
-
+    const {accountGroupId} = useSelectId()
     const formValidate = yup.object().shape({
         accountGroupId:yup.string(),
         accountMainName:yup.string().required("وارد کردن نام اجباری است"),
@@ -35,7 +38,7 @@ const CreateAccountSpeac = () => {
     const {register ,
         handleSubmit,
         formState:{errors},
-        reset
+        reset,
     } = useForm({
         resolver:yupResolver(formValidate)
     });
@@ -59,14 +62,20 @@ const CreateAccountSpeac = () => {
     const {isLoading,
         isRefetching ,
         isError ,
-        data} = useAllAccountGroup('accountsGroup' , `${accountCodingKindId}`)
+        data} = useQuery(['accountsGroupForSpecs'] ,()=>getAllAccountGroup(accountCodingKindId) )
 
-    const {data:allAccountMain} = useAllAccountMain('accountMains');
+
+    console.log(accountGroupId)
+
+    const {data:allAccountMain , refetch , isRefetching:mainRefetching} = useAllAccountMain('accountMainsByGroup' , accountGroupId);
+
     if (isError){
         return (
             toast.error('دریافت اطلاعات با مشکل مواجه شد!')
         )
     }
+
+
 
     if (isLoading || isRefetching){
         return (
@@ -74,13 +83,19 @@ const CreateAccountSpeac = () => {
         )
     }
 
+
+
+
+
     return(
         <>
             <ActionCodingTitle title={'افزودن حساب معین به'}/>
             <form onSubmit={handleSubmit(onFormSubmit)} className={"w-full pt-5"}>
-                <SelectInput type={'account-group'} register={register} data={data && data.data.accountGroups}/>
-                <SelectInput type={'account-main'} register={register}
-                             data={allAccountMain && allAccountMain.data.accountMains}/>
+                <SelectInput type={'account-group'} refetch={refetch} step={'account-spec'} register={register} data={data && data.data.accountGroups}/>
+                {
+                  mainRefetching ? <LoadingComponents title={'دریافت حساب کل'}/> : <SelectInput type={'account-main'} register={register} data={allAccountMain && allAccountMain.data.accountMains}/>
+                }
+
                 <div className={"flex flex-row gap-3 mt-6 w-full"}>
                     {
                         instinctButton.map((items, index) => (

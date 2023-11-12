@@ -4,6 +4,8 @@ const useStore = create((set)=>({
     sideMenuStatus:false,
     defineTabs:'',
     reloadData:false,
+    selectAccountGroup:'',
+    updateSelectAccountGroup:(selectAccountGroup)=>set(()=>({selectAccountGroup:selectAccountGroup})),
     codingTitle:'',
     codingKindId:'',
     updateCodingKindId:(codingKindId) => set(() => ({ codingKindId: codingKindId })),

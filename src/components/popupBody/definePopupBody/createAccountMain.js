@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import SelectInput from "../../globals/inputs/selectInput";
-import {useAllAccountGroup} from "../../../hooks/coding";
 import {toast} from "react-toastify";
 import LoadingComponents from "../../loading/loadingComponents";
 import * as yup from "yup";
@@ -14,6 +13,14 @@ import {addAccountMain} from "../../../api/accountMainApi";
 import ActionCodingTitle from "../../actionCodingTitle/actionCodingTitle";
 import formStore from "../../../zustand/formStore";
 import useStore from "../../../zustand/store";
+import {useQuery} from "@tanstack/react-query";
+import {getAllAccountGroup} from "../../../api/codingKind";
+import {create} from "zustand";
+
+export const useSelectId = create((set) => ({
+    accountGroupId: '',
+    updateAccountGroupId: (accountGroupId)=>set(()=>({accountGroupId:accountGroupId}))
+}))
 
 const CreateAccountMain = () => {
     const instinct = formStore(state => state.instinct)
@@ -23,7 +30,6 @@ const CreateAccountMain = () => {
     const updateType = formStore(state => state.updateType)
     const instinctButton = formStore(state => state.instinctButton)
     const [loading, setLoading] = useState(false);
-
     const formValidate = yup.object().shape({
         accountGroupId:yup.string(),
         accountMainName:yup.string().required("وارد کردن نام اجباری است"),
@@ -36,6 +42,7 @@ const CreateAccountMain = () => {
     } = useForm({
         resolver:yupResolver(formValidate)
     });
+
 
     const onFormSubmit = async (data) =>{
         setLoading(true)
@@ -56,15 +63,13 @@ const CreateAccountMain = () => {
     const {isLoading,
         isRefetching ,
         isError ,
-        data} = useAllAccountGroup('accountsGroup' , `${accountCodingKindId}`)
+        data} = useQuery(['accountsGroups'] , ()=>getAllAccountGroup(accountCodingKindId))
 
     if (isError){
         return (
             toast.error('دریافت اطلاعات با مشکل مواجه شد!')
         )
     }
-
-    console.log(data , 'all account groups data')
 
     if (isLoading || isRefetching){
         return (

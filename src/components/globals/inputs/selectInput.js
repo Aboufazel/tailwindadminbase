@@ -1,9 +1,10 @@
 import React from "react";
+import {useSelectId} from "../../popupBody/definePopupBody/createAccountMain";
 
-const SelectInput = ({data , type= '' , register}) => {
+const SelectInput = ({data , type= '' , register , step  , refetch}) => {
+    const {updateAccountGroupId} = useSelectId()
 
     const SelectAccountGroupOptions = ()=>{
-
         return (
             <div className={"flex flex-col mt-3"}>
                 <label>{renderOptionLabel[type]}</label>
@@ -12,6 +13,10 @@ const SelectInput = ({data , type= '' , register}) => {
                     {
                         data && data.map((items)=>(
                             <option
+                                onClick={()=> {
+                                    updateAccountGroupId(items.accountGroupId)
+                                    refetch()
+                                }}
                                 value={items.accountGroupId}
                             >{items.accountGroupName}</option>
                         ))
