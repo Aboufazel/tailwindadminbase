@@ -19,7 +19,7 @@ export const codingAccountGroupTableHead = [
     {
         name: "action",
         title: "عملیات",
-        render: (row) => (<ReviewTabsActionButton/>),
+        render: () => (<ReviewTabsActionButton/>),
     },
 ]
 
@@ -52,7 +52,7 @@ export const codingAccountMainsTableHead = [
     {
         name: "action",
         title: "عملیات",
-        render: (row) => (<ReviewTabsActionButton/>),
+        render: () => (<ReviewTabsActionButton/>),
     },
 ]
 
@@ -85,7 +85,7 @@ export const codingAccountSpecTableHead = [
     {
         name: "action",
         title: "عملیات",
-        render: (row) => (<ReviewTabsActionButton/>),
+        render: () => (<ReviewTabsActionButton/>),
     },
 ]
 
