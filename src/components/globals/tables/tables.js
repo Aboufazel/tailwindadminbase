@@ -6,6 +6,7 @@ import BusinessPopupBody from "../../popupBody/businessPopupBody";
 import {useState} from "react";
 import {Link} from "react-router-dom";
 import {ArrowLeft, ArrowRight} from "react-iconly";
+import useReviewTabStore from "../../../zustand/reviewTabStore";
 const Tables = ({headers , data ,bodyId}) => {
 
 
@@ -40,6 +41,11 @@ const Tables = ({headers , data ,bodyId}) => {
 
     const managePopup = popupStore(state => state.manageOpenPopUp);
     const updatePopupBody = popupDataStore((state) => state.updatePopupBodyData);
+    const updataStepView = useReviewTabStore(state => state.updateReviewStep);
+    const stepView = useReviewTabStore(state => state.reviewStep)
+    const updateAccountGroupId = useReviewTabStore(state => state.updateCodingAccountGroupId)
+    const updateAccountMainId = useReviewTabStore(state => state.updateCodingAccountMainId)
+
     return(
            <>
                <div className={"h-[540px] overflow-y-auto"}>
@@ -54,18 +60,36 @@ const Tables = ({headers , data ,bodyId}) => {
                        <tbody>
                        {records.map((row, index) => (
                            <tr key={index} className="cursor-pointer even:bg-blue-gray-50/50" onClick={()=>{
-                               managePopup()
-                               updatePopupBody(row)
+                               if(bodyId === 'business'){
+                                   managePopup()
+                                   updatePopupBody(row)
+                               }
                            }} >
-                               {headers.map((header) => (
-                                   <td className={"p-4 font-normal"} key={header.name.toString()}>{header.render(row)}</td>
+                               {headers.map((header , index) => (
+                                   <td
+                                       onClick={()=>{
+                                           if (bodyId === 'coding' && index === 1){
+                                               if (stepView === 'coding-account-group'){
+                                                   updateAccountGroupId(row.accountGroupId)
+                                                   updataStepView('coding-account-main')
+                                               }else if(stepView === 'coding-account-main'){
+                                                   updateAccountMainId(row.accountMainId)
+                                                   updataStepView('coding-account-spec')
+                                               }
+                                           }
+                                       }}
+                                       className={"p-4 font-normal"} key={header.name.toString()}>{header.render(row)}</td>
                                ))}
                            </tr>
                        ))}
                        </tbody>
-                       <PopupComponents>
-                           {bodyView[bodyId]}
-                       </PopupComponents>
+                       {
+                           bodyId === 'business' ?
+                               <PopupComponents>
+                                   {bodyView[bodyId]}
+                               </PopupComponents>
+                               : ""
+                       }
                    </table>
                </div>
                <nav className={"flex flex-row w-full mt-3 justify-center"}>

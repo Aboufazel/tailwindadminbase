@@ -5,7 +5,7 @@ import {Message, Notification} from "react-iconly";
 const AdminHeader = () => {
 
     return(
-        <div className={"flex flex-row items-center bg-white w-full pr-[32px] py-[16px]"}>
+        <div className={"flex flex-row items-center bg-white w-full pr-[32px] z-20 relative py-[16px]"}>
             <form
                 className={"flex flex-row items-center gap-[8px] text-text-color-3 pr-[16px] py-[4px] rounded-[4px] w-1/5"}>
                 {/*<Search/>*/}
