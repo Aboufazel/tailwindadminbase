@@ -7,7 +7,6 @@ import {useState} from "react";
 import {Link} from "react-router-dom";
 import {ArrowLeft, ArrowRight} from "react-iconly";
 import useReviewTabStore from "../../../zustand/reviewTabStore";
-import {toast} from "react-toastify";
 import useAccountTypeStore from "../../../zustand/accountTypeStore";
 const Tables = ({headers , data ,bodyId , step}) => {
 

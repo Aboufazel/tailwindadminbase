@@ -3,6 +3,8 @@ import {ArrowLeft} from "react-iconly";
 import Buttons from "../globals/Buttons";
 import useAccountTypeStore from "../../zustand/accountTypeStore";
 import {useAllAccountSpecByTypeId} from "../../hooks/coding";
+import {toast} from "react-toastify";
+import LoadingComponents from "../loading/loadingComponents";
 
 const AccountTypeAction = () => {
     const manageActionLayout = useReviewTabStore(state => state.manageActionLayout)
@@ -19,7 +21,16 @@ const AccountTypeAction = () => {
 
 
     console.log(data , 'account spec by type data')
+
+    if(isError){
+        toast.error('دریافت اطلاعات با مشکل مواجه شد!')
+    }
     const AccountSpecShowCard = () =>{
+
+        if(isLoading || isRefetching){
+            return (<LoadingComponents title={'درحال دریافت حساب معین'}/>
+        )
+        }
 
         return(
             <div className={"flex flex-row items-center w-full my-5 border-primary-main/10 border-b pb-3"}>
