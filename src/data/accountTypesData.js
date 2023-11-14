@@ -1,5 +1,3 @@
-import ReviewTabsActionButton from "../components/globals/actionButton/reviewTabsActionButton";
-
 export const codingAccountTypesTableHead = [
     {
         name: "accountTypeCode",
@@ -25,10 +23,5 @@ export const codingAccountTypesTableHead = [
         name: "isActive",
         title: "وضعیت",
         render: (row) => (row.isActive === true ? "فعال" : "غیر فعال"),
-    },
-    {
-        name: "action",
-        title: "عملیات",
-        render: () => (<ReviewTabsActionButton/>),
     },
 ]

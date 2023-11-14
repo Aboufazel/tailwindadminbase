@@ -36,3 +36,20 @@ export const getAccountTypeCodingKind = (codingId)=>{
         }
     })
 }
+
+export const getAllAccountTypeSpecByAccountTypeId = (typeId) =>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:"post",
+        url:'/AccountTypeService/api/AccountTypeSpecs/GetAllAccountTypeSpecByAccountTypeId',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            'Content-Type': 'application/json'
+        },
+        data:{
+            "accountTypeId":typeId,
+        }
+    })
+}

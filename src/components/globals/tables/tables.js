@@ -8,6 +8,7 @@ import {Link} from "react-router-dom";
 import {ArrowLeft, ArrowRight} from "react-iconly";
 import useReviewTabStore from "../../../zustand/reviewTabStore";
 import {toast} from "react-toastify";
+import useAccountTypeStore from "../../../zustand/accountTypeStore";
 const Tables = ({headers , data ,bodyId , step}) => {
 
 
@@ -39,7 +40,7 @@ const Tables = ({headers , data ,bodyId , step}) => {
        setCurrentPage(number)
     }
 
-
+    const updateAccountTypeId = useAccountTypeStore(state => state.updateAccountTypeId)
     const managePopup = popupStore(state => state.manageOpenPopUp);
     const updatePopupBody = popupDataStore((state) => state.updatePopupBodyData);
     const updataStepView = useReviewTabStore(state => state.updateReviewStep);
@@ -48,6 +49,7 @@ const Tables = ({headers , data ,bodyId , step}) => {
     const updateAccountMainId = useReviewTabStore(state => state.updateCodingAccountMainId);
     const updateAccountGroupName = useReviewTabStore(state => state.updateAccountGroupName);
     const updateAccountMainName = useReviewTabStore(state => state.updateAccountMainName);
+    const manageActionLayout = useReviewTabStore(state => state.manageActionLayout)
 
     return(
            <>
@@ -66,6 +68,9 @@ const Tables = ({headers , data ,bodyId , step}) => {
                                if(bodyId === 'business'){
                                    managePopup()
                                    updatePopupBody(row)
+                               }else if(step === 'accountType'){
+                                   updateAccountTypeId(row.accountTypeId)
+                                   manageActionLayout()
                                }
                            }} >
                                {headers.map((header , index) => (
@@ -81,8 +86,6 @@ const Tables = ({headers , data ,bodyId , step}) => {
                                                    updateAccountMainId(row.accountMainId)
                                                    updataStepView('coding-account-spec')
                                                }
-                                           } else if(step === 'accountType' && index === 1){
-                                               toast.info('در این مرحله فقط امکان انجام عملیات وجود دارد')
                                            }
                                        }}
                                        className={"p-4 font-normal"} key={header.name.toString()}>{header.render(row)}</td>

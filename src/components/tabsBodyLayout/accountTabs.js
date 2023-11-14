@@ -4,8 +4,8 @@ import Tables from "../globals/tables/tables";
 import {codingAccountTypesTableHead} from "../../data/accountTypesData";
 import LoadingComponents from "../loading/loadingComponents";
 import {toast} from "react-toastify";
-import AccountGroupAction from "../reviewTabsActionLayout/accountGroupAction";
 import useReviewTabStore from "../../zustand/reviewTabStore";
+import AccountTypeAction from "../reviewTabsActionLayout/accountTypeAction";
 
 const AccountTabs = () => {
 
@@ -28,7 +28,7 @@ const AccountTabs = () => {
 
     return(
         actionLayout ?
-            <AccountGroupAction/>
+            <AccountTypeAction/>
             :
             <Tables bodyId={'coding'} step={'accountType'} headers={codingAccountTypesTableHead} data={data.data.accountTypes}/>
     )
