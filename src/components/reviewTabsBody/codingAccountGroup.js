@@ -7,8 +7,13 @@ import LoadingComponents from "../loading/loadingComponents";
 import {toast} from "react-toastify";
 import useReviewTabStore from "../../zustand/reviewTabStore";
 import AccountGroupAction from "../reviewTabsActionLayout/accountGroupAction";
+import {useEffect} from "react";
 
 const CodingAccountGroup = () => {
+    const updateGroupName = useReviewTabStore(state => state.updateAccountGroupName)
+    useEffect(() => {
+        updateGroupName('')
+    }, []);
 
     const accountCodingKindId = useStore(state => state.codingKindId)
     const actionLayout = useReviewTabStore(state => state.actionLayout)

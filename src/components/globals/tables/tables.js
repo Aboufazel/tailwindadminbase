@@ -44,7 +44,9 @@ const Tables = ({headers , data ,bodyId}) => {
     const updataStepView = useReviewTabStore(state => state.updateReviewStep);
     const stepView = useReviewTabStore(state => state.reviewStep)
     const updateAccountGroupId = useReviewTabStore(state => state.updateCodingAccountGroupId)
-    const updateAccountMainId = useReviewTabStore(state => state.updateCodingAccountMainId)
+    const updateAccountMainId = useReviewTabStore(state => state.updateCodingAccountMainId);
+    const updateAccountGroupName = useReviewTabStore(state => state.updateAccountGroupName);
+    const updateAccountMainName = useReviewTabStore(state => state.updateAccountMainName);
 
     return(
            <>
@@ -71,8 +73,10 @@ const Tables = ({headers , data ,bodyId}) => {
                                            if (bodyId === 'coding' && index === 1){
                                                if (stepView === 'coding-account-group'){
                                                    updateAccountGroupId(row.accountGroupId)
+                                                   updateAccountGroupName(row.accountGroupName)
                                                    updataStepView('coding-account-main')
                                                }else if(stepView === 'coding-account-main'){
+                                                   updateAccountMainName(row.accountMainName)
                                                    updateAccountMainId(row.accountMainId)
                                                    updataStepView('coding-account-spec')
                                                }

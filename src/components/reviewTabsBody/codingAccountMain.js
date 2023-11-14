@@ -5,12 +5,18 @@ import {toast} from "react-toastify";
 import AccountGroupAction from "../reviewTabsActionLayout/accountGroupAction";
 import Tables from "../globals/tables/tables";
 import {codingAccountMainsTableHead} from "../../data/codingAccountGroupData";
+import {useEffect} from "react";
 
 const CodingAccountMain = () => {
     const actionLayout = useReviewTabStore(state => state.actionLayout)
     const accountGroupId = useReviewTabStore(state => state.codingAccountGroupId)
     const updateStepView = useReviewTabStore(state => state.updateReviewStep);
+    const updateMainName = useReviewTabStore(state => state.updateAccountMainName)
 
+
+    useEffect(() => {
+        updateMainName('')
+    }, []);
     const {data ,
         isLoading ,
         isError,
