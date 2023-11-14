@@ -19,3 +19,20 @@ export const addAccountType = (data , codingId , automatic , float)=>{
             "lang":"fa"}
     })
 }
+
+export const getAccountTypeCodingKind = (codingId)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:"post",
+        url:'/AccountTypeService/api/AccountTypes/GetAccountTypeCodingKind',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            'Content-Type': 'application/json'
+        },
+        data:{
+            "accountTypeCodingKindId":codingId,
+        }
+    })
+}

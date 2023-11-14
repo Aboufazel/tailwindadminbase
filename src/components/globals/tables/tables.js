@@ -7,7 +7,8 @@ import {useState} from "react";
 import {Link} from "react-router-dom";
 import {ArrowLeft, ArrowRight} from "react-iconly";
 import useReviewTabStore from "../../../zustand/reviewTabStore";
-const Tables = ({headers , data ,bodyId}) => {
+import {toast} from "react-toastify";
+const Tables = ({headers , data ,bodyId , step}) => {
 
 
     const [currentPage , setCurrentPage] = useState(1);
@@ -70,7 +71,7 @@ const Tables = ({headers , data ,bodyId}) => {
                                {headers.map((header , index) => (
                                    <td
                                        onClick={()=>{
-                                           if (bodyId === 'coding' && index === 1){
+                                           if (bodyId === 'coding' && index === 1 && step !== 'accountType'){
                                                if (stepView === 'coding-account-group'){
                                                    updateAccountGroupId(row.accountGroupId)
                                                    updateAccountGroupName(row.accountGroupName)
@@ -80,6 +81,8 @@ const Tables = ({headers , data ,bodyId}) => {
                                                    updateAccountMainId(row.accountMainId)
                                                    updataStepView('coding-account-spec')
                                                }
+                                           } else if(step === 'accountType' && index === 1){
+                                               toast.info('در این مرحله فقط امکان انجام عملیات وجود دارد')
                                            }
                                        }}
                                        className={"p-4 font-normal"} key={header.name.toString()}>{header.render(row)}</td>
