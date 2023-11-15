@@ -41,7 +41,7 @@ const AccountTypeAction = () => {
     }
 
     const manageDeleteAccountType = async ()=>{
-        const res = await deleteAccountType(accountTypeId).catch((e)=>{
+        const res = await deleteAccountType(accountTypeId).catch(()=>{
             toast.error('حذف موفقیت آمیز نبود')
         })
         if (res?.status === 200){
