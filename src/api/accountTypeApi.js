@@ -53,3 +53,43 @@ export const getAllAccountTypeSpecByAccountTypeId = (typeId) =>{
         }
     })
 }
+
+export const getAccountTypeById = (typeId)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:"post",
+        url:'/AccountTypeService/api/AccountTypes/GetAccountType',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            'Content-Type': 'application/json'
+        },
+        data:{
+            "accountTypeId":typeId,
+        }
+    })
+}
+
+export const editAccountType = (data , accountTypeId , accountCodingKindId , isAutomatic , isFloat , isActive)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:"put",
+        url:'/AccountTypeService/api/AccountTypes/Edit',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            'Content-Type': 'application/json'
+        },
+        data:{
+            "accountTypeId":accountTypeId,
+            "accountCodingKindId":accountCodingKindId,
+            "accountTypeCode":data.accountTypeCode,
+            "accountTypeName":data.accountTypeName,
+            "isAutomatic":isAutomatic,
+            "isActive":isActive,
+            "isFloat":isFloat,
+            "lang":"fa"}
+    })
+}
