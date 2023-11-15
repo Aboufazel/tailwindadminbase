@@ -3,6 +3,8 @@ import {create} from "zustand";
 const useAccountTypeStore = create((set)=>({
     accountTypeId: '',
     editStep:false,
+    deleteStep:false,
+    updateDeleteStep:()=>set((state)=>({deleteStep:state.deleteStep !== true})),
     manageEditStep:()=>set((state)=>({editStep:state.editStep !== true})),
     updateAccountTypeId:(accountTypeId)=>set(()=>({accountTypeId:accountTypeId})),
 }))

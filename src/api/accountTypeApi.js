@@ -111,3 +111,20 @@ export const editAccountTypeIsActive = (accountTypeId , isActive)=>{
         }
     })
 }
+
+export const deleteAccountType = (accountTypeId)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:"delete",
+        url:'/AccountTypeService/api/AccountTypes/delete',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            'Content-Type': 'application/json'
+        },
+        data:{
+            "accountTypeId":accountTypeId,
+        }
+    })
+}

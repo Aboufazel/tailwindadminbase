@@ -8,16 +8,20 @@ import {toast} from "react-toastify";
 import LoadingComponents from "../loading/loadingComponents";
 import AccountSpecShowCard from "./actionComponents/accountSpecShowCard";
 import EditTypeForm from "./actionComponents/editTypeForm";
-import {editAccountTypeIsActive} from "../../api/accountTypeApi";
+import {deleteAccountType, editAccountTypeIsActive} from "../../api/accountTypeApi";
 
 const AccountTypeAction = () => {
     const manageActionLayout = useReviewTabStore(state => state.manageActionLayout)
     const accountTypeId = useAccountTypeStore(state => state.accountTypeId)
     const editStep = useAccountTypeStore(state => state.editStep)
     const manageEditStep = useAccountTypeStore(state => state.manageEditStep)
+    const updateDeleteStep = useAccountTypeStore(state => state.updateDeleteStep)
+    const deleteStep = useAccountTypeStore(state => state.deleteStep)
+    const [active , setActive] = useState('')
+
     const {data , isRefetching , isLoading , isError} = useAllAccountSpecByTypeId('accountSpecsByTypeId' , accountTypeId)
     const {data:accountTypeData , isLoading:AccountTypeLoading , refetch , isRefetching:AccountTypeRefetching} = useGetAccountTypeById('getAccountTypeWithId' , accountTypeId);
-    const [active , setActive] = useState('')
+
     const accountTypeInformationList = [
         {title:"نام حساب" , data:accountTypeData?.data.accountTypes[0].accountTypeName},
         {title:"کد حساب" , data:accountTypeData?.data.accountTypes[0].accountTypeCode},
@@ -33,6 +37,15 @@ const AccountTypeAction = () => {
         if(res.status === 200){
             toast.success('ویرایش انجام شد')
             refetch()
+        }
+    }
+
+    const manageDeleteAccountType = async ()=>{
+        const res = await deleteAccountType(accountTypeId).catch((e)=>{
+            toast.error('حذف موفقیت آمیز نبود')
+        })
+        if (res?.status === 200){
+            toast.success('حذف موفقیت آمیز بود')
         }
     }
 
@@ -98,12 +111,25 @@ const AccountTypeAction = () => {
                     </div>
 
                     <div className={"flex flex-row items-center w-full justify-center mt-8 gap-5"}>
-                        <Buttons light={true}>لینک جدید</Buttons>
-                        <Buttons onClick={manageEditStep} light={true}>ویرایش</Buttons>
-                        <Buttons light={true}>حذف</Buttons>
-                        <Buttons onClick={manageIsActive} light={true}>
-                            {accountTypeData?.data.accountTypes[0].isActive ? 'غیرفعال سازی' : 'فعال سازی'}
-                        </Buttons>
+                        {
+                            !deleteStep ?
+                                <>
+                                    <Buttons light={true}>لینک جدید</Buttons>
+                                    <Buttons onClick={manageEditStep} light={true}>ویرایش</Buttons>
+                                    <Buttons onClick={updateDeleteStep} light={true}>حذف</Buttons>
+                                    <Buttons onClick={manageIsActive} light={true}>
+                                        {accountTypeData?.data.accountTypes[0].isActive ? 'غیرفعال سازی' : 'فعال سازی'}
+                                    </Buttons>
+                                </> :
+                                <div className={"w-full"}>
+                                   <p className={"text-danger-600 font-medium text-[14px]"}>آیا نوع حساب را حذف میکنید؟</p>
+                                    <p className={"text-text-color-2 mt-2"}>با حذف نوع حساب دسترسی به آن دیگر وجود ندارد</p>
+                                    <div className={"flex flex-row justify-end gap-3 items-center"}>
+                                        <Buttons onClick={updateDeleteStep} light={true}>{"انصراف"}</Buttons>
+                                        <Buttons onClick={manageDeleteAccountType} color={"danger"} light={true}>{"تایید"}</Buttons>
+                                    </div>
+                                </div>
+                        }
                     </div>
                 </div>
                 :
