@@ -18,7 +18,6 @@ const AccountTypeAction = () => {
     const {data , isRefetching , isLoading , isError} = useAllAccountSpecByTypeId('accountSpecsByTypeId' , accountTypeId)
     const {data:accountTypeData , isLoading:AccountTypeLoading , refetch , isRefetching:AccountTypeRefetching} = useGetAccountTypeById('getAccountTypeWithId' , accountTypeId);
     const [active , setActive] = useState('')
-
     const accountTypeInformationList = [
         {title:"نام حساب" , data:accountTypeData?.data.accountTypes[0].accountTypeName},
         {title:"کد حساب" , data:accountTypeData?.data.accountTypes[0].accountTypeCode},
