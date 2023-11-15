@@ -93,3 +93,21 @@ export const editAccountType = (data , accountTypeId , accountCodingKindId , isA
             "lang":"fa"}
     })
 }
+
+export const editAccountTypeIsActive = (accountTypeId , isActive)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:"put",
+        url:'/AccountTypeService/api/AccountTypes/EditIsActive',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            'Content-Type': 'application/json'
+        },
+        data:{
+            "accountTypeId":accountTypeId,
+            "isActive":isActive,
+        }
+    })
+}

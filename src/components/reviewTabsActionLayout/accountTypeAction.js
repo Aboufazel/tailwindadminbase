@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import useReviewTabStore from "../../zustand/reviewTabStore";
 import {ArrowLeft} from "react-iconly";
 import Buttons from "../globals/Buttons";
@@ -8,6 +8,7 @@ import {toast} from "react-toastify";
 import LoadingComponents from "../loading/loadingComponents";
 import AccountSpecShowCard from "./actionComponents/accountSpecShowCard";
 import EditTypeForm from "./actionComponents/editTypeForm";
+import {editAccountTypeIsActive} from "../../api/accountTypeApi";
 
 const AccountTypeAction = () => {
     const manageActionLayout = useReviewTabStore(state => state.manageActionLayout)
@@ -15,8 +16,8 @@ const AccountTypeAction = () => {
     const editStep = useAccountTypeStore(state => state.editStep)
     const manageEditStep = useAccountTypeStore(state => state.manageEditStep)
     const {data , isRefetching , isLoading , isError} = useAllAccountSpecByTypeId('accountSpecsByTypeId' , accountTypeId)
-    const {data:accountTypeData , isLoading:AccountTypeLoading , isRefetching:AccountTypeRefetching} = useGetAccountTypeById('getAccountTypeWithId' , accountTypeId);
-
+    const {data:accountTypeData , isLoading:AccountTypeLoading , refetch , isRefetching:AccountTypeRefetching} = useGetAccountTypeById('getAccountTypeWithId' , accountTypeId);
+    const [active , setActive] = useState('')
 
     const accountTypeInformationList = [
         {title:"نام حساب" , data:accountTypeData?.data.accountTypes[0].accountTypeName},
@@ -25,6 +26,20 @@ const AccountTypeAction = () => {
         {title:"وضعیت" , data:accountTypeData?.data.accountTypes[0].isActive ? 'فعال' : 'غیر فعال'},
         {title:"نوع" , data:accountTypeData?.data.accountTypes[0].isAutomatic ? 'اتوماتیک' : 'غیراتوماتیک'},
     ]
+
+    const manageIsActive = async ()=>{
+       const res = await editAccountTypeIsActive(accountTypeId , !active).catch(()=>{
+            toast.error('ویرایش موفق نبود')
+        })
+        if(res.status === 200){
+            toast.success('ویرایش انجام شد')
+            refetch()
+        }
+    }
+
+    useEffect(() => {
+        setActive(accountTypeData?.data.accountTypes[0].isActive)
+    }, [accountTypeData]);
 
     if(isError){
         toast.error('دریافت اطلاعات با مشکل مواجه شد!')
@@ -87,7 +102,9 @@ const AccountTypeAction = () => {
                         <Buttons light={true}>لینک جدید</Buttons>
                         <Buttons onClick={manageEditStep} light={true}>ویرایش</Buttons>
                         <Buttons light={true}>حذف</Buttons>
-                        <Buttons light={true}>غیرفعال سازی</Buttons>
+                        <Buttons onClick={manageIsActive} light={true}>
+                            {accountTypeData?.data.accountTypes[0].isActive ? 'غیرفعال سازی' : 'فعال سازی'}
+                        </Buttons>
                     </div>
                 </div>
                 :
