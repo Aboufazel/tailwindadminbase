@@ -40,3 +40,22 @@ export const getAllAccountSpecByMainId = (mainId)=>{
     })
 
 }
+
+export const getAllAccountSpec = ()=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method: 'post',
+        url: '/AccountSpecservice/api/AccountSpecs/getAll',
+        headers: {
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            'Content-Type': 'application/json'
+        },
+        data:{
+            "main":true,
+            "group":true
+        }
+    })
+
+}
