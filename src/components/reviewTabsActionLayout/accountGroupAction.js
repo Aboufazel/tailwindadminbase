@@ -54,6 +54,7 @@ const AccountGroupAction = () => {
             return (toast.error('گروه حساب قابل حذف نیست!'))
         })
         if (res.status===200){
+            manageDeleteGroupStep()
             return(toast.success('حذف موفقیت آمیز بود'))
         }
     }
