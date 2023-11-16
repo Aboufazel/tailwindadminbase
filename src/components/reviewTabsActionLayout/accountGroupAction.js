@@ -108,10 +108,10 @@ const AccountGroupAction = () => {
                                     </> :
                                     <div className={"w-full px-3 mt-3"}>
                                         <p className={"text-danger-600 font-medium text-[14px]"}>
-                                            آیا گروه حساب را غیر فعال میکنید؟
+                                            آیا گروه حساب را حذف می‌‌کنید؟
                                         </p>
                                         <p className={"text-text-color-2 mt-2"}>
-                                          با غیر فعال کردن کاربر به این گروه حساب و اطلاعات آن دسترسی ندارد.
+                                            با حذف کردن گروه حساب دیگر کسب و کار ها به آن دسترسی ندارند
                                         </p>
                                         <div className={"flex flex-row justify-end gap-3 items-center"}>
                                             <Buttons onClick={manageDeleteGroupStep} light={true}>{"انصراف"}</Buttons>
