@@ -9,7 +9,6 @@ import LoadingComponents from "../loading/loadingComponents";
 import {toast} from "react-toastify";
 import {deleteAccountMain, editAccountMainIsActive} from "../../api/accountMainApi";
 import EditMainForm from "./actionComponents/editMainForm";
-import {deleteAccountGroup} from "../../api/accountGroupApi";
 
 const AccountMainAction = () => {
     const manageActionLayout = useReviewTabStore(state => state.manageActionLayout)

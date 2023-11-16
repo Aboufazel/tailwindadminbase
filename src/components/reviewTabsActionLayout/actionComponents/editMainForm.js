@@ -7,7 +7,7 @@ import React, {useEffect, useState} from "react";
 import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {addAccountMain, editAccountMain} from "../../../api/accountMainApi";
+import {editAccountMain} from "../../../api/accountMainApi";
 import {toast} from "react-toastify";
 import formStore from "../../../zustand/formStore";
 import {useQuery} from "@tanstack/react-query";
