@@ -54,3 +54,17 @@ export const getAllAccountGroup = (codingKindId)=>{
     })
 }
 
+export const deleteCoding = (codingId)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:'delete',
+        url:'/accountCodingKindService/api/AccountCodingKinds/delete',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            "Content-Type":"application/json"
+        },
+        data: {"accountCodingKindId": codingId}
+    })
+}
