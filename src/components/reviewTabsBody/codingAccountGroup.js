@@ -33,7 +33,7 @@ const CodingAccountGroup = () => {
         actionLayout ?
             <AccountGroupAction/>
             :
-            <Tables  headers={codingAccountGroupTableHead} bodyId={"coding"} data={data.data.accountGroups}/>
+            <Tables  headers={codingAccountGroupTableHead} bodyId={"coding"} step={'accountGroup'} data={data.data.accountGroups}/>
     )
 }
 

@@ -7,6 +7,7 @@ const useReviewTabStore = create((set)=>({
     accountSpecName: 'حساب های معین',
     codingAccountGroupId:'',
     codingAccountMainId:'',
+    codingAccountSpecId:'',
     actionLayout:false,
     updateAccountGroupName:(accountGroupName)=>set(()=>({accountGroupName:accountGroupName})),
     updateAccountMainName:(accountMainName)=>set(()=>({accountMainName:accountMainName})),
@@ -14,6 +15,7 @@ const useReviewTabStore = create((set)=>({
     updateReviewStep:(reviewStep)=>set(()=>({reviewStep:reviewStep})),
     updateCodingAccountGroupId:(codingAccountGroupId)=>set(()=>({codingAccountGroupId:codingAccountGroupId})),
     updateCodingAccountMainId:(codingAccountMainId)=>set(()=>({codingAccountMainId:codingAccountMainId})),
+    updateCodingAccountSpecId:(codingAccountSpecId)=>set(()=>({codingAccountSpecId:codingAccountSpecId})),
 }))
 
 export default useReviewTabStore;

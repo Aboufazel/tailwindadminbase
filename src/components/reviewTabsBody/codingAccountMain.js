@@ -2,10 +2,10 @@ import useReviewTabStore from "../../zustand/reviewTabStore";
 import {useAllAccountMain} from "../../hooks/coding";
 import LoadingComponents from "../loading/loadingComponents";
 import {toast} from "react-toastify";
-import AccountGroupAction from "../reviewTabsActionLayout/accountGroupAction";
 import Tables from "../globals/tables/tables";
 import {codingAccountMainsTableHead} from "../../data/codingAccountGroupData";
 import {useEffect} from "react";
+import AccountMainAction from "../reviewTabsActionLayout/accountMainAction";
 
 const CodingAccountMain = () => {
     const actionLayout = useReviewTabStore(state => state.actionLayout)
@@ -34,9 +34,9 @@ const CodingAccountMain = () => {
     }else {
         return(
             actionLayout ?
-                <AccountGroupAction/>
+                <AccountMainAction/>
                 :
-                <Tables  headers={codingAccountMainsTableHead} bodyId={"coding"} data={data.data.accountMains}/>
+                <Tables  headers={codingAccountMainsTableHead} bodyId={"coding"} step={'accountMain'} data={data.data.accountMains}/>
         )
     }
 }

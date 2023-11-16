@@ -2,9 +2,9 @@ import useReviewTabStore from "../../zustand/reviewTabStore";
 import {useAllAccountSpecByMain} from "../../hooks/coding";
 import LoadingComponents from "../loading/loadingComponents";
 import {toast} from "react-toastify";
-import AccountGroupAction from "../reviewTabsActionLayout/accountGroupAction";
 import Tables from "../globals/tables/tables";
 import {codingAccountSpecTableHead} from "../../data/codingAccountGroupData";
+import AccountSpecAction from "../reviewTabsActionLayout/accountSpecAction";
 
 const CodingAccountSpec = () => {
     const actionLayout = useReviewTabStore(state => state.actionLayout)
@@ -25,9 +25,9 @@ const CodingAccountSpec = () => {
 
     return(
         actionLayout ?
-            <AccountGroupAction/>
+            <AccountSpecAction/>
             :
-            <Tables  headers={codingAccountSpecTableHead} bodyId={"coding"} data={data.data.accountSpecs}/>
+            <Tables  headers={codingAccountSpecTableHead} bodyId={"coding"} step={'accountSpec'} data={data.data.accountSpecs}/>
     )
 }
 

@@ -46,6 +46,7 @@ const Tables = ({headers , data ,bodyId , step}) => {
     const stepView = useReviewTabStore(state => state.reviewStep)
     const updateAccountGroupId = useReviewTabStore(state => state.updateCodingAccountGroupId)
     const updateAccountMainId = useReviewTabStore(state => state.updateCodingAccountMainId);
+    const updateAccountSpecId = useReviewTabStore(state => state.updateCodingAccountSpecId);
     const updateAccountGroupName = useReviewTabStore(state => state.updateAccountGroupName);
     const updateAccountMainName = useReviewTabStore(state => state.updateAccountMainName);
     const manageActionLayout = useReviewTabStore(state => state.manageActionLayout)
@@ -85,6 +86,12 @@ const Tables = ({headers , data ,bodyId , step}) => {
                                                    updateAccountMainId(row.accountMainId)
                                                    updataStepView('coding-account-spec')
                                                }
+                                           } else if(step === 'accountGroup' && index === 3){
+                                               updateAccountGroupId(row.accountGroupId)
+                                           } else if(step === 'accountMain' && index === 5){
+                                               updateAccountMainId(row.accountMainId)
+                                           } else if(step === 'accountSpec' && index === 5){
+                                               updateAccountSpecId(row.accountSpecId)
                                            }
                                        }}
                                        className={"p-4 font-normal"} key={header.name.toString()}>{header.render(row)}</td>

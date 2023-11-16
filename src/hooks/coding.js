@@ -7,7 +7,7 @@ import {
     getAccountTypeCodingKind,
     getAllAccountTypeSpecByAccountTypeId
 } from "../api/accountTypeApi";
-
+import {getAccountGroupById} from "../api/accountGroupApi";
 const useAllCodingAccount = (queryKey)=>{
     return useQuery({
         queryKey:[queryKey],
@@ -70,6 +70,13 @@ const useGetAccountTypeById = (queryKey , typeId)=>{
     })
 }
 
+const useGetAccountGroupById = (queryKey , accountGroupId)=>{
+    return useQuery({
+        queryKey:[queryKey],
+        queryFn:()=>getAccountGroupById(`${accountGroupId}`),
+    })
+}
+
 
 
 export {
@@ -81,4 +88,5 @@ export {
     useAllAccountSpecByTypeId,
     useGetAccountTypeById,
     useAllAccountSpec,
+    useGetAccountGroupById,
 }
