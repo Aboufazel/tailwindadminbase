@@ -31,6 +31,7 @@ const BusinessPopupBody = () => {
         if (res.status === 200){
             toast.success("ویرایش با موفقیت انجام شد")
             manageActionStatus()
+            refetch()
         }
 
     }
@@ -100,7 +101,6 @@ const BusinessPopupBody = () => {
                                         userId: popupBody?.userId,
                                          status: popupBody?.status === 0 ? 1 : 0
                                     }).then()
-                                    refetch()
                                 }}>{"تایید"}</Buttons>
                             </div>
                         </div>
