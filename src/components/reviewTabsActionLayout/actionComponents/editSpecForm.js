@@ -15,7 +15,7 @@ import {toast} from "react-toastify";
 import useStore from "../../../zustand/store";
 import {useQuery} from "@tanstack/react-query";
 import {getAllAccountGroup} from "../../../api/codingKind";
-import {useAllAccountMain, useGetAccountSpecById} from "../../../hooks/coding";
+import {useAllAccountMain} from "../../../hooks/coding";
 import useAccountSpecStore from "../../../zustand/accountSpecStore";
 import useReviewTabStore from "../../../zustand/reviewTabStore";
 
