@@ -20,8 +20,6 @@ import {addAccountSpecInputs} from "../../../data/accountSpecInputsData";
 
 
 const CreateAccountSpeac = () => {
-
-
     const type = formStore(state => state.type)
     const updateInstinct = formStore(state => state.updateInstinct)
     const typeButton = formStore(state => state.typeButton)

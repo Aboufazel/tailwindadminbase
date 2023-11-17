@@ -1,7 +1,7 @@
 import {useQuery} from "@tanstack/react-query";
 import {getAllAccountGroup, getAllCoding} from "../api/codingKind";
 import {getAccountMainById, getAllAccountMain} from "../api/accountMainApi";
-import {getAllAccountSpec, getAllAccountSpecByMainId} from "../api/accountSpecApi";
+import {getAccountSpecById, getAllAccountSpec, getAllAccountSpecByMainId} from "../api/accountSpecApi";
 import {
     getAccountTypeById,
     getAccountTypeCodingKind,
@@ -86,6 +86,14 @@ const useGetAccountMainById = (queryKey , accountMainId) => {
 }
 
 
+const useGetAccountSpecById = (queryKey , accountSpecId) => {
+    return useQuery({
+        queryKey:[queryKey],
+        queryFn:()=>getAccountSpecById(accountSpecId)
+    })
+}
+
+
 
 export {
     useAllCodingAccount,
@@ -98,4 +106,5 @@ export {
     useAllAccountSpec,
     useGetAccountGroupById,
     useGetAccountMainById,
+    useGetAccountSpecById,
 }
