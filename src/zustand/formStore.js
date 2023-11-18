@@ -9,6 +9,10 @@ const formStore = create((set)=>({
         {id:'debtor' , title:'بدهکار', value:'1'},
         {id:'creditor' , title:'بستانکار', value:'2'},
     ],
+    canDeleteButton:[
+        {id:'canDelete' , title:'اختیاری', value:'0'},
+        {id:'cantDelete' , title:'اجباری', value:'1'},
+    ],
     floatButton:[
         {id:'isFloat' , title:'شناور' , value:true},
         {id:'notFloat' , title:'غیر شناور' , value:false},

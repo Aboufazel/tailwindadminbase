@@ -128,3 +128,27 @@ export const deleteAccountType = (accountTypeId)=>{
         }
     })
 }
+
+
+export const editAccountTypeSpec = ()=>{}
+
+export const deleteAccountTypeSpec = ()=>{}
+
+export const addNewSpecForAccountType = (typeId , specId , canDelete)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:"post",
+        url:'/AccountTypeService/api/AccountTypeSpecs/Add',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            'Content-Type': 'application/json'
+        },
+        data:{
+            "accountTypeId":typeId,
+            "accountSpecId":specId,
+            "lang":"fa",
+            "canDelete":canDelete}
+    })
+}

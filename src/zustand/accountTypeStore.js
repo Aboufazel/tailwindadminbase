@@ -2,10 +2,16 @@ import {create} from "zustand";
 
 const useAccountTypeStore = create((set)=>({
     accountTypeId: '',
+    accountSpecId:'',
     editStep:false,
     deleteStep:false,
     specLinkStep:false,
     specCardAction:false,
+    canDeleteStep:false,
+    canDeleteData:'',
+    updateAccountSpecId:(accountSpecId)=>set(()=>({accountSpecId:accountSpecId})),
+    manageCanDeleteStep:()=>set((state)=>({canDeleteStep:state.canDeleteStep !== true})),
+    updateCanDeleteData:(canDeleteData)=>set(()=>({canDeleteData:canDeleteData})),
     manageSpecCardAction:()=>set((state)=>({specCardAction:state.specCardAction !== true})),
     manageSpecLinkStep:()=>set((state)=>({specLinkStep:state.specLinkStep !== true})),
     updateDeleteStep:()=>set((state)=>({deleteStep:state.deleteStep !== true})),
