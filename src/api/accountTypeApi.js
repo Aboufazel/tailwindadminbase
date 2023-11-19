@@ -149,6 +149,6 @@ export const addNewSpecForAccountType = (typeId , specId , canDelete)=>{
             "accountTypeId":typeId,
             "accountSpecId":specId,
             "lang":"fa",
-            "canDelete":canDelete}
+            "canDelete":Number(canDelete)}
     })
 }

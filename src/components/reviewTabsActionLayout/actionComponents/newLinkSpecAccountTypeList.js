@@ -47,7 +47,7 @@ const NewLinkSpecAccountTypeList = () => {
 
     return(
         <>
-            <div className={"w-full pt-[50px] h-[400px] overflow-y-auto"}>
+            <div className={`w-full pt-[50px] ${canDeleteStep ? 'h-[400px]' : 'h-[500px]'}  overflow-y-auto`}>
                 {
                     data.data.accountSpecs.map((items , index)=>(
                         <AllSpecLinkCard key={'account-spec-link-data' + index} data={items}/>
