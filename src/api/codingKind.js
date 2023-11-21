@@ -22,6 +22,28 @@ export const addCoding = (data)=>{
     })
 }
 
+export const editCoding = (data , codingId)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:'put',
+        url:'/accountCodingKindService/api/AccountCodingKinds/edit',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            "Content-Type":"application/json"
+        },
+        data:{
+            "accountCodingKindId": Number(codingId),
+            "accountCodingKindName": data.accountCodingKindName,
+            "accountCodingKindCode": data.accountCodingKindCode,
+            "accountCodingKindDesc": data.accountCodingKindDesc,
+            "isActive": true,
+            "lang": "fa"
+        }
+    })
+}
+
 export const getAllCoding = ()=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
@@ -66,5 +88,23 @@ export const deleteCoding = (codingId)=>{
             "Content-Type":"application/json"
         },
         data: {"accountCodingKindId": codingId}
+    })
+}
+
+
+export const getCodingById = (codingKindId)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:'post',
+        url:'/accountCodingKindService/api/AccountCodingKinds/getById',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            "Content-Type":"application/json"
+        },
+        data:{
+            "accountCodingKindId":codingKindId,
+        }
     })
 }
