@@ -12,7 +12,7 @@ import LoadingComponents from "../loading/loadingComponents";
 const SideMenu = ({manageOpenAndClose}) => {
     const navigate = useNavigate()
     const storage = Storage()
-    const {data:codingdata , isLoading, isError , error , isRefetching} = useAllCodingAccount("getAllSideCoding")
+    const {data:codingdata , isLoading, isError , error} = useAllCodingAccount("getAllSideCoding")
     const [,setAuthInfo] = useStorage("auth", {
         userId: "",
         accessToken: "",
