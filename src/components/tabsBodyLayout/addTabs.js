@@ -6,6 +6,7 @@ import CreateAccountMain from "../popupBody/definePopupBody/createAccountMain";
 import CreateAccountSpeac from "../popupBody/definePopupBody/createAccountSpeac";
 import CreateAccountType from "../popupBody/definePopupBody/createAccountType";
 import CreateAccountDefaultPerson from "../popupBody/definePopupBody/createAccountDefaultPerson";
+import useAccountPersonStore from "../../zustand/accountPersonStore";
 
 const usePopupBody = create((set)=>({
     selectType:"",
@@ -19,6 +20,9 @@ const AddTabs = () => {
     const {actionStatus, manageActionStatus , updateSelectType} = usePopupBody()
     const actionType = useActionType(state => state.actionType)
     const updateActionType = useActionType(state => state.updateActionType)
+    const showFormStatus = useAccountPersonStore(state => state.showFormStatus);
+    const updateAccountTypeName = useAccountPersonStore(state => state.updateAccountTypeName);
+    const manageShowFormStatus = useAccountPersonStore(state => state.manageShowFormStatus);
     const bodyData = [
         {id:'account-group' , title:'گروه حساب' , action:'form'},
         {id:'account-main' , title:'حساب کل' , action:'form'},
@@ -43,6 +47,10 @@ const AddTabs = () => {
                         <div
                             onClick={()=>{
                                 manageActionStatus()
+                                if(showFormStatus){
+                                    updateAccountTypeName('')
+                                    manageShowFormStatus()
+                                }
                             }}
                             className={`flex flex-row items-center 
                         hover:bg-primary-main hover:text-white 

@@ -15,10 +15,9 @@ const CreateAccountDefaultPerson = () => {
 
     const {data ,
         isError ,
-        isLoading ,
-        isRefetching}  = useAllAccountTypesByCoding('accountTypesById' , accountCodingId)
+        isLoading}  = useAllAccountTypesByCoding('accountTypesById' , accountCodingId)
 
-    if (isLoading || isRefetching){
+    if (isLoading){
         return (<LoadingComponents title={"در حال دریافت حساب های تفضیلی"}/> )
     }
 
@@ -40,7 +39,7 @@ const CreateAccountDefaultPerson = () => {
                             }}
                             className={`cursor-pointer 
                             transition-all 
-                            duration-150 hover:font-bold
+                            duration-100 hover:font-bold
                             ${item.accountTypeName === accountTypeName ? "text-primary-main font-bold" : "text-text-color-1 font-medium"} 
                             hover:text-primary-main my-4`}>
                             {item.accountTypeName}
@@ -48,12 +47,13 @@ const CreateAccountDefaultPerson = () => {
                     ))
                 }
             </ul>
-            <div className={"w-1/2"}>
-                {
-                    showFormStatus &&
+            {
+                showFormStatus &&
+                <div className={"w-1/2 bg-primary-extraLight px-10 pb-10 rounded-[12px] border-[0.5px] border-primary-main mt-16"}>
                     <CreateAccountPersonForm/>
-                }
-            </div>
+                </div>
+            }
+
         </div>
     )
 }
