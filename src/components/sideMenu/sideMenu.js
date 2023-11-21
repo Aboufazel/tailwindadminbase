@@ -74,7 +74,7 @@ const SideMenu = ({manageOpenAndClose}) => {
            }
            <div className={"h-[300px] overflow-y-auto"}>
            {
-               (isRefetching || isLoading) ?
+               (isLoading) ?
                    <LoadingComponents title={'دریافت کدینگ...'}/>
                    :
 
