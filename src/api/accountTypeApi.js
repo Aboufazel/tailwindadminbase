@@ -146,8 +146,8 @@ export const addNewSpecForAccountType = (typeId , specId , canDelete)=>{
             'Content-Type': 'application/json'
         },
         data:{
-            "accountTypeId":typeId,
-            "accountSpecId":specId,
+            "accountTypeId":Number(typeId),
+            "accountSpecId":Number(specId),
             "lang":"fa",
             "canDelete":Number(canDelete)}
     })
