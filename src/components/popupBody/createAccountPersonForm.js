@@ -1,10 +1,8 @@
 import {addAccountPersonInputs} from "../../data/accountPersonInputData";
 import Inputs from "../globals/inputs/inputs";
 import React, {useState} from "react";
-import {addAccountCodingKindInputs} from "../../data/codingKindInputsData";
 import Buttons from "../globals/Buttons";
 import {Spinner} from "@material-tailwind/react";
-import {addCoding} from "../../api/codingKind";
 import {toast} from "react-toastify";
 import * as yup from "yup";
 import {useForm} from "react-hook-form";

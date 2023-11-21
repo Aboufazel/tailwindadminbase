@@ -2,9 +2,6 @@ import {useAllAccountTypesByCoding} from "../../../hooks/coding";
 import {toast} from "react-toastify";
 import LoadingComponents from "../../loading/loadingComponents";
 import useStore from "../../../zustand/store";
-import popupStore from "../../../zustand/popupStore";
-import {Popover} from "@material-tailwind/react";
-import PopupComponents from "../../popup/popupComponents";
 import CreateAccountPersonForm from "../createAccountPersonForm";
 import useAccountPersonStore from "../../../zustand/accountPersonStore";
 
