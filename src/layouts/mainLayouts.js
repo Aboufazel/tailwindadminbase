@@ -1,13 +1,17 @@
-import {Outlet} from "react-router-dom";
+import {Outlet, useLocation} from "react-router-dom";
 import AdminHeader from "../components/adminHeader/adminHeader";
 import SideMenu from "../components/sideMenu/sideMenu";
 import {ArrowRight} from "react-iconly";
 import useStore from "../zustand/store";
+import ServicesBriflyBlock from "../components/servicesBriflyBlock/servicesBriflyBlock";
+import {routes} from "../data/routes";
 
 const MainLayouts = () => {
     const sideStatus = useStore(state => state.sideMenuStatus)
     const manageSideMenu = useStore(state => state.manageOpenAndCloseSide)
+    const location = useLocation()
 
+    console.log(location.pathname)
 
     return (
         <div className={"flex flex-row w-full h-[100vh]"}>
@@ -24,6 +28,9 @@ const MainLayouts = () => {
                 <div className={"sticky top-0 w-full"}>
                     <AdminHeader/>
                 </div>
+                {
+                    location.pathname === routes.main && <ServicesBriflyBlock/>
+                }
                 <div className={"w-full p-[20px]"}>
                     <div className={"w-full  h-full shadow-cards p-[24px] rounded-[8px] bg-white"}>
                         <Outlet/>

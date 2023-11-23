@@ -9,6 +9,7 @@ import useStorage from "../../hooks/useStorage";
 import {useEffect} from "react";
 import Storage from "../../services/storage";
 import LoadingComponents from "../loading/loadingComponents";
+import {routes} from "../../data/routes";
 const SideMenu = ({manageOpenAndClose}) => {
     const navigate = useNavigate()
     const storage = Storage()
@@ -29,7 +30,7 @@ const SideMenu = ({manageOpenAndClose}) => {
                     accessToken: "",
                     role:"",
                 })
-                navigate('/')
+                navigate(routes.login)
             } else if (storage.accessToken && error?.response.status >=400 && error?.response.status <=500){
                 toast.error("توکن منقضی شده است")
                 setAuthInfo({
@@ -37,7 +38,7 @@ const SideMenu = ({manageOpenAndClose}) => {
                     accessToken: "",
                     role:"",
                 })
-                navigate('/')
+                navigate(routes.login)
             }
         }
     }, [isError]);

@@ -7,6 +7,7 @@ import useStorage from "../../hooks/useStorage";
 import {useNavigate} from "react-router-dom";
 import Storage from "../../services/storage";
 import LoadingComponents from "../../components/loading/loadingComponents";
+import {routes} from "../../data/routes";
 
 const BusinessLayout = () => {
     const [,setAuthInfo] = useStorage("auth", {
@@ -35,7 +36,7 @@ const BusinessLayout = () => {
                             accessToken: "",
                             role:"",
                         })
-                        navigate('/')
+                        navigate(routes.login)
                     } else if (storage.accessToken && error?.response.status === 403){
                         toast.error("توکن منقضی شده است")
                         setAuthInfo({
@@ -43,7 +44,7 @@ const BusinessLayout = () => {
                             accessToken: "",
                             role:"",
                         })
-                        navigate('/')
+                        navigate(routes.login)
                     }
         return (
             <>

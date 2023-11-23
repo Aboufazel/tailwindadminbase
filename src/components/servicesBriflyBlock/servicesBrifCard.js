@@ -1,6 +1,6 @@
 import {TwoUsers} from "react-iconly";
+const ServicesBrifCard = ({data=[] , title}) => {
 
-const ServicesBrifCard = () => {
 
     return(
         <div className={"flex flex-row gap-[8px] shadow shadow-card1 items-center p-[24px] w-2/12 bg-white rounded-[8px]"}>
@@ -8,9 +8,9 @@ const ServicesBrifCard = () => {
               <TwoUsers/>
           </div>
             <p className={"text-[14px] text-text-color-3"}>
-                {" مجموع کاربران "}
+                {title}
                 <span className={"text-text-color-1 text-[16px] mt-[8px] block"}>
-                  {" 154 K "}
+                  {data.length}
                 </span>
             </p>
         </div>

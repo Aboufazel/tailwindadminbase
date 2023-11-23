@@ -14,14 +14,8 @@ const Root = () => {
 
     const router = createBrowserRouter([
         {
-            path:'/',
+            path:'/admin/login',
             element:<AuthLayouts/>,
-            children: [
-                {
-                    path: '/signUp',
-                    element: <SignUp/>
-                }
-            ],
         },
         {
             path:'/',

@@ -12,6 +12,7 @@ import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
 import Storage from "../../services/storage";
 import userStore from "../../zustand/userStore";
+import {routes} from "../../data/routes";
 const AdminHeaderUserInfo = ({userData}) => {
     const userName = userStore(state=>state.userName)
     const navigate = useNavigate();
@@ -28,7 +29,7 @@ const AdminHeaderUserInfo = ({userData}) => {
             userId: "",
             accessToken: "",
         })
-        navigate('/')
+        navigate(routes.login)
         toast.error("از حساب خود خارج شدید!")
     }
     const MenuRenderFunction = () =>{

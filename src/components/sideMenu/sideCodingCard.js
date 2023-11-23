@@ -2,6 +2,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {Tooltip} from "@material-tailwind/react";
 import {Folder} from "react-iconly";
 import useStore from "../../zustand/store";
+import {routes} from "../../data/routes";
 
 const SideCodingCard = ({data , index , manageOpenAndClose}) => {
     const navigate = useNavigate()
@@ -14,7 +15,7 @@ const SideCodingCard = ({data , index , manageOpenAndClose}) => {
             <div onClick={()=> {
                 updateCodingKindId(data.accountCodingKindId)
                 updateCodingDefineTitle(data.accountCodingKindName)
-                navigate('/define')
+                navigate(routes.define)
             }} key={data.accountCodingKindName + index}
                  className={`flex flex-row items-center
              ${manageOpenAndClose ? "justify-center" : " justify-between"}

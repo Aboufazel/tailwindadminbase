@@ -54,7 +54,7 @@ const AuthLayouts = () => {
             role:res.data.user.kind,
         })
         toast.success("با موفقیت وارد شدید")
-        navigate('/main')
+        navigate(routes.main)
         setLoading(false);
         reset()
     }
