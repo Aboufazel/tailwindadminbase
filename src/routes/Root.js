@@ -13,7 +13,7 @@ const Root = () => {
 
     const router = createBrowserRouter([
         {
-            path:'/admin/login',
+            path:'/',
             element:<AuthLayouts/>,
         },
         {

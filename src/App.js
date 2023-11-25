@@ -8,6 +8,8 @@ import useWindowSize from "./hooks/useWindowSize";
 import React, {useEffect, useState} from "react";
 import MobileAccess from "./components/access/mobileAccess";
 import AccessDenide from "./components/access/accessDenide";
+import {Navigate} from "react-router-dom";
+import {routes} from "./data/routes";
 
 const ProviderTree = buildProviderTree([
     [QueryClientProvider , {client:queryClient}],
@@ -22,6 +24,12 @@ function App() {
     useEffect(()=>{
         setIsMobile(isTabletOrMobile);
     },[isTabletOrMobile])
+
+    useEffect(() => {
+        alert("salam")
+
+        console.log("nekbat nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
+    }, []);
 
   if(isMobile){
       return(

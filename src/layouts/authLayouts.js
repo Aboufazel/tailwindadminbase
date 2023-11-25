@@ -44,19 +44,21 @@ const AuthLayouts = () => {
     const onFormSubmit = async (data) =>{
         setLoading(true);
         const res = await LoginApi(data).catch(() => {
-            toast.error("لطفا اتصال خودتون رو بررسی کنید")
             setLoading(false);
+            toast.error("لطفا اتصال خودتون رو بررسی کنید")
         })
-        updateUserName(res.data.user.userName)
-        setAuthInfo({
-            userId: res.data.token.userId,
-            accessToken: res.data.token.token,
-            role:res.data.user.kind,
-        })
-        toast.success("با موفقیت وارد شدید")
-        navigate(routes.main)
-        setLoading(false);
-        reset()
+        if (res.status === 200){
+            updateUserName(res.data.user.userName)
+            setAuthInfo({
+                userId: res.data.token.userId,
+                accessToken: res.data.token.token,
+                role:res.data.user.kind,
+            })
+            toast.success("با موفقیت وارد شدید")
+            navigate(routes.main)
+            setLoading(false);
+            reset()
+        }
     }
 
     if(storage.accessToken){

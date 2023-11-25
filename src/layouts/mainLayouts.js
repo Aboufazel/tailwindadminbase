@@ -11,8 +11,6 @@ const MainLayouts = () => {
     const manageSideMenu = useStore(state => state.manageOpenAndCloseSide)
     const location = useLocation()
 
-    console.log(location.pathname)
-
     return (
         <div className={"flex flex-row w-full h-[100vh]"}>
             <div className={`relative ${sideStatus ? "w-1/12" : "w-2/12"} transition-all duration-300  bg-white`}>

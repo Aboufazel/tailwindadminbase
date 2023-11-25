@@ -19,6 +19,9 @@ const BusinessLayout = () => {
     const navigate = useNavigate()
     const {isLoading, isError, data , error} = useAllBusiness("business")
 
+
+    console.log(data , "business data")
+
     if(isLoading){
         return (
             <>

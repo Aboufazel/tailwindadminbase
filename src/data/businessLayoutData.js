@@ -10,6 +10,11 @@ export const businessTableHead = [
         render: (row) => row.businessName,
     },
     {
+        name: "mobile",
+        title: "شماره همراه",
+        render: (row) => row.mobile,
+    },
+    {
         name: "status",
         title: "وضعیت",
         render: (row) => (row.status === 1 ? "فعال" : "غیر فعال"),
