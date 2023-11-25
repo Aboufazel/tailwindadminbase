@@ -1,6 +1,7 @@
 {
   "name": "tailwindadmin",
   "version": "0.1.0",
+
   "private": true,
   "dependencies": {
     "@hookform/resolvers": "^3.3.1",
