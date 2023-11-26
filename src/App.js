@@ -29,10 +29,11 @@ function App() {
       return(
          <MobileAccess/>
       )
-  } else if(userAuthData.role !== 4 && userAuthData.accessToken.length > 0){
+  } else if(userAuthData.accessToken.length > 0){
       return <AccessDenide/>
   }
-  else {
+    // userAuthData.role !== 4 &&
+else {
       return (
           <ProviderTree>
               <ToastContainer position="bottom-left"
