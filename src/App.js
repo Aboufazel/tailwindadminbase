@@ -23,16 +23,16 @@ function App() {
         setIsMobile(isTabletOrMobile);
     },[isTabletOrMobile])
 
-    console.log("پدرسسسسسسسسسسسسسسسسسسسسسسسگ")
+    console.log("پدرسسسسسسسسسسسسسسسسسسسسسسسگ۲۲۲۲۲۲۲")
 
   if(isMobile){
       return(
          <MobileAccess/>
       )
-  } else if(userAuthData.accessToken.length > 0){
-      return <AccessDenide/>
   }
-    // userAuthData.role !== 4 &&
+  // else if(userAuthData.role !== 4 && userAuthData.accessToken.length > 0){
+  //     return <AccessDenide/>
+  // }
 else {
       return (
           <ProviderTree>
