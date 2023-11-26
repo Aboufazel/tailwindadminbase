@@ -23,8 +23,6 @@ function App() {
         setIsMobile(isTabletOrMobile);
     },[isTabletOrMobile])
 
-    console.log("پدرسسسسسسسسسسسسسسسسسسسسسسسگ۲۲۲۲۲۲۲")
-
   if(isMobile){
       return(
          <MobileAccess/>
