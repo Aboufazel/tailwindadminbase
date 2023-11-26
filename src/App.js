@@ -46,8 +46,7 @@ else {
                               draggable
                               pauseOnHover
                               theme="light" rtl={true}/>
-              {/*<Root/>*/}
-              <p className={"text-primary-main font-bold"}>root debug admin</p>
+              <Root/>
           </ProviderTree>
       );
   }
