@@ -23,12 +23,6 @@ function App() {
         setIsMobile(isTabletOrMobile);
     },[isTabletOrMobile])
 
-    useEffect(() => {
-        alert("salam")
-
-        console.log("nekbat nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
-    }, []);
-
   if(isMobile){
       return(
          <MobileAccess/>
