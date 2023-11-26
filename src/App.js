@@ -28,9 +28,9 @@ function App() {
          <MobileAccess/>
       )
   }
-  // else if(userAuthData.role !== 4 && userAuthData.accessToken.length > 0){
-  //     return <AccessDenide/>
-  // }
+  else if(userAuthData?.role !== 4 && userAuthData?.accessToken.length > 0){
+      return <AccessDenide/>
+  }
 else {
       return (
           <ProviderTree>
