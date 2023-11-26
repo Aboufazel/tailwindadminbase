@@ -6,7 +6,6 @@ import useAccountTypeStore from "../../zustand/accountTypeStore";
 import React, {useState} from "react";
 import {toast} from "react-toastify";
 import LoadingComponents from "../loading/loadingComponents";
-import AccountSpecShowCard from "./actionComponents/accountSpecShowCard";
 import Buttons from "../globals/Buttons";
 import EditTypeForm from "./actionComponents/editTypeForm";
 import NewLinkSpecAccountTypeList from "./actionComponents/newLinkSpecAccountTypeList";
