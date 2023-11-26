@@ -43,7 +43,8 @@ function App() {
                               draggable
                               pauseOnHover
                               theme="light" rtl={true}/>
-              <Root/>
+              {/*<Root/>*/}
+              <p className={"text-primary-main font-bold"}>root debug admin</p>
           </ProviderTree>
       );
   }
