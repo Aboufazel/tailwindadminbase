@@ -8,7 +8,7 @@ import {
     getAllAccountTypeSpecByAccountTypeId
 } from "../api/accountTypeApi";
 import {getAccountGroupById} from "../api/accountGroupApi";
-import {getAllAccountDefault} from "../api/accountDefaultPersonApi";
+import {getAccountPersonById, getAllAccountDefaultLinks, getAllAccountPerson} from "../api/accountDefaultPersonApi";
 const useAllCodingAccount = (queryKey)=>{
     return useQuery({
         queryKey:[queryKey],
@@ -100,10 +100,24 @@ const useGetCodingById = (queryKey , codingId)=>{
         queryFn:()=>getCodingById(codingId)
     })
 }
-const useGetAllAccountPerson = (queryKey)=>{
+const useGetAllAccountPersonLinks = (queryKey)=>{
     return useQuery({
         queryKey:[queryKey],
-        queryFn:()=>getAllAccountDefault()
+        queryFn:()=>getAllAccountDefaultLinks()
+    })
+}
+
+const useGetAllAccountPerson = (queryKey , codingId)=>{
+    return useQuery({
+        queryKey:[queryKey],
+        queryFn:()=>getAllAccountPerson(codingId)
+    })
+}
+
+const useGetPersonById = (queryKey , personId)=>{
+    return useQuery({
+        queryKey:[queryKey],
+        queryFn:()=>getAccountPersonById(personId)
     })
 }
 
@@ -121,6 +135,8 @@ export {
     useGetAccountGroupById,
     useGetAccountMainById,
     useGetAccountSpecById,
-    useGetAllAccountPerson,
+    useGetAllAccountPersonLinks,
     useGetCodingById,
+    useGetAllAccountPerson,
+    useGetPersonById,
 }

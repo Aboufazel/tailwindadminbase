@@ -1,6 +1,6 @@
 import {BaseUrl} from "./dashboardApi";
 
-export const getAllAccountDefault = ()=>{
+export const getAllAccountDefaultLinks = ()=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
@@ -19,6 +19,40 @@ export const getAllAccountDefault = ()=>{
         }
     })
 
+}
+
+export const getAllAccountPerson = (codingId)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method: 'post',
+        url: '/AccountPersonservice/api/DefaultPersons/getAll',
+        headers: {
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            'Content-Type': 'application/json'
+        },
+        data:{
+            "accountCodingKindId": Number(codingId),
+        }
+    })
+}
+
+export const getAccountPersonById = (personId)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method: 'post',
+        url: '/AccountPersonservice/api/DefaultPersons/getDefaultPerson',
+        headers: {
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            'Content-Type': 'application/json'
+        },
+        data:{
+            "defaultPersonId": Number(personId)
+        }
+    })
 }
 
 export const addAccountDefaultPerson = (data , codingId ,accountTypeId )=>{

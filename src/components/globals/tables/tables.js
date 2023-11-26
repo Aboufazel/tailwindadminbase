@@ -8,6 +8,7 @@ import {Link} from "react-router-dom";
 import {ArrowLeft, ArrowRight} from "react-iconly";
 import useReviewTabStore from "../../../zustand/reviewTabStore";
 import useAccountTypeStore from "../../../zustand/accountTypeStore";
+import useAccountPersonStore from "../../../zustand/accountPersonStore";
 const Tables = ({headers , data ,bodyId , step}) => {
 
 
@@ -50,7 +51,7 @@ const Tables = ({headers , data ,bodyId , step}) => {
     const updateAccountGroupName = useReviewTabStore(state => state.updateAccountGroupName);
     const updateAccountMainName = useReviewTabStore(state => state.updateAccountMainName);
     const manageActionLayout = useReviewTabStore(state => state.manageActionLayout)
-
+    const updateAccountPersonId = useAccountPersonStore(state => state.updateAccountPersonId)
     return(
            <>
                <div className={"h-[540px] overflow-y-auto"}>
@@ -71,6 +72,9 @@ const Tables = ({headers , data ,bodyId , step}) => {
                                }else if(step === 'accountType'){
                                    updateAccountTypeId(row.accountTypeId)
                                    manageActionLayout()
+                               }else if(step === "accountPerson"){
+                                   manageActionLayout()
+                                   updateAccountPersonId(row.defaultPersonId)
                                }
                            }} >
                                {headers.map((header , index) => (

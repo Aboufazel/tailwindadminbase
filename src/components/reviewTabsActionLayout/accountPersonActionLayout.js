@@ -1,62 +1,41 @@
-import React, {useEffect, useState} from "react";
 import useReviewTabStore from "../../zustand/reviewTabStore";
-import Buttons from "../globals/Buttons";
+import BackBtn from "./actionComponents/backBtn";
+import {useGetPersonById} from "../../hooks/coding";
+import useAccountPersonStore from "../../zustand/accountPersonStore";
 import useAccountTypeStore from "../../zustand/accountTypeStore";
-import {useAllAccountSpecByTypeId, useGetAccountTypeById} from "../../hooks/coding";
+import React, {useState} from "react";
 import {toast} from "react-toastify";
 import LoadingComponents from "../loading/loadingComponents";
 import AccountSpecShowCard from "./actionComponents/accountSpecShowCard";
+import Buttons from "../globals/Buttons";
 import EditTypeForm from "./actionComponents/editTypeForm";
-import {deleteAccountType, editAccountTypeIsActive} from "../../api/accountTypeApi";
-import BackBtn from "./actionComponents/backBtn";
 import NewLinkSpecAccountTypeList from "./actionComponents/newLinkSpecAccountTypeList";
 
-const AccountTypeAction = () => {
-    const accountTypeId = useAccountTypeStore(state => state.accountTypeId)
+const AccountPersonActionLayout = () => {
     const editStep = useAccountTypeStore(state => state.editStep)
     const linkStep = useAccountTypeStore(state => state.specLinkStep)
+    const manageActionLayout = useReviewTabStore(state => state.manageActionLayout)
+    const accountPersonId = useAccountPersonStore(state => state.accountPersonId)
+    const {data , isLoading , isError , isRefetching} = useGetPersonById("getPersonByID" , accountPersonId)
     const manageLinkStep = useAccountTypeStore(state => state.manageSpecLinkStep)
     const manageEditStep = useAccountTypeStore(state => state.manageEditStep)
     const updateDeleteStep = useAccountTypeStore(state => state.updateDeleteStep)
     const deleteStep = useAccountTypeStore(state => state.deleteStep)
     const [active , setActive] = useState('')
-    const manageActionLayout = useReviewTabStore(state => state.manageActionLayout)
-    const {data , isRefetching , isLoading , isError} = useAllAccountSpecByTypeId('accountSpecsByTypeId' , accountTypeId)
-    const {data:accountTypeData , isLoading:AccountTypeLoading , refetch , isRefetching:AccountTypeRefetching} = useGetAccountTypeById('getAccountTypeWithId' , accountTypeId);
 
-    const accountTypeInformationList = [
-        {title:"نام حساب" , data:accountTypeData?.data.accountTypes[0].accountTypeName},
-        {title:"کد حساب" , data:accountTypeData?.data.accountTypes[0].accountTypeCode},
-        {title:"نوع شناوری" , data:accountTypeData?.data.accountTypes[0].isFloat ? 'شناور' : 'غیر شناور'},
-        {title:"وضعیت" , data:accountTypeData?.data.accountTypes[0].isActive ? 'فعال' : 'غیر فعال'},
-        {title:"نوع" , data:accountTypeData?.data.accountTypes[0].isAutomatic ? 'اتوماتیک' : 'غیراتوماتیک'},
+    console.log(data)
+
+    const accountPersonInformationList = [
+        {title:"نام حساب" , data:data?.data.defaultPersons[0].defaultPersonName},
+        {title:"کد حساب" , data:data?.data.defaultPersons[0].defaultPersonCode},
+        {title:"نوع حساب" , data:data?.data.defaultPersons[0].accountTypeId},
+        {title:"وضعیت" , data:data?.data.defaultPersons[0].canDelete === 1 ? 'غیر قابل حذف' : 'قابل حذف'},
     ]
 
-    const manageIsActive = async ()=>{
-       const res = await editAccountTypeIsActive(accountTypeId , !active).catch(()=>{
-            toast.error('ویرایش موفق نبود')
-        })
-        if(res.status === 200){
-            toast.success('ویرایش انجام شد')
-            refetch()
-        }
-    }
 
-    const manageDeleteAccountType = async ()=>{
-        const res = await deleteAccountType(accountTypeId).catch(()=>{
-            toast.error('حذف موفقیت آمیز نبود')
-        })
-        if (res?.status === 200){
-            toast.success('حذف موفقیت آمیز بود')
-        }
-    }
-
-    useEffect(() => {
-        setActive(accountTypeData?.data.accountTypes[0].isActive)
-    }, [accountTypeData]);
 
     if(isError){
-       return  toast.error('دریافت اطلاعات با مشکل مواجه شد!')
+        return  (toast.error('دریافت اطلاعات با مشکل مواجه شد!'))
     }
 
     return(
@@ -72,12 +51,12 @@ const AccountTypeAction = () => {
                                         اطلاعات
                                     </div>
                                     {
-                                        (AccountTypeLoading || AccountTypeRefetching) ?
+                                        (isLoading || isRefetching) ?
                                             <LoadingComponents title={'دریافت اطلاعات نوع حساب'}/>
                                             :
                                             <ul className={"mt-5 px-5"}>
                                                 {
-                                                    accountTypeInformationList.map((items, index) => (
+                                                    accountPersonInformationList.map((items, index) => (
                                                         <li key={"accountType-list-info" + index}
                                                             className={"flex flex-row items-center w-full justify-between mb-3"}>
                                                             <p>{items?.title}</p>
@@ -93,18 +72,18 @@ const AccountTypeAction = () => {
                                     <div className={'bg-primary-extraLight p-1 font-medium text-[14px] w-full'}>
                                         لینک های معین
                                     </div>
-                                    <div className={'h-[100px] overflow-y-auto '}>
-                                        {
-                                            (isLoading || isRefetching) ?
-                                                <LoadingComponents title={'درحال دریافت حساب معین'}/>
-                                                :
-                                                data.data.accountTypeSpecs.map((items, index) => (
-                                                    <AccountSpecShowCard
-                                                        key={'account-type-spec' + index + items.accountTypeSpecId}
-                                                        data={items}/>
-                                                ))
-                                        }
-                                    </div>
+                                    {/*<div className={'h-[100px] overflow-y-auto '}>*/}
+                                    {/*    {*/}
+                                    {/*        (isLoading || isRefetching) ?*/}
+                                    {/*            <LoadingComponents title={'درحال دریافت حساب معین'}/>*/}
+                                    {/*            :*/}
+                                    {/*            data.data.accountTypeSpecs.map((items, index) => (*/}
+                                    {/*                <AccountSpecShowCard*/}
+                                    {/*                    key={'account-type-spec' + index + items.accountTypeSpecId}*/}
+                                    {/*                    data={items}/>*/}
+                                    {/*            ))*/}
+                                    {/*    }*/}
+                                    {/*</div>*/}
                                 </div>
 
                                 <div className={"flex flex-row items-center w-full justify-center mt-8 gap-5"}>
@@ -114,9 +93,6 @@ const AccountTypeAction = () => {
                                                 <Buttons onClick={manageLinkStep} light={true}>لینک جدید</Buttons>
                                                 <Buttons onClick={manageEditStep} light={true}>ویرایش</Buttons>
                                                 <Buttons onClick={updateDeleteStep} light={true}>حذف</Buttons>
-                                                <Buttons onClick={manageIsActive} light={true}>
-                                                    {accountTypeData?.data.accountTypes[0].isActive ? 'غیرفعال سازی' : 'فعال سازی'}
-                                                </Buttons>
                                             </> :
                                             <div className={"w-full"}>
                                                 <p className={"text-danger-600 font-medium text-[14px]"}>آیا نوع حساب را حذف
@@ -125,7 +101,7 @@ const AccountTypeAction = () => {
                                                     ندارد</p>
                                                 <div className={"flex flex-row justify-end gap-3 items-center"}>
                                                     <Buttons onClick={updateDeleteStep} light={true}>{"انصراف"}</Buttons>
-                                                    <Buttons onClick={manageDeleteAccountType} color={"danger"}
+                                                    <Buttons color={"danger"}
                                                              light={true}>{"تایید"}</Buttons>
                                                 </div>
                                             </div>
@@ -148,5 +124,4 @@ const AccountTypeAction = () => {
     )
 }
 
-
-export default AccountTypeAction;
+export default AccountPersonActionLayout;
