@@ -18,7 +18,11 @@ const Root = () => {
         },
         {
             path:'/',
-            element:<MainLayouts/>,
+            element:(
+                <AuthProvider>
+                    <MainLayouts/>
+                </AuthProvider>
+            ),
             children:[
                 {
                     path: routes.main,
