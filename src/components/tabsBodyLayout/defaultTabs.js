@@ -18,7 +18,7 @@ const DefaultTabs = () => {
 
   if(isError){
     return (
-        toast.error("دریافت معین با مشکل مواجه شد")
+        toast.error("دریافت حساب تفضیلی با مشکل مواجه شد")
     )
   }
 

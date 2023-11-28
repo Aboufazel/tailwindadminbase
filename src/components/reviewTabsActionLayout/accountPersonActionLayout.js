@@ -1,14 +1,15 @@
+import React from "react";
 import useReviewTabStore from "../../zustand/reviewTabStore";
 import BackBtn from "./actionComponents/backBtn";
 import {useGetPersonById} from "../../hooks/coding";
 import useAccountPersonStore from "../../zustand/accountPersonStore";
 import useAccountTypeStore from "../../zustand/accountTypeStore";
-import React, {useState} from "react";
 import {toast} from "react-toastify";
 import LoadingComponents from "../loading/loadingComponents";
 import Buttons from "../globals/Buttons";
-import EditTypeForm from "./actionComponents/editTypeForm";
 import NewLinkSpecAccountTypeList from "./actionComponents/newLinkSpecAccountTypeList";
+import {deleteAccountPerson} from "../../api/accountDefaultPersonApi";
+import EditPersonForm from "./actionComponents/editPersonForm";
 
 const AccountPersonActionLayout = () => {
     const editStep = useAccountTypeStore(state => state.editStep)
@@ -20,9 +21,13 @@ const AccountPersonActionLayout = () => {
     const manageEditStep = useAccountTypeStore(state => state.manageEditStep)
     const updateDeleteStep = useAccountTypeStore(state => state.updateDeleteStep)
     const deleteStep = useAccountTypeStore(state => state.deleteStep)
-    const [active , setActive] = useState('')
 
-    console.log(data)
+
+
+    if(isError){
+        return  (toast.error('دریافت اطلاعات با مشکل مواجه شد!'))
+    }
+
 
     const accountPersonInformationList = [
         {title:"نام حساب" , data:data?.data.defaultPersons[0].defaultPersonName},
@@ -31,10 +36,13 @@ const AccountPersonActionLayout = () => {
         {title:"وضعیت" , data:data?.data.defaultPersons[0].canDelete === 1 ? 'غیر قابل حذف' : 'قابل حذف'},
     ]
 
-
-
-    if(isError){
-        return  (toast.error('دریافت اطلاعات با مشکل مواجه شد!'))
+    const manageDeleteDefaultPerson = async ()=>{
+        await deleteAccountPerson(accountPersonId).catch(()=>{
+            return (toast.error("حذف با مشکل مواجه شد"))
+        })
+        manageActionLayout()
+        updateDeleteStep()
+        toast.success("حساب با موفقیت حذف شد")
     }
 
     return(
@@ -94,13 +102,13 @@ const AccountPersonActionLayout = () => {
                                                 <Buttons onClick={updateDeleteStep} light={true}>حذف</Buttons>
                                             </> :
                                             <div className={"w-full"}>
-                                                <p className={"text-danger-600 font-medium text-[14px]"}>آیا نوع حساب را حذف
+                                                <p className={"text-danger-600 font-medium text-[14px]"}>آیا حساب تفضیلی را حذف
                                                     میکنید؟</p>
-                                                <p className={"text-text-color-2 mt-2"}>با حذف نوع حساب دسترسی به آن دیگر وجود
+                                                <p className={"text-text-color-2 mt-2"}>با حذف حساب تفضیلی دسترسی به آن دیگر وجود
                                                     ندارد</p>
                                                 <div className={"flex flex-row justify-end gap-3 items-center"}>
                                                     <Buttons onClick={updateDeleteStep} light={true}>{"انصراف"}</Buttons>
-                                                    <Buttons color={"danger"}
+                                                    <Buttons onClick={manageDeleteDefaultPerson} color={"danger"}
                                                              light={true}>{"تایید"}</Buttons>
                                                 </div>
                                             </div>
@@ -110,7 +118,7 @@ const AccountPersonActionLayout = () => {
                             :
                             <div className={'w-full relative'}>
                                 <BackBtn onClick={manageEditStep}/>
-                                <EditTypeForm/>
+                                <EditPersonForm/>
                             </div>
                         }
                     </> :

@@ -1,6 +1,7 @@
 import React from "react";
 import Storage from "./storage";
 import {Navigate} from "react-router-dom";
+import {routes} from "../data/routes";
 
 
 const AuthProvider = ({children}) => {
@@ -9,7 +10,7 @@ const AuthProvider = ({children}) => {
 
 
     if (!storage.accessToken) {
-        return <Navigate to={"/"} />;
+        return <Navigate to={routes.login} />;
     }
     return (
         <>
