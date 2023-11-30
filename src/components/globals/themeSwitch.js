@@ -3,7 +3,6 @@ import { Switch } from '@headlessui/react'
 import { SunIcon } from '@heroicons/react/24/solid'
 import { useLocalStorage } from 'usehooks-ts'
 import {MoonIcon} from "@heroicons/react/20/solid";
-
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
@@ -60,7 +59,7 @@ function ThemeSwitch() {
             )}
             aria-hidden='true'
         >
-          <SunIcon className='h-3 w-3 text-gray-400' />
+          <SunIcon className='h-3 w-3 text-yellow-800' />
         </span>
       </span>
         </Switch>
