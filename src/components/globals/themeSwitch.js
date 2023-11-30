@@ -48,7 +48,7 @@ function ThemeSwitch() {
             )}
             aria-hidden='true'
         >
-          <MoonIcon className='h-3 w-3 text-gray-400' />
+          <MoonIcon className='h-3 w-3 text-gray-900' />
         </span>
         <span
             className={classNames(

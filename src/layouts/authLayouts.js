@@ -70,12 +70,12 @@ const AuthLayouts = () => {
             <div className={"w-1/2"}>
                <img src={LoginPic} alt={"adminHeader login pic"}/>
             </div>
-            <div className={"flex flex-col w-1/2 items-center relative"}>
+            <div className={"flex flex-col w-1/2 bg-white dark:bg-dark-900 items-center relative"}>
                 <img src={waterMark} alt={"adminHeader water mark"}  className={"xl:w-[350px] absolute -top-0 -left-0"}/>
                 <Logo cls={"xl:mt-[200px]"}/>
-                <p className={"font-bold text-center mt-[40px] text-[33px] text-black"}>
+                <p className={"font-bold text-center mt-[40px] text-[33px] dark:text-white text-black"}>
                     {" ورود به پنل "}
-                    <span className={"font-normal text-secondary-600 text-[18px] mt-3 block"}>
+                    <span className={"font-normal dark:text-text-color-3 text-secondary-600 text-[18px] mt-3 block"}>
                         {" برای استفاده از امکانات وارد شوید "}
                     </span>
                 </p>
