@@ -7,6 +7,7 @@ import CreateAccountSpeac from "../popupBody/definePopupBody/createAccountSpeac"
 import CreateAccountType from "../popupBody/definePopupBody/createAccountType";
 import CreateAccountDefaultPerson from "../popupBody/definePopupBody/createAccountDefaultPerson";
 import useAccountPersonStore from "../../zustand/accountPersonStore";
+import BackBtn from "../reviewTabsActionLayout/actionComponents/backBtn";
 
 const usePopupBody = create((set)=>({
     selectType:"",
@@ -44,22 +45,13 @@ const AddTabs = () => {
             <div className={"w-full relative"}>
                 {
                     actionStatus ?
-                        <div
-                            onClick={()=>{
-                                manageActionStatus()
-                                if(showFormStatus){
-                                    updateAccountTypeName('')
-                                    manageShowFormStatus()
-                                }
-                            }}
-                            className={`flex flex-row items-center 
-                        hover:bg-primary-main hover:text-white 
-                        absolute left-0
-                        justify-center rounded-[5px] 
-                        cursor-pointer bg-primary-extraLight  max-w-max px-[12px] gap-3 h-[35px]`}>
-                            <p>بازگشت</p>
-                            <ArrowLeft set={"bulk"}/>
-                        </div>
+                        <BackBtn onClick={()=>{
+                            manageActionStatus()
+                            if(showFormStatus){
+                                updateAccountTypeName('')
+                                manageShowFormStatus()
+                            }
+                        }}/>
                         : ""
                 }
                 {
@@ -73,7 +65,7 @@ const AddTabs = () => {
                                      updateSelectType(items.action)
                                      updateActionType(items.id)
                                  }}
-                                 className={"flex flex-row hover:text-primary-main max-w-max text-text-color-1 transition-all ease-in-out duration-150 hover:font-bold items-center my-[20px] cursor-pointer gap-[12px]"}>
+                                 className={"flex flex-row hover:text-primary-main max-w-max dark:text-text-color-3 dark:hover:text-white text-text-color-1 transition-all ease-in-out duration-150 hover:font-bold items-center my-[20px] cursor-pointer gap-[12px]"}>
                                 <Plus set={"bulk"} style={{color:"#0D6DFD"}}/> {items.title}
                             </div>
                         ))

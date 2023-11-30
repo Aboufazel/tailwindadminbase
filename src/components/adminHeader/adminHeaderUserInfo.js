@@ -13,7 +13,7 @@ import {useNavigate} from "react-router-dom";
 import Storage from "../../services/storage";
 import userStore from "../../zustand/userStore";
 import {routes} from "../../data/routes";
-const AdminHeaderUserInfo = ({userData}) => {
+const AdminHeaderUserInfo = () => {
     const userName = userStore(state=>state.userName)
     const navigate = useNavigate();
     const storage = Storage()

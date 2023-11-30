@@ -55,7 +55,7 @@ const CreateAccountPersonForm = () => {
                 ))
              }
              <div className={"flex flex-row-reverse w-full mt-5 pr-3 justify-end items-center gap-2"}>
-                <p className={"text-[14px]"}>غیر قابل حذف است</p>
+                <p className={"dark:text-text-color-3 text-[14px]"}>غیر قابل حذف است</p>
                 <input {...(register && register("canDelete"))} type="checkbox" id="canDelete" name="canDelete" value="0"/>
              </div>
           </div>

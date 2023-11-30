@@ -28,7 +28,7 @@ const CreateAccountDefaultPerson = () => {
     return(
         <div className={"flex flex-row items-center w-full"}>
             <ul className={"w-1/2"}>
-                <p className={"font-bold text-[16px] text-text-color-2 mb-[20px]"}>لیست انواع حساب ها</p>
+                <p className={"font-bold text-[16px] dark:text-white text-text-color-2 mb-[20px]"}>لیست انواع حساب ها</p>
                 {
                     data.data.accountTypes.map((item , index)=>(
                         <li key={'account-spec-person-link' + index}
@@ -40,7 +40,7 @@ const CreateAccountDefaultPerson = () => {
                             className={`cursor-pointer 
                             transition-all 
                             duration-100 hover:font-bold
-                            ${item.accountTypeName === accountTypeName ? "text-primary-main font-bold" : "text-text-color-1 font-medium"} 
+                            ${item.accountTypeName === accountTypeName ? "text-primary-main font-bold" : "dark:text-text-color-3 text-text-color-1 font-medium"} 
                             hover:text-primary-main my-4`}>
                             {item.accountTypeName}
                         </li>
@@ -49,7 +49,7 @@ const CreateAccountDefaultPerson = () => {
             </ul>
             {
                 showFormStatus &&
-                <div className={"w-1/2 bg-primary-extraLight px-10 pb-10 rounded-[12px] border-[0.5px] border-primary-main mt-16"}>
+                <div className={"w-1/2 dark:bg-dark-800 dark:border-none bg-primary-extraLight px-10 pb-10 rounded-[12px] border-[0.5px] border-primary-main mt-16"}>
                     <CreateAccountPersonForm/>
                 </div>
             }

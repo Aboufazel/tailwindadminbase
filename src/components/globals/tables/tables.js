@@ -57,7 +57,7 @@ const Tables = ({headers , data ,bodyId , step}) => {
                <div className={"h-[540px] overflow-y-auto"}>
                    <table className="w-full min-w-max table-auto mt-[40px]">
                        <thead>
-                       <tr className={"text-right w-[50px] text-white bg-primary-main"}>
+                       <tr className={"text-right w-[50px] text-white dark:bg-dark-800 bg-primary-main"}>
                            {headers.map((header) => (
                                <th key={header.name.toString()} className="font-medium leading-none p-4">{header.title}</th>
                            ))}
@@ -65,7 +65,7 @@ const Tables = ({headers , data ,bodyId , step}) => {
                        </thead>
                        <tbody>
                        {records.map((row, index) => (
-                           <tr key={index} className="cursor-pointer even:bg-blue-gray-50/50" onClick={()=>{
+                           <tr key={index} className="cursor-pointer dark:bg-dark-100 dark:even:bg-dark-800 dark:text-text-color-3 even:bg-blue-gray-50/50" onClick={()=>{
                                if(bodyId === 'business'){
                                    managePopup()
                                    updatePopupBody(row)
