@@ -1,4 +1,4 @@
-import {ArrowLeft, Plus} from "react-iconly";
+import {Plus} from "react-iconly";
 import {create} from "zustand";
 import CreateAccountGroup from "../popupBody/definePopupBody/createAccountGroup";
 import useActionType from "../../zustand/actionTypeStore";
