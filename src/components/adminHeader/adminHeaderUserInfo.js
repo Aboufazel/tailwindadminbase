@@ -38,7 +38,7 @@ const AdminHeaderUserInfo = ({userData}) => {
                 <MenuHandler>
                     <img src={userIcon} alt={"admin user icon"} className={"cursor-pointer w-[45px]"}/>
                 </MenuHandler>
-                <MenuList>
+                <MenuList className={"dark:bg-dark-900 dark:border-none"}>
                     <MenuItem className="flex hover:!bg-primary-main hover:!text-white items-center gap-2">
                         <User set={"bulk"}/>
                         <Typography variant="small" className="font-medium">
@@ -67,9 +67,9 @@ const AdminHeaderUserInfo = ({userData}) => {
     return(
         <div className={"flex flex-row max-w-max ml-3 gap-[16px] items-center"}>
             <MenuRenderFunction/>
-            <p className={"text-text-color-1 text-[14px]"}>
+            <p className={"text-text-color-1 dark:text-text-color-3 text-[14px]"}>
                 {userName}
-                <span className={"block text-text-color-2 mt-1"}>
+                <span className={"block dark:text-text-color-3 text-text-color-2 mt-1"}>
                     {roleTitle[storage.role]}
                 </span>
             </p>

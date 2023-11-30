@@ -11,7 +11,7 @@ const BreadCrumbs = ({data , type='link'}) => {
             <div className={"flex flex-row items-center"}>
                 {data.map((items  , index)=> (
                     <Link key={"bread-crumbs-link" + items.id + index} to={items.link}
-                          className={`${index === (data.length) - 1 ? "text-text-color-1 font-bold cursor-not-allowed " : "text-text-color-2 hover:text-primary-main cursor-pointer font-bold"} `}>
+                          className={`${index === (data.length) - 1 ? "dark:text-text-color-3 text-text-color-1 font-bold cursor-not-allowed " : "dark:text-white text-text-color-2 hover:text-primary-main cursor-pointer font-bold"} `}>
                         {items.title}
                         <span key={items.id + index}
                               className={`${index === (data.length) - 1 ? "hidden" : ""} mx-1 text-text-color-3`}>/</span>
@@ -27,7 +27,7 @@ const BreadCrumbs = ({data , type='link'}) => {
             <div className={"flex flex-row items-center"}>
                 {data.map((items  , index)=> (
                     <div onClick={()=>updataStepView(items.link)} key={"bread-crumbs-link" + items.id + index}
-                          className={`cursor-pointer ${index === (data.length) - 1 ? "text-text-color-1 font-bold" : "text-text-color-2 hover:text-primary-main cursor-pointer font-bold"} `}>
+                          className={`cursor-pointer ${index === (data.length) - 1 ? "dark:text-text-color-3 text-text-color-1 font-bold" : "dark:text-white text-text-color-2 hover:text-primary-main cursor-pointer font-bold"} `}>
                         {items.title}
                         <span key={items.id + index}
                               className={`${index === (data.length) - 1 ? "hidden" : ""} mx-1 text-text-color-3`}>/</span>
