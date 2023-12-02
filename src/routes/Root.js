@@ -8,6 +8,7 @@ import UserList from "../layouts/userList/userList";
 import BusinessLayout from "../layouts/business/businessLayout";
 import DefineLayout from "../layouts/define/defineLayout";
 import CreateNewCoding from "../layouts/define/createNewCoding";
+import RevenueModelLayout from "../layouts/revenue/revenueModelLayout";
 
 const Root = () => {
 
@@ -57,6 +58,13 @@ const Root = () => {
                     element:(
                         <AuthProvider>
                             <DefineLayout/>
+                        </AuthProvider>
+                    )
+                },{
+                    path: routes.revenueModel,
+                    element:(
+                        <AuthProvider>
+                            <RevenueModelLayout/>
                         </AuthProvider>
                     )
                 }

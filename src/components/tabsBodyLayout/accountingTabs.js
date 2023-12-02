@@ -1,7 +1,7 @@
 const AccountingTabs = () => {
 
     return(
-        "Accounting Tabs"
+        "adminPanel accounting setting"
     )
 }
 

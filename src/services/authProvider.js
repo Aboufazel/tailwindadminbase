@@ -7,8 +7,6 @@ import {routes} from "../data/routes";
 const AuthProvider = ({children}) => {
     const storage = Storage()
 
-
-
     if (!storage.accessToken) {
         return <Navigate to={routes.login} />;
     }
