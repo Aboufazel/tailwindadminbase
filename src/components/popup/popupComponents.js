@@ -7,7 +7,7 @@ const PopupComponents = ({children}) => {
     const managePopup = popupStore(state => state.manageOpenPopUp)
 
     return(
-        <Dialog open={popupStatus} size={"lg"} handler={managePopup}>
+        <Dialog open={popupStatus} size={"lg"}  handler={managePopup}>
             {children}
         </Dialog>
     )

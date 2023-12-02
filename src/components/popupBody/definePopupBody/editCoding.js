@@ -46,7 +46,7 @@ const EditCoding = () => {
         }
     }
     
-    if (isLoading || isRefetching){
+    if (isLoading){
         return (<LoadingComponents title={"در حال دریافت اطلاعات"}/> )
     }
 

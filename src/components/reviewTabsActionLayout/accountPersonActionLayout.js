@@ -12,15 +12,15 @@ import {deleteAccountPerson} from "../../api/accountDefaultPersonApi";
 import EditPersonForm from "./actionComponents/editPersonForm";
 
 const AccountPersonActionLayout = () => {
-    const editStep = useAccountTypeStore(state => state.editStep)
-    const linkStep = useAccountTypeStore(state => state.specLinkStep)
+    const editStep = useAccountPersonStore(state => state.editPersonStep)
+    const linkStep = useAccountPersonStore(state => state.specPersonLinkStep)
     const manageActionLayout = useReviewTabStore(state => state.manageActionLayout)
     const accountPersonId = useAccountPersonStore(state => state.accountPersonId)
     const {data , isLoading , isError , isRefetching} = useGetPersonById("getPersonByID" , accountPersonId)
-    const manageLinkStep = useAccountTypeStore(state => state.manageSpecLinkStep)
-    const manageEditStep = useAccountTypeStore(state => state.manageEditStep)
+    const manageLinkStep = useAccountPersonStore(state => state.managePersonSpecLinkStep)
+    const manageEditStep = useAccountPersonStore(state => state.managePersonEditStep)
     const updateDeleteStep = useAccountTypeStore(state => state.updateDeleteStep)
-    const deleteStep = useAccountTypeStore(state => state.deleteStep)
+    const deleteStep = useAccountPersonStore(state => state.deletePersonStep)
 
 
 
