@@ -1,5 +1,7 @@
 import {create} from "zustand";
 
-const revenueModelStore = create((set)=>({
+const useRevenueModelStore = create((set)=>({
 
 }))
+
+export default useRevenueModelStore
