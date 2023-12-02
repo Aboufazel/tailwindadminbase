@@ -18,7 +18,7 @@ const EditCoding = () => {
     const accountCodingId = useStore(state => state.codingKindId)
     const [loading, setLoading] = useState(false);
     const managePopup = popupStore(state => state.manageOpenPopUp);
-    const {data , isLoading , isRefetching, isError} = useGetCodingById('getCodingById' ,accountCodingId )
+    const {data , isLoading , isError} = useGetCodingById('getCodingById' ,accountCodingId )
     const {refetch} = useAllCodingAccount("getAllSideCoding")
     const formValidate = yup.object().shape({
         accountCodingKindName:yup.string().required("وارد کردن نام اجباری است"),
