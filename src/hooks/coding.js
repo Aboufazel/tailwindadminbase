@@ -9,6 +9,7 @@ import {
 } from "../api/accountTypeApi";
 import {getAccountGroupById} from "../api/accountGroupApi";
 import {getAccountPersonById, getAllAccountDefaultLinks, getAllAccountPerson} from "../api/accountDefaultPersonApi";
+import {getAllRevenueModel} from "../api/revenueModelApi";
 const useAllCodingAccount = (queryKey)=>{
     return useQuery({
         queryKey:[queryKey],
@@ -121,9 +122,24 @@ const useGetPersonById = (queryKey , personId)=>{
     })
 }
 
+const useGetRevenueModels = (queryKey , codingId)=>{
+    return useQuery({
+        queryKey:[queryKey],
+        refetchIntervalInBackground:true,
+        queryFn:()=>getAllRevenueModel(codingId)
+    })
+}
+
+const useGetFunction = (queryKey , fnId , getFunction)=>{
+    return useQuery({
+        queryKey:[queryKey],
+        queryFn:()=>getFunction(fnId)
+    })
+}
 
 
 export {
+    useGetFunction,
     useAllCodingAccount,
     useAllAccountGroup,
     useAllAccountMain,
@@ -137,6 +153,7 @@ export {
     useGetAccountSpecById,
     useGetAllAccountPersonLinks,
     useGetCodingById,
+    useGetRevenueModels,
     useGetAllAccountPerson,
     useGetPersonById,
 }

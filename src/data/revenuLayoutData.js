@@ -2,19 +2,19 @@ import {routes} from "./routes";
 
 export const revenueModelTableHeaderData = [
     {
-        name: "revenueId",
+        name: "revenueModelCode",
         title: "کد",
-        render: (row) => row.revenueId
+        render: (row) => row.revenueModelCode
     },
     {
-        name: "revenueName",
+        name: "revenueModelName",
         title: "نام مدل درآمدی",
-        render: (row) => row.revenueName,
+        render: (row) => row.revenueModelName,
     },
     {
-        name: "revenuePlans",
+        name: "revenueModelType",
         title: "پلن های درآمدی",
-        render: (row) => row.revenuePlans,
+        render: (row) => row.revenueModelType,
     },
     {
         name: "status",

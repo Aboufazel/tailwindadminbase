@@ -1,24 +1,27 @@
-import BreadCrumbs from "../../components/breadCrumbs/breadCrumbs";
-import {RevenueModelBreadCrumbsData, revenueModelTableHeaderData} from "../../data/revenuLayoutData";
-import Tables from "../../components/globals/tables/tables";
-import {useGetFunction} from "../../hooks/coding";
-import {getAllRevenueModel} from "../../api/revenueModelApi";
-import Buttons from "../../components/globals/Buttons";
-import LoadingComponents from "../../components/loading/loadingComponents";
-import {toast} from "react-toastify";
 import useRevenueModelStore from "../../zustand/revenueModelStore";
-import BackBtn from "../../components/reviewTabsActionLayout/actionComponents/backBtn";
-import AddModels from "./revenueLayout/addModels";
 import useStore from "../../zustand/store";
+import {useGetRevenueModels} from "../../hooks/coding";
+import LoadingComponents from "../loading/loadingComponents";
+import {toast} from "react-toastify";
+import BreadCrumbs from "../breadCrumbs/breadCrumbs";
+import {RevenueModelBreadCrumbsData, revenueModelTableHeaderData} from "../../data/revenuLayoutData";
+import BackBtn from "../reviewTabsActionLayout/actionComponents/backBtn";
+import AddModels from "../../layouts/revenue/revenueLayout/addModels";
+import Buttons from "../globals/Buttons";
+import Tables from "../globals/tables/tables";
 
-const RevenueModelLayout = () => {
+const RevenueModelsTab = () => {
     const addRevenueLayout = useRevenueModelStore(state => state.addRevenueModelLayout)
     const codingId = useStore(state => state.codingKindId)
     const manageAddRevenueModelLayout = useRevenueModelStore(state => state.manageAddRevenueLayout)
-    const {data, isLoading, isError} = useGetFunction('getAllRevenueModel', codingId, getAllRevenueModel)
+    const {data, isLoading,refetch ,isRefetching,isError} = useGetRevenueModels('getAllRevenueModel', codingId)
 
     if (isLoading) {
         return (<LoadingComponents title={"درحال دریافت مدل درامدی"}/>)
+    }
+
+    if (isRefetching){
+        return (<LoadingComponents title={"درحال بروزرسانی مدل درامدی"}/>)
     }
 
     if (isError) {
@@ -33,7 +36,10 @@ const RevenueModelLayout = () => {
             {
                 addRevenueLayout ?
                     <div className={"w-full relative"}>
-                        <BackBtn onClick={manageAddRevenueModelLayout}/>
+                        <BackBtn onClick={()=>{
+                            refetch()
+                            manageAddRevenueModelLayout()
+                        }}/>
                         <AddModels/>
                     </div> :
                     <>
@@ -48,4 +54,4 @@ const RevenueModelLayout = () => {
     )
 }
 
-export default RevenueModelLayout;
+export default RevenueModelsTab;
