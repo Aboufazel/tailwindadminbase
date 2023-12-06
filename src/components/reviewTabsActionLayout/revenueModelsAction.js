@@ -14,7 +14,6 @@ import {Spinner} from "@material-tailwind/react";
 import EditRevenueModelForm from "./actionComponents/editRevenueModelForm";
 
 const RevenueModelsAction = () => {
-
     const [loading, setLoading] = useState(false)
     const manageRevenueActionLayout = useRevenueModelStore(state => state.manageRevenueActionLayout)
     const manageRevenueEditLayout = useRevenueModelStore(state => state.manageRevenueModelEditLayout)
