@@ -40,8 +40,6 @@ const RevenueModelsAction = () => {
         return (toast.error("دریافت با مشکل مواجه شد!"))
     }
 
-
-
     const revenueModelsInformationList = [
         {title: "وضعیت", data: modelsData.data.revenueModels[0].isActive === 1 ? "فعال" : "غیر فعال"},
         {title: "کد مدل درآمدی", data: modelsData.data.revenueModels[0].revenueModelCode},
