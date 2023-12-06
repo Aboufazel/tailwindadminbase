@@ -17,10 +17,15 @@ export const revenueModelTableHeaderData = [
         render: (row) => row.revenueModelType,
     },
     {
-        name: "status",
-        title: "وضعیت",
-        render: (row) => (row.status === 1 ? "فعال" : "غیر فعال"),
+        name: "fiscalYearLimit",
+        title: "محدودیت حساب مالی",
+        render: (row) => row.fiscalYearLimit,
     },
+    {
+        name: "isActive",
+        title: "وضعیت",
+        render: (row) => (row.isActive === 1 ? "فعال" : "غیر فعال"),
+    }
 ]
 
 export const RevenueModelBreadCrumbsData = [

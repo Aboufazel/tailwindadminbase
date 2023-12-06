@@ -129,7 +129,6 @@ const useGetRevenueModels = (queryKey , codingId)=>{
         queryFn:()=>getAllRevenueModel(codingId)
     })
 }
-
 const useGetFunction = (queryKey , fnId , getFunction)=>{
     return useQuery({
         queryKey:[queryKey],

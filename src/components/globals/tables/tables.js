@@ -9,6 +9,7 @@ import {ArrowLeft, ArrowRight} from "react-iconly";
 import useReviewTabStore from "../../../zustand/reviewTabStore";
 import useAccountTypeStore from "../../../zustand/accountTypeStore";
 import useAccountPersonStore from "../../../zustand/accountPersonStore";
+import useRevenueModelStore from "../../../zustand/revenueModelStore";
 const Tables = ({headers , data ,bodyId , step}) => {
 
 
@@ -39,7 +40,7 @@ const Tables = ({headers , data ,bodyId , step}) => {
     const changeCurrentPage = (number)=>{
        setCurrentPage(number)
     }
-
+    const updateRevenueModelId = useRevenueModelStore(state => state.updateRevenueModelId)
     const updateAccountTypeId = useAccountTypeStore(state => state.updateAccountTypeId)
     const managePopup = popupStore(state => state.manageOpenPopUp);
     const updatePopupBody = popupDataStore((state) => state.updatePopupBodyData);
@@ -51,7 +52,11 @@ const Tables = ({headers , data ,bodyId , step}) => {
     const updateAccountGroupName = useReviewTabStore(state => state.updateAccountGroupName);
     const updateAccountMainName = useReviewTabStore(state => state.updateAccountMainName);
     const manageActionLayout = useReviewTabStore(state => state.manageActionLayout)
+    const manageRevenueActionLayout = useRevenueModelStore(state => state.manageRevenueActionLayout)
     const updateAccountPersonId = useAccountPersonStore(state => state.updateAccountPersonId)
+
+
+
     return(
            <>
                <div className={"h-[540px] overflow-y-auto"}>
@@ -75,6 +80,9 @@ const Tables = ({headers , data ,bodyId , step}) => {
                                }else if(step === "accountPerson"){
                                    manageActionLayout()
                                    updateAccountPersonId(row.defaultPersonId)
+                               }else if(step === 'revenueModel'){
+                                   updateRevenueModelId(row.revenueModelId)
+                                   manageRevenueActionLayout()
                                }
                            }} >
                                {headers.map((header , index) => (

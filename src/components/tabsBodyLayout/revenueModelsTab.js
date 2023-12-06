@@ -9,19 +9,18 @@ import BackBtn from "../reviewTabsActionLayout/actionComponents/backBtn";
 import AddModels from "../../layouts/revenue/revenueLayout/addModels";
 import Buttons from "../globals/Buttons";
 import Tables from "../globals/tables/tables";
+import RevenueModelsAction from "../reviewTabsActionLayout/revenueModelsAction";
 
 const RevenueModelsTab = () => {
     const addRevenueLayout = useRevenueModelStore(state => state.addRevenueModelLayout)
+    const actionLayout = useRevenueModelStore(state => state.revenueActionLayout)
     const codingId = useStore(state => state.codingKindId)
     const manageAddRevenueModelLayout = useRevenueModelStore(state => state.manageAddRevenueLayout)
     const {data, isLoading,refetch ,isRefetching,isError} = useGetRevenueModels('getAllRevenueModel', codingId)
 
+
     if (isLoading) {
         return (<LoadingComponents title={"درحال دریافت مدل درامدی"}/>)
-    }
-
-    if (isRefetching){
-        return (<LoadingComponents title={"درحال بروزرسانی مدل درامدی"}/>)
     }
 
     if (isError) {
@@ -29,6 +28,7 @@ const RevenueModelsTab = () => {
             toast.error("دریافت مدل درامدی با مشکل مواجه شد!")
         )
     }
+
 
     return (
         <>
@@ -42,13 +42,22 @@ const RevenueModelsTab = () => {
                         }}/>
                         <AddModels/>
                     </div> :
-                    <>
-                        <div className={"flex items-center justify-end w-full"}>
-                            <Buttons onClick={manageAddRevenueModelLayout}>افزودن مدل درآمدی</Buttons>
-                        </div>
-                        <Tables data={data.data.revenueModels} bodyId={"business"} headers={revenueModelTableHeaderData}
-                                step={'revenueModel'}/>
-                    </>
+                    actionLayout ?
+
+                        <RevenueModelsAction/>
+                        :
+                        <>
+                            <div className={"flex items-center justify-end w-full"}>
+                                <Buttons onClick={manageAddRevenueModelLayout}>افزودن مدل درآمدی</Buttons>
+                            </div>
+                            {
+                                isRefetching ?
+                                    <LoadingComponents title={"درحال بروزرسانی مدل درامدی"}/>
+                                    :
+                                    <Tables data={data.data.revenueModels} bodyId={"coding"} headers={revenueModelTableHeaderData}
+                                            step={'revenueModel'}/>
+                            }
+                        </>
             }
         </>
     )
