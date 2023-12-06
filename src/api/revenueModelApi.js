@@ -88,3 +88,26 @@ export const addRevenueModel = (data , codingId)=>{
         },
     })
 }
+
+export const editRevenueModel = (data , codingId ,revenueId)=>{
+    console.log(revenueId , "api revenue id")
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:'put',
+        url:'/revenueModelService/api/RevenueModels/edit',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            "Content-Type":"application/json"
+        },
+        data:{
+            "revenueModelId":Number(revenueId),
+            "revenueModelCode":data.revenueModelCode,
+            "revenueModelName":data.revenueModelName,
+            "revenueModelType":data.revenueModelType,
+            "accountCodingId":codingId ,
+            "fiscalYearLimit":Number(data.fiscalYearLimit),
+        },
+    })
+}

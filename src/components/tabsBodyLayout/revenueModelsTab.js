@@ -10,6 +10,7 @@ import AddModels from "../../layouts/revenue/revenueLayout/addModels";
 import Buttons from "../globals/Buttons";
 import Tables from "../globals/tables/tables";
 import RevenueModelsAction from "../reviewTabsActionLayout/revenueModelsAction";
+import {useEffect} from "react";
 
 const RevenueModelsTab = () => {
     const addRevenueLayout = useRevenueModelStore(state => state.addRevenueModelLayout)
@@ -19,9 +20,14 @@ const RevenueModelsTab = () => {
     const {data, isLoading,refetch ,isRefetching,isError} = useGetRevenueModels('getAllRevenueModel', codingId)
 
 
+    useEffect(() => {
+        refetch()
+    }, [addRevenueLayout  , actionLayout]);
+
     if (isLoading) {
         return (<LoadingComponents title={"درحال دریافت مدل درامدی"}/>)
     }
+
 
     if (isError) {
         return (
