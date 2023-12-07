@@ -12,6 +12,7 @@ import {toast} from "react-toastify";
 import Buttons from "../globals/Buttons";
 import {Spinner} from "@material-tailwind/react";
 import EditRevenueModelForm from "./actionComponents/editRevenueModelForm";
+import AddRevenuePlans from "../../layouts/revenue/revenueLayout/addRevenuePlans";
 
 const RevenueModelsAction = () => {
     const [loading, setLoading] = useState(false)
@@ -19,6 +20,9 @@ const RevenueModelsAction = () => {
     const manageRevenueEditLayout = useRevenueModelStore(state => state.manageRevenueModelEditLayout)
     const revenueEditLayout = useRevenueModelStore(state => state.revenueModelEditLayout)
     const revenueModelId = useRevenueModelStore(state => state.revenueModelId)
+    const revenuePlansAddLayout = useRevenueModelStore(state => state.addRevenuePlansLayout)
+    const manageRevenuePlansAddLayout = useRevenueModelStore(state => state.manageAddRevenuePlansLayout)
+
     const {
         data: modelsData,
         isLoading,
@@ -86,64 +90,76 @@ const RevenueModelsAction = () => {
         }
     }
 
-    return (
-        <>
-            {!revenueEditLayout ?
-                <div className={"relative w-full"}>
-                    <BackBtn onClick={() => {
-                        manageRevenueActionLayout()
-                    }}/>
-                    <div className={"flex flex-col pt-14"}>
-                        <div className={'w-full'}>
-                            <div className={'bg-primary-extraLight p-1 font-medium text-[14px] w-full'}>
-                                اطلاعات
-                            </div>
-                            <ul className={"mt-5 px-5"}>
-                                {
-                                    revenueModelsInformationList.map((items, index) => (
-                                        <li key={"accountType-list-info" + index}
-                                            className={"flex flex-row items-center w-full justify-between mb-3"}>
-                                            <p>{items?.title}</p>
-                                            <p className={"font-medium text-text-color-1"}>{items?.data}</p>
-                                        </li>
-                                    ))
-                                }
-                            </ul>
-                        </div>
+    if (revenueEditLayout){
+        return (
+            <div className={"relative w-full"}>
+                <BackBtn onClick={() => {
+                    manageRevenueEditLayout()
+                }}/>
+                <EditRevenueModelForm data={modelsData.data.revenueModels[0]}/>
+            </div>
+        )
+    }
+
+    else if(revenuePlansAddLayout){
+        return (
+            <div className={"w-full relative"}>
+                <BackBtn onClick={manageRevenuePlansAddLayout}/>
+                <AddRevenuePlans revenueModelId={revenueModelId}/>
+            </div>
+        )
+    }
+
+    else if(!revenueEditLayout && !revenuePlansAddLayout){
+        return (
+            <div className={"relative w-full"}>
+                <BackBtn onClick={() => {
+                    manageRevenueActionLayout()
+                }}/>
+                <div className={"flex flex-col pt-14"}>
+                    <div className={'w-full'}>
                         <div className={'bg-primary-extraLight p-1 font-medium text-[14px] w-full'}>
-                            پلن های درآمدی
+                            اطلاعات
                         </div>
-                    </div>
-                    <div className={"flex flex-row w-full gap-5 mt-5 items-center justify-center"}>
-                        <Buttons light={true}>ایجاد پلن جدید</Buttons>
-                        <Buttons onClick={manageRevenueEditLayout} light={true}>ویرایش</Buttons>
-                        <Buttons light={true}>حذف</Buttons>
-                        <Buttons onClick={manageActiveRevenueModel} light={true}>
+                        <ul className={"mt-5 px-5"}>
                             {
-                                modelsData.data.revenueModels[0].isActive === 1 ?
-                                    <div className={"flex flex-row gap-3 items-center"}>
-                                        {loading ? <Spinner color={"blue"}/> : "" }
-                                        <p>غیرفعال سازی</p>
-                                    </div>
-                                    :
-                                    <div className={"flex flex-row gap-1 items-center"}>
-                                        {loading ? <Spinner color={"blue"}/> : "" }
-                                        <p>فعال سازی</p>
-                                    </div>
+                                revenueModelsInformationList.map((items, index) => (
+                                    <li key={"accountType-list-info" + index}
+                                        className={"flex flex-row items-center w-full justify-between mb-3"}>
+                                        <p>{items?.title}</p>
+                                        <p className={"font-medium text-text-color-1"}>{items?.data}</p>
+                                    </li>
+                                ))
                             }
-                        </Buttons>
+                        </ul>
+                    </div>
+                    <div className={'bg-primary-extraLight p-1 font-medium text-[14px] w-full'}>
+                        پلن های درآمدی
                     </div>
                 </div>
-                :
-                <div className={"relative w-full"}>
-                    <BackBtn onClick={() => {
-                        manageRevenueEditLayout()
-                    }}/>
-                   <EditRevenueModelForm data={modelsData.data.revenueModels[0]}/>
+                <div className={"flex flex-row w-full gap-5 mt-5 items-center justify-center"}>
+                    <Buttons onClick={manageRevenuePlansAddLayout} light={true}>ایجاد پلن جدید</Buttons>
+                    <Buttons onClick={manageRevenueEditLayout} light={true}>ویرایش</Buttons>
+                    <Buttons light={true}>حذف</Buttons>
+                    <Buttons onClick={manageActiveRevenueModel} light={true}>
+                        {
+                            modelsData.data.revenueModels[0].isActive === 1 ?
+                                <div className={"flex flex-row gap-3 items-center"}>
+                                    {loading ? <Spinner color={"blue"}/> : "" }
+                                    <p>غیرفعال سازی</p>
+                                </div>
+                                :
+                                <div className={"flex flex-row gap-1 items-center"}>
+                                    {loading ? <Spinner color={"blue"}/> : "" }
+                                    <p>فعال سازی</p>
+                                </div>
+                        }
+                    </Buttons>
                 </div>
-            }
-        </>
-    )
+            </div>
+        )
+    }
+
 }
 
 export default RevenueModelsAction;

@@ -90,7 +90,6 @@ export const addRevenueModel = (data , codingId)=>{
 }
 
 export const editRevenueModel = (data , codingId ,revenueId)=>{
-    console.log(revenueId , "api revenue id")
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
@@ -108,6 +107,28 @@ export const editRevenueModel = (data , codingId ,revenueId)=>{
             "revenueModelType":data.revenueModelType,
             "accountCodingId":codingId ,
             "fiscalYearLimit":Number(data.fiscalYearLimit),
+        },
+    })
+}
+
+
+//revenue plans api
+
+export const addRevenuePlans = (data , revenueModelId)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:'post',
+        url:'/revenueModelService/api/RevenuePlans/add',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            "Content-Type":"application/json"
+        },
+        data:{
+            "revenueModelId":Number(revenueModelId),
+            "revenuePlanCode":Number(data.revenuePlanCode),
+            "revenuePlanName":data.revenuePlanName
         },
     })
 }

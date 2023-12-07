@@ -34,3 +34,27 @@ export const addRevenueModelsInputs = [
     }
 
 ]
+
+
+//revenue plans inputs data
+
+export const addRevenuePlansInputs = [
+    {
+        inputLabel:"کد *",
+        inputPlaceholder:"کد پلن را وارد نمایید...",
+        required:true,
+        type:"input",
+        inputType:"number",
+        inputName:"revenuePlanCode",
+        width:'w-1/2'
+    },{
+        inputLabel:"نام پلن درآمدی *",
+        inputPlaceholder:"نام پلن درآمدی را وارد نمایید...",
+        required:true,
+        type:"input",
+        inputType:"text",
+        inputName:"revenuePlanName",
+        width:'w-1/2'
+    }
+
+]
