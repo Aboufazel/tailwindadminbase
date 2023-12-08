@@ -6,11 +6,15 @@ import React, {useState} from "react";
 import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {addRevenuePlans} from "../../../api/revenueModelApi";
+import {addRevenuePlans, getAllRevenueModelNoId} from "../../../api/revenueModelApi";
 import {toast} from "react-toastify";
+import SelectInput from "../../../components/globals/inputs/selectInput";
+import {useGetFunction} from "../../../hooks/coding";
+import LoadingComponents from "../../../components/loading/loadingComponents";
 
-const AddRevenuePlans = ({revenueModelId}) => {
+const AddRevenuePlans = () => {
     const [loading, setLoading] = useState(false);
+    const {data , isLoading , refetch , isError} = useGetFunction('getAllRevenueModelsNoId' , "" , getAllRevenueModelNoId)
     const formValidate = yup.object().shape({
         revenuePlanName: yup.string().required("وارد کردن نام مدل اجباری است").test(
             "revenueNameValidation",
@@ -30,7 +34,7 @@ const AddRevenuePlans = ({revenueModelId}) => {
     const onFormSubmit = async (data) => {
         setLoading(true)
 
-        const res = await addRevenuePlans(data, revenueModelId).catch(() => {
+        const res = await addRevenuePlans(data).catch(() => {
             toast.error("ثبت انجام نشد")
             setLoading(false)
         })
@@ -41,9 +45,17 @@ const AddRevenuePlans = ({revenueModelId}) => {
         }
     }
 
+    if (isError){
+        return (toast.error("دربافت با مشکل مواجه شد!"))
+    }
+
     return (
         <form onSubmit={handleSubmit(onFormSubmit)} className={"flex flex-col w-full items-center mt-[16px]"}>
             <div className={"flex flex-col w-full"}>
+                {
+                    isLoading ? <LoadingComponents title={"دریافت مدل های درآمدی"}/>
+                        :  <SelectInput type={'add-revenue-plans'} refetch={refetch} step={'add-revenue-plans'} register={register} data={data && data.data.revenueModels}/>
+                }
                 {
                     addRevenuePlansInputs.map((item, index) => (
                         <Inputs type={item.type}

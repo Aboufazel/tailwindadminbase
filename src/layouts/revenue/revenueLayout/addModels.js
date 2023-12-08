@@ -2,18 +2,20 @@ import Inputs from "../../../components/globals/inputs/inputs";
 import Buttons from "../../../components/globals/Buttons";
 import {Spinner} from "@material-tailwind/react";
 import React, {useState} from "react";
-import useStore from "../../../zustand/store";
 import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {toast} from "react-toastify";
 import {addRevenueModelsInputs} from "../../../data/revenueModelInputsData";
 import {addRevenueModel} from "../../../api/revenueModelApi";
+import SelectInput from "../../../components/globals/inputs/selectInput";
+import {useAllCodingAccount} from "../../../hooks/coding";
 
-const AddModels = () => {
+const AddModels = ({type}) => {
     const [loading, setLoading] = useState(false);
-    const accountCodingKindId = useStore(state => state.codingKindId)
+    const {data:allCodingData , refetch} = useAllCodingAccount("getAllSideCoding")
     const formValidate = yup.object().shape({
+        accountCodingId:yup.string().required("انتخاب کدینگ اجباریست"),
         revenueModelName:yup.string().required("وارد کردن نام مدل اجباری است").test(
             "revenueNameValidation" ,
             "نام نباید بیشتر از 100 کارکتر باشد" , val => val.length <= 100),
@@ -33,7 +35,7 @@ const AddModels = () => {
 
     const onFormSubmit = async (data) =>{
         setLoading(true)
-        const res = await addRevenueModel(data , accountCodingKindId).catch(() => {
+        const res = await addRevenueModel(data).catch(() => {
             toast.error("ثبت انجام نشد")
             setLoading(false)
         })
@@ -47,7 +49,8 @@ const AddModels = () => {
     return(
 
         <div className={"w-full"}>
-            <form onSubmit={handleSubmit(onFormSubmit)} className={"flex flex-col w-full items-center mt-[16px]"}>
+            <form onSubmit={handleSubmit(onFormSubmit)} className={"flex flex-col w-full items-start mt-[16px]"}>
+                <SelectInput error={errors["accountCodingId"] ? errors["accountCodingId"].message : false} type={'all-account-coding'}  refetch={refetch} step={'revenue-models'} register={register} data={allCodingData && allCodingData.data.accountCodingKinds}/>
                 <div className={"flex flex-col w-full"}>
                     {
                         addRevenueModelsInputs.map((item , index)=>(

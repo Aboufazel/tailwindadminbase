@@ -68,7 +68,7 @@ export const getRevenueModelByIdApi = (revenueId)=>{
     })
 }
 
-export const addRevenueModel = (data , codingId)=>{
+export const addRevenueModel = (data)=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
@@ -83,7 +83,7 @@ export const addRevenueModel = (data , codingId)=>{
             "revenueModelCode":data.revenueModelCode,
             "revenueModelName":data.revenueModelName,
             "revenueModelType":data.revenueModelType,
-            "accountCodingId":codingId ,
+            "accountCodingId":Number(data.accountCodingId) ,
             "fiscalYearLimit":Number(data.fiscalYearLimit),
         },
     })
@@ -114,7 +114,7 @@ export const editRevenueModel = (data , codingId ,revenueId)=>{
 
 //revenue plans api
 
-export const addRevenuePlans = (data , revenueModelId)=>{
+export const addRevenuePlans = (data)=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
@@ -126,9 +126,40 @@ export const addRevenuePlans = (data , revenueModelId)=>{
             "Content-Type":"application/json"
         },
         data:{
-            "revenueModelId":Number(revenueModelId),
+            "revenueModelId":Number(data.revenueModelId),
             "revenuePlanCode":Number(data.revenuePlanCode),
             "revenuePlanName":data.revenuePlanName
         },
+    })
+}
+
+export const getRevenuePlansByModelId = (revenueModelId)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:'post',
+        url:'/revenueModelService/api/RevenuePlans/getByRevenueModelId',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            "Content-Type":"application/json"
+        },
+        data:{
+            "revenueModelId":Number(revenueModelId),
+        },
+    })
+}
+
+export const getAllRevenueModelNoId = ()=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:'post',
+        url:'/revenueModelService/api/RevenueModels/getAll',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            "Content-Type":"application/json"
+        }
     })
 }

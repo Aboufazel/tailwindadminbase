@@ -1,13 +1,14 @@
+import {routes} from "../data/routes";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import AuthLayouts from "../layouts/authLayouts";
 import AuthProvider from "../services/authProvider";
 import Admin from "../layouts/main/admin";
 import MainLayouts from "../layouts/mainLayouts";
-import {routes} from "../data/routes";
 import UserList from "../layouts/userList/userList";
 import BusinessLayout from "../layouts/business/businessLayout";
 import DefineLayout from "../layouts/define/defineLayout";
 import CreateNewCoding from "../layouts/define/createNewCoding";
+import RevenueModelLayout from "../layouts/revenue/revenueModelLayout";
 
 const Root = () => {
 
@@ -57,6 +58,13 @@ const Root = () => {
                     element:(
                         <AuthProvider>
                             <DefineLayout/>
+                        </AuthProvider>
+                    )
+                },{
+                    path: routes.revenueModel,
+                    element:(
+                        <AuthProvider>
+                            <RevenueModelLayout/>
                         </AuthProvider>
                     )
                 }

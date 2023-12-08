@@ -4,7 +4,7 @@ import BackBtn from "./actionComponents/backBtn";
 import useRevenueModelStore from "../../zustand/revenueModelStore";
 import {useGetFunction} from "../../hooks/coding";
 import {
-    getRevenueModelByIdApi,
+    getRevenueModelByIdApi, getRevenuePlansByModelId,
     manageRevenueModelsActive,
     manageRevenueModelsDeActive
 } from "../../api/revenueModelApi";
@@ -13,6 +13,7 @@ import Buttons from "../globals/Buttons";
 import {Spinner} from "@material-tailwind/react";
 import EditRevenueModelForm from "./actionComponents/editRevenueModelForm";
 import AddRevenuePlans from "../../layouts/revenue/revenueLayout/addRevenuePlans";
+import RevenuePlansShowCard from "./actionComponents/revenuePlansShowCard";
 
 const RevenueModelsAction = () => {
     const [loading, setLoading] = useState(false)
@@ -20,8 +21,6 @@ const RevenueModelsAction = () => {
     const manageRevenueEditLayout = useRevenueModelStore(state => state.manageRevenueModelEditLayout)
     const revenueEditLayout = useRevenueModelStore(state => state.revenueModelEditLayout)
     const revenueModelId = useRevenueModelStore(state => state.revenueModelId)
-    const revenuePlansAddLayout = useRevenueModelStore(state => state.addRevenuePlansLayout)
-    const manageRevenuePlansAddLayout = useRevenueModelStore(state => state.manageAddRevenuePlansLayout)
 
     const {
         data: modelsData,
@@ -30,6 +29,9 @@ const RevenueModelsAction = () => {
         refetch,
         isError
     } = useGetFunction('getRevenueModelById', `${revenueModelId}`, getRevenueModelByIdApi)
+
+
+    const {data:plansData} = useGetFunction('getRevenuePlansById' , revenueModelId , getRevenuePlansByModelId)
 
     useEffect(() => {
         refetch()
@@ -101,16 +103,8 @@ const RevenueModelsAction = () => {
         )
     }
 
-    else if(revenuePlansAddLayout){
-        return (
-            <div className={"w-full relative"}>
-                <BackBtn onClick={manageRevenuePlansAddLayout}/>
-                <AddRevenuePlans revenueModelId={revenueModelId}/>
-            </div>
-        )
-    }
 
-    else if(!revenueEditLayout && !revenuePlansAddLayout){
+    else if(!revenueEditLayout){
         return (
             <div className={"relative w-full"}>
                 <BackBtn onClick={() => {
@@ -133,12 +127,18 @@ const RevenueModelsAction = () => {
                             }
                         </ul>
                     </div>
-                    <div className={'bg-primary-extraLight p-1 font-medium text-[14px] w-full'}>
-                        پلن های درآمدی
-                    </div>
+                    {/*<div className={'bg-primary-light/30 mt-5 p-1 font-medium text-[14px] w-full'}>*/}
+                    {/*    پلن های درآمدی*/}
+                    {/*</div>*/}
+                    {/*<div className={"flex flex-col max-h-[700px] overflow-y-auto w-full"}>*/}
+                    {/*    {*/}
+                    {/*        plansData.data.revenuePlans.map((items , index)=>(*/}
+                    {/*            <RevenuePlansShowCard key={"revenue-plans-card" + index} data={items}/>*/}
+                    {/*        ))*/}
+                    {/*    }*/}
+                    {/*</div>*/}
                 </div>
                 <div className={"flex flex-row w-full gap-5 mt-5 items-center justify-center"}>
-                    <Buttons onClick={manageRevenuePlansAddLayout} light={true}>ایجاد پلن جدید</Buttons>
                     <Buttons onClick={manageRevenueEditLayout} light={true}>ویرایش</Buttons>
                     <Buttons light={true}>حذف</Buttons>
                     <Buttons onClick={manageActiveRevenueModel} light={true}>
