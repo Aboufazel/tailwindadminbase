@@ -4,7 +4,7 @@ import BackBtn from "./actionComponents/backBtn";
 import useRevenueModelStore from "../../zustand/revenueModelStore";
 import {useGetFunction} from "../../hooks/coding";
 import {
-    getRevenueModelByIdApi, getRevenuePlansByModelId,
+    getRevenueModelByIdApi,
     manageRevenueModelsActive,
     manageRevenueModelsDeActive
 } from "../../api/revenueModelApi";
