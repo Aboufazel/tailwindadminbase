@@ -12,8 +12,6 @@ import {toast} from "react-toastify";
 import Buttons from "../globals/Buttons";
 import {Spinner} from "@material-tailwind/react";
 import EditRevenueModelForm from "./actionComponents/editRevenueModelForm";
-import AddRevenuePlans from "../../layouts/revenue/revenueLayout/addRevenuePlans";
-import RevenuePlansShowCard from "./actionComponents/revenuePlansShowCard";
 
 const RevenueModelsAction = () => {
     const [loading, setLoading] = useState(false)
@@ -30,8 +28,6 @@ const RevenueModelsAction = () => {
         isError
     } = useGetFunction('getRevenueModelById', `${revenueModelId}`, getRevenueModelByIdApi)
 
-
-    const {data:plansData} = useGetFunction('getRevenuePlansById' , revenueModelId , getRevenuePlansByModelId)
 
     useEffect(() => {
         refetch()
