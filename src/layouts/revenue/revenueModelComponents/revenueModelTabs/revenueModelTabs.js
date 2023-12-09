@@ -1,12 +1,13 @@
 import AddRevenue from "./addRevenue";
 import AllRevenueModels from "../../revenueLayout/allRevenueModels";
+import AllRevenuePlans from "../../revenueLayout/allRevenuePlans";
 
 const RevenueModelTabs = ({role}) => {
 
     const revenueTabsView = {
         'add-revenues':<AddRevenue/>,
         'revenue-models':<AllRevenueModels/>,
-        'revenue-plans':"plans",
+        'revenue-plans':<AllRevenuePlans/>,
         'revenue-prices':"prices",
         'revenue-permission':"permission"
     }

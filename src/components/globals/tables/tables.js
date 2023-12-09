@@ -41,6 +41,7 @@ const Tables = ({headers , data ,bodyId , step}) => {
        setCurrentPage(number)
     }
     const updateRevenueModelId = useRevenueModelStore(state => state.updateRevenueModelId)
+    const updateRevenuePlanId = useRevenueModelStore(state => state.updateRevenuePlansId)
     const updateAccountTypeId = useAccountTypeStore(state => state.updateAccountTypeId)
     const managePopup = popupStore(state => state.manageOpenPopUp);
     const updatePopupBody = popupDataStore((state) => state.updatePopupBodyData);
@@ -53,6 +54,7 @@ const Tables = ({headers , data ,bodyId , step}) => {
     const updateAccountMainName = useReviewTabStore(state => state.updateAccountMainName);
     const manageActionLayout = useReviewTabStore(state => state.manageActionLayout)
     const manageRevenueActionLayout = useRevenueModelStore(state => state.manageRevenueActionLayout)
+    const manageRevenuePlansActionLayout = useRevenueModelStore(state => state.manageRevenuePlansActionLayout)
     const updateAccountPersonId = useAccountPersonStore(state => state.updateAccountPersonId)
 
 
@@ -83,6 +85,9 @@ const Tables = ({headers , data ,bodyId , step}) => {
                                }else if(step === 'revenueModel'){
                                    updateRevenueModelId(row.revenueModelId)
                                    manageRevenueActionLayout()
+                               }else if(step === 'revenuePlans'){
+                                   updateRevenuePlanId(row.revenuePlanId)
+                                   manageRevenuePlansActionLayout()
                                }
                            }} >
                                {headers.map((header , index) => (

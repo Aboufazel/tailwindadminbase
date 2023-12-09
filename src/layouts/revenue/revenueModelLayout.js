@@ -11,7 +11,7 @@ const RevenueModelLayout = () => {
     return (
         <>
             <BreadCrumbs data={RevenueModelBreadCrumbsData}/>
-            <DefineTabs tabsData={revenueTabsData}/>
+            <DefineTabs layoutId={'revenue'}  tabsData={revenueTabsData}/>
             <RevenueModelTabs role={defineTabs}/>
         </>
     )

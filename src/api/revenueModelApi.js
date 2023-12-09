@@ -111,6 +111,19 @@ export const editRevenueModel = (data , codingId ,revenueId)=>{
     })
 }
 
+export const getAllRevenueModelNoId = ()=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:'post',
+        url:'/revenueModelService/api/RevenueModels/getAll',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            "Content-Type":"application/json"
+        }
+    })
+}
 
 //revenue plans api
 
@@ -133,6 +146,45 @@ export const addRevenuePlans = (data)=>{
     })
 }
 
+export const editRevenuePlans = (data , modelId , planId)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:'put',
+        url:'/revenueModelService/api/RevenuePlans/edit',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            "Content-Type":"application/json"
+        },
+        data:{
+            "revenueModelId":Number(modelId),
+            "revenuePlanId":Number(planId),
+            "revenuePlanCode":Number(data.revenuePlanCode),
+            "revenuePlanName":data.revenuePlanName
+        },
+    })
+}
+
+
+export const deleteRevenuePlans = (planId)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:'delete',
+        url:'/revenueModelService/api/RevenuePlans/delete',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            "Content-Type":"application/json"
+        },
+        data:{
+            "revenuePlanId":Number(planId),
+        },
+    })
+}
+
+
 export const getRevenuePlansByModelId = (revenueModelId)=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
@@ -150,16 +202,53 @@ export const getRevenuePlansByModelId = (revenueModelId)=>{
     })
 }
 
-export const getAllRevenueModelNoId = ()=>{
+export const getRevenuePlansDataById = (plansId)=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
         method:'post',
-        url:'/revenueModelService/api/RevenueModels/getAll',
+        url:'/revenueModelService/api/RevenuePlans/getById',
         headers:{
             "selfUserId": userAuthData.userId,
             "Authorization": userAuthData.accessToken,
             "Content-Type":"application/json"
-        }
+        },
+        data:{
+            "revenuePlanId":Number(plansId),
+        },
+    })
+}
+
+export const manageRevenuePlansActive = (revenuePlanId)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:'put',
+        url:'/revenueModelService/api/RevenuePlans/active',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            "Content-Type":"application/json"
+        },
+        data:{
+            "revenuePlanId":Number(revenuePlanId) ,
+        },
+    })
+}
+
+export const manageRevenuePlansDeActive = (revenuePlanId)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:'put',
+        url:'/revenueModelService/api/RevenuePlans/DeActive',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            "Content-Type":"application/json"
+        },
+        data:{
+            "revenuePlanId":Number(revenuePlanId) ,
+        },
     })
 }

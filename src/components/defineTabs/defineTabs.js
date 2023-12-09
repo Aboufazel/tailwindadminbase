@@ -14,7 +14,7 @@ const defineState = create((set)=>({
     updateEditOrDelete:(editOrDeleteStatus) => set(() => ({ editOrDeleteStatus: editOrDeleteStatus })),
     manageActionStatus:()=>set((state)=>({actionStatus:state.actionStatus !== true})),
 }))
-const DefineTabs = ({tabsData=[]}) => {
+const DefineTabs = ({tabsData=[] , layoutId= 'coding'}) => {
     const updateTabs = useStore((state) => state.updateTabs)
     const defineTabs = useStore(state => state.defineTabs)
     const managePopup = popupStore(state => state.manageOpenPopUp);
@@ -35,7 +35,9 @@ const DefineTabs = ({tabsData=[]}) => {
 
         return(
             <div className={"flex flex-col absolute left-0 -top-16 items-end"}>
-                <MoreSquare onClick={()=>manageActionStatus()} style={{color:"#F16A1B"}} className={"cursor-pointer"} set={"bulk"}/>
+                {
+                    layoutId === 'coding' ? <MoreSquare onClick={()=>manageActionStatus()} style={{color:"#F16A1B"}} className={"cursor-pointer"} set={"bulk"}/>  :""
+                }
 
                 {
                     actionStatus ?

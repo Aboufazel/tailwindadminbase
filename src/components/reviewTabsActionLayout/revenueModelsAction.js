@@ -12,6 +12,7 @@ import {toast} from "react-toastify";
 import Buttons from "../globals/Buttons";
 import {Spinner} from "@material-tailwind/react";
 import EditRevenueModelForm from "./actionComponents/editRevenueModelForm";
+import ShowDetailComponents from "../showDetailComponents/showDetailComponents";
 
 const RevenueModelsAction = () => {
     const [loading, setLoading] = useState(false)
@@ -106,34 +107,7 @@ const RevenueModelsAction = () => {
                 <BackBtn onClick={() => {
                     manageRevenueActionLayout()
                 }}/>
-                <div className={"flex flex-col pt-14"}>
-                    <div className={'w-full'}>
-                        <div className={'bg-primary-extraLight p-1 font-medium text-[14px] w-full'}>
-                            اطلاعات
-                        </div>
-                        <ul className={"mt-5 px-5"}>
-                            {
-                                revenueModelsInformationList.map((items, index) => (
-                                    <li key={"accountType-list-info" + index}
-                                        className={"flex flex-row items-center w-full justify-between mb-3"}>
-                                        <p>{items?.title}</p>
-                                        <p className={"font-medium text-text-color-1"}>{items?.data}</p>
-                                    </li>
-                                ))
-                            }
-                        </ul>
-                    </div>
-                    {/*<div className={'bg-primary-light/30 mt-5 p-1 font-medium text-[14px] w-full'}>*/}
-                    {/*    پلن های درآمدی*/}
-                    {/*</div>*/}
-                    {/*<div className={"flex flex-col max-h-[700px] overflow-y-auto w-full"}>*/}
-                    {/*    {*/}
-                    {/*        plansData.data.revenuePlans.map((items , index)=>(*/}
-                    {/*            <RevenuePlansShowCard key={"revenue-plans-card" + index} data={items}/>*/}
-                    {/*        ))*/}
-                    {/*    }*/}
-                    {/*</div>*/}
-                </div>
+                <ShowDetailComponents data={revenueModelsInformationList}/>
                 <div className={"flex flex-row w-full gap-5 mt-5 items-center justify-center"}>
                     <Buttons onClick={manageRevenueEditLayout} light={true}>ویرایش</Buttons>
                     <Buttons light={true}>حذف</Buttons>

@@ -28,6 +28,24 @@ export const revenueModelTableHeaderData = [
     }
 ]
 
+export const revenuePlansTableHeaderData = [
+    {
+        name: "revenuePlanCode",
+        title: "کد",
+        render: (row) => row.revenuePlanCode
+    },
+    {
+        name: "revenuePlanName",
+        title: "نام پلن درآمدی",
+        render: (row) => row.revenuePlanName,
+    },
+    {
+        name: "isActive",
+        title: "وضعیت",
+        render: (row) => (row.isActive === 1 ? "فعال" : "غیر فعال"),
+    }
+]
+
 export const RevenueModelBreadCrumbsData = [
     {id: "business", title: "داشبورد", link: routes.main},
     {id: "business", title: "مدل های درآمدی", link: "#"},
