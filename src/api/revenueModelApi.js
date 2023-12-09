@@ -201,6 +201,19 @@ export const deleteRevenuePlans = (planId)=>{
     })
 }
 
+export const getAllRevenuePlans = ()=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:'post',
+        url:'/revenueModelService/api/RevenuePlans/getAll',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            "Content-Type":"application/json"
+        }
+    })
+}
 
 export const getRevenuePlansByModelId = (revenueModelId)=>{
     const storageData = localStorage.getItem("auth")
@@ -266,6 +279,33 @@ export const manageRevenuePlansDeActive = (revenuePlanId)=>{
         },
         data:{
             "revenuePlanId":Number(revenuePlanId) ,
+        },
+    })
+}
+
+
+// revenue plans price api
+
+export const addRevenuePlanPrice = (data)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:'post',
+        url:'/revenueModelService/api/RevenuePlanPrices/add',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            "Content-Type":"application/json"
+        },
+        data:{
+            "revenuePlanId":Number(data.revenuePlanId),
+            "revenuePlanPriceCode":Number(data.revenuePlanPriceCode),
+            "revenuePlanPriceName":data.revenuePlanPriceName,
+            "price":Number(data.price),
+            "duration":Number(data.duration),
+            "isInitial":data.noOne === "1" ? 0 : Number(data.isInitial),
+            "isGift":data.noOne === "1" ? 0 : Number(data.isGift),
+            "buyLimit":Number(data.buyLimit),
         },
     })
 }

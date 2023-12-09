@@ -5,6 +5,7 @@ import {Plus} from "react-iconly";
 import {create} from "zustand";
 import AddRevenuePlans from "../../revenueLayout/addRevenuePlans";
 import AddModels from "../../revenueLayout/addModels";
+import AddPlanPrices from "../../revenueLayout/addPlanPrices";
 
 const useReveneuAction = create((set)=>({
     selectType:"",
@@ -28,7 +29,7 @@ const AddRevenue = () => {
     const actionBody = {
         "add-models": <AddModels/> ,
         "add-plans": <AddRevenuePlans/>,
-        "add-prices": "add revenue prices",
+        "add-prices": <AddPlanPrices/>,
     }
 
     return(

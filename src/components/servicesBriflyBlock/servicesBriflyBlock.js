@@ -22,8 +22,8 @@ const ServicesBriflyBlock = () => {
             <img src={MainImg} alt={"dash main elements"}/>
 
             <div className={"flex flex-row overflow-hidden justify-center items-center -bottom-14 w-full px-[24px] gap-[40px] absolute"}>
-                <ServicesBrifCard data={data.data.businesses} icon={<Work set={"bulk"}/>} title={"کسب و کارها"}/>
-                <ServicesBrifCard data={codingdata.data.accountCodingKinds} icon={<Folder set={"bulk"}/>} title={"کدینگ ها"}/>
+                <ServicesBrifCard data={data?.data.businesses} icon={<Work set={"bulk"}/>} title={"کسب و کارها"}/>
+                <ServicesBrifCard data={codingdata?.data.accountCodingKinds} icon={<Folder set={"bulk"}/>} title={"کدینگ ها"}/>
                 <ServicesBrifCard icon={<TwoUsers set={"bulk"}/>}/>
                 <ServicesBrifCard icon={<TwoUsers set={"bulk"}/>}/>
                 <ServicesBrifCard icon={<TwoUsers set={"bulk"}/>}/>

@@ -4,7 +4,27 @@ import {useSelectId} from "../../popupBody/definePopupBody/createAccountMain";
 const SelectInput = ({data , error ,type= '' , register , step  , refetch , selectValue='حساب را انتخاب کنید...' ,...props}) => {
     const {updateAccountGroupId} = useSelectId()
 
-    console.log(error , "select error")
+
+
+    const SelectRevenuePlansForRevenuePrices =()=>{
+        return(
+            <div className={"flex flex-col mt-3"}>
+                <label>{renderOptionLabel[type]}</label>
+                <select {...props} required={true} className={"bg-transparent border border-text-color-3 px-3 py-2 rounded-[8px] mt-3"}
+                        name={'revenuePlanId'} id={'revenuePlanId'} {...register("revenuePlanId")}>
+                    <option value={''}>{selectValue}</option>
+                    {
+                        data && data.map((items)=>(
+                            <option
+                                value={items.revenuePlanId}
+                            >{items.revenuePlanName}</option>
+                        ))
+                    }
+                </select>
+            </div>
+        )
+    }
+
     const SelectRevenueModelsForRevenuePlans =()=>{
         return(
             <div className={"flex flex-col mt-3"}>
@@ -93,13 +113,15 @@ const SelectInput = ({data , error ,type= '' , register , step  , refetch , sele
         'account-main':<SelectAccountMainOptions/>,
         'all-account-coding':<SelectCodingForRevenueModel/>,
         'add-revenue-plans':<SelectRevenueModelsForRevenuePlans/>,
+        'all-revenue-plans':<SelectRevenuePlansForRevenuePrices/>,
     }
 
     const renderOptionLabel = {
         'account-group':'گروه حساب',
         'account-main':'حساب کل',
         'all-account-coding':'کدینگ های موجود',
-        'add-revenue-plans':'پلن های درآمدی',
+        'add-revenue-plans':'مدل های درآمدی',
+        'all-revenue-plans':'پلن های درآمدی',
     }
 
 

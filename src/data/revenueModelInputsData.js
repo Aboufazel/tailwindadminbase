@@ -58,3 +58,50 @@ export const addRevenuePlansInputs = [
     }
 
 ]
+
+
+// revenue prices input data
+
+export const addRevenuePricesInputs = [
+    {
+        inputLabel:"کد *",
+        inputPlaceholder:"کد  را وارد نمایید...",
+        required:true,
+        type:"input",
+        inputType:"number",
+        inputName:"revenuePlanPriceCode",
+        width:'w-1/2'
+    },{
+        inputLabel:"نام  *",
+        inputPlaceholder:"نام را وارد نمایید...",
+        required:true,
+        type:"input",
+        inputType:"text",
+        inputName:"revenuePlanPriceName",
+        width:'w-1/2'
+    },{
+        inputLabel:"تعداد روز *",
+        inputPlaceholder:"تعداد روز را وارد نمایید...",
+        required:true,
+        type:"input",
+        inputType:"number",
+        inputName:"duration",
+        width:'w-1/2'
+    },{
+        inputLabel:"محدودیت استفاده *",
+        inputPlaceholder:"محدودیت استفاده کاربر را وارد نمایید...",
+        required:true,
+        type:"input",
+        inputType:"number",
+        inputName:"buyLimit",
+        width:'w-1/2'
+    },{
+        inputLabel:"قیمت *",
+        inputPlaceholder:"قیمت را وارد نمایید...",
+        required:true,
+        type:"input",
+        inputType:"number",
+        inputName:"price",
+        width:'w-1/2'
+    }
+]
