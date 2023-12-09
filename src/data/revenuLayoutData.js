@@ -46,6 +46,49 @@ export const revenuePlansTableHeaderData = [
     }
 ]
 
+export const revenuePlanPriceTableHeaderData = [
+    {
+        name: "revenuePlanPriceCode",
+        title: "کد",
+        render: (row) => row.revenuePlanPriceCode
+    },
+    {
+        name: "revenuePlanPriceName",
+        title: "نام",
+        render: (row) => row.revenuePlanPriceName,
+    },
+    {
+        name: "price",
+        title: "قیمت",
+        render: (row) => `${row.price}تومان `,
+    },
+    {
+        name: "isGift",
+        title: "جایزه",
+        render: (row) => row.isGift === 1 ? "جایزه فعال" : "جایزه ندارد",
+    },
+    {
+        name: "isInitial",
+        title: "میزان اولیه",
+        render: (row) => row.isInitial === 1 ? "میزان اولیه دارد" : "میزان اولیه ندارد",
+    },
+    {
+        name: "buyLimit",
+        title: "محدودیت کاربر",
+        render: (row) => row.buyLimit
+    },
+    {
+        name: "duration",
+        title: "مدت زمان",
+        render: (row) => row.duration
+    },
+    {
+        name: "isActive",
+        title: "وضعیت",
+        render: (row) => (row.isActive === 1 ? "فعال" : "غیر فعال"),
+    }
+]
+
 export const RevenueModelBreadCrumbsData = [
     {id: "business", title: "داشبورد", link: routes.main},
     {id: "business", title: "مدل های درآمدی", link: "#"},

@@ -56,8 +56,8 @@ const Tables = ({headers , data ,bodyId , step}) => {
     const manageRevenueActionLayout = useRevenueModelStore(state => state.manageRevenueActionLayout)
     const manageRevenuePlansActionLayout = useRevenueModelStore(state => state.manageRevenuePlansActionLayout)
     const updateAccountPersonId = useAccountPersonStore(state => state.updateAccountPersonId)
-
-
+    const updateRevenuePlanPriceId = useRevenueModelStore(state => state.updateRevenuePlanPriceId)
+    const managePlanPriceActionLayout = useRevenueModelStore(state => state.managePlanPriceActionLayout)
 
     return(
            <>
@@ -88,6 +88,9 @@ const Tables = ({headers , data ,bodyId , step}) => {
                                }else if(step === 'revenuePlans'){
                                    updateRevenuePlanId(row.revenuePlanId)
                                    manageRevenuePlansActionLayout()
+                               }else if(step === 'revenuePlanPrice'){
+                                   updateRevenuePlanPriceId(row.revenuePlanPriceId)
+                                   managePlanPriceActionLayout()
                                }
                            }} >
                                {headers.map((header , index) => (

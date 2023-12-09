@@ -1,6 +1,7 @@
 import AddRevenue from "./addRevenue";
 import AllRevenueModels from "../../revenueLayout/allRevenueModels";
 import AllRevenuePlans from "../../revenueLayout/allRevenuePlans";
+import AllRevenuePlansPrice from "../../revenueLayout/allRevenuePlansPrice";
 
 const RevenueModelTabs = ({role}) => {
 
@@ -8,7 +9,7 @@ const RevenueModelTabs = ({role}) => {
         'add-revenues':<AddRevenue/>,
         'revenue-models':<AllRevenueModels/>,
         'revenue-plans':<AllRevenuePlans/>,
-        'revenue-prices':"prices",
+        'revenue-prices':<AllRevenuePlansPrice/>,
         'revenue-permission':"permission"
     }
 
