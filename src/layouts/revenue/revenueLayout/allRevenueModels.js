@@ -6,10 +6,15 @@ import LoadingComponents from "../../../components/loading/loadingComponents";
 import {toast} from "react-toastify";
 import useRevenueModelStore from "../../../zustand/revenueModelStore";
 import RevenueModelsAction from "../../../components/reviewTabsActionLayout/revenueModelsAction";
+import {useEffect} from "react";
 
 const AllRevenueModels = () => {
     const actionLayout = useRevenueModelStore(state => state.revenueActionLayout)
-    const {data , isLoading , isError} = useGetFunction('getAllRevenueModelsNoId' , "" , getAllRevenueModelNoId)
+    const {data , isLoading , isError , refetch} = useGetFunction('getAllRevenueModelsNoId' , "" , getAllRevenueModelNoId)
+
+    useEffect(() => {
+        refetch()
+    }, [actionLayout]);
 
     if(isLoading){
         return (<LoadingComponents title={"دریافت مدل های درآمدی"}/> )

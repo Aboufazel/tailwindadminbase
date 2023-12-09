@@ -111,6 +111,23 @@ export const editRevenueModel = (data , codingId ,revenueId)=>{
     })
 }
 
+export const deleteRevenueModel = (revenueModelId)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:'delete',
+        url:'/revenueModelService/api/RevenueModels/delete',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            "Content-Type":"application/json"
+        },
+        data:{
+            "revenueModelId":Number(revenueModelId),
+        },
+    })
+}
+
 export const getAllRevenueModelNoId = ()=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);

@@ -4,6 +4,7 @@ import BackBtn from "./actionComponents/backBtn";
 import useRevenueModelStore from "../../zustand/revenueModelStore";
 import {useGetFunction} from "../../hooks/coding";
 import {
+    deleteRevenueModel,
     getRevenueModelByIdApi,
     manageRevenueModelsActive,
     manageRevenueModelsDeActive
@@ -20,7 +21,8 @@ const RevenueModelsAction = () => {
     const manageRevenueEditLayout = useRevenueModelStore(state => state.manageRevenueModelEditLayout)
     const revenueEditLayout = useRevenueModelStore(state => state.revenueModelEditLayout)
     const revenueModelId = useRevenueModelStore(state => state.revenueModelId)
-
+    const deleteRevenueModelLayout = useRevenueModelStore(state => state.deleteRevenueModelLayout)
+    const manageRevenueModelsDeleteLayout = useRevenueModelStore(state => state.manageRevenueModelsDeleteLayout)
     const {
         data: modelsData,
         isLoading,
@@ -89,6 +91,16 @@ const RevenueModelsAction = () => {
         }
     }
 
+    const manageDeleteRevenueModel = async ()=>{
+        await deleteRevenueModel(`${revenueModelId}`).catch(()=>{
+            return(toast.error("حذف با مشکل مواجه شد"))
+        }).then(()=>{
+            manageRevenueActionLayout()
+            manageRevenueModelsDeleteLayout()
+            return(toast.success("مدل درامدی با موفقیت حذف شد"))
+        })
+    }
+
     if (revenueEditLayout){
         return (
             <div className={"relative w-full"}>
@@ -110,7 +122,7 @@ const RevenueModelsAction = () => {
                 <ShowDetailComponents data={revenueModelsInformationList}/>
                 <div className={"flex flex-row w-full gap-5 mt-5 items-center justify-center"}>
                     <Buttons onClick={manageRevenueEditLayout} light={true}>ویرایش</Buttons>
-                    <Buttons light={true}>حذف</Buttons>
+                    <Buttons onClick={manageRevenueModelsDeleteLayout} light={true}>حذف</Buttons>
                     <Buttons onClick={manageActiveRevenueModel} light={true}>
                         {
                             modelsData.data.revenueModels[0].isActive === 1 ?
@@ -126,6 +138,17 @@ const RevenueModelsAction = () => {
                         }
                     </Buttons>
                 </div>
+                {
+                    deleteRevenueModelLayout?
+                        <div className={"w-full mt-5"}>
+                            <p>ایا از حذف مدل درآمدی مطمعن هستید؟</p>
+                            <div className={"flex flex-row gap-5 items-center w-full justify-end"}>
+                                <Buttons onClick={manageRevenueModelsDeleteLayout} light={true}>انصراف</Buttons>
+                                <Buttons onClick={manageDeleteRevenueModel} light={true} color={"danger"}>تایید</Buttons>
+                            </div>
+                        </div>
+                        : ""
+                }
             </div>
         )
     }
