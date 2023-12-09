@@ -3,10 +3,8 @@ import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {
-    addRevenueModel,
     addRevenuePlanPrice,
     getAllRevenuePlans,
-    getRevenuePlansByModelId
 } from "../../../api/revenueModelApi";
 import {toast} from "react-toastify";
 import SelectInput from "../../../components/globals/inputs/selectInput";
