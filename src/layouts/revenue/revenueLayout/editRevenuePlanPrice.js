@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {addRevenuePlanPrice, editRevenuePlanPrice} from "../../../api/revenueModelApi";
+import {editRevenuePlanPrice} from "../../../api/revenueModelApi";
 import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";

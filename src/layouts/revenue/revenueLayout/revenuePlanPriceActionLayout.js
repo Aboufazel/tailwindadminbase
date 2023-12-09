@@ -1,9 +1,7 @@
 import {useGetFunction} from "../../../hooks/coding";
 import {
     deleteRevenuePlanPrice,
-    deleteRevenuePlans,
     getRevenuePlansPriceDetail, manageRevenuePlanPriceActive, manageRevenuePlanPriceDeActive,
-    manageRevenuePlansActive, manageRevenuePlansDeActive
 } from "../../../api/revenueModelApi";
 import useRevenueModelStore from "../../../zustand/revenueModelStore";
 import ShowDetailComponents from "../../../components/showDetailComponents/showDetailComponents";
