@@ -8,6 +8,7 @@ import {useNavigate} from "react-router-dom";
 import Storage from "../../services/storage";
 import LoadingComponents from "../../components/loading/loadingComponents";
 import {routes} from "../../data/routes";
+import {useEffect} from "react";
 
 const BusinessLayout = () => {
     const [,setAuthInfo] = useStorage("auth", {
@@ -17,7 +18,12 @@ const BusinessLayout = () => {
     })
     const storage = Storage()
     const navigate = useNavigate()
-    const {isLoading, isError, data , error} = useAllBusiness("business")
+    const {isLoading, refetch , isRefetching ,isError, data , error} = useAllBusiness("business")
+
+    useEffect(() => {
+        refetch()
+    }, [isRefetching]);
+
 
     if(isLoading){
         return (

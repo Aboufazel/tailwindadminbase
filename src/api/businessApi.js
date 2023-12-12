@@ -14,6 +14,42 @@ export const getAllBusiness = ()=>{
     })
 }
 
+export const activeBusiness = (businessId)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:'put',
+        url:'/BusinessService/api/businesses/active',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            'Content-Type': 'application/json'
+        },
+        data:{
+            "businessId": businessId,
+            "isActive": 1,
+        }
+    })
+}
+
+export const deActiveBusiness = (businessId)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:'put',
+        url:'/BusinessService/api/businesses/deActive',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            'Content-Type': 'application/json'
+        },
+        data:{
+            "businessId": businessId,
+            "isActive": 0,
+        }
+    })
+}
+
 export const editUserStatus = (data)=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);

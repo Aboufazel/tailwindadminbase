@@ -1,9 +1,9 @@
 import React from "react";
 
-const ShowDetailComponents = ({data=[]}) => {
+const ShowDetailComponents = ({data=[] , cls="pt-14"}) => {
 
     return(
-        <div className={"flex flex-col pt-14"}>
+        <div className={`flex flex-col ${cls}`}>
             <div className={'w-full'}>
                 <div className={'bg-primary-extraLight p-1 font-medium text-[14px] w-full'}>
                     اطلاعات

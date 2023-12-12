@@ -3,9 +3,11 @@ import popupStore from "../../zustand/popupStore";
 import Buttons from "../globals/Buttons";
 import popupDataStore from "../../zustand/popupDataStore";
 import {create} from "zustand";
-import {editUserStatus} from "../../api/businessApi";
+import {activeBusiness, deActiveBusiness, editUserStatus} from "../../api/businessApi";
 import {toast} from "react-toastify";
 import {useAllBusiness} from "../../hooks/businessServicesActions";
+import ShowDetailComponents from "../showDetailComponents/showDetailComponents";
+import {activeFunction, deActiveFunction} from "../../hooks/globalFunction";
 
 const useState = create((set)=>({
     actionStatus:false,
@@ -23,63 +25,35 @@ const BusinessPopupBody = () => {
     ]
 
 
-    const {refetch} = useAllBusiness("business")
-    const manageStatusEdit = async (data)=>{
-        const res =await editUserStatus(data).catch(()=>{
-            toast.error("ویرایش موفق نبود")
-        })
-        if (res.status === 200){
-            toast.success("ویرایش با موفقیت انجام شد")
-            manageActionStatus()
+    const {refetch} = useAllBusiness('business')
+    const manageStatusEdit = async ()=>{
+        if (popupBody.isActive === 1){
+            deActiveFunction(deActiveBusiness , popupBody.businessId).then()
             refetch()
         }
-
+        else if(popupBody.isActive === 0){
+            activeFunction(activeBusiness , popupBody.businessId).then()
+            refetch()
+        }
+        manageActionStatus()
     }
 
-    const businessUserInfo = [
-        {title:"مدیر کسب و کار" , data:popupBody.userName},
-    ]
     return(
         <>
             <DialogHeader className={"flex flex-row items-center gap-[8px]"}>
                 {"اطلاعات کسب و کار"}
             </DialogHeader>
             <DialogBody>
-                <div className={"w-full px-3 py-2 rounded-[5px] font-bold bg-primary-main/10 text-text-color-1 text-[13px]"}>
-                    {" اطلاعات "}
-                </div>
-                <ul className={"mt-5 px-5"}>
+                <ShowDetailComponents data={informationList} cls={""}/>
+                <div className={"flex flex-row items-center justify-end gap-3 w-full"}>
                     {
-                        informationList.map((items , index) =>(
-                            <li key={"business-list-info"+index} className={"flex flex-row items-center w-full justify-between mb-3"}>
-                                <p>{items?.title}</p>
-                                <p className={"font-medium text-text-color-1"}>{items?.data}</p>
-                            </li>
-                        ))
+                        actionStatus?
+                            "" :
+                            <Buttons light={true} onClick={manageActionStatus}>
+                                {popupBody?.isActive === 0 ? "فعال سازی" : "غیر فعال سازی"}
+                            </Buttons>
                     }
-                </ul>
-                <div className={"w-full px-3 py-2 rounded-[5px] font-bold bg-primary-main/10 text-text-color-1 text-[13px]"}>
-                    {" کاربران "}
                 </div>
-                <ul className={"mt-5 px-5"}>
-                    {
-                        businessUserInfo.map((items , index) =>(
-                            <li key={"user-business-list-info"+index} className={"flex flex-row items-center font-normal w-full justify-between mb-3"}>
-                                <p className={"w-1/2"}>{items?.title}</p>
-                                <div className={"flex flex-row items-center justify-end gap-3 w-1/2"}>
-                                    <p className={"font-medium text-text-color-1"}>{items?.data}</p>
-                                    {
-                                        actionStatus?
-                                            "" :
-                                            <Buttons light={true} onClick={manageActionStatus}>
-                                                {popupBody?.status === 0 ? "فعال سازی" : "غیر فعال سازی"}
-                                            </Buttons>
-                                    }
-                                </div>
-                            </li>
-                        ))
-                    }
-                </ul>
             </DialogBody>
             <DialogFooter className={"flex flex-row w-full items-center gap-[10px]"}>
                 {
