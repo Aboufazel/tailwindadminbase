@@ -22,6 +22,8 @@ const CodingAccountGroup = () => {
         isError ,
         data} = useQuery(['accountsGroups'] , ()=>getAllAccountGroup(accountCodingKindId))
 
+    console.log(data , "account group data")
+
     if (isLoading || isRefetching)
           return <LoadingComponents title={'دریافت گروه حساب'}/>
 

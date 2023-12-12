@@ -7,8 +7,14 @@ import LoadingComponents from "../loading/loadingComponents";
 import Buttons from "../globals/Buttons";
 import useAccountGroupStore from "../../zustand/accountGroupStore";
 import EditGroupForm from "./actionComponents/editGroupForm";
-import {deleteAccountGroup, editAccountGroupIsActive} from "../../api/accountGroupApi";
+import {
+    activeAccountGroup,
+    deActiveAccountGroup,
+    deleteAccountGroup,
+    editAccountGroupIsActive
+} from "../../api/accountGroupApi";
 import {Spinner} from "@material-tailwind/react";
+import {activeFunction, deActiveFunction} from "../../hooks/globalFunction";
 
 const AccountGroupAction = () => {
     const manageActionLayout = useReviewTabStore(state => state.manageActionLayout)
@@ -35,18 +41,6 @@ const AccountGroupAction = () => {
         return (toast.error('دربافت با مشکل مواجه شد!'))
     }
 
-    const manageIsActiveFn = async ()=>{
-        setLoading(true)
-        const res = await editAccountGroupIsActive(accountGroupId , !data.data.accountGroups[0].isActive).catch(()=>{
-            setLoading(false)
-            return ( toast.error('غیر فعال  سازی موفق نبود'))
-        })
-        if(res.status === 200){
-            setLoading(false)
-            refetch()
-            return ( toast.success('ویرایش موفقیت آمیز بود'))
-        }
-    }
 
     const manageDeleteGroupAccount = async ()=>{
         const res = await deleteAccountGroup(accountGroupId).catch(()=>{
@@ -88,24 +82,6 @@ const AccountGroupAction = () => {
                                     <>
                                         <Buttons onClick={manageEditGroupsStep} light={true}>ویرایش</Buttons>
                                         <Buttons onClick={manageDeleteGroupStep} light={true}>حذف</Buttons>
-                                        <Buttons onClick={manageIsActiveFn} light={true}>
-                                            {
-                                                data?.data.accountGroups[0].isActive ?
-                                                    <div className={"flex flex-row gap-3 items-center"}>
-                                                        {
-                                                            loading ? <Spinner color={"blue"}/> : ""
-                                                        }
-                                                        <p>غیرفعال سازی</p>
-                                                    </div>
-                                                    :
-                                                    <div className={"flex flex-row gap-1 items-center"}>
-                                                        {
-                                                            loading ? <Spinner color={"blue"}/> : ""
-                                                        }
-                                                        <p>فعال سازی</p>
-                                                    </div>
-                                            }
-                                        </Buttons>
                                     </> :
                                     <div className={"w-full px-3 mt-3"}>
                                         <p className={"text-danger-600 font-medium text-[14px]"}>

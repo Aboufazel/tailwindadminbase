@@ -58,14 +58,14 @@ export const getAllAccountGroup = (codingKindId)=>{
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
         method:'post',
-        url:'/accountGroupService/api/accountGroups/GetAccountGroupCodingKindId',
+        url:'/accountGroupService/api/accountGroups/GetByAccountCodingId',
         headers:{
             "selfUserId": userAuthData.userId,
             "Authorization": userAuthData.accessToken,
             "Content-Type":"application/json"
         },
         data:{
-            "accountCodingKindId":codingKindId,
+            "accountCodingId":codingKindId,
         }
     })
 }

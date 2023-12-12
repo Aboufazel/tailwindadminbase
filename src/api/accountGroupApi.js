@@ -12,10 +12,9 @@ export const addAccountGroup = (data , codingId)=>{
             'Content-Type': 'application/json'
         },
         data:{
-            "accountGroupCode":data.accountGroupCode,
+            "accountCodingId":codingId,
+            "accountGroupCode":Number(data.accountGroupCode),
             "accountGroupName":data.accountGroupName,
-            "accountCodingKindId":codingId,
-            "lang":"fa"
         }
     })
 }
@@ -49,12 +48,10 @@ export const editAccountGroup = (id,data , codingId)=>{
             'Content-Type': 'application/json'
         },
         data:{
-            "accountGroupId":id,
-            "accountGroupCode":data.accountGroupCode,
+            "accountGroupId":Number(id),
+            "accountGroupCode":Number(data.accountGroupCode),
             "accountGroupName":data.accountGroupName,
-            "accountCodingKindId":codingId,
-            "isActive":true,
-            "lang":"fa"
+            "accountCodingId":Number(codingId),
         }
     })
 }
@@ -76,6 +73,44 @@ export const editAccountGroupIsActive = (groupId , isActive)=>{
         }
     })
 }
+
+export const activeAccountGroup = (groupId)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:"put",
+        url:'/AccountGroupService/api/accountGroups/active',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            'Content-Type': 'application/json'
+        },
+        data:{
+            "accountGroupId":Number(groupId),
+            "isActive":1
+        }
+    })
+}
+
+export const deActiveAccountGroup = (groupId)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:"put",
+        url:'/AccountGroupService/api/accountGroups/deActive',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            'Content-Type': 'application/json'
+        },
+        data:{
+            "accountGroupId":Number(groupId),
+            "isActive":0
+        }
+    })
+}
+
+
 
 export const deleteAccountGroup = (groupId)=>{
     const storageData = localStorage.getItem("auth")
