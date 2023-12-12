@@ -8,13 +8,8 @@ import Buttons from "../globals/Buttons";
 import useAccountGroupStore from "../../zustand/accountGroupStore";
 import EditGroupForm from "./actionComponents/editGroupForm";
 import {
-    activeAccountGroup,
-    deActiveAccountGroup,
     deleteAccountGroup,
-    editAccountGroupIsActive
 } from "../../api/accountGroupApi";
-import {Spinner} from "@material-tailwind/react";
-import {activeFunction, deActiveFunction} from "../../hooks/globalFunction";
 
 const AccountGroupAction = () => {
     const manageActionLayout = useReviewTabStore(state => state.manageActionLayout)
@@ -23,9 +18,8 @@ const AccountGroupAction = () => {
     const deleteGroupStep = useAccountGroupStore(state => state.deleteGroupStep)
     const manageDeleteGroupStep = useAccountGroupStore(state => state.manageDeleteGroupStep)
     const manageEditGroupsStep = useAccountGroupStore(state => state.manageEditGroupStep)
-    const [loading , setLoading] = useState(false)
 
-    const {data , isLoading , refetch ,isRefetching , isError} = useGetAccountGroupById('getAccountGroupWithId' ,  accountGroupId)
+    const {data , isLoading , isRefetching , isError} = useGetAccountGroupById('getAccountGroupWithId' ,  accountGroupId)
 
     if (isLoading || isRefetching){
         return (<LoadingComponents title={'دریافت گروه حساب'}/> )
