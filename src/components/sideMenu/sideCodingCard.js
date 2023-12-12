@@ -1,4 +1,4 @@
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {Tooltip} from "@material-tailwind/react";
 import {Folder} from "react-iconly";
 import useStore from "../../zustand/store";
