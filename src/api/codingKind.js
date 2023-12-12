@@ -49,7 +49,7 @@ export const getAllCoding = ()=>{
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
         method:'post',
-        url:'/accountCodingKindService/api/AccountCodingKinds/getAll',
+        url:'/accountCodingService/api/AccountCodings/getAll',
         headers:{
             "selfUserId": userAuthData.userId,
             "Authorization": userAuthData.accessToken,

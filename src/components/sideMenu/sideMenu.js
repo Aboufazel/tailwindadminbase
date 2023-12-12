@@ -21,27 +21,27 @@ const SideMenu = ({manageOpenAndClose}) => {
     })
 
 
-    // useEffect(() => {
-    //     if (isError){
-    //         if(storage.accessToken && error.response.status === 403){
-    //             toast.error("توکن منقضی شده است")
-    //             setAuthInfo({
-    //                 userId: "",
-    //                 accessToken: "",
-    //                 role:"",
-    //             })
-    //             navigate(routes.login)
-    //         } else if (storage.accessToken && error?.response.status >=400 && error?.response.status <=500){
-    //             toast.error("توکن منقضی شده است")
-    //             setAuthInfo({
-    //                 userId: "",
-    //                 accessToken: "",
-    //                 role:"",
-    //             })
-    //             navigate(routes.login)
-    //         }
-    //     }
-    // }, [isError]);
+    useEffect(() => {
+        if (isError){
+            if(storage.accessToken && error.response.status === 403){
+                toast.error("توکن منقضی شده است")
+                setAuthInfo({
+                    userId: "",
+                    accessToken: "",
+                    role:"",
+                })
+                navigate(routes.login)
+            } else if (storage.accessToken && error?.response.status >=400 && error?.response.status <=500){
+                toast.error("توکن منقضی شده است")
+                setAuthInfo({
+                    userId: "",
+                    accessToken: "",
+                    role:"",
+                })
+                navigate(routes.login)
+            }
+        }
+    }, [isError]);
 
     return(
        <div className={"w-full pt-[32px] z-10 px-[12px]"}>
@@ -79,7 +79,7 @@ const SideMenu = ({manageOpenAndClose}) => {
                    <LoadingComponents title={'دریافت کدینگ...'}/>
                    :
 
-                   codingdata && codingdata.data.accountCodingKinds.map((data , index)=> (
+                   codingdata && codingdata.data.accountCodings.map((data , index)=> (
                            <SideCodingCard data={data} index={index} manageOpenAndClose={manageOpenAndClose}/>
 
                    ))

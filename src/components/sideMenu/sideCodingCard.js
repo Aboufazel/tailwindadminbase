@@ -1,4 +1,4 @@
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {Tooltip} from "@material-tailwind/react";
 import {Folder} from "react-iconly";
 import useStore from "../../zustand/store";
@@ -6,17 +6,17 @@ import {routes} from "../../data/routes";
 
 const SideCodingCard = ({data , index , manageOpenAndClose}) => {
     const navigate = useNavigate()
-    const location = useLocation()
+    const params = useParams()
     const updateCodingDefineTitle = useStore((state) => state.updateCodingTitle);
     const updateCodingKindId = useStore(state => state.updateCodingKindId)
 
     return(
-        <Tooltip content={data.accountCodingKindName}  className={manageOpenAndClose ? "bg-primary-main text-white" : "hidden"} placement="left">
+        <Tooltip content={data.accountCodingName}  className={manageOpenAndClose ? "bg-primary-main text-white" : "hidden"} placement="left">
             <div onClick={()=> {
-                updateCodingKindId(data.accountCodingKindId)
-                updateCodingDefineTitle(data.accountCodingKindName)
-                navigate(routes.define)
-            }} key={data.accountCodingKindName + index}
+                updateCodingKindId(data.accountCodingId)
+                updateCodingDefineTitle(data.accountCodingName)
+                navigate(`${routes.defineNoId}/${data.accountCodingId}`)
+            }} key={data.accountCodingName + index}
                  className={`flex flex-row items-center
              ${manageOpenAndClose ? "justify-center" : " justify-between"}
              transition-all
@@ -24,11 +24,11 @@ const SideCodingCard = ({data , index , manageOpenAndClose}) => {
              cursor-pointer rounded-4px text-text-color-2
              hover:shadow shadow-primary25
              rounded-[4px]
-             ${location.pathname === data.link ? "bg-primary-main text-white" : ""}
+             ${Number(params.id) === data.accountCodingId ? "bg-primary-main text-white" : ""}
              px-[20px] py-[10px] hover:text-white hover:bg-primary-main w-full`}>
                 <div className={"flex flex-row items-center gap-[16px] "}>
                     <Folder set={"bulk"}/>
-                    {manageOpenAndClose ? "" : <p>{data.accountCodingKindName}</p>}
+                    {manageOpenAndClose ? "" : <p>{data.accountCodingName}</p>}
                 </div>
             </div>
         </Tooltip>

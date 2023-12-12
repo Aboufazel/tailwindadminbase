@@ -6,5 +6,6 @@ export const routes = {
   revenueModel:'/revenue',
   business:'/business',
   createCoding:'/createCoding',
-  define:'/define'
+  define:'/define/:id',
+  defineNoId:'/define'
 }
