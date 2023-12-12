@@ -21,8 +21,8 @@ const EditCoding = () => {
     const {data , isLoading , isError} = useGetCodingById('getCodingById' ,accountCodingId )
     const {refetch} = useAllCodingAccount("getAllSideCoding")
     const formValidate = yup.object().shape({
-        accountCodingKindName:yup.string().required("وارد کردن نام اجباری است"),
-        accountCodingKindCode:yup.string().required("وارد کردن کد اجباری است"),
+        accountCodingName:yup.string().required("وارد کردن نام اجباری است"),
+        accountCodingCode:yup.string().required("وارد کردن کد اجباری است"),
     });
     const {register ,
         handleSubmit,
@@ -73,9 +73,8 @@ const EditCoding = () => {
                                         label={item.inputLabel}
                                         inputType={item.inputType}
                                         defaultValue={
-                                        index === 0 ? data.data.accountCodingKinds[0].accountCodingKindName :
-                                        index === 1 ? data.data.accountCodingKinds[0].accountCodingKindCode :
-                                        index === 2 ? data.data.accountCodingKinds[0].accountCodingKindDesc : ""
+                                        index === 0 ? data.data.accountCodings[0].accountCodingCode :
+                                        index === 1 ? data.data.accountCodings[0].accountCodingName : ""
                                 }/>
                             ))
                         }

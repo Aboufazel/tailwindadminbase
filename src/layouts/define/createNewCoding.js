@@ -19,8 +19,8 @@ const CreateNewCoding = () => {
     ]
 
     const formValidate = yup.object().shape({
-        accountCodingKindName:yup.string().required("وارد کردن نام اجباری است"),
-        accountCodingKindCode:yup.string().required("وارد کردن کد اجباری است"),
+        accountCodingName:yup.string().required("وارد کردن نام اجباری است"),
+        accountCodingCode:yup.string().required("وارد کردن کد اجباری است"),
     });
     const {register ,
         handleSubmit,

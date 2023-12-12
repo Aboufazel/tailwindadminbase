@@ -6,18 +6,15 @@ export const addCoding = (data)=>{
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
         method:'POST',
-        url:'/accountCodingKindService/api/AccountCodingKinds/Add',
+        url:'/accountCodingService/api/AccountCodings/Add',
         headers:{
             "selfUserId": userAuthData.userId,
             "Authorization": userAuthData.accessToken,
             "Content-Type":"application/json"
         },
         data:{
-            "accountCodingKindName": data.accountCodingKindName,
-            "accountCodingKindCode": data.accountCodingKindCode,
-            "accountCodingKindDesc": data.accountCodingKindDesc,
-            "isActive": true,
-            "lang": "fa"
+            "accountCodingName": data.accountCodingName,
+            "accountCodingCode": data.accountCodingCode,
         }
     })
 }
@@ -27,19 +24,16 @@ export const editCoding = (data , codingId)=>{
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
         method:'put',
-        url:'/accountCodingKindService/api/AccountCodingKinds/edit',
+        url:'/accountCodingService/api/AccountCodings/edit',
         headers:{
             "selfUserId": userAuthData.userId,
             "Authorization": userAuthData.accessToken,
             "Content-Type":"application/json"
         },
         data:{
-            "accountCodingKindId": Number(codingId),
-            "accountCodingKindName": data.accountCodingKindName,
-            "accountCodingKindCode": data.accountCodingKindCode,
-            "accountCodingKindDesc": data.accountCodingKindDesc,
-            "isActive": true,
-            "lang": "fa"
+            "accountCodingId": Number(codingId),
+            "accountCodingName": data.accountCodingName,
+            "accountCodingCode": data.accountCodingCode,
         }
     })
 }
@@ -81,30 +75,30 @@ export const deleteCoding = (codingId)=>{
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
         method:'delete',
-        url:'/accountCodingKindService/api/AccountCodingKinds/delete',
+        url:'/accountCodingService/api/AccountCodings/delete',
         headers:{
             "selfUserId": userAuthData.userId,
             "Authorization": userAuthData.accessToken,
             "Content-Type":"application/json"
         },
-        data: {"accountCodingKindId": codingId}
+        data: {"accountCodingId": codingId}
     })
 }
 
 
-export const getCodingById = (codingKindId)=>{
+export const getCodingById = (codingId)=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
         method:'post',
-        url:'/accountCodingKindService/api/AccountCodingKinds/getById',
+        url:'/accountCodingService/api/AccountCodings/getById',
         headers:{
             "selfUserId": userAuthData.userId,
             "Authorization": userAuthData.accessToken,
             "Content-Type":"application/json"
         },
         data:{
-            "accountCodingKindId":codingKindId,
+            "accountCodingId":codingId,
         }
     })
 }

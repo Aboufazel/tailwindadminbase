@@ -8,12 +8,12 @@ import {useAllCodingAccount} from "../../../hooks/coding";
 
 const DeleteCoding = () => {
     const managePopup = popupStore(state => state.manageOpenPopUp);
-    const accountCodingKindId = useStore(state => state.codingKindId)
+    const accountCodingId = useStore(state => state.codingKindId)
     const {refetch} = useAllCodingAccount("getAllSideCoding")
     const updateCodingTitle = useStore(state => state.updateCodingTitle)
     const manageDeleteCoding = async ()=>{
         managePopup()
-        const res = await deleteCoding(accountCodingKindId).catch(()=>{
+        const res = await deleteCoding(accountCodingId).catch(()=>{
             return(toast.error('حذف موفقیت آمیز نبود!'))
         })
         if (res.status === 200){
