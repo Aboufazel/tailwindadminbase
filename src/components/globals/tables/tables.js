@@ -102,14 +102,14 @@ const Tables = ({headers , data ,bodyId , step}) => {
                                                    updateAccountGroupName(row.accountGroupName)
                                                    updataStepView('coding-account-main')
                                                }else if(stepView === 'coding-account-main'){
-                                                   updateAccountMainName(row.accountMainName)
-                                                   updateAccountMainId(row.accountMainId)
+                                                   updateAccountMainName(row.accountGeneralName)
+                                                   updateAccountMainId(row.accountGeneralId)
                                                    updataStepView('coding-account-spec')
                                                }
-                                           } else if(step === 'accountGroup' && index === 3){
+                                           } else if(step === 'accountGroup' && index === 2){
                                                updateAccountGroupId(row.accountGroupId)
-                                           } else if(step === 'accountMain' && index === 5){
-                                               updateAccountMainId(row.accountMainId)
+                                           } else if(step === 'accountGeneral' && index === 4){
+                                               updateAccountMainId(row.accountGeneralId)
                                            } else if(step === 'accountSpec' && index === 5){
                                                updateAccountSpecId(row.accountSpecId)
                                            }

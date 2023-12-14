@@ -1,5 +1,5 @@
 import React from "react";
-import {useSelectId} from "../../popupBody/definePopupBody/createAccountMain";
+import {useSelectId} from "../../popupBody/definePopupBody/createAccountGeneral";
 
 const SelectInput = ({data , error ,type= '' , register , step  , refetch , selectValue='حساب را انتخاب کنید...' ,...props}) => {
     const {updateAccountGroupId} = useSelectId()

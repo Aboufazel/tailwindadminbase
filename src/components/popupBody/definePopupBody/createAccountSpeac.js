@@ -13,7 +13,7 @@ import formStore from "../../../zustand/formStore";
 import useStore from "../../../zustand/store";
 import {useQuery} from "@tanstack/react-query";
 import {getAllAccountGroup} from "../../../api/codingKind";
-import {useSelectId} from "./createAccountMain";
+import {useSelectId} from "./createAccountGeneral";
 import {useAllAccountMain} from "../../../hooks/coding";
 import {addAccountSpec} from "../../../api/accountSpecApi";
 import {addAccountSpecInputs} from "../../../data/accountSpecInputsData";

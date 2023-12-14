@@ -6,8 +6,8 @@ const formStore = create((set)=>({
         {id:'temporary' , title:'موقت', value:'0'},
     ],
     instinctButton:[
-        {id:'debtor' , title:'بدهکار', value:'1'},
-        {id:'creditor' , title:'بستانکار', value:'2'},
+        {id:'debtor' , title:'بدهکار', value:'0'},
+        {id:'creditor' , title:'بستانکار', value:'1'},
     ],
     canDeleteButton:[
         {id:'canDelete' , title:'اختیاری', value:'0'},

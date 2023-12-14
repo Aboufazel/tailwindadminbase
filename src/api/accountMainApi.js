@@ -1,31 +1,31 @@
 import {BaseUrl} from "./dashboardApi";
-export const addAccountMain = (data , instinct , type)=>{
+export const addAccountGeneral = (data , accountNature , balanceSheet)=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
         method:'post',
-        url:'/AccountMainservice/api/AccountMains/add',
+        url:'/AccountGeneralService/api/AccountGenerals/add',
         headers:{
             "selfUserId": userAuthData.userId,
             "Authorization": userAuthData.accessToken,
             'Content-Type': 'application/json'
         },
         data:{
-            "accountGroupId":data.accountGroupId,
-            "accountMainCode":data.accountMainCode,
-            "accountMainName":data.accountMainName,
-            "lang":"fa",
-            "instinct":instinct,
-            "type":type}
+            "accountGroupId":Number(data.accountGroupId),
+            "accountGeneralCode":Number(data.accountGeneralCode),
+            "accountGeneralName":data.accountGeneralName,
+            "accountNature":Number(accountNature),
+            "balanceSheetType":Number(balanceSheet)
+        }
     })
 }
 
-export const getAllAccountMain = (accountGroupId)=>{
+export const getAllAccountGeneral = (accountGroupId)=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
    return BaseUrl({
        method:'post',
-       url:'/AccountMainservice/api/AccountMains/GetAccountMainByGroupId',
+       url:'/AccountGeneralService/api/AccountGenerals/GetByAccountGroupId',
        headers:{
            "selfUserId": userAuthData.userId,
            "Authorization": userAuthData.accessToken,
@@ -38,19 +38,19 @@ export const getAllAccountMain = (accountGroupId)=>{
    })
 }
 
-export const getAccountMainById = (accountMainId)=>{
+export const getAccountGeneralById = (accountMainId)=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
         method:'post',
-        url:'/AccountMainservice/api/AccountMains/GetAccountMain',
+        url:'/AccountGeneralService/api/AccountGenerals/GetById',
         headers:{
             "selfUserId": userAuthData.userId,
             "Authorization": userAuthData.accessToken,
             'Content-Type': 'application/json'
         },
         data:{
-            "accountMainId":accountMainId,
+            "accountGeneralId":accountMainId,
             "group":true
         }
     })
@@ -74,43 +74,41 @@ export const editAccountMainIsActive = (accountMainId , isActive)=>{
     })
 }
 
-export const deleteAccountMain = (accountMainId)=>{
+export const deleteAccountGeneral = (accountGeneralId)=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
         method:'delete',
-        url:'/AccountMainservice/api/AccountMains/delete',
+        url:'/AccountGeneralService/api/AccountGenerals/delete',
         headers:{
             "selfUserId": userAuthData.userId,
             "Authorization": userAuthData.accessToken,
             'Content-Type': 'application/json'
         },
         data:{
-            "accountMainId":accountMainId,
+            "accountGeneralId":accountGeneralId,
         }
     })
 }
 
-export const editAccountMain = (mainId,data , instinct , type)=>{
+export const editAccountGeneral = (mainId,data , accountNature , balanceSheet)=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
         method:'put',
-        url:'/AccountMainservice/api/AccountMains/edit',
+        url:'/AccountGeneralService/api/AccountGenerals/edit',
         headers:{
             "selfUserId": userAuthData.userId,
             "Authorization": userAuthData.accessToken,
             'Content-Type': 'application/json'
         },
         data:{
-            "accountGroupId":data.accountGroupId,
-            "accountMainId":mainId,
-            "accountMainCode":data.accountMainCode,
-            "accountMainName":data.accountMainName,
-            "lang":"fa",
-            "isActive":true,
-            "instinct":instinct,
-            "type":type
+            "accountGroupId":Number(data.accountGroupId),
+            "accountGeneralId":Number(mainId),
+            "accountGeneralCode":Number(data.accountGeneralCode),
+            "accountGeneralName":data.accountGeneralName,
+            "accountNature":Number(accountNature),
+            "balanceSheetType":Number(balanceSheet)
         }
     })
 }

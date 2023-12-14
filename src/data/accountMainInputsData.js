@@ -1,11 +1,11 @@
-export const addAccountMainInputs = [
+export const addAccountGeneralInputs = [
     {
         inputLabel:"کد *",
         inputPlaceholder:"کد را وارد نمایید...",
         required:true,
         type:"input",
         inputType:"text",
-        inputName:"accountMainCode",
+        inputName:"accountGeneralCode",
         width:'w-1/2'
     },{
         inputLabel:"نام حساب کل *",
@@ -13,7 +13,7 @@ export const addAccountMainInputs = [
         required:true,
         type:"input",
         inputType:"text",
-        inputName:"accountMainName",
+        inputName:"accountGeneralName",
         width:'w-1/2'
     }
 

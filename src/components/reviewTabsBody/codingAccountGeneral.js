@@ -7,7 +7,7 @@ import {codingAccountMainsTableHead} from "../../data/codingAccountGroupData";
 import {useEffect} from "react";
 import AccountMainAction from "../reviewTabsActionLayout/accountMainAction";
 
-const CodingAccountMain = () => {
+const CodingAccountGeneral = () => {
     const actionLayout = useReviewTabStore(state => state.actionLayout)
     const accountGroupId = useReviewTabStore(state => state.codingAccountGroupId)
     const updateStepView = useReviewTabStore(state => state.updateReviewStep);
@@ -20,7 +20,7 @@ const CodingAccountMain = () => {
     const {data ,
         isLoading ,
         isError,
-        isRefetching} = useAllAccountMain('accountMainsByGroup' , accountGroupId);
+        isRefetching} = useAllAccountMain('accountGeneralsByGroup' , accountGroupId);
 
     if (isLoading || isRefetching)
         return <LoadingComponents title={'دریافت حساب کل'}/>
@@ -36,9 +36,9 @@ const CodingAccountMain = () => {
             actionLayout ?
                 <AccountMainAction/>
                 :
-                <Tables  headers={codingAccountMainsTableHead} bodyId={"coding"} step={'accountMain'} data={data.data.accountMains}/>
+                <Tables  headers={codingAccountMainsTableHead} bodyId={"coding"} step={'accountGeneral'} data={data.data.accountGenerals}/>
         )
     }
 }
 
-export default CodingAccountMain;
+export default CodingAccountGeneral;

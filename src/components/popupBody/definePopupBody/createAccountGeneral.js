@@ -5,11 +5,11 @@ import LoadingComponents from "../../loading/loadingComponents";
 import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {addAccountMainInputs} from "../../../data/accountMainInputsData";
+import {addAccountGeneralInputs} from "../../../data/accountMainInputsData";
 import Inputs from "../../globals/inputs/inputs";
 import Buttons from "../../globals/Buttons";
 import {Spinner} from "@material-tailwind/react";
-import {addAccountMain} from "../../../api/accountMainApi";
+import {addAccountGeneral} from "../../../api/accountMainApi";
 import ActionCodingTitle from "../../actionCodingTitle/actionCodingTitle";
 import formStore from "../../../zustand/formStore";
 import useStore from "../../../zustand/store";
@@ -22,18 +22,18 @@ export const useSelectId = create((set) => ({
     updateAccountGroupId: (accountGroupId)=>set(()=>({accountGroupId:accountGroupId}))
 }))
 
-const CreateAccountMain = () => {
+const CreateAccountGeneral = () => {
     const instinct = formStore(state => state.instinct)
     const type = formStore(state => state.type)
     const updateInstinct = formStore(state => state.updateInstinct)
-    const typeButton = formStore(state => state.typeButton)
+    const balanceSheetButton = formStore(state => state.typeButton)
     const updateType = formStore(state => state.updateType)
-    const instinctButton = formStore(state => state.instinctButton)
+    const accountNatureButton = formStore(state => state.instinctButton)
     const [loading, setLoading] = useState(false);
     const formValidate = yup.object().shape({
         accountGroupId:yup.string(),
-        accountMainName:yup.string().required("وارد کردن نام اجباری است"),
-        accountMainCode:yup.string().required("وارد کردن کد اجباری است"),
+        accountGeneralName:yup.string().required("وارد کردن نام اجباری است"),
+        accountGeneralCode:yup.string().required("وارد کردن کد اجباری است"),
     });
     const {register ,
         handleSubmit,
@@ -46,7 +46,7 @@ const CreateAccountMain = () => {
 
     const onFormSubmit = async (data) =>{
         setLoading(true)
-        const res = await addAccountMain(data , instinct , type).catch(() => {
+        const res = await addAccountGeneral(data , instinct , type).catch(() => {
             toast.error("ثبت انجام نشد")
             setLoading(false)
         })
@@ -59,11 +59,11 @@ const CreateAccountMain = () => {
         }
     }
 
-    const accountCodingKindId = useStore(state => state.codingKindId)
+    const accountCodingId = useStore(state => state.codingKindId)
     const {isLoading,
         isRefetching ,
         isError ,
-        data} = useQuery(['accountsGroups'] , ()=>getAllAccountGroup(accountCodingKindId))
+        data} = useQuery(['accountsGroups'] , ()=>getAllAccountGroup(accountCodingId))
 
     if (isError){
         return (
@@ -85,7 +85,7 @@ const CreateAccountMain = () => {
                              data={data && data.data.accountGroups}/>
                 <div className={"flex flex-row gap-3 mt-6 w-full"}>
                     {
-                        instinctButton.map((items, index) => (
+                        accountNatureButton.map((items, index) => (
                             <div key={items.id + index} onClick={() => updateInstinct(items.value)}
                                  className={`cursor-pointer 
                              ${instinct === items.value ? 'bg-primary-extraLight border-primary-main' : 'border-text-color-3'} 
@@ -97,7 +97,7 @@ const CreateAccountMain = () => {
                 </div>
                 <div className={"flex flex-col w-full"}>
                     {
-                        addAccountMainInputs.map((item, index) => (
+                        addAccountGeneralInputs.map((item, index) => (
                             <Inputs type={item.type}
                                     iClass={item.width}
                                     key={"input-value" + index}
@@ -111,7 +111,7 @@ const CreateAccountMain = () => {
                 </div>
                 <div className={"flex flex-row gap-3 mt-6 w-full"}>
                     {
-                        typeButton.map((items, index) => (
+                        balanceSheetButton.map((items, index) => (
                             <div key={items.id + index} onClick={() => updateType(items.value)}
                                  className={`cursor-pointer 
                              ${type === items.value ? 'bg-primary-extraLight border-primary-main' : 'border-text-color-3'} 
@@ -138,4 +138,4 @@ const CreateAccountMain = () => {
     )
 }
 
-export default CreateAccountMain;
+export default CreateAccountGeneral;

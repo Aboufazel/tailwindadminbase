@@ -1,9 +1,8 @@
 import CodingAccountGroup from "../reviewTabsBody/codingAccountGroup";
-import CodingAccountMain from "../reviewTabsBody/codingAccountMain";
+import CodingAccountGeneral from "../reviewTabsBody/codingAccountGeneral";
 import CodingAccountSpec from "../reviewTabsBody/codingAccountSpec";
 import useReviewTabStore from "../../zustand/reviewTabStore";
 import BreadCrumbs from "../breadCrumbs/breadCrumbs";
-import {useEffect} from "react";
 
 const ReviewTabs = () => {
 
@@ -23,7 +22,7 @@ const ReviewTabs = () => {
 
     const manageStepShow = {
         'coding-account-group':<CodingAccountGroup/>,
-        'coding-account-main':<CodingAccountMain/>,
+        'coding-account-main':<CodingAccountGeneral/>,
         'coding-account-spec':<CodingAccountSpec/>,
     }
 

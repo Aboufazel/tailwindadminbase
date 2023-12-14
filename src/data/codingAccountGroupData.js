@@ -12,11 +12,6 @@ export const codingAccountGroupTableHead = [
         render: (row) => row.accountGroupName,
     },
     {
-        name: "isActive",
-        title: "وضعیت",
-        render: (row) => (row.isActive === true ? "فعال" : "غیر فعال"),
-    },
-    {
         name: "action",
         title: "عملیات",
         render: () => (<ReviewTabsActionButton/>),
@@ -25,29 +20,24 @@ export const codingAccountGroupTableHead = [
 
 export const codingAccountMainsTableHead = [
     {
-        name: "accountMainCode",
+        name: "accountGeneralCode",
         title: "کد",
-        render: (row) => row.accountMainCode
+        render: (row) => row.accountGeneralCode
     },
     {
-        name: "accountMainName",
+        name: "accountGeneralName",
         title: "نام حساب کل",
-        render: (row) => row.accountMainName,
+        render: (row) => row.accountGeneralName,
     },
     {
-        name: "instinct",
+        name: "accountNature",
         title: "ماهیت",
-        render: (row) => (row.instinct === 1 ? 'بدهکار' : 'بستانکار'),
+        render: (row) => (row.accountNature === 0 ? 'بدهکار' : 'بستانکار'),
     },
     {
-        name: "type",
+        name: "balanceSheetType",
         title: "نوع",
-        render: (row) => (row.type === 1 ? 'دائم' : 'موقت'),
-    },
-    {
-        name: "isActive",
-        title: "وضعیت",
-        render: (row) => (row.isActive === true ? "فعال" : "غیر فعال"),
+        render: (row) => (row.balanceSheetType === 1 ? 'دائم' : 'موقت'),
     },
     {
         name: "action",

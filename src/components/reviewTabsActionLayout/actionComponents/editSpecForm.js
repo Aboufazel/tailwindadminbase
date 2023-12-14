@@ -6,7 +6,7 @@ import Buttons from "../../globals/Buttons";
 import {Spinner} from "@material-tailwind/react";
 import React, {useEffect, useState} from "react";
 import formStore from "../../../zustand/formStore";
-import {useSelectId} from "../../popupBody/definePopupBody/createAccountMain";
+import {useSelectId} from "../../popupBody/definePopupBody/createAccountGeneral";
 import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";

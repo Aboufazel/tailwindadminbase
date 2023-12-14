@@ -2,7 +2,7 @@ import {Plus} from "react-iconly";
 import {create} from "zustand";
 import CreateAccountGroup from "../popupBody/definePopupBody/createAccountGroup";
 import useActionType from "../../zustand/actionTypeStore";
-import CreateAccountMain from "../popupBody/definePopupBody/createAccountMain";
+import CreateAccountGeneral from "../popupBody/definePopupBody/createAccountGeneral";
 import CreateAccountSpeac from "../popupBody/definePopupBody/createAccountSpeac";
 import CreateAccountType from "../popupBody/definePopupBody/createAccountType";
 import CreateAccountDefaultPerson from "../popupBody/definePopupBody/createAccountDefaultPerson";
@@ -34,7 +34,7 @@ const AddTabs = () => {
 
     const actionBody = {
         "account-group": <CreateAccountGroup/>,
-        "account-main": <CreateAccountMain/>,
+        "account-main": <CreateAccountGeneral/>,
         "account-speac": <CreateAccountSpeac/>,
         "account-define": <CreateAccountDefaultPerson/>,
         "account-type": <CreateAccountType/>,
