@@ -1,19 +1,25 @@
 import useReviewTabStore from "../../zustand/reviewTabStore";
-import {useAllAccountSpecByMain} from "../../hooks/coding";
+import {useAllAccountSubsidiaryByMain} from "../../hooks/coding";
 import LoadingComponents from "../loading/loadingComponents";
 import {toast} from "react-toastify";
 import Tables from "../globals/tables/tables";
-import {codingAccountSpecTableHead} from "../../data/codingAccountGroupData";
+import {codingAccountSubsidiaryTableHead} from "../../data/codingAccountGroupData";
 import AccountSpecAction from "../reviewTabsActionLayout/accountSpecAction";
+import {useEffect} from "react";
 
-const CodingAccountSpec = () => {
+const CodingAccountSubsidiary = () => {
     const actionLayout = useReviewTabStore(state => state.actionLayout)
-    const accountMainId = useReviewTabStore(state => state.codingAccountMainId)
+    const accountGeneralId = useReviewTabStore(state => state.codingAccountMainId)
 
     const {data ,
         isLoading ,
         isError,
-        isRefetching} = useAllAccountSpecByMain('accountSpecsByMain' , accountMainId);
+        refetch,
+        isRefetching} = useAllAccountSubsidiaryByMain('accountSubsidiaryByGeneral' , accountGeneralId);
+
+    useEffect(() => {
+        refetch()
+    }, [actionLayout]);
 
     if (isLoading || isRefetching)
         return <LoadingComponents title={'دریافت حساب معین'}/>
@@ -27,8 +33,8 @@ const CodingAccountSpec = () => {
         actionLayout ?
             <AccountSpecAction/>
             :
-            <Tables  headers={codingAccountSpecTableHead} bodyId={"coding"} step={'accountSpec'} data={data.data.accountSpecs}/>
+            <Tables  headers={codingAccountSubsidiaryTableHead} bodyId={"coding"} step={'accountSubsidiary'} data={data?.data.accountSubsidiaries}/>
     )
 }
 
-export default CodingAccountSpec;
+export default CodingAccountSubsidiary;

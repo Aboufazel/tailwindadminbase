@@ -1,11 +1,11 @@
-export const addAccountSpecInputs = [
+export const addAccountSubsidiaryInputs = [
     {
         inputLabel:"کد *",
         inputPlaceholder:"کد را وارد نمایید...",
         required:true,
         type:"input",
         inputType:"text",
-        inputName:"accountSpecCode",
+        inputName:"accountSubsidiaryCode",
         width:'w-1/2'
     },{
         inputLabel:"نام حساب معین *",
@@ -13,7 +13,7 @@ export const addAccountSpecInputs = [
         required:true,
         type:"input",
         inputType:"text",
-        inputName:"accountSpecName",
+        inputName:"accountSubsidiaryName",
         width:'w-1/2'
     }
 

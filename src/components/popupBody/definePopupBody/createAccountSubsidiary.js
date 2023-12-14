@@ -15,23 +15,23 @@ import {useQuery} from "@tanstack/react-query";
 import {getAllAccountGroup} from "../../../api/codingKind";
 import {useSelectId} from "./createAccountGeneral";
 import {useAllAccountMain} from "../../../hooks/coding";
-import {addAccountSpec} from "../../../api/accountSpecApi";
-import {addAccountSpecInputs} from "../../../data/accountSpecInputsData";
+import {addAccountSubsidiary} from "../../../api/accountSubsidiaryApi";
+import {addAccountSubsidiaryInputs} from "../../../data/accountSpecInputsData";
 
 
-const CreateAccountSpeac = () => {
-    const type = formStore(state => state.type)
-    const updateInstinct = formStore(state => state.updateInstinct)
-    const typeButton = formStore(state => state.typeButton)
-    const updateType = formStore(state => state.updateType)
-    const instinct = formStore(state => state.instinct)
-    const instinctButton = formStore(state => state.instinctButton)
+const CreateAccountSubsidiary = () => {
+    const updateBalanceSheet = formStore(state => state.updateType)
+    const accountNature = formStore(state => state.instinct)
+    const balanceSheet = formStore(state => state.type)
+    const updateAccountNature = formStore(state => state.updateInstinct)
+    const balanceSheetButton = formStore(state => state.typeButton)
+    const accountNatureButton = formStore(state => state.instinctButton)
     const [loading, setLoading] = useState(false);
     const {accountGroupId} = useSelectId()
     const formValidate = yup.object().shape({
-        accountMainId:yup.string(),
-        accountSpecName:yup.string().required("وارد کردن نام اجباری است"),
-        accountSpecCode:yup.string().required("وارد کردن کد اجباری است"),
+        accountGeneralId:yup.string(),
+        accountSubsidiaryName:yup.string().required("وارد کردن نام اجباری است"),
+        accountSubsidiaryCode:yup.string().required("وارد کردن کد اجباری است"),
     });
     const {register ,
         handleSubmit,
@@ -43,27 +43,27 @@ const CreateAccountSpeac = () => {
 
     const onFormSubmit = async (data) =>{
         setLoading(true)
-        const res = await addAccountSpec(data , instinct , type).catch(() => {
+        const res = await addAccountSubsidiary(data , accountNature , balanceSheet).catch(() => {
             toast.error("ثبت انجام نشد")
             setLoading(false)
         })
         if (res?.status === 200){
             reset()
-            updateType('')
-            updateInstinct('')
+            updateBalanceSheet('')
+            updateAccountNature('')
             toast.success("حساب معین با موفقیت ایجاد شد")
             setLoading(false)
         }
     }
 
-    const accountCodingKindId = useStore(state => state.codingKindId)
+    const accountCodingId = useStore(state => state.codingKindId)
     const {isLoading,
         isRefetching ,
         isError ,
-        data} = useQuery(['accountsGroupForSpecs'] ,()=>getAllAccountGroup(accountCodingKindId) )
+        data} = useQuery(['accountsGroupForSpecs'] ,()=>getAllAccountGroup(accountCodingId) )
 
 
-    const {data:allAccountMain , refetch , isRefetching:mainRefetching} = useAllAccountMain('accountMainsByGroup' , accountGroupId);
+    const {data:allAccountGeneral , refetch , isRefetching:generalRefetching} = useAllAccountMain('accountMainsByGroup' , accountGroupId);
 
     if (isError){
         return (
@@ -89,15 +89,15 @@ const CreateAccountSpeac = () => {
             <form onSubmit={handleSubmit(onFormSubmit)} className={"w-full pt-5"}>
                 <SelectInput type={'account-group'} refetch={refetch} step={'account-spec'} register={register} data={data && data.data.accountGroups}/>
                 {
-                  mainRefetching ? <LoadingComponents title={'دریافت حساب کل'}/> : <SelectInput type={'account-main'} register={register} data={allAccountMain && allAccountMain.data.accountMains}/>
+                    generalRefetching ? <LoadingComponents title={'دریافت حساب کل'}/> : <SelectInput type={'account-general'} register={register} data={allAccountGeneral && allAccountGeneral.data.accountGenerals}/>
                 }
 
                 <div className={"flex flex-row gap-3 mt-6 w-full"}>
                     {
-                        instinctButton.map((items, index) => (
-                            <div key={items.id + index} onClick={() => updateInstinct(items.value)}
+                        accountNatureButton.map((items, index) => (
+                            <div key={items.id + index} onClick={() => updateAccountNature(items.value)}
                                  className={`cursor-pointer 
-                             ${instinct === items.value ? 'bg-primary-extraLight border-primary-main' : 'border-text-color-3'} 
+                             ${accountNature === items.value ? 'bg-primary-extraLight border-primary-main' : 'border-text-color-3'} 
                              w-[135px] py-2 rounded-[8px] text-center border`}>
                                 {items.title}
                             </div>
@@ -106,7 +106,7 @@ const CreateAccountSpeac = () => {
                 </div>
                 <div className={"flex flex-col w-full"}>
                     {
-                        addAccountSpecInputs.map((item, index) => (
+                        addAccountSubsidiaryInputs.map((item, index) => (
                             <Inputs type={item.type}
                                     iClass={item.width}
                                     key={"input-value" + index}
@@ -120,10 +120,10 @@ const CreateAccountSpeac = () => {
                 </div>
                 <div className={"flex flex-row gap-3 mt-6 w-full"}>
                     {
-                        typeButton.map((items, index) => (
-                            <div key={items.id + index} onClick={() => updateType(items.value)}
+                        balanceSheetButton.map((items, index) => (
+                            <div key={items.id + index} onClick={() => updateBalanceSheet(items.value)}
                                  className={`cursor-pointer 
-                             ${type === items.value ? 'bg-primary-extraLight border-primary-main' : 'border-text-color-3'} 
+                             ${balanceSheet === items.value ? 'bg-primary-extraLight border-primary-main' : 'border-text-color-3'} 
                              w-[135px] py-2 rounded-[8px] text-center border`}>
                                 {items.title}
                             </div>
@@ -131,7 +131,7 @@ const CreateAccountSpeac = () => {
                     }
                 </div>
                 <div className={"flex flex-row justify-end w-full mt-5"}>
-                    <Buttons disabled={(instinct.length <= 0 && type.length <= 0)} type={"submit"}>
+                    <Buttons disabled={(accountNature.length <= 0 && balanceSheet.length <= 0)} type={"submit"}>
                         {
                             loading ?
                                 <p className={"flex flex-row items-center justify-center gap-3"}>
@@ -148,4 +148,4 @@ const CreateAccountSpeac = () => {
 }
 
 
-export default CreateAccountSpeac;
+export default CreateAccountSubsidiary;

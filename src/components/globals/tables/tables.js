@@ -110,8 +110,8 @@ const Tables = ({headers , data ,bodyId , step}) => {
                                                updateAccountGroupId(row.accountGroupId)
                                            } else if(step === 'accountGeneral' && index === 4){
                                                updateAccountMainId(row.accountGeneralId)
-                                           } else if(step === 'accountSpec' && index === 5){
-                                               updateAccountSpecId(row.accountSpecId)
+                                           } else if(step === 'accountSubsidiary' && index === 4){
+                                               updateAccountSpecId(row.accountSubsidiaryId)
                                            }
                                        }}
                                        className={"p-4 font-normal"} key={header.name.toString()}>{header.render(row)}</td>

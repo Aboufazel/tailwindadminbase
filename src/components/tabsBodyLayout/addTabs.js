@@ -3,7 +3,7 @@ import {create} from "zustand";
 import CreateAccountGroup from "../popupBody/definePopupBody/createAccountGroup";
 import useActionType from "../../zustand/actionTypeStore";
 import CreateAccountGeneral from "../popupBody/definePopupBody/createAccountGeneral";
-import CreateAccountSpeac from "../popupBody/definePopupBody/createAccountSpeac";
+import CreateAccountSubsidiary from "../popupBody/definePopupBody/createAccountSubsidiary";
 import CreateAccountType from "../popupBody/definePopupBody/createAccountType";
 import CreateAccountDefaultPerson from "../popupBody/definePopupBody/createAccountDefaultPerson";
 import useAccountPersonStore from "../../zustand/accountPersonStore";
@@ -35,7 +35,7 @@ const AddTabs = () => {
     const actionBody = {
         "account-group": <CreateAccountGroup/>,
         "account-main": <CreateAccountGeneral/>,
-        "account-speac": <CreateAccountSpeac/>,
+        "account-speac": <CreateAccountSubsidiary/>,
         "account-define": <CreateAccountDefaultPerson/>,
         "account-type": <CreateAccountType/>,
     }

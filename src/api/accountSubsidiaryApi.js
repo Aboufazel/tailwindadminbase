@@ -1,39 +1,38 @@
 import {BaseUrl} from "./dashboardApi";
 
-export const addAccountSpec = (data , instinct , type)=>{
+export const addAccountSubsidiary = (data , accountNature , balanceSheet)=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
         method:'post',
-        url:'/AccountSpecservice/api/AccountSpecs/add',
+        url:'/AccountSubsidiaryService/api/AccountSubsidiaries/add',
         headers:{
             "selfUserId": userAuthData.userId,
             "Authorization": userAuthData.accessToken,
             'Content-Type': 'application/json'
         },
         data:{
-            "accountMainId":data.accountMainId,
-            "accountSpecCode":data.accountSpecCode,
-            "accountSpecName":data.accountSpecName,
-            "lang":"fa",
-            "instinct":instinct,
-            "type":type}
+            "accountGeneralId":Number(data.accountGeneralId),
+            "accountSubsidiaryCode":Number(data.accountSubsidiaryCode),
+            "accountSubsidiaryName":data.accountSubsidiaryName,
+            "accountNature":Number(accountNature),
+            "balanceSheetType":Number(balanceSheet)}
     })
 }
 
-export const getAllAccountSpecByMainId = (mainId)=>{
+export const getAllAccountSubsidiaryByMainId = (generalId)=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
         method: 'post',
-        url: '/AccountSpecservice/api/AccountSpecs/GetAccountSpecByMainId',
+        url: '/AccountSubsidiaryService/api/AccountSubsidiaries/GetByGeneralId',
         headers: {
             "selfUserId": userAuthData.userId,
             "Authorization": userAuthData.accessToken,
             'Content-Type': 'application/json'
         },
         data:{
-            "accountMainId":mainId,
+            "accountGeneralId":generalId,
             "main":true,
             "group":true
         }
@@ -46,7 +45,7 @@ export const getAllAccountSpec = ()=>{
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
         method: 'post',
-        url: '/AccountSpecservice/api/AccountSpecs/getAll',
+        url: '/AccountSubsidiaryService/api/AccountSubsidiaries/getAll',
         headers: {
             "selfUserId": userAuthData.userId,
             "Authorization": userAuthData.accessToken,
@@ -59,80 +58,60 @@ export const getAllAccountSpec = ()=>{
     })
 }
 
-export const editAccountSpec = (specId , data , instinct , type)=>{
+export const editAccountSubsidiary = (subsidiaryId , data , accountNature , balanceSheet)=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
         method: 'put',
-        url: '/AccountSpecservice/api/AccountSpecs/edit',
+        url: '/AccountSubsidiaryService/api/AccountSubsidiaries/edit',
         headers: {
             "selfUserId": userAuthData.userId,
             "Authorization": userAuthData.accessToken,
             'Content-Type': 'application/json'
         },
         data:{
-            "accountSpecId":specId,
-            "accountMainId":data.accountMainId,
-            "accountSpecCode":data.accountSpecCode,
-            "accountSpecName":data.accountSpecName,
-            "instinct":instinct,
-            "type":type,
-            "isActive":true,
-            "lang":"fa"}
+            "accountSubsidiaryId":Number(subsidiaryId),
+            "accountGeneralId":Number(data.accountGeneralId),
+            "accountSubsidiaryCode":Number(data.accountSubsidiaryCode),
+            "accountSubsidiaryName":data.accountSubsidiaryName,
+            "accountNature":Number(accountNature),
+            "balanceSheetType":Number(balanceSheet)
+        }
     })
 }
 
-export const getAccountSpecById = (specId)=>{
+export const getAccountSubsidiaryById = (subsidiaryId)=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
         method: 'post',
-        url: '/AccountSpecservice/api/AccountSpecs/GetAccountSpec',
+        url: '/AccountSubsidiaryService/api/AccountSubsidiaries/GetById',
         headers: {
             "selfUserId": userAuthData.userId,
             "Authorization": userAuthData.accessToken,
             'Content-Type': 'application/json'
         },
         data:{
-            "accountSpecId":specId,
-            "main":true,
+            "accountSubsidiaryId":subsidiaryId,
+            "general":true,
             "group":true,
         }}
     )
 }
 
-export const editIsActiveAccountSpec = (specId , isActive)=>{
-    const storageData = localStorage.getItem("auth")
-    const userAuthData = JSON.parse(storageData);
-    return BaseUrl({
-        method: 'put',
-        url: '/AccountSpecservice/api/AccountSpecs/EditIsActive',
-        headers: {
-            "selfUserId": userAuthData.userId,
-            "Authorization": userAuthData.accessToken,
-            'Content-Type': 'application/json'
-        },
-        data:{
-            "accountSpecId":specId,
-            "isActive":isActive,
-        }
-    }
-    )
-}
-
-export const deleteAccountSpec = (specId)=>{
+export const deleteAccountSubsidiary = (subsidiaryId)=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
             method: 'delete',
-            url: '/AccountSpecservice/api/AccountSpecs/delete',
+            url: '/AccountSubsidiaryService/api/AccountSubsidiaries/delete',
             headers: {
                 "selfUserId": userAuthData.userId,
                 "Authorization": userAuthData.accessToken,
                 'Content-Type': 'application/json'
             },
             data:{
-                "accountSpecId":specId,
+                "accountSubsidiaryId":Number(subsidiaryId),
             }
         }
     )

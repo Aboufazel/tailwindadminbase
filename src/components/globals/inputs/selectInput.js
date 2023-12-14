@@ -87,19 +87,19 @@ const SelectInput = ({data , error ,type= '' , register , step  , refetch , sele
         )
     }
 
-    const SelectAccountMainOptions = ()=>{
+    const SelectAccountGeneralOptions = ()=>{
 
         return (
             <div className={"flex flex-col mt-3"}>
                 <label>{renderOptionLabel[type]}</label>
                 <select required={true} className={"bg-transparent border border-text-color-3 px-3 py-2 rounded-[8px] mt-3"}
-                        name={'accountMainId'} id={'accountMainId'} {...register("accountMainId")}>
+                        name={'accountGeneralId'} id={'accountGeneralId'} {...register("accountGeneralId")}>
                     <option value={''}>{selectValue}</option>
                     {
                         data && data.map((items)=>(
                             <option
-                                value={items.accountMainId}
-                            >{items.accountMainName}</option>
+                                value={items.accountGeneralId}
+                            >{items.accountGeneralName}</option>
                         ))
                     }
                 </select>
@@ -110,7 +110,7 @@ const SelectInput = ({data , error ,type= '' , register , step  , refetch , sele
 
     const renderOption = {
         'account-group':<SelectAccountGroupOptions/>,
-        'account-main':<SelectAccountMainOptions/>,
+        'account-general':<SelectAccountGeneralOptions/>,
         'all-account-coding':<SelectCodingForRevenueModel/>,
         'add-revenue-plans':<SelectRevenueModelsForRevenuePlans/>,
         'all-revenue-plans':<SelectRevenuePlansForRevenuePrices/>,
@@ -118,7 +118,7 @@ const SelectInput = ({data , error ,type= '' , register , step  , refetch , sele
 
     const renderOptionLabel = {
         'account-group':'گروه حساب',
-        'account-main':'حساب کل',
+        'account-general':'حساب کل',
         'all-account-coding':'کدینگ های موجود',
         'add-revenue-plans':'مدل های درآمدی',
         'all-revenue-plans':'پلن های درآمدی',

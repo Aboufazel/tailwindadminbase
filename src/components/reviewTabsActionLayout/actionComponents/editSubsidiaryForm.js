@@ -1,6 +1,6 @@
 import SelectInput from "../../globals/inputs/selectInput";
 import LoadingComponents from "../../loading/loadingComponents";
-import {addAccountSpecInputs} from "../../../data/accountSpecInputsData";
+import {addAccountSubsidiaryInputs} from "../../../data/accountSpecInputsData";
 import Inputs from "../../globals/inputs/inputs";
 import Buttons from "../../globals/Buttons";
 import {Spinner} from "@material-tailwind/react";
@@ -10,7 +10,7 @@ import {useSelectId} from "../../popupBody/definePopupBody/createAccountGeneral"
 import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {editAccountSpec} from "../../../api/accountSpecApi";
+import {editAccountSubsidiary} from "../../../api/accountSubsidiaryApi";
 import {toast} from "react-toastify";
 import useStore from "../../../zustand/store";
 import {useQuery} from "@tanstack/react-query";
@@ -19,26 +19,26 @@ import {useAllAccountMain} from "../../../hooks/coding";
 import useAccountSpecStore from "../../../zustand/accountSpecStore";
 import useReviewTabStore from "../../../zustand/reviewTabStore";
 
-const EditSpecForm = ({apiData}) => {
+const EditSubsidiaryForm = ({apiData}) => {
     const accountSpecId = useReviewTabStore(state => state.codingAccountSpecId)
-    const type = formStore(state => state.type)
+    const balanceSheet = formStore(state => state.type)
     const updateInstinct = formStore(state => state.updateInstinct)
-    const typeButton = formStore(state => state.typeButton)
+    const balanceSheetTypeButton = formStore(state => state.typeButton)
     const updateType = formStore(state => state.updateType)
-    const instinct = formStore(state => state.instinct)
-    const instinctButton = formStore(state => state.instinctButton)
+    const accountNature = formStore(state => state.instinct)
+    const accountNatureButton = formStore(state => state.instinctButton)
     const [loading, setLoading] = useState(false);
     const {accountGroupId} = useSelectId()
     const manageSpecEditStep = useAccountSpecStore(state => state.manageEditSpecStep)
     useEffect(() => {
-        updateType(apiData?.data.accountSpecs[0].type.toString())
-        updateInstinct(apiData?.data.accountSpecs[0].instinct.toString())
+        updateType(apiData?.data.accountSubsidiaries[0].balanceSheetType.toString())
+        updateInstinct(apiData?.data.accountSubsidiaries[0].accountNature.toString())
     }, [apiData]);
 
     const formValidate = yup.object().shape({
-        accountMainId:yup.string(),
-        accountSpecName:yup.string().required("وارد کردن نام اجباری است"),
-        accountSpecCode:yup.string().required("وارد کردن کد اجباری است"),
+        accountGeneralId:yup.string(),
+        accountSubsidiaryName:yup.string().required("وارد کردن نام اجباری است"),
+        accountSubsidiaryCode:yup.string().required("وارد کردن کد اجباری است"),
     });
     const {register ,
         handleSubmit,
@@ -50,7 +50,7 @@ const EditSpecForm = ({apiData}) => {
 
     const onFormSubmit = async (data) =>{
         setLoading(true)
-        const res = await editAccountSpec(accountSpecId, data , Number(instinct) , Number(type)).catch(() => {
+        const res = await editAccountSubsidiary(accountSpecId, data , accountNature , balanceSheet).catch(() => {
             toast.error("ویرایش انجام نشد")
             setLoading(false)
         })
@@ -64,14 +64,14 @@ const EditSpecForm = ({apiData}) => {
         }
     }
 
-    const accountCodingKindId = useStore(state => state.codingKindId)
+    const accountCodingId = useStore(state => state.codingKindId)
     const {isLoading,
         isRefetching ,
         isError ,
-        data} = useQuery(['accountsGroupForSpecs'] ,()=>getAllAccountGroup(accountCodingKindId) )
+        data} = useQuery(['accountsGroupForSubsidiary'] ,()=>getAllAccountGroup(accountCodingId) )
 
 
-    const {data:allAccountMain , refetch , isRefetching:mainRefetching} = useAllAccountMain('accountMainsByGroup' , accountGroupId);
+    const {data:allAccountGeneral , refetch , isRefetching:generalRefetching} = useAllAccountMain('accountGeneralsByGroup' , accountGroupId);
 
     if (isError){
         return (
@@ -94,17 +94,17 @@ const EditSpecForm = ({apiData}) => {
 
     return(
         <form onSubmit={handleSubmit(onFormSubmit)} className={"w-full pt-5"}>
-            <SelectInput type={'account-group'} selectValue={apiData.data.accountSpecs[0].accountGroupName} refetch={refetch} step={'account-spec'} register={register} data={data && data.data.accountGroups}/>
+            <SelectInput type={'account-group'} selectValue={apiData.data.accountSubsidiaries[0].accountGroupName} refetch={refetch} step={'account-spec'} register={register} data={data && data.data.accountGroups}/>
             {
-                mainRefetching ? <LoadingComponents title={'دریافت حساب کل'}/> : <SelectInput type={'account-main'} selectValue={apiData.data.accountSpecs[0].accountMainName}  register={register} data={allAccountMain && allAccountMain.data.accountMains}/>
+                generalRefetching ? <LoadingComponents title={'دریافت حساب کل'}/> : <SelectInput type={'account-general'} selectValue={apiData.data.accountSubsidiaries[0].accountGeneralName}  register={register} data={allAccountGeneral && allAccountGeneral.data.accountGenerals}/>
             }
 
             <div className={"flex flex-row gap-3 mt-6 w-full"}>
                 {
-                    instinctButton.map((items, index) => (
+                    accountNatureButton.map((items, index) => (
                         <div key={items.id + index} onClick={() => updateInstinct(items.value)}
                              className={`cursor-pointer 
-                             ${instinct.toString() === items.value ? 'bg-primary-extraLight border-primary-main' : 'border-text-color-3'} 
+                             ${accountNature.toString() === items.value ? 'bg-primary-extraLight border-primary-main' : 'border-text-color-3'} 
                              w-[135px] py-2 rounded-[8px] text-center border`}>
                             {items.title}
                         </div>
@@ -113,7 +113,7 @@ const EditSpecForm = ({apiData}) => {
             </div>
             <div className={"flex flex-col w-full"}>
                 {
-                    addAccountSpecInputs.map((item, index) => (
+                    addAccountSubsidiaryInputs.map((item, index) => (
                         <Inputs type={item.type}
                                 iClass={item.width}
                                 key={"input-value" + index}
@@ -122,18 +122,18 @@ const EditSpecForm = ({apiData}) => {
                                 name={item.inputName}
                                 label={item.inputLabel}
                                 inputType={item.inputType} defaultValue={
-                                index === 0 ? apiData.data.accountSpecs[0].accountSpecCode
-                                : index === 1 ?  apiData.data.accountSpecs[0].accountSpecName : ""
+                                index === 0 ? apiData.data.accountSubsidiaries[0].accountSubsidiaryCode
+                                : index === 1 ?  apiData.data.accountSubsidiaries[0].accountSubsidiaryName : ""
                         }/>
                     ))
                 }
             </div>
             <div className={"flex flex-row gap-3 mt-6 w-full"}>
                 {
-                    typeButton.map((items, index) => (
+                    balanceSheetTypeButton.map((items, index) => (
                         <div key={items.id + index} onClick={() => updateType(items.value)}
                              className={`cursor-pointer 
-                             ${type === items.value ? 'bg-primary-extraLight border-primary-main' : 'border-text-color-3'} 
+                             ${balanceSheet === items.value ? 'bg-primary-extraLight border-primary-main' : 'border-text-color-3'} 
                              w-[135px] py-2 rounded-[8px] text-center border`}>
                             {items.title}
                         </div>
@@ -141,7 +141,7 @@ const EditSpecForm = ({apiData}) => {
                 }
             </div>
             <div className={"flex flex-row justify-end w-full mt-5"}>
-                <Buttons disabled={(instinct.length <= 0 && type.length <= 0)} type={"submit"}>
+                <Buttons disabled={(accountNature.length <= 0 && balanceSheet.length <= 0)} type={"submit"}>
                     {
                         loading ?
                             <p className={"flex flex-row items-center justify-center gap-3"}>
@@ -156,5 +156,5 @@ const EditSpecForm = ({apiData}) => {
     )
 }
 
-export default EditSpecForm
+export default EditSubsidiaryForm
 

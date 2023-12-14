@@ -46,31 +46,26 @@ export const codingAccountMainsTableHead = [
     },
 ]
 
-export const codingAccountSpecTableHead = [
+export const codingAccountSubsidiaryTableHead = [
     {
-        name: "accountSpecCode",
+        name: "accountSubsidiaryCode",
         title: "کد",
-        render: (row) => row.accountSpecCode
+        render: (row) => row.accountSubsidiaryCode
     },
     {
-        name: "accountSpecName",
+        name: "accountSubsidiaryName",
         title: "نام حساب معین",
-        render: (row) => row.accountSpecName,
+        render: (row) => row.accountSubsidiaryName,
     },
     {
-        name: "instinct",
+        name: "accountNature",
         title: "ماهیت",
-        render: (row) => (row.instinct === 1 ? 'بدهکار' : 'بستانکار'),
+        render: (row) => (row.accountNature === 0 ? 'بدهکار' : 'بستانکار'),
     },
     {
-        name: "type",
+        name: "balanceSheetType",
         title: "نوع",
-        render: (row) => (row.type === 1 ? 'دائم' : 'موقت'),
-    },
-    {
-        name: "isActive",
-        title: "وضعیت",
-        render: (row) => (row.isActive === true ? "فعال" : "غیر فعال"),
+        render: (row) => (row.balanceSheetType === 1 ? 'دائم' : 'موقت'),
     },
     {
         name: "action",

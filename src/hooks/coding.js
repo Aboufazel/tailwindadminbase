@@ -1,7 +1,11 @@
 import {useQuery} from "@tanstack/react-query";
 import {getAllAccountGroup, getAllCoding, getCodingById} from "../api/codingKind";
 import {getAccountGeneralById, getAllAccountGeneral} from "../api/accountMainApi";
-import {getAccountSpecById, getAllAccountSpec, getAllAccountSpecByMainId} from "../api/accountSpecApi";
+import {
+    getAccountSubsidiaryById,
+    getAllAccountSpec,
+    getAllAccountSubsidiaryByMainId
+} from "../api/accountSubsidiaryApi";
 import {
     getAccountTypeById,
     getAccountTypeCodingKind,
@@ -33,10 +37,10 @@ const useAllAccountMain = (queryKey , groupId )=>{
 }
 
 
-const useAllAccountSpecByMain = (queryKey , mainId)=>{
+const useAllAccountSubsidiaryByMain = (queryKey , mainId)=>{
     return useQuery({
        queryKey:[queryKey],
-       queryFn:()=>getAllAccountSpecByMainId(`${mainId}`)
+       queryFn:()=>getAllAccountSubsidiaryByMainId(`${mainId}`)
     })
 }
 
@@ -88,10 +92,10 @@ const useGetAccountMainById = (queryKey , accountMainId) => {
 }
 
 
-const useGetAccountSpecById = (queryKey , accountSpecId) => {
+const useGetAccountSubsidiaryById = (queryKey , accountSubsidiaryId) => {
     return useQuery({
         queryKey:[queryKey],
-        queryFn:()=>getAccountSpecById(accountSpecId)
+        queryFn:()=>getAccountSubsidiaryById(accountSubsidiaryId)
     })
 }
 
@@ -142,14 +146,14 @@ export {
     useAllCodingAccount,
     useAllAccountGroup,
     useAllAccountMain,
-    useAllAccountSpecByMain,
+    useAllAccountSubsidiaryByMain,
     useAllAccountTypesByCoding,
     useAllAccountSpecByTypeId,
     useGetAccountTypeById,
     useAllAccountSpec,
     useGetAccountGroupById,
     useGetAccountMainById,
-    useGetAccountSpecById,
+    useGetAccountSubsidiaryById,
     useGetAllAccountPersonLinks,
     useGetCodingById,
     useGetRevenueModels,
