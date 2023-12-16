@@ -5,7 +5,7 @@ import {codingAccountTypesTableHead} from "../../data/accountTypesData";
 import LoadingComponents from "../loading/loadingComponents";
 import {toast} from "react-toastify";
 import useReviewTabStore from "../../zustand/reviewTabStore";
-import AccountTypeAction from "../reviewTabsActionLayout/accountTypeAction";
+import AccountDetailTypeAction from "../reviewTabsActionLayout/accountDetailTypeAction";
 
 const AccountTabs = () => {
 
@@ -14,11 +14,13 @@ const AccountTabs = () => {
     const {data ,
         isError ,
         isLoading ,
-        isRefetching}  = useAllAccountTypesByCoding('accountTypesById' , accountCodingId)
+        isRefetching}  = useAllAccountTypesByCoding('accountDetailTypeById' , accountCodingId)
 
     if (isLoading || isRefetching){
         return  <LoadingComponents title={'دریافت نوع حساب'}/>
     }
+
+    console.log(data)
 
     if (isError){
         return (
@@ -28,9 +30,9 @@ const AccountTabs = () => {
 
     return(
         actionLayout ?
-            <AccountTypeAction/>
+            <AccountDetailTypeAction/>
             :
-            <Tables bodyId={'coding'} step={'accountType'} headers={codingAccountTypesTableHead} data={data.data.accountTypes}/>
+            <Tables bodyId={'coding'} step={'accountDetailType'} headers={codingAccountTypesTableHead} data={data.data.accountDetailTypes}/>
     )
 }
 

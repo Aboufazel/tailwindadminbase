@@ -76,8 +76,8 @@ const Tables = ({headers , data ,bodyId , step}) => {
                                if(bodyId === 'business'){
                                    managePopup()
                                    updatePopupBody(row)
-                               }else if(step === 'accountType'){
-                                   updateAccountTypeId(row.accountTypeId)
+                               }else if(step === 'accountDetailType'){
+                                   updateAccountTypeId(row.accountDetailTypeId)
                                    manageActionLayout()
                                }else if(step === "accountPerson"){
                                    manageActionLayout()

@@ -40,7 +40,7 @@ export const getAllAccountSubsidiaryByMainId = (generalId)=>{
 
 }
 
-export const getAllAccountSpec = ()=>{
+export const getAllAccountSubsidiary = ()=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({

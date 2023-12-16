@@ -1,13 +1,13 @@
 export const codingAccountTypesTableHead = [
     {
-        name: "accountTypeCode",
+        name: "accountDetailTypeCode",
         title: "کد",
-        render: (row) => row.accountTypeCode
+        render: (row) => row.accountDetailTypeCode
     },
     {
-        name: "accountTypeName",
+        name: "accountDetailTypeName",
         title: "نام حساب معین",
-        render: (row) => row.accountTypeName,
+        render: (row) => row.accountDetailTypeName,
     },
     {
         name: "isAutomatic",
@@ -20,8 +20,8 @@ export const codingAccountTypesTableHead = [
         render: (row) => (row.isFloat === true ? 'شناور' : 'غیر شناور'),
     },
     {
-        name: "isActive",
-        title: "وضعیت",
-        render: (row) => (row.isActive === true ? "فعال" : "غیر فعال"),
+        name: "type",
+        title: "نام یکتا",
+        render: (row) => (row.type),
     },
 ]

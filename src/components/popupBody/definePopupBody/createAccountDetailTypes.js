@@ -8,11 +8,11 @@ import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {toast} from "react-toastify";
-import {addAccountType} from "../../../api/accountTypeApi";
+import {addAccountDetailType} from "../../../api/accountTypeApi";
 import useStore from "../../../zustand/store";
-import {addAccountTypeInputs} from "../../../data/accountTypeInputData";
+import {addAccountDetailTypeInputs} from "../../../data/accountDetailTypeInputData";
 
-const CreateAccountType = () => {
+const CreateAccountDetailTypes = () => {
     const isFloat = formStore(state => state.isFloat)
     const updateIsfloat = formStore(state => state.updateIsFloat)
     const floatButton = formStore(state => state.floatButton)
@@ -20,11 +20,12 @@ const CreateAccountType = () => {
     const isAutomatic = formStore(state => state.isAutomatic)
     const automaticButton = formStore(state => state.automaticButton)
     const [loading, setLoading] = useState(false);
-    const accountCodingKindId = useStore(state => state.codingKindId)
+    const accountCodingId = useStore(state => state.codingKindId)
 
     const formValidate = yup.object().shape({
-        accountTypeName:yup.string().required("وارد کردن نام اجباری است"),
-        accountTypeCode:yup.string().required("وارد کردن کد اجباری است"),
+        accountDetailTypeName:yup.string().required("وارد کردن نام اجباری است"),
+        accountDetailTypeCode:yup.string().required("وارد کردن کد اجباری است"),
+        type:yup.string().required("وارد کردن نام یکتا اجباری است"),
     });
     const {register ,
         handleSubmit,
@@ -36,7 +37,7 @@ const CreateAccountType = () => {
 
     const onFormSubmit = async (data) =>{
         setLoading(true)
-        const res = await addAccountType(data , accountCodingKindId , isAutomatic , isFloat).catch(() => {
+        const res = await addAccountDetailType(data , accountCodingId , isAutomatic , isFloat).catch(() => {
             toast.error("ثبت انجام نشد")
             setLoading(false)
         })
@@ -66,7 +67,7 @@ const CreateAccountType = () => {
               </div>
               <div className={"flex flex-col w-full"}>
                   {
-                      addAccountTypeInputs.map((item, index) => (
+                      addAccountDetailTypeInputs.map((item, index) => (
                           <Inputs type={item.type}
                                   iClass={item.width}
                                   key={"input-value" + index}
@@ -107,4 +108,4 @@ const CreateAccountType = () => {
   )
 }
 
-export default CreateAccountType;
+export default CreateAccountDetailTypes;

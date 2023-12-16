@@ -3,13 +3,11 @@ import {getAllAccountGroup, getAllCoding, getCodingById} from "../api/codingKind
 import {getAccountGeneralById, getAllAccountGeneral} from "../api/accountMainApi";
 import {
     getAccountSubsidiaryById,
-    getAllAccountSpec,
+    getAllAccountSubsidiary,
     getAllAccountSubsidiaryByMainId
 } from "../api/accountSubsidiaryApi";
 import {
-    getAccountTypeById,
-    getAccountTypeCodingKind,
-    getAllAccountTypeSpecByAccountTypeId
+    getAccountDetailTypeByCodingId, getAccountDetailTypeById, getAllAccountDetailTypeSubsidiaryAccountDetailTypeId,
 } from "../api/accountTypeApi";
 import {getAccountGroupById} from "../api/accountGroupApi";
 import {getAccountPersonById, getAllAccountDefaultLinks, getAllAccountPerson} from "../api/accountDefaultPersonApi";
@@ -49,15 +47,15 @@ const useAllAccountSubsidiaryByMain = (queryKey , mainId)=>{
 const useAllAccountTypesByCoding = (queryKey , codingId)=>{
     return useQuery({
         queryKey:[queryKey],
-        queryFn:()=>getAccountTypeCodingKind(codingId)
+        queryFn:()=>getAccountDetailTypeByCodingId(codingId)
     })
 }
 
 
-const useAllAccountSpecByTypeId = (queryKey , typeId)=>{
+const useAllAccountSubsidiaryByDetailTypeId = (queryKey , typeId)=>{
     return useQuery({
         queryKey:[queryKey],
-        queryFn:()=>getAllAccountTypeSpecByAccountTypeId(typeId)
+        queryFn:()=>getAllAccountDetailTypeSubsidiaryAccountDetailTypeId(typeId)
     })
 }
 
@@ -65,14 +63,14 @@ const useAllAccountSpecByTypeId = (queryKey , typeId)=>{
 const useAllAccountSpec = (queryKey)=>{
     return useQuery({
         queryKey:[queryKey],
-        queryFn:getAllAccountSpec,
+        queryFn:getAllAccountSubsidiary,
     })
 }
 
 const useGetAccountTypeById = (queryKey , typeId)=>{
     return useQuery({
         queryKey:[queryKey],
-        queryFn:()=>getAccountTypeById(typeId)
+        queryFn:()=>getAccountDetailTypeById(typeId)
     })
 }
 
@@ -148,7 +146,7 @@ export {
     useAllAccountMain,
     useAllAccountSubsidiaryByMain,
     useAllAccountTypesByCoding,
-    useAllAccountSpecByTypeId,
+    useAllAccountSubsidiaryByDetailTypeId,
     useGetAccountTypeById,
     useAllAccountSpec,
     useGetAccountGroupById,

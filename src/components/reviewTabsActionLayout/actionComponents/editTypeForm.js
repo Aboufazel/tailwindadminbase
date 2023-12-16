@@ -1,4 +1,4 @@
-import {addAccountTypeInputs} from "../../../data/accountTypeInputData";
+import {addAccountDetailTypeInputs} from "../../../data/accountDetailTypeInputData";
 import Inputs from "../../globals/inputs/inputs";
 import Buttons from "../../globals/Buttons";
 import {Spinner} from "@material-tailwind/react";
@@ -28,8 +28,8 @@ const EditTypeForm = () => {
          refetch,
         isLoading:AccountTypeLoading , isRefetching:AccountTypeRefetching} = useGetAccountTypeById('getAccountTypeWithId' , accountTypeId);
     const formValidate = yup.object().shape({
-        accountTypeName:yup.string().required("وارد کردن نام اجباری است"),
-        accountTypeCode:yup.string().required("وارد کردن کد اجباری است"),
+        accountDetailTypeName:yup.string().required("وارد کردن نام اجباری است"),
+        accountDetailTypeCode:yup.string().required("وارد کردن کد اجباری است"),
     });
     const {register ,
         handleSubmit,
@@ -87,7 +87,7 @@ const EditTypeForm = () => {
                 </div>
                 <div className={"flex flex-col w-full"}>
                     {
-                        addAccountTypeInputs.map((item, index) => (
+                        addAccountDetailTypeInputs.map((item, index) => (
                             <Inputs type={item.type}
                                     iClass={item.width}
                                     key={"input-value" + index}

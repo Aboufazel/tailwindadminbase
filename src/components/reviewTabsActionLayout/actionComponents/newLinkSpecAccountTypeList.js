@@ -4,9 +4,11 @@ import {toast} from "react-toastify";
 import AllSpecLinkCard from "./allSpecLinkCard";
 import useAccountTypeStore from "../../../zustand/accountTypeStore";
 import formStore from "../../../zustand/formStore";
-import React from "react";
+import React, {useState} from "react";
 import Buttons from "../../globals/Buttons";
-import {addNewSpecForAccountType} from "../../../api/accountTypeApi";
+import {addNewSubsidiaryForAccountDetailType} from "../../../api/accountTypeApi";
+import {Spinner} from "@material-tailwind/react";
+import LoadingText from "../../loadingText/loadingText";
 
 const NewLinkSpecAccountTypeList = () => {
     const accountTypeId = useAccountTypeStore(state => state.accountTypeId)
@@ -17,10 +19,9 @@ const NewLinkSpecAccountTypeList = () => {
     const manageCanDeleteStep = useAccountTypeStore(state => state.manageCanDeleteStep)
     const canDeleteButton = formStore(state => state.canDeleteButton)
     const manageLinkStep = useAccountTypeStore(state => state.manageSpecLinkStep)
-
+    const updateAccountSubsidiaryId = useAccountTypeStore(state => state.updateAccountSpecId)
     const {data , isLoading , isRefetching , isError} = useAllAccountSpec('getAllAccountSpec')
-
-
+    const [loading , setLaoding]  = useState(false)
     if(isLoading || isRefetching){
         return <LoadingComponents title={'در حال دریافت تمامی حساب های معین'}/>
     }
@@ -31,7 +32,8 @@ const NewLinkSpecAccountTypeList = () => {
 
 
     const manageAddNewSpecLink = async ()=>{
-        const res = await addNewSpecForAccountType(Number(accountTypeId) , Number(accountSpecId) , `${canDeleteData}`).catch(()=>{
+       setLaoding(true)
+        const res = await addNewSubsidiaryForAccountDetailType(Number(accountTypeId) , Number(accountSpecId) , `${canDeleteData}`).catch(()=>{
             manageCanDeleteStep()
             updatecanDeleteData()
             return(toast.error('لینک سازی با مشکل مواجه شد'))
@@ -42,6 +44,8 @@ const NewLinkSpecAccountTypeList = () => {
             updatecanDeleteData()
             toast.success('لینک جدید ایجاد شد')
         }
+        updateAccountSubsidiaryId()
+        setLaoding(false)
     }
 
 
@@ -49,7 +53,7 @@ const NewLinkSpecAccountTypeList = () => {
         <>
             <div className={`w-full pt-[50px] ${canDeleteStep ? 'h-[400px]' : 'h-[500px]'}  overflow-y-auto`}>
                 {
-                    data.data.accountSpecs.map((items , index)=>(
+                    data.data.accountSubsidiaries.map((items , index)=>(
                         <AllSpecLinkCard key={'account-spec-link-data' + index} data={items}/>
                     ))
                 }
@@ -74,9 +78,17 @@ const NewLinkSpecAccountTypeList = () => {
                             <div className={"flex flex-row items-center gap-3 justify-end w-1/2"}>
                                 <Buttons color={'danger'} onClick={()=>{
                                     manageCanDeleteStep()
+                                    updateAccountSubsidiaryId()
                                     updatecanDeleteData()
                                 }} light={true}>انصراف</Buttons>
-                                <Buttons light={true} onClick={manageAddNewSpecLink}>ثبت لینک جدید</Buttons>
+                                <Buttons light={true} onClick={manageAddNewSpecLink}>
+                                    {
+                                        loading ?
+                                            <LoadingText text={"ثبت لینک جدید"}/>
+                                            : "ثبت لینک جدید"
+                                    }
+
+                                </Buttons>
                             </div>
                         </div>
                     </div>

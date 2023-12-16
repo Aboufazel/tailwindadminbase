@@ -28,7 +28,7 @@ const ReviewTabs = () => {
 
     return(
         <>
-            {groupName.length === 0 ? "" :
+            {groupName?.length === 0 ? "" :
                 <BreadCrumbs type={'button'} data={reviewTabsBreadCrumbsData}/>
             }
             {manageStepShow[stepView]}

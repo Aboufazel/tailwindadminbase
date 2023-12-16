@@ -4,7 +4,7 @@ import CreateAccountGroup from "../popupBody/definePopupBody/createAccountGroup"
 import useActionType from "../../zustand/actionTypeStore";
 import CreateAccountGeneral from "../popupBody/definePopupBody/createAccountGeneral";
 import CreateAccountSubsidiary from "../popupBody/definePopupBody/createAccountSubsidiary";
-import CreateAccountType from "../popupBody/definePopupBody/createAccountType";
+import CreateAccountDetailTypes from "../popupBody/definePopupBody/createAccountDetailTypes";
 import CreateAccountDefaultPerson from "../popupBody/definePopupBody/createAccountDefaultPerson";
 import useAccountPersonStore from "../../zustand/accountPersonStore";
 import BackBtn from "../reviewTabsActionLayout/actionComponents/backBtn";
@@ -37,7 +37,7 @@ const AddTabs = () => {
         "account-main": <CreateAccountGeneral/>,
         "account-speac": <CreateAccountSubsidiary/>,
         "account-define": <CreateAccountDefaultPerson/>,
-        "account-type": <CreateAccountType/>,
+        "account-type": <CreateAccountDetailTypes/>,
     }
 
     return(

@@ -1,72 +1,76 @@
 import {BaseUrl} from "./dashboardApi";
 
-export const addAccountType = (data , codingId , automatic , float)=>{
+export const addAccountDetailType = (data , codingId , automatic , float)=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
         method:"post",
-        url:'/AccountTypeService/api/AccountTypes/add',
-        headers:{
-            "selfUserId": userAuthData.userId,
-            "Authorization": userAuthData.accessToken,
-            'Content-Type': 'application/json'
-        },
-        data:{"accountCodingKindId":codingId,
-            "accountTypeCode":data.accountTypeCode,
-            "accountTypeName":data.accountTypeName,
-            "isAutomatic":automatic === 1 ,
-            "isFloat":float === 1,
-            "lang":"fa"}
-    })
-}
-
-export const getAccountTypeCodingKind = (codingId)=>{
-    const storageData = localStorage.getItem("auth")
-    const userAuthData = JSON.parse(storageData);
-    return BaseUrl({
-        method:"post",
-        url:'/AccountTypeService/api/AccountTypes/GetAccountTypeCodingKind',
+        url:'/AccountDetailTypeService/api/AccountDetailTypes/add',
         headers:{
             "selfUserId": userAuthData.userId,
             "Authorization": userAuthData.accessToken,
             'Content-Type': 'application/json'
         },
         data:{
-            "accountTypeCodingKindId":codingId,
+            "accountCodingId":Number(codingId),
+            "accountDetailTypeCode":Number(data.accountDetailTypeCode),
+            "accountDetailTypeName":data.accountDetailTypeName,
+            "type":data.type,
+            "isAutomatic":automatic,
+            "isFloat":float,
         }
     })
 }
 
-export const getAllAccountTypeSpecByAccountTypeId = (typeId) =>{
+export const getAccountDetailTypeByCodingId = (codingId)=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
         method:"post",
-        url:'/AccountTypeService/api/AccountTypeSpecs/GetAllAccountTypeSpecByAccountTypeId',
+        url:'/AccountDetailTypeService/api/AccountDetailTypes/GetByAccountCodingId',
         headers:{
             "selfUserId": userAuthData.userId,
             "Authorization": userAuthData.accessToken,
             'Content-Type': 'application/json'
         },
         data:{
-            "accountTypeId":typeId,
+            "accountCodingId":codingId,
         }
     })
 }
 
-export const getAccountTypeById = (typeId)=>{
+export const getAllAccountDetailTypeSubsidiaryAccountDetailTypeId = (typeId) =>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
         method:"post",
-        url:'/AccountTypeService/api/AccountTypes/GetAccountType',
+        url:'/AccountDetailTypeService/api/AccountDetailTypeSubsidiaries/GetByAccountDetailTypeId',
         headers:{
             "selfUserId": userAuthData.userId,
             "Authorization": userAuthData.accessToken,
             'Content-Type': 'application/json'
         },
         data:{
-            "accountTypeId":typeId,
+            "accountDetailTypeId":typeId,
+            "group":true,
+            "general":true,
+        }
+    })
+}
+
+export const getAccountDetailTypeById = (typeId)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:"post",
+        url:'/AccountDetailTypeService/api/AccountDetailTypes/GetById',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            'Content-Type': 'application/json'
+        },
+        data:{
+            "accountDetailTypeId":typeId,
         }
     })
 }
@@ -129,26 +133,37 @@ export const deleteAccountType = (accountTypeId)=>{
     })
 }
 
+export const deleteAccountDetailTypeSubsidiary = (subsidiaryId)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:"delete",
+        url:'/AccountDetailTypeService/api/AccountDetailTypeSubsidiaries/delete',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            'Content-Type': 'application/json'
+        },
+        data: {
+            "accountDetailTypeSubsidiaryId": Number(subsidiaryId),
+        }
+    })
+}
 
-export const editAccountTypeSpec = ()=>{}
-
-export const deleteAccountTypeSpec = ()=>{}
-
-export const addNewSpecForAccountType = (typeId , specId , canDelete)=>{
+export const addNewSubsidiaryForAccountDetailType = (detailTypeId , subsidiaryId , canDelete)=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
         method:"post",
-        url:'/AccountTypeService/api/AccountTypeSpecs/Add',
+        url:'/AccountDetailTypeService/api/AccountDetailTypeSubsidiaries/Add',
         headers:{
             "selfUserId": userAuthData.userId,
             "Authorization": userAuthData.accessToken,
             'Content-Type': 'application/json'
         },
         data:{
-            "accountTypeId":Number(typeId),
-            "accountSpecId":Number(specId),
-            "lang":"fa",
+            "accountDetailTypeId":Number(detailTypeId),
+            "accountSubsidiaryId":Number(subsidiaryId),
             "canDelete":Number(canDelete)}
     })
 }
