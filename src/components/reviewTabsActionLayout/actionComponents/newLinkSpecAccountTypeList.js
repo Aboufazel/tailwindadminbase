@@ -7,7 +7,6 @@ import formStore from "../../../zustand/formStore";
 import React, {useState} from "react";
 import Buttons from "../../globals/Buttons";
 import {addNewSubsidiaryForAccountDetailType} from "../../../api/accountTypeApi";
-import {Spinner} from "@material-tailwind/react";
 import LoadingText from "../../loadingText/loadingText";
 
 const NewLinkSpecAccountTypeList = () => {
