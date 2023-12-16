@@ -1,6 +1,6 @@
 import BackBtn from "./actionComponents/backBtn";
 import useReviewTabStore from "../../zustand/reviewTabStore";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import useAccountSpecStore from "../../zustand/accountSpecStore";
 import {useGetAccountSubsidiaryById} from "../../hooks/coding";
 import LoadingComponents from "../loading/loadingComponents";
@@ -9,8 +9,9 @@ import Buttons from "../globals/Buttons";
 import EditSubsidiaryForm from "./actionComponents/editSubsidiaryForm";
 import {deleteAccountSubsidiary} from "../../api/accountSubsidiaryApi";
 import ShowDetailComponents from "../showDetailComponents/showDetailComponents";
+import {Spinner} from "@material-tailwind/react";
 
-const AccountSpecAction = () => {
+const AccountSubsidiaryAction = () => {
     const manageActionLayout = useReviewTabStore(state => state.manageActionLayout)
     const accountSubsidiaryId = useReviewTabStore(state => state.codingAccountSpecId)
     const deleteSpecStep = useAccountSpecStore(state => state.deleteSpecStep)
@@ -18,9 +19,8 @@ const AccountSpecAction = () => {
     const manageSpecEditStep = useAccountSpecStore(state => state.manageEditSpecStep)
     const manageDeleteSpecStep = useAccountSpecStore(state => state.manageDeleteSpecStep)
     const {data , isRefetching ,refetch ,isLoading , isError} = useGetAccountSubsidiaryById('getAccountSubsidiaryWithId' , accountSubsidiaryId)
+    const [loading, setLoading] = useState(false);
 
-
-    console.log(data , "subsidiary data")
     useEffect(() => {
         refetch()
     }, [editStep]);
@@ -46,10 +46,17 @@ const AccountSpecAction = () => {
     }
 
 
-    const manageDeleteMainAccount = async ()=>{
+    const manageDeleteSubsidiaryAccount = async ()=>{
+        setLoading(true)
         const res = await deleteAccountSubsidiary(accountSubsidiaryId).catch(
+
             (e)=>{
-                return(toast.error(e.message))
+                manageDeleteSpecStep()
+                if(e.response.status === 403){
+                    return (toast.error("به دلیل وجود حساب معین امکان حذف وجود ندارد!"))
+                } else if(e.response.status > 403 || e.response.status <= 500){
+                    return (toast.error('خطا در ارتباط با سرور!'))
+                }
             }
         )
         if (res.status===200){
@@ -57,6 +64,7 @@ const AccountSpecAction = () => {
             manageActionLayout()
             return(toast.success('حذف موفقیت آمیز بود'))
         }
+       setLoading(false)
     }
 
     return(
@@ -87,8 +95,17 @@ const AccountSpecAction = () => {
                                             </p>
                                             <div className={"flex flex-row justify-end gap-3 items-center"}>
                                                 <Buttons onClick={manageDeleteSpecStep} light={true}>{"انصراف"}</Buttons>
-                                                <Buttons onClick={manageDeleteMainAccount} color={"danger"}
-                                                         light={true}>{"تایید"}</Buttons>
+                                                <Buttons onClick={manageDeleteSubsidiaryAccount} color={"danger"}
+                                                         light={true}>
+                                                    {
+                                                        loading ?
+                                                            <p className={"flex flex-row items-center justify-center gap-3"}>
+                                                                <Spinner/>
+                                                                {"تایید"}
+                                                            </p>
+                                                            : "تایید"
+                                                    }
+                                                </Buttons>
                                             </div>
                                         </div>
                                 }
@@ -105,4 +122,4 @@ const AccountSpecAction = () => {
     )
 }
 
-export default AccountSpecAction;
+export default AccountSubsidiaryAction;

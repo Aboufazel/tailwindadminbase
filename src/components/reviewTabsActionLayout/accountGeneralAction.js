@@ -1,7 +1,7 @@
 import BackBtn from "./actionComponents/backBtn";
 import useReviewTabStore from "../../zustand/reviewTabStore";
 import {useGetAccountMainById} from "../../hooks/coding";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import Buttons from "../globals/Buttons";
 import useAccountMainStore from "../../zustand/accountMainStore";
 import LoadingComponents from "../loading/loadingComponents";
@@ -9,15 +9,16 @@ import {toast} from "react-toastify";
 import {deleteAccountGeneral} from "../../api/accountMainApi";
 import EditMainForm from "./actionComponents/editMainForm";
 import ShowDetailComponents from "../showDetailComponents/showDetailComponents";
+import {Spinner} from "@material-tailwind/react";
 
-const AccountMainAction = () => {
+const AccountGeneralAction = () => {
     const manageActionLayout = useReviewTabStore(state => state.manageActionLayout)
     const accountGeneralId = useReviewTabStore(state => state.codingAccountMainId)
     const deleteGeneralStep = useAccountMainStore(state => state.deleteMainStep)
     const editGeneralStep = useAccountMainStore(state => state.editMainStep)
     const manageEditGeneralStep = useAccountMainStore(state => state.manageEditMainStep)
     const manageDeleteGeneralStep = useAccountMainStore(state => state.manageDeleteMainStep)
-
+    const [loading, setLoading] = useState(false);
     const {data , isLoading , isError , refetch,  isRefetching} = useGetAccountMainById('getMainById' , accountGeneralId)
 
     const accountMainInformationList = [
@@ -45,14 +46,20 @@ const AccountMainAction = () => {
 
 
     const manageDeleteGeneralAccount = async ()=>{
-        const res = await deleteAccountGeneral(accountGeneralId).catch(()=>{
+        setLoading(true)
+        const res = await deleteAccountGeneral(accountGeneralId).catch((e)=>{
             manageDeleteGeneralStep()
-            return (toast.error(' حساب  کل قابل حذف نیست!'))
+            if(e.response.status === 403){
+                return (toast.error("به دلیل وجود حساب معین امکان حذف وجود ندارد!"))
+            } else if(e.response.status > 403 || e.response.status <= 500){
+                return (toast.error('خطا در ارتباط با سرور!'))
+            }
         })
         if (res.status===200){
             manageDeleteGeneralStep()
             return(toast.success('حذف موفقیت آمیز بود'))
         }
+        setLoading(false)
     }
 
     return(
@@ -84,7 +91,16 @@ const AccountMainAction = () => {
                                             <div className={"flex flex-row justify-end gap-3 items-center"}>
                                                 <Buttons onClick={manageDeleteGeneralStep} light={true}>{"انصراف"}</Buttons>
                                                 <Buttons onClick={manageDeleteGeneralAccount} color={"danger"}
-                                                         light={true}>{"تایید"}</Buttons>
+                                                         light={true}>
+                                                    {
+                                                        loading ?
+                                                            <p className={"flex flex-row items-center justify-center gap-3"}>
+                                                                <Spinner/>
+                                                                {"تایید"}
+                                                            </p>
+                                                            : "تایید"
+                                                    }
+                                                </Buttons>
                                             </div>
                                         </div>
                                 }
@@ -101,4 +117,4 @@ const AccountMainAction = () => {
     )
 }
 
-export default AccountMainAction
+export default AccountGeneralAction

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import useReviewTabStore from "../../zustand/reviewTabStore";
 import BackBtn from "./actionComponents/backBtn";
 import {useGetAccountGroupById} from "../../hooks/coding";
@@ -10,6 +10,7 @@ import EditGroupForm from "./actionComponents/editGroupForm";
 import {
     deleteAccountGroup,
 } from "../../api/accountGroupApi";
+import {Spinner} from "@material-tailwind/react";
 
 const AccountGroupAction = () => {
     const manageActionLayout = useReviewTabStore(state => state.manageActionLayout)
@@ -18,7 +19,7 @@ const AccountGroupAction = () => {
     const deleteGroupStep = useAccountGroupStore(state => state.deleteGroupStep)
     const manageDeleteGroupStep = useAccountGroupStore(state => state.manageDeleteGroupStep)
     const manageEditGroupsStep = useAccountGroupStore(state => state.manageEditGroupStep)
-
+    const [loading, setLoading] = useState(false);
     const {data , isLoading , isRefetching , isError} = useGetAccountGroupById('getAccountGroupWithId' ,  accountGroupId)
 
     if (isLoading || isRefetching){
@@ -37,14 +38,20 @@ const AccountGroupAction = () => {
 
 
     const manageDeleteGroupAccount = async ()=>{
-        const res = await deleteAccountGroup(accountGroupId).catch(()=>{
+        setLoading(true)
+        const res = await deleteAccountGroup(accountGroupId).catch((e)=>{
             manageDeleteGroupStep()
-            return (toast.error('گروه حساب قابل حذف نیست!'))
+            if(e.response.status === 403){
+                return (toast.error("به دلیل وجود حساب کل امکان حذف وجود ندارد!"))
+            } else if(e.response.status > 403 || e.response.status <= 500){
+                return (toast.error('خطا در ارتباط با سرور!'))
+            }
         })
         if (res.status===200){
             manageDeleteGroupStep()
             return(toast.success('حذف موفقیت آمیز بود'))
         }
+        setLoading(false)
     }
 
     return(
@@ -87,7 +94,16 @@ const AccountGroupAction = () => {
                                         <div className={"flex flex-row justify-end gap-3 items-center"}>
                                             <Buttons onClick={manageDeleteGroupStep} light={true}>{"انصراف"}</Buttons>
                                             <Buttons onClick={manageDeleteGroupAccount} color={"danger"}
-                                                     light={true}>{"تایید"}</Buttons>
+                                                     light={true}>
+                                                {
+                                                    loading ?
+                                                        <p className={"flex flex-row items-center justify-center gap-3"}>
+                                                            <Spinner/>
+                                                            {"تایید"}
+                                                        </p>
+                                                        : "تایید"
+                                                }
+                                            </Buttons>
                                         </div>
                                     </div>
                             }

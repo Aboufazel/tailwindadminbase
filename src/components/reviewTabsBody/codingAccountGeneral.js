@@ -5,7 +5,7 @@ import {toast} from "react-toastify";
 import Tables from "../globals/tables/tables";
 import {codingAccountMainsTableHead} from "../../data/codingAccountGroupData";
 import {useEffect} from "react";
-import AccountMainAction from "../reviewTabsActionLayout/accountMainAction";
+import AccountGeneralAction from "../reviewTabsActionLayout/accountGeneralAction";
 
 const CodingAccountGeneral = () => {
     const actionLayout = useReviewTabStore(state => state.actionLayout)
@@ -34,7 +34,7 @@ const CodingAccountGeneral = () => {
     }else {
         return(
             actionLayout ?
-                <AccountMainAction/>
+                <AccountGeneralAction/>
                 :
                 <Tables  headers={codingAccountMainsTableHead} bodyId={"coding"} step={'accountGeneral'} data={data.data.accountGenerals}/>
         )

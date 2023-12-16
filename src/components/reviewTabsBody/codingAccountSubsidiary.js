@@ -4,7 +4,7 @@ import LoadingComponents from "../loading/loadingComponents";
 import {toast} from "react-toastify";
 import Tables from "../globals/tables/tables";
 import {codingAccountSubsidiaryTableHead} from "../../data/codingAccountGroupData";
-import AccountSpecAction from "../reviewTabsActionLayout/accountSpecAction";
+import AccountSubsidiaryAction from "../reviewTabsActionLayout/accountSubsidiaryAction";
 import {useEffect} from "react";
 
 const CodingAccountSubsidiary = () => {
@@ -31,7 +31,7 @@ const CodingAccountSubsidiary = () => {
 
     return(
         actionLayout ?
-            <AccountSpecAction/>
+            <AccountSubsidiaryAction/>
             :
             <Tables  headers={codingAccountSubsidiaryTableHead} bodyId={"coding"} step={'accountSubsidiary'} data={data?.data.accountSubsidiaries}/>
     )
