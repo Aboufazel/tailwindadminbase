@@ -16,7 +16,7 @@ import useStore from "../../../zustand/store";
 
 const EditTypeForm = () => {
     const isFloat = formStore(state => state.isFloat)
-    const accountTypeId = useAccountTypeStore(state => state.accountTypeId)
+    const accountDetailTypeId = useAccountTypeStore(state => state.accountTypeId)
     const updateIsfloat = formStore(state => state.updateIsFloat)
     const floatButton = formStore(state => state.floatButton)
     const updateIsAutomatic = formStore(state => state.updateIsAutomatic)
@@ -26,11 +26,12 @@ const EditTypeForm = () => {
     const [loading, setLoading] = useState(false);
     const {data:accountTypeData ,
          refetch,
-        isLoading:AccountTypeLoading , isRefetching:AccountTypeRefetching} = useGetAccountTypeById('getAccountTypeWithId' , accountTypeId);
+        isLoading:AccountTypeLoading , isRefetching:AccountTypeRefetching} = useGetAccountTypeById('getAccountTypeWithId' , accountDetailTypeId);
     const formValidate = yup.object().shape({
         accountDetailTypeName:yup.string().required("وارد کردن نام اجباری است"),
         accountDetailTypeCode:yup.string().required("وارد کردن کد اجباری است"),
     });
+    console.log(accountTypeData , "account type data")
     const {register ,
         handleSubmit,
         formState:{errors},
@@ -43,31 +44,30 @@ const EditTypeForm = () => {
         setLoading(true)
         const res = await editAccountType(
             data ,
-            accountTypeId ,
+            accountDetailTypeId ,
             codingKindId ,
             isAutomatic ,
             isFloat ,
-            accountTypeData?.data.accountTypes[0].isActive,
+            accountTypeData?.data.accountDetailTypes[0].isActive,
             ).catch(() => {
             toast.error("ویرایش انجام نشد")
-            setLoading(false)
         })
         if (res?.status === 200){
             reset()
             updateIsfloat('')
             updateIsAutomatic('')
             toast.success("ویرایش با موفقیت ایجاد شد")
-            setLoading(false)
             refetch()
         }
+        setLoading(false)
     }
 
     if (AccountTypeLoading || AccountTypeRefetching){
         return <LoadingComponents title={'درحال دریافت اطلاعات هستیم'}/>
     }else {
         if(isFloat.length <= 0 && isAutomatic.length <= 0){
-            updateIsfloat(accountTypeData?.data.accountTypes[0].isFloat)
-            updateIsAutomatic(accountTypeData?.data.accountTypes[0].isAutomatic)
+            updateIsfloat(accountTypeData?.data.accountDetailTypes[0].isFloat)
+            updateIsAutomatic(accountTypeData?.data.accountDetailTypes[0].isAutomatic)
         }
         return(
             <form onSubmit={handleSubmit(onFormSubmit)} className={"w-full pt-5"}>
@@ -98,10 +98,12 @@ const EditTypeForm = () => {
                                     inputType={item.inputType}
                                     defaultValue={
                                         index === 0 ?
-                                            accountTypeData?.data.accountTypes[0].accountTypeCode
+                                            accountTypeData?.data.accountDetailTypes[0].accountDetailTypeCode
                                             :
                                             index === 1 ?
-                                                accountTypeData?.data.accountTypes[0].accountTypeName : ""
+                                            accountTypeData?.data.accountDetailTypes[0].accountDetailTypeName :
+                                            index === 2 ?
+                                            accountTypeData?.data.accountDetailTypes[0].type : ""
                                     }
                             />
                         ))

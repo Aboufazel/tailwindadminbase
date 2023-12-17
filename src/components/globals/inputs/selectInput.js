@@ -54,8 +54,8 @@ const SelectInput = ({data , error ,type= '' , register , step  , refetch , sele
                     {
                         data && data.map((items)=>(
                             <option
-                                value={items.accountCodingKindId}
-                            >{items.accountCodingKindName}</option>
+                                value={items.accountCodingId}
+                            >{items.accountCodingName}</option>
                         ))
                     }
                 </select>
