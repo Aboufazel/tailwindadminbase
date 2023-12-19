@@ -75,60 +75,43 @@ export const getAccountDetailTypeById = (typeId)=>{
     })
 }
 
-export const editAccountType = (data , accountTypeId , accountCodingKindId , isAutomatic , isFloat , isActive)=>{
+export const editAccountDetailType = (data , accountDetailTypeId , accountCodingId , isAutomatic , isFloat)=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
         method:"put",
-        url:'/AccountTypeService/api/AccountTypes/Edit',
+        url:'/AccountDetailTypeService/api/AccountDetailTypes/Edit',
         headers:{
             "selfUserId": userAuthData.userId,
             "Authorization": userAuthData.accessToken,
             'Content-Type': 'application/json'
         },
         data:{
-            "accountTypeId":accountTypeId,
-            "accountCodingKindId":accountCodingKindId,
-            "accountTypeCode":data.accountTypeCode,
-            "accountTypeName":data.accountTypeName,
+            "AccountDetaiTypeId":Number(accountDetailTypeId),
+            "accountCodingId":Number(accountCodingId),
+            "accountDetailTypeCode":Number(data.accountDetailTypeCode),
+            "accountDetailTypeName":data.accountDetailTypeName,
+            "type":data.type,
             "isAutomatic":isAutomatic,
-            "isActive":isActive,
             "isFloat":isFloat,
-            "lang":"fa"}
-    })
-}
-
-export const editAccountTypeIsActive = (accountTypeId , isActive)=>{
-    const storageData = localStorage.getItem("auth")
-    const userAuthData = JSON.parse(storageData);
-    return BaseUrl({
-        method:"put",
-        url:'/AccountTypeService/api/AccountTypes/EditIsActive',
-        headers:{
-            "selfUserId": userAuthData.userId,
-            "Authorization": userAuthData.accessToken,
-            'Content-Type': 'application/json'
-        },
-        data:{
-            "accountTypeId":accountTypeId,
-            "isActive":isActive,
         }
     })
 }
 
-export const deleteAccountType = (accountTypeId)=>{
+
+export const deleteAccountDetailType = (accountDetailTypeId)=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
         method:"delete",
-        url:'/AccountTypeService/api/AccountTypes/delete',
+        url:'/AccountDetailTypeService/api/AccountDetailTypes/delete',
         headers:{
             "selfUserId": userAuthData.userId,
             "Authorization": userAuthData.accessToken,
             'Content-Type': 'application/json'
         },
         data:{
-            "accountTypeId":accountTypeId,
+            "accountDetailTypeId":Number(accountDetailTypeId),
         }
     })
 }

@@ -8,7 +8,7 @@ import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {toast} from "react-toastify";
-import {addAccountDetailType} from "../../../api/accountTypeApi";
+import {addAccountDetailType} from "../../../api/accountDetailTypeApi";
 import useStore from "../../../zustand/store";
 import {addAccountDetailTypeInputs} from "../../../data/accountDetailTypeInputData";
 

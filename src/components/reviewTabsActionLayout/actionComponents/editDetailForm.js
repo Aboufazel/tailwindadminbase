@@ -6,7 +6,7 @@ import React, {useState} from "react";
 import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {editAccountType} from "../../../api/accountTypeApi";
+import {editAccountDetailType} from "../../../api/accountDetailTypeApi";
 import {toast} from "react-toastify";
 import formStore from "../../../zustand/formStore";
 import {useGetAccountTypeById} from "../../../hooks/coding";
@@ -14,14 +14,15 @@ import LoadingComponents from "../../loading/loadingComponents";
 import useAccountTypeStore from "../../../zustand/accountTypeStore";
 import useStore from "../../../zustand/store";
 
-const EditTypeForm = () => {
+const EditDetailForm = () => {
     const isFloat = formStore(state => state.isFloat)
     const accountDetailTypeId = useAccountTypeStore(state => state.accountTypeId)
     const updateIsfloat = formStore(state => state.updateIsFloat)
     const floatButton = formStore(state => state.floatButton)
     const updateIsAutomatic = formStore(state => state.updateIsAutomatic)
     const isAutomatic = formStore(state => state.isAutomatic)
-    const codingKindId = useStore(state => state.codingKindId)
+    const codingId = useStore(state => state.codingKindId)
+    const manageEditStep = useAccountTypeStore(state => state.manageEditStep)
     const automaticButton = formStore(state => state.automaticButton)
     const [loading, setLoading] = useState(false);
     const {data:accountTypeData ,
@@ -30,6 +31,7 @@ const EditTypeForm = () => {
     const formValidate = yup.object().shape({
         accountDetailTypeName:yup.string().required("وارد کردن نام اجباری است"),
         accountDetailTypeCode:yup.string().required("وارد کردن کد اجباری است"),
+        type:yup.string().required("وارد کردن نام یکتا اجباری است")
     });
     console.log(accountTypeData , "account type data")
     const {register ,
@@ -42,13 +44,12 @@ const EditTypeForm = () => {
 
     const onFormSubmit = async (data) =>{
         setLoading(true)
-        const res = await editAccountType(
+        const res = await editAccountDetailType(
             data ,
             accountDetailTypeId ,
-            codingKindId ,
+            codingId ,
             isAutomatic ,
             isFloat ,
-            accountTypeData?.data.accountDetailTypes[0].isActive,
             ).catch(() => {
             toast.error("ویرایش انجام نشد")
         })
@@ -56,6 +57,7 @@ const EditTypeForm = () => {
             reset()
             updateIsfloat('')
             updateIsAutomatic('')
+            manageEditStep()
             toast.success("ویرایش با موفقیت ایجاد شد")
             refetch()
         }
@@ -142,4 +144,4 @@ const EditTypeForm = () => {
 
 }
 
-export default EditTypeForm;
+export default EditDetailForm;

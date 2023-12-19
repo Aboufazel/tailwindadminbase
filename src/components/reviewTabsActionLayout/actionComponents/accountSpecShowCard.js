@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import useAccountTypeStore from "../../../zustand/accountTypeStore";
 import {CloseSquare, Delete} from "react-iconly";
 import LoadingText from "../../loadingText/loadingText";
-import {deleteAccountDetailTypeSubsidiary} from "../../../api/accountTypeApi";
+import {deleteAccountDetailTypeSubsidiary} from "../../../api/accountDetailTypeApi";
 import {toast} from "react-toastify";
 
 const AccountSpecShowCard = ({data , refetch}) =>{
@@ -30,7 +30,7 @@ const AccountSpecShowCard = ({data , refetch}) =>{
     }
 
     return(
-        <div className={"flex flex-row items-center w-full p-3 rounded-2xl my-5 border-primary-main/10 border pb-3"}>
+        <div className={"flex flex-row items-center w-full p-3 rounded-2xl my-2 border-primary-main/10 border pb-3"}>
             <div className={"w-1/2"}>
                 <p className={'flex flex-row text-[14px] text-text-color-1 items-center gap-3'}>
                     {data.accountSubsidiaryName}

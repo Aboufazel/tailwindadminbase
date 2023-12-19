@@ -8,7 +8,7 @@ import {
 } from "../api/accountSubsidiaryApi";
 import {
     getAccountDetailTypeByCodingId, getAccountDetailTypeById, getAllAccountDetailTypeSubsidiaryAccountDetailTypeId,
-} from "../api/accountTypeApi";
+} from "../api/accountDetailTypeApi";
 import {getAccountGroupById} from "../api/accountGroupApi";
 import {getAccountPersonById, getAllAccountDefaultLinks, getAllAccountPerson} from "../api/accountDefaultPersonApi";
 import {getAllRevenueModel} from "../api/revenueModelApi";

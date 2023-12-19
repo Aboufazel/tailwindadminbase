@@ -6,7 +6,7 @@ import useAccountTypeStore from "../../../zustand/accountTypeStore";
 import formStore from "../../../zustand/formStore";
 import React, {useState} from "react";
 import Buttons from "../../globals/Buttons";
-import {addNewSubsidiaryForAccountDetailType} from "../../../api/accountTypeApi";
+import {addNewSubsidiaryForAccountDetailType} from "../../../api/accountDetailTypeApi";
 import LoadingText from "../../loadingText/loadingText";
 
 const NewLinkSpecAccountTypeList = () => {
