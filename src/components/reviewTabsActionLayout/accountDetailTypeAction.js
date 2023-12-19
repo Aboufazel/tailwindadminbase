@@ -6,7 +6,7 @@ import {useAllAccountSubsidiaryByDetailTypeId, useGetAccountTypeById} from "../.
 import {toast} from "react-toastify";
 import LoadingComponents from "../loading/loadingComponents";
 import EditDetailForm from "./actionComponents/editDetailForm";
-import {deleteAccountDetailType, deleteAccountType} from "../../api/accountDetailTypeApi";
+import {deleteAccountDetailType} from "../../api/accountDetailTypeApi";
 import BackBtn from "./actionComponents/backBtn";
 import NewLinkSpecAccountTypeList from "./actionComponents/newLinkSpecAccountTypeList";
 import ShowDetailComponents from "../showDetailComponents/showDetailComponents";
