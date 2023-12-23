@@ -22,7 +22,7 @@ const AccountDetailDefaultActionLayout = () => {
     const {data , isLoading ,refetch ,isError , isRefetching} = useGetPersonById("getPersonByID" , accountDetailDefaultId)
     const manageLinkStep = useAccountPersonStore(state => state.managePersonSpecLinkStep)
     const manageEditStep = useAccountPersonStore(state => state.managePersonEditStep)
-    const manageDeleteStep = useAccountPersonStore(state => state. manageDeleteStep)
+    const manageDeleteStep = useAccountPersonStore(state => state.manageDeleteStep)
     const deleteStep = useAccountPersonStore(state => state.deletePersonStep)
     const {data:defaultLink , refetch:linkRefetch ,isLoading:linkLoading} = useGetFunction('getDefaultSubsidiary' , accountDetailDefaultId , getAccountDefaultDetailLink)
 
