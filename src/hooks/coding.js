@@ -12,7 +12,6 @@ import {
 import {getAccountGroupById} from "../api/accountGroupApi";
 import {
     getAccountDetailDefaultById,
-    getAccountPersonById,
     getAllAccountDefaultLinks,
     getAllAccountDetailDefault,
 } from "../api/accountDetailDefaultsApi";
