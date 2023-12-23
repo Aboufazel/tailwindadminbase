@@ -34,6 +34,8 @@ const BusinessLayout = () => {
         )
     }
 
+    console.log(data , "business data")
+
     if(isError){
         if(storage.accessToken && error?.response.status >=400 && error?.response.status <=500){
                         toast.error("توکن منقضی شده است")

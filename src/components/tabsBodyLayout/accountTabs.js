@@ -6,6 +6,7 @@ import LoadingComponents from "../loading/loadingComponents";
 import {toast} from "react-toastify";
 import useReviewTabStore from "../../zustand/reviewTabStore";
 import AccountDetailTypeAction from "../reviewTabsActionLayout/accountDetailTypeAction";
+import {useEffect} from "react";
 
 const AccountTabs = () => {
 
@@ -14,19 +15,26 @@ const AccountTabs = () => {
     const {data ,
         isError ,
         isLoading ,
+        refetch,
         isRefetching}  = useAllAccountTypesByCoding('accountDetailTypeById' , accountCodingId)
+
+
+    useEffect(() => {
+        refetch()
+    }, [actionLayout]);
 
     if (isLoading || isRefetching){
         return  <LoadingComponents title={'دریافت نوع حساب'}/>
     }
 
-    console.log(data)
+
 
     if (isError){
         return (
             toast.error('دریافت با مشکل مواجه شد')
         )
     }
+
 
     return(
         actionLayout ?

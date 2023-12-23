@@ -5,8 +5,9 @@ import {CloseSquare, Delete} from "react-iconly";
 import LoadingText from "../../loadingText/loadingText";
 import {deleteAccountDetailTypeSubsidiary} from "../../../api/accountDetailTypeApi";
 import {toast} from "react-toastify";
+import {deleteNewLinkForAccountDetailDefaultSubsidiary} from "../../../api/accountDetailDefaultsApi";
 
-const AccountSpecShowCard = ({data , refetch}) =>{
+const AccountSpecShowCard = ({data , refetch , step='account-detail-type'}) =>{
     const [loading , setLaoding] = useState(false)
     const specCardAction = useAccountTypeStore(state => state.specCardAction)
     const manageSpecCardAction = useAccountTypeStore(state => state.manageSpecCardAction)
@@ -27,6 +28,28 @@ const AccountSpecShowCard = ({data , refetch}) =>{
         updateAccountSubsidiaryId()
         manageSpecCardAction()
         setLaoding(false)
+    }
+
+
+    const manageDeleteDefaultLink = async ()=>{
+        setLaoding(true)
+        const res = await deleteNewLinkForAccountDetailDefaultSubsidiary(data.accountDetailDefaultLinkId).catch((e)=>{
+            return(
+                toast.error(e.response.data.value.message)
+            )
+        })
+        if (res.status === 200){
+            refetch()
+            toast.success("لینک با موفقیت حذف شد!")
+        }
+        updateAccountSubsidiaryId()
+        manageSpecCardAction()
+        setLaoding(false)
+    }
+
+    const deleteLinkFunction = {
+        'account-detail-type' : manageDeleteLink,
+        'account-detail-default-link' : manageDeleteDefaultLink,
     }
 
     return(
@@ -51,7 +74,7 @@ const AccountSpecShowCard = ({data , refetch}) =>{
                                 <Buttons onClick={manageSpecCardAction} light={true} rounded={true} icon={true}>
                                     <CloseSquare/>
                                 </Buttons>
-                                <Buttons onClick={manageDeleteLink} light={true} color={'danger'} rounded={true} icon={true}>
+                                <Buttons onClick={deleteLinkFunction[step]} light={true} color={'danger'} rounded={true} icon={true}>
                                     {
                                         loading ?
                                             <LoadingText text={<Delete/>}/>

@@ -8,16 +8,20 @@ import React, {useState} from "react";
 import Buttons from "../../globals/Buttons";
 import {addNewSubsidiaryForAccountDetailType} from "../../../api/accountDetailTypeApi";
 import LoadingText from "../../loadingText/loadingText";
+import {addNewLinkForAccountDetailDefaultSubsidiary} from "../../../api/accountDetailDefaultsApi";
+import useAccountPersonStore from "../../../zustand/accountPersonStore";
 
-const NewLinkSpecAccountTypeList = () => {
+const NewLinkSpecAccountTypeList = ({step="account-detail-type"}) => {
     const accountTypeId = useAccountTypeStore(state => state.accountTypeId)
-    const accountSpecId = useAccountTypeStore(state => state.accountSpecId)
+    const accountSubsidiaryId = useAccountTypeStore(state => state.accountSpecId)
+    const accountDetailDefaultId = useAccountPersonStore(state => state.accountPersonId)
     const canDeleteStep = useAccountTypeStore(state => state.canDeleteStep)
     const canDeleteData = useAccountTypeStore(state => state.canDeleteData)
     const updatecanDeleteData = useAccountTypeStore(state => state.updateCanDeleteData)
     const manageCanDeleteStep = useAccountTypeStore(state => state.manageCanDeleteStep)
     const canDeleteButton = formStore(state => state.canDeleteButton)
     const manageLinkStep = useAccountTypeStore(state => state.manageSpecLinkStep)
+    const manageDetailDefaultLinkStep = useAccountPersonStore(state => state.managePersonSpecLinkStep)
     const updateAccountSubsidiaryId = useAccountTypeStore(state => state.updateAccountSpecId)
     const {data , isLoading , isRefetching , isError} = useAllAccountSpec('getAllAccountSpec')
     const [loading , setLaoding]  = useState(false)
@@ -29,14 +33,14 @@ const NewLinkSpecAccountTypeList = () => {
         return toast.error('دریافت با مشکل مواجه شد!')
     }
 
-
     const manageAddNewSpecLink = async ()=>{
-       setLaoding(true)
-        const res = await addNewSubsidiaryForAccountDetailType(Number(accountTypeId) , Number(accountSpecId) , `${canDeleteData}`).catch(()=>{
+        setLaoding(true)
+        const res = await addNewSubsidiaryForAccountDetailType(Number(accountTypeId) , Number(accountSubsidiaryId) , `${canDeleteData}`).catch((e)=>{
             manageCanDeleteStep()
             updatecanDeleteData()
-            return(toast.error('لینک سازی با مشکل مواجه شد'))
+            return(toast.error(e.response.data.errors.AccountDetailTypeId[0]))
         })
+
         if (res.status === 200){
             manageLinkStep()
             manageCanDeleteStep()
@@ -46,6 +50,34 @@ const NewLinkSpecAccountTypeList = () => {
         updateAccountSubsidiaryId()
         setLaoding(false)
     }
+
+
+    const manageAddNewSpecForAccountDetailDefault = async ()=>{
+        setLaoding(true)
+        const res = await addNewLinkForAccountDetailDefaultSubsidiary(`${accountDetailDefaultId}`, `${accountSubsidiaryId}`,`${canDeleteData}`).catch((e)=>{
+            manageCanDeleteStep()
+            updatecanDeleteData()
+            return(toast.error(e.response.data.errors.AccountDetailTypeId[0]))
+        })
+
+        if (res.status === 200){
+            manageDetailDefaultLinkStep()
+            manageCanDeleteStep()
+            updatecanDeleteData()
+            toast.success('لینک جدید ایجاد شد')
+        }
+        updateAccountSubsidiaryId()
+        setLaoding(false)
+
+    }
+
+
+    const stepFunction = {
+        'account-detail-type':manageAddNewSpecLink,
+        'account-default-detail-link':manageAddNewSpecForAccountDetailDefault,
+    }
+
+
 
 
     return(
@@ -80,7 +112,7 @@ const NewLinkSpecAccountTypeList = () => {
                                     updateAccountSubsidiaryId()
                                     updatecanDeleteData()
                                 }} light={true}>انصراف</Buttons>
-                                <Buttons light={true} onClick={manageAddNewSpecLink}>
+                                <Buttons light={true} onClick={stepFunction[step]}>
                                     {
                                         loading ?
                                             <LoadingText text={"ثبت لینک جدید"}/>

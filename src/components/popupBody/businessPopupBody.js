@@ -19,6 +19,7 @@ const BusinessPopupBody = () => {
     const informationList = [
         {title:"نام" , data:popupBody.businessName},
         {title:"شناسه کسب و کار" , data:popupBody.businessId},
+        {title:"شناسه یکتا" , data:popupBody.uniqueName},
         {title:"وضعیت کسب و کار" , data:popupBody.status === 0 ? "غیر فعال" : "فعال"},
         {title:"نوع کدینگ" , data:popupBody.accountCodingKindName},
     ]

@@ -24,11 +24,16 @@ const AccountDetailDefaultActionLayout = () => {
     const manageEditStep = useAccountPersonStore(state => state.managePersonEditStep)
     const manageDeleteStep = useAccountPersonStore(state => state. manageDeleteStep)
     const deleteStep = useAccountPersonStore(state => state.deletePersonStep)
-    const {data:defaultLink} = useGetFunction('getDefaultSubsidiary' , accountDetailDefaultId , getAccountDefaultDetailLink)
+    const {data:defaultLink , refetch:linkRefetch ,isLoading:linkLoading} = useGetFunction('getDefaultSubsidiary' , accountDetailDefaultId , getAccountDefaultDetailLink)
 
     useEffect(() => {
         refetch()
-    }, [editStep]);
+    }, [editStep, refetch]);
+
+
+    useEffect(() => {
+        linkRefetch()
+    }, [linkRefetch, linkStep]);
 
     if(isError){
         return  (toast.error('دریافت اطلاعات با مشکل مواجه شد!'))
@@ -53,7 +58,6 @@ const AccountDetailDefaultActionLayout = () => {
         setLoading(false)
     }
 
-    console.log(defaultLink , "link data setup")
 
     return(
         <div className={"relative w-full"}>
@@ -75,16 +79,17 @@ const AccountDetailDefaultActionLayout = () => {
                                         لینک های معین
                                     </div>
                                     <div className={'h-[100px] overflow-y-auto '}>
-                                        {/*{*/}
-                                        {/*    (isLoading || isRefetching) ?*/}
-                                        {/*        <LoadingComponents title={'درحال دریافت حساب معین'}/>*/}
-                                        {/*        :*/}
-                                        {/*        data.data.accountTypeSpecs.map((items, index) => (*/}
-                                        {/*            <AccountSpecShowCard*/}
-                                        {/*                key={'account-type-spec' + index + items.accountTypeSpecId}*/}
-                                        {/*                data={items}/>*/}
-                                        {/*        ))*/}
-                                        {/*}*/}
+                                        {
+                                            (linkLoading || isRefetching) ?
+                                                <LoadingComponents title={'درحال دریافت حساب معین'}/>
+                                                :
+                                                defaultLink.data.accountDetailDefaultLinks.map((items, index) => (
+                                                    <AccountSpecShowCard
+                                                        key={'account-type-spec' + index + items.accountTypeSpecId}
+                                                        step={'account-detail-default-link'}
+                                                        data={items}/>
+                                                ))
+                                        }
                                     </div>
                                 </div>
 
@@ -121,7 +126,7 @@ const AccountDetailDefaultActionLayout = () => {
                     </> :
                     <div className={'w-full relative'}>
                         <BackBtn onClick={manageLinkStep}/>
-                        <NewLinkSpecAccountTypeList/>
+                        <NewLinkSpecAccountTypeList step={'account-default-detail-link'}/>
                     </div>
             }
         </div>

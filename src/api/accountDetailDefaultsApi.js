@@ -138,3 +138,39 @@ export const deleteAccountDetailDefault =  (accountDetailDefaultId)=>{
         }
     })
 }
+
+export const addNewLinkForAccountDetailDefaultSubsidiary = (defaultId , subsidiaryId , canDelete)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method: 'post',
+        url: '/AccountDetailService/api/AccountDetailDefaultLinks/add',
+        headers: {
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            'Content-Type': 'application/json'
+        },
+        data:{
+            "accountDetailDefaultId": Number(defaultId),
+            "accountSubsidiaryId": Number(subsidiaryId),
+            "canDelete": Number(canDelete)
+        }
+    })
+}
+
+export const deleteNewLinkForAccountDetailDefaultSubsidiary = (linkId)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method: 'delete',
+        url: '/AccountDetailService/api/AccountDetailDefaultLinks/delete',
+        headers: {
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            'Content-Type': 'application/json'
+        },
+        data:{
+            "accountDetailDefaultLinkId": Number(linkId)
+        }
+    })
+}

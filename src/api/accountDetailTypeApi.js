@@ -87,7 +87,7 @@ export const editAccountDetailType = (data , accountDetailTypeId , accountCoding
             'Content-Type': 'application/json'
         },
         data:{
-            "AccountDetaiTypeId":Number(accountDetailTypeId),
+            "AccountDetailTypeId":Number(accountDetailTypeId),
             "accountCodingId":Number(accountCodingId),
             "accountDetailTypeCode":Number(data.accountDetailTypeCode),
             "accountDetailTypeName":data.accountDetailTypeName,
@@ -129,6 +129,26 @@ export const deleteAccountDetailTypeSubsidiary = (subsidiaryId)=>{
         },
         data: {
             "accountDetailTypeSubsidiaryId": Number(subsidiaryId),
+        }
+    })
+}
+
+export const editAccountDetailTypeSubsidiary = (accountDetailTypeSubsidiaryId , detailTypeId , SubsidiaryId ,canDelete)=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method:"delete",
+        url:'/AccountDetailTypeService/api/AccountDetailTypeSubsidiaries/delete',
+        headers:{
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            'Content-Type': 'application/json'
+        },
+        data: {
+            "accountDetailTypeSubsidiaryId": Number(accountDetailTypeSubsidiaryId),
+            "accountDetailTypeId": Number(detailTypeId),
+            "accountSubsidiaryId": Number(SubsidiaryId),
+            "canDelete": Number(canDelete)
         }
     })
 }

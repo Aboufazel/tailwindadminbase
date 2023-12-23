@@ -10,6 +10,11 @@ export const businessTableHead = [
         render: (row) => row.businessName,
     },
     {
+        name: "uniqueName",
+        title: "شناسه یکتا",
+        render: (row) => row.uniqueName,
+    },
+    {
         name: "isActive",
         title: "وضعیت",
         render: (row) => (row.isActive === 1 ? "فعال" : "غیر فعال"),
