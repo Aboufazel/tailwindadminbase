@@ -8,14 +8,14 @@ import useAccountPersonStore from "../../../zustand/accountPersonStore";
 const CreateAccountDefaultPerson = () => {
     const accountCodingId = useStore(state => state.codingKindId)
     const showFormStatus = useAccountPersonStore(state => state.showFormStatus);
-    const accountTypeName = useAccountPersonStore(state => state.accountTypeName);
+    const accountDetailTypeName = useAccountPersonStore(state => state.accountTypeName);
     const updateAccountTypeId = useAccountPersonStore(state => state.updatePersonAccountTypeId);
     const updateAccountTypeName = useAccountPersonStore(state => state.updateAccountTypeName);
     const manageShowFormStatus = useAccountPersonStore(state => state.manageShowFormStatus);
 
     const {data ,
         isError ,
-        isLoading}  = useAllAccountTypesByCoding('accountTypesById' , accountCodingId)
+        isLoading}  = useAllAccountTypesByCoding('accountDetailTypesById' , accountCodingId)
 
     if (isLoading){
         return (<LoadingComponents title={"در حال دریافت حساب های تفضیلی"}/> )
@@ -30,19 +30,19 @@ const CreateAccountDefaultPerson = () => {
             <ul className={"w-1/2"}>
                 <p className={"font-bold text-[16px] dark:text-white text-text-color-2 mb-[20px]"}>لیست انواع حساب ها</p>
                 {
-                    data.data.accountTypes.map((item , index)=>(
+                    data.data.accountDetailTypes.map((item , index)=>(
                         <li key={'account-spec-person-link' + index}
                             onClick={()=>{
                                 manageShowFormStatus()
-                                updateAccountTypeName(item.accountTypeName)
-                                updateAccountTypeId(item.accountTypeId)
+                                updateAccountTypeName(item.accountDetailTypeName)
+                                updateAccountTypeId(item.accountDetailTypeId)
                             }}
                             className={`cursor-pointer 
                             transition-all 
                             duration-100 hover:font-bold
-                            ${item.accountTypeName === accountTypeName ? "text-primary-main font-bold" : "dark:text-text-color-3 text-text-color-1 font-medium"} 
+                            ${item.accountDetailTypeName === accountDetailTypeName ? "text-primary-main font-bold" : "dark:text-text-color-3 text-text-color-1 font-medium"} 
                             hover:text-primary-main my-4`}>
-                            {item.accountTypeName}
+                            {item.accountDetailTypeName}
                         </li>
                     ))
                 }

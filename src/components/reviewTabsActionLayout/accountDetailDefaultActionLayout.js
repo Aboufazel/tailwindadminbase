@@ -1,28 +1,34 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import useReviewTabStore from "../../zustand/reviewTabStore";
 import BackBtn from "./actionComponents/backBtn";
-import {useGetPersonById} from "../../hooks/coding";
+import {useGetFunction, useGetPersonById} from "../../hooks/coding";
 import useAccountPersonStore from "../../zustand/accountPersonStore";
-import useAccountTypeStore from "../../zustand/accountTypeStore";
 import {toast} from "react-toastify";
 import LoadingComponents from "../loading/loadingComponents";
 import Buttons from "../globals/Buttons";
 import NewLinkSpecAccountTypeList from "./actionComponents/newLinkSpecAccountTypeList";
-import {deleteAccountPerson} from "../../api/accountDefaultPersonApi";
+import {deleteAccountDetailDefault, getAccountDefaultDetailLink} from "../../api/accountDetailDefaultsApi";
 import EditPersonForm from "./actionComponents/editPersonForm";
+import ShowDetailComponents from "../showDetailComponents/showDetailComponents";
+import LoadingText from "../loadingText/loadingText";
+import AccountSpecShowCard from "./actionComponents/accountSpecShowCard";
 
-const AccountPersonActionLayout = () => {
+const AccountDetailDefaultActionLayout = () => {
+    const [loading ,setLoading] = useState(false)
     const editStep = useAccountPersonStore(state => state.editPersonStep)
     const linkStep = useAccountPersonStore(state => state.specPersonLinkStep)
     const manageActionLayout = useReviewTabStore(state => state.manageActionLayout)
-    const accountPersonId = useAccountPersonStore(state => state.accountPersonId)
-    const {data , isLoading , isError , isRefetching} = useGetPersonById("getPersonByID" , accountPersonId)
+    const accountDetailDefaultId = useAccountPersonStore(state => state.accountPersonId)
+    const {data , isLoading ,refetch ,isError , isRefetching} = useGetPersonById("getPersonByID" , accountDetailDefaultId)
     const manageLinkStep = useAccountPersonStore(state => state.managePersonSpecLinkStep)
     const manageEditStep = useAccountPersonStore(state => state.managePersonEditStep)
-    const updateDeleteStep = useAccountTypeStore(state => state.updateDeleteStep)
+    const manageDeleteStep = useAccountPersonStore(state => state. manageDeleteStep)
     const deleteStep = useAccountPersonStore(state => state.deletePersonStep)
+    const {data:defaultLink} = useGetFunction('getDefaultSubsidiary' , accountDetailDefaultId , getAccountDefaultDetailLink)
 
-
+    useEffect(() => {
+        refetch()
+    }, [editStep]);
 
     if(isError){
         return  (toast.error('دریافت اطلاعات با مشکل مواجه شد!'))
@@ -30,20 +36,24 @@ const AccountPersonActionLayout = () => {
 
 
     const accountPersonInformationList = [
-        {title:"نام حساب" , data:data?.data.defaultPersons[0].defaultPersonName},
-        {title:"کد حساب" , data:data?.data.defaultPersons[0].defaultPersonCode},
-        {title:"نوع حساب" , data:data?.data.defaultPersons[0].accountTypeId},
-        {title:"وضعیت" , data:data?.data.defaultPersons[0].canDelete === 1 ? 'غیر قابل حذف' : 'قابل حذف'},
+        {title:"نام حساب" , data:data?.data.accountDetailDefaults[0].accountDetailDefaultName},
+        {title:"کد حساب" , data:data?.data.accountDetailDefaults[0].accountDetailDefaultCode},
+        {title:"نوع حساب" , data:data?.data.accountDetailDefaults[0].accountDetailTypeId},
+        {title:"وضعیت" , data:data?.data.accountDetailDefaults[0].canDelete === 1 ? 'غیر قابل حذف' : 'قابل حذف'},
     ]
 
     const manageDeleteDefaultPerson = async ()=>{
-        await deleteAccountPerson(accountPersonId).catch(()=>{
+        setLoading(true)
+        await deleteAccountDetailDefault(accountDetailDefaultId).catch(()=>{
             return (toast.error("حذف با مشکل مواجه شد"))
         })
         manageActionLayout()
-        updateDeleteStep()
+        manageDeleteStep()
         toast.success("حساب با موفقیت حذف شد")
+        setLoading(false)
     }
+
+    console.log(defaultLink , "link data setup")
 
     return(
         <div className={"relative w-full"}>
@@ -53,44 +63,29 @@ const AccountPersonActionLayout = () => {
                         <BackBtn onClick={manageActionLayout}/>
                         {!editStep ?
                             <div className={"flex flex-col pt-14"}>
-                                <div className={'w-full'}>
-                                    <div className={'bg-primary-extraLight p-1 font-medium text-[14px] w-full'}>
-                                        اطلاعات
-                                    </div>
-                                    {
-                                        (isLoading || isRefetching) ?
-                                            <LoadingComponents title={'دریافت اطلاعات نوع حساب'}/>
-                                            :
-                                            <ul className={"mt-5 px-5"}>
-                                                {
-                                                    accountPersonInformationList.map((items, index) => (
-                                                        <li key={"accountType-list-info" + index}
-                                                            className={"flex flex-row items-center w-full justify-between mb-3"}>
-                                                            <p>{items?.title}</p>
-                                                            <p className={"font-medium text-text-color-1"}>{items?.data}</p>
-                                                        </li>
-                                                    ))
-                                                }
-                                            </ul>
-                                    }
-                                </div>
+                                {
+                                    (isLoading || isRefetching) ?
+                                        <LoadingComponents title={'دریافت اطلاعات حساب تفضیلی'}/>
+                                        :
+                                        <ShowDetailComponents cls={""} data={accountPersonInformationList}/>
+                                }
 
                                 <div className={'w-full mt-6'}>
                                     <div className={'bg-primary-extraLight p-1 font-medium text-[14px] w-full'}>
                                         لینک های معین
                                     </div>
-                                    {/*<div className={'h-[100px] overflow-y-auto '}>*/}
-                                    {/*    {*/}
-                                    {/*        (isLoading || isRefetching) ?*/}
-                                    {/*            <LoadingComponents title={'درحال دریافت حساب معین'}/>*/}
-                                    {/*            :*/}
-                                    {/*            data.data.accountTypeSpecs.map((items, index) => (*/}
-                                    {/*                <AccountSpecShowCard*/}
-                                    {/*                    key={'account-type-spec' + index + items.accountTypeSpecId}*/}
-                                    {/*                    data={items}/>*/}
-                                    {/*            ))*/}
-                                    {/*    }*/}
-                                    {/*</div>*/}
+                                    <div className={'h-[100px] overflow-y-auto '}>
+                                        {/*{*/}
+                                        {/*    (isLoading || isRefetching) ?*/}
+                                        {/*        <LoadingComponents title={'درحال دریافت حساب معین'}/>*/}
+                                        {/*        :*/}
+                                        {/*        data.data.accountTypeSpecs.map((items, index) => (*/}
+                                        {/*            <AccountSpecShowCard*/}
+                                        {/*                key={'account-type-spec' + index + items.accountTypeSpecId}*/}
+                                        {/*                data={items}/>*/}
+                                        {/*        ))*/}
+                                        {/*}*/}
+                                    </div>
                                 </div>
 
                                 <div className={"flex flex-row items-center w-full justify-center mt-8 gap-5"}>
@@ -99,7 +94,7 @@ const AccountPersonActionLayout = () => {
                                             <>
                                                 <Buttons onClick={manageLinkStep} light={true}>لینک جدید</Buttons>
                                                 <Buttons onClick={manageEditStep} light={true}>ویرایش</Buttons>
-                                                <Buttons onClick={updateDeleteStep} light={true}>حذف</Buttons>
+                                                <Buttons onClick={manageDeleteStep} light={true}>حذف</Buttons>
                                             </> :
                                             <div className={"w-full"}>
                                                 <p className={"text-danger-600 font-medium text-[14px]"}>آیا حساب تفضیلی را حذف
@@ -107,9 +102,11 @@ const AccountPersonActionLayout = () => {
                                                 <p className={"text-text-color-2 mt-2"}>با حذف حساب تفضیلی دسترسی به آن دیگر وجود
                                                     ندارد</p>
                                                 <div className={"flex flex-row justify-end gap-3 items-center"}>
-                                                    <Buttons onClick={updateDeleteStep} light={true}>{"انصراف"}</Buttons>
+                                                    <Buttons onClick={manageDeleteStep} light={true}>{"انصراف"}</Buttons>
                                                     <Buttons onClick={manageDeleteDefaultPerson} color={"danger"}
-                                                             light={true}>{"تایید"}</Buttons>
+                                                             light={true}>
+                                                        {loading ? <LoadingText text={"تایید"}/> :  "تایید"}
+                                                    </Buttons>
                                                 </div>
                                             </div>
                                     }
@@ -118,7 +115,7 @@ const AccountPersonActionLayout = () => {
                             :
                             <div className={'w-full relative'}>
                                 <BackBtn onClick={manageEditStep}/>
-                                <EditPersonForm/>
+                                <EditPersonForm refetch={refetch}/>
                             </div>
                         }
                     </> :
@@ -131,4 +128,4 @@ const AccountPersonActionLayout = () => {
     )
 }
 
-export default AccountPersonActionLayout;
+export default AccountDetailDefaultActionLayout;

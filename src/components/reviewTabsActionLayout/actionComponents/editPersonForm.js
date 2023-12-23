@@ -1,28 +1,25 @@
 import {useGetPersonById} from "../../../hooks/coding";
 import useAccountPersonStore from "../../../zustand/accountPersonStore";
-import {addAccountPersonInputs} from "../../../data/accountPersonInputData";
+import {addAccountDetailDefaultInputs} from "../../../data/accountDetailDefaultInputData";
 import Inputs from "../../globals/inputs/inputs";
 import Buttons from "../../globals/Buttons";
 import {Spinner} from "@material-tailwind/react";
 import React, {useState} from "react";
-import useStore from "../../../zustand/store";
 import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {addAccountDefaultPerson} from "../../../api/accountDefaultPersonApi";
 import {toast} from "react-toastify";
 import LoadingComponents from "../../loading/loadingComponents";
+import {editAccountDetailDefaults} from "../../../api/accountDetailDefaultsApi";
 
-const EditPersonForm = () => {
+const EditPersonForm = ({refetch}) => {
     const [loading, setLoading] = useState(false);
-    const accountPersonId = useAccountPersonStore(state => state.accountPersonId)
-    const {data , isLoading , isError} = useGetPersonById("getPersonByID" , accountPersonId)
-
-    const accountTypeId = useAccountPersonStore(state => state.accountTypeId)
-    const accountCodingId = useStore(state => state.codingKindId)
+    const manageEditStep = useAccountPersonStore(state => state.managePersonEditStep)
+    const accountDetailDefaultId = useAccountPersonStore(state => state.accountPersonId)
+    const {data:detailDefaultData , isRefetching ,isLoading , isError} = useGetPersonById("getDetailDefaultByID" , accountDetailDefaultId)
     const formValidate = yup.object().shape({
-        accountPersonName:yup.string().required("وارد کردن نام اجباری است"),
-        accountPersonCode:yup.string().required("وارد کردن کد اجباری است"),
+        accountDetailDefaultName:yup.string().required("وارد کردن نام اجباری است"),
+        accountDetailDefaultCode:yup.number().required("وارد کردن کد اجباری است").min(1,"کد نباید کمتر از ۱ باشد").max(100 , "کد نباید بیشتر از ۱۰۰ باشد"),
     });
     const {register ,
         handleSubmit,
@@ -32,7 +29,7 @@ const EditPersonForm = () => {
         resolver:yupResolver(formValidate)
     });
 
-    if (isLoading){
+    if (isLoading || isRefetching){
         return(<LoadingComponents title={"دریافت اطلاعات حساب"}/> )
     }
 
@@ -43,15 +40,20 @@ const EditPersonForm = () => {
 
     const onFormSubmit = async (data) =>{
         setLoading(!loading)
-        // const res = await addAccountDefaultPerson(data , accountCodingId , accountTypeId).catch(() => {
-        //     toast.error("ثبت انجام نشد")
-        //     setLoading(false)
-        // })
-        // if (res?.status === 200){
-        //     toast.success("حساب تفضیلی با موفقیت ثبت شد")
-        //     reset()
-        //     setLoading(false)
-        // }
+        const res = await editAccountDetailDefaults(data ,
+            `${accountDetailDefaultId}`,
+            `${detailDefaultData?.data.accountDetailDefaults[0].accountDetailTypeId}`,
+            `${detailDefaultData?.data.accountDetailDefaults[0].accountCodingId}`,
+            ).catch(() => {
+            toast.error("ویرایش انجام نشد")
+        })
+        if (res?.status === 200){
+            toast.success("حساب تفضیلی با ویرایش ثبت شد")
+            reset()
+            manageEditStep()
+            refetch()
+        }
+        setLoading(false)
     }
 
 
@@ -60,7 +62,7 @@ const EditPersonForm = () => {
         <form onSubmit={handleSubmit(onFormSubmit)} className={"flex flex-col w-full items-center mt-[16px]"}>
             <div className={"flex flex-col w-full"}>
                 {
-                    addAccountPersonInputs.map((item , index)=> (
+                    addAccountDetailDefaultInputs.map((item , index)=> (
                         <Inputs type={item.type}
                                 iClass={item.width}
                                 key={"input-value"+index}
@@ -70,16 +72,19 @@ const EditPersonForm = () => {
                                 label={item.inputLabel}
                                 inputType={item.inputType}
                                 defaultValue={
-                                  index === 0 ? data.data.defaultPersons[0].defaultPersonCode
+                                  index === 0 ? detailDefaultData?.data.accountDetailDefaults[0].accountDetailDefaultCode
                                       :
-                                  index === 1  ? data.data.defaultPersons[0].defaultPersonName : ""
+                                  index === 1  ? detailDefaultData?.data.accountDetailDefaults[0].accountDetailDefaultName : ""
                                 }
                         />
                     ))
                 }
                 <div className={"flex flex-row-reverse w-full mt-5 pr-3 justify-end items-center gap-2"}>
                     <p className={"text-[14px]"}>غیر قابل حذف است</p>
-                    <input {...(register && register("canDelete"))} type="checkbox" id="canDelete" name="canDelete" value="0"/>
+                    <input defaultChecked={detailDefaultData?.data.accountDetailDefaults[0].canDelete === 1}
+                           {...(register && register("canDelete"))}
+                           type="checkbox" id="canDelete"
+                           name="canDelete"/>
                 </div>
             </div>
             <div className={"flex flex-row justify-end w-full mt-5"}>
@@ -88,9 +93,9 @@ const EditPersonForm = () => {
                         loading ?
                             <p className={"flex flex-row items-center justify-center gap-3"}>
                                 <Spinner/>
-                                {"ثبت"}
+                                {"ویرایش"}
                             </p>
-                            : "ثبت"
+                            : "ویرایش"
                     }
                 </Buttons>
             </div>

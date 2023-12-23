@@ -1,4 +1,4 @@
-import {addAccountPersonInputs} from "../../data/accountPersonInputData";
+import {addAccountDetailDefaultInputs} from "../../data/accountDetailDefaultInputData";
 import Inputs from "../globals/inputs/inputs";
 import React, {useState} from "react";
 import Buttons from "../globals/Buttons";
@@ -7,16 +7,16 @@ import {toast} from "react-toastify";
 import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {addAccountDefaultPerson} from "../../api/accountDefaultPersonApi";
+import {addAccountDetailDefaults} from "../../api/accountDetailDefaultsApi";
 import useAccountPersonStore from "../../zustand/accountPersonStore";
 import useStore from "../../zustand/store";
 const CreateAccountPersonForm = () => {
    const [loading, setLoading] = useState(false);
-   const accountTypeId = useAccountPersonStore(state => state.accountTypeId)
+   const accountDetailTypeId = useAccountPersonStore(state => state.accountTypeId)
    const accountCodingId = useStore(state => state.codingKindId)
    const formValidate = yup.object().shape({
-      accountPersonName:yup.string().required("وارد کردن نام اجباری است"),
-      accountPersonCode:yup.string().required("وارد کردن کد اجباری است"),
+      accountDetailDefaultName:yup.string().required("وارد کردن نام اجباری است"),
+      accountDetailDefaultCode:yup.number().required("وارد کردن کد اجباری است").min(1,"کد نباید کمتر از ۱ باشد").max(100 , "کد نباید بیشتر از ۱۰۰ باشد"),
    });
    const {register ,
       handleSubmit,
@@ -27,7 +27,7 @@ const CreateAccountPersonForm = () => {
    });
    const onFormSubmit = async (data) =>{
       setLoading(!loading)
-      const res = await addAccountDefaultPerson(data , accountCodingId , accountTypeId).catch(() => {
+      const res = await addAccountDetailDefaults(data , accountCodingId , accountDetailTypeId).catch(() => {
          toast.error("ثبت انجام نشد")
          setLoading(false)
       })
@@ -43,7 +43,7 @@ const CreateAccountPersonForm = () => {
        <form onSubmit={handleSubmit(onFormSubmit)} className={"flex flex-col w-full items-center mt-[16px]"}>
           <div className={"flex flex-col w-full"}>
              {
-                addAccountPersonInputs.map((item , index)=> (
+                addAccountDetailDefaultInputs.map((item , index)=> (
                     <Inputs type={item.type}
                             iClass={item.width}
                             key={"input-value"+index}
@@ -56,7 +56,10 @@ const CreateAccountPersonForm = () => {
              }
              <div className={"flex flex-row-reverse w-full mt-5 pr-3 justify-end items-center gap-2"}>
                 <p className={"dark:text-text-color-3 text-[14px]"}>غیر قابل حذف است</p>
-                <input {...(register && register("canDelete"))} type="checkbox" id="canDelete" name="canDelete" value="0"/>
+                <input {...(register && register("canDelete"))}
+                       type="checkbox" id="canDelete"
+                       name="canDelete"
+                       value="1"/>
              </div>
           </div>
           <div className={"flex flex-row justify-end w-full mt-5"}>

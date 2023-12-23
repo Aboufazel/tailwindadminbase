@@ -3,8 +3,8 @@ import {create} from "zustand";
 const useReviewTabStore = create((set)=>({
     reviewStep:'coding-account-group',
     accountGroupName: '',
-    accountMainName: 'حساب های کل',
-    accountSpecName: 'حساب های معین',
+    accountMainName:'حساب های کل',
+    accountSpecName:'حساب های معین',
     codingAccountGroupId:'',
     codingAccountMainId:'',
     codingAccountSpecId:'',

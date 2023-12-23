@@ -1,18 +1,23 @@
 import {useGetAllAccountPerson} from "../../hooks/coding";
 import Tables from "../globals/tables/tables";
 import useStore from "../../zustand/store";
-import {personsTableHead} from "../../data/personLayoutData";
+import {accountDetailDefaultTableHead} from "../../data/accountDetailDefaultLayoutData";
 import useReviewTabStore from "../../zustand/reviewTabStore";
 import LoadingComponents from "../loading/loadingComponents";
 import {toast} from "react-toastify";
-import AccountPersonActionLayout from "../reviewTabsActionLayout/accountPersonActionLayout";
+import AccountDetailDefaultActionLayout from "../reviewTabsActionLayout/accountDetailDefaultActionLayout";
+import {useEffect} from "react";
 
 const DefaultTabs = () => {
   const codingId = useStore(state => state.codingKindId)
   const actionLayout = useReviewTabStore(state => state.actionLayout)
-  const {data , isLoading , isError} = useGetAllAccountPerson("getAllPersons" , codingId)
+  const {data , isLoading ,refetch,isRefetching ,isError} = useGetAllAccountPerson("getAllDetailDefault" , codingId)
 
-  if(isLoading){
+  useEffect(() => {
+    refetch()
+  }, [actionLayout]);
+
+  if(isLoading || isRefetching){
     return (<LoadingComponents title={"دریافت حساب های تفضیلی"}/> )
   }
 
@@ -24,9 +29,9 @@ const DefaultTabs = () => {
 
   return(
       actionLayout ?
-         <AccountPersonActionLayout/>
+         <AccountDetailDefaultActionLayout/>
       :
-          <Tables data={data.data.defaultPersons} step={'accountPerson'}  headers={personsTableHead}/>
+          <Tables data={data.data.accountDetailDefaults} step={'accountDetailDefault'}  headers={accountDetailDefaultTableHead}/>
   )
 }
 

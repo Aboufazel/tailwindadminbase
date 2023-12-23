@@ -12,6 +12,7 @@ const useAccountPersonStore = create((set)=>({
     canPersonDeleteStep:false,
     manageCanDeletePersonStep:()=>set((state)=>({canPersonDeleteStep:state.canPersonDeleteStep !== true})),
     managePersonSpecCardAction:()=>set((state)=>({specPersonCardAction:state.specPersonCardAction !== true})),
+    manageDeleteStep:()=>set((state)=>({deletePersonStep:state.deletePersonStep !== true})),
     managePersonSpecLinkStep:()=>set((state)=>({specPersonLinkStep:state.specPersonLinkStep !== true})),
     managePersonEditStep:()=>set((state)=>({editPersonStep:state.editPersonStep !== true})),
     updateAccountPersonId:(accountPersonId) => set(() => ({ accountPersonId: accountPersonId })),

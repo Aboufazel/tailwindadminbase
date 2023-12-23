@@ -10,7 +10,12 @@ import {
     getAccountDetailTypeByCodingId, getAccountDetailTypeById, getAllAccountDetailTypeSubsidiaryAccountDetailTypeId,
 } from "../api/accountDetailTypeApi";
 import {getAccountGroupById} from "../api/accountGroupApi";
-import {getAccountPersonById, getAllAccountDefaultLinks, getAllAccountPerson} from "../api/accountDefaultPersonApi";
+import {
+    getAccountDetailDefaultById,
+    getAccountPersonById,
+    getAllAccountDefaultLinks,
+    getAllAccountDetailDefault,
+} from "../api/accountDetailDefaultsApi";
 import {getAllRevenueModel} from "../api/revenueModelApi";
 const useAllCodingAccount = (queryKey)=>{
     return useQuery({
@@ -113,14 +118,14 @@ const useGetAllAccountPersonLinks = (queryKey)=>{
 const useGetAllAccountPerson = (queryKey , codingId)=>{
     return useQuery({
         queryKey:[queryKey],
-        queryFn:()=>getAllAccountPerson(codingId)
+        queryFn:()=>getAllAccountDetailDefault(codingId)
     })
 }
 
-const useGetPersonById = (queryKey , personId)=>{
+const useGetPersonById = (queryKey , detailDefaultId)=>{
     return useQuery({
         queryKey:[queryKey],
-        queryFn:()=>getAccountPersonById(personId)
+        queryFn:()=>getAccountDetailDefaultById(detailDefaultId)
     })
 }
 

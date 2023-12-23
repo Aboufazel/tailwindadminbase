@@ -79,9 +79,9 @@ const Tables = ({headers , data ,bodyId , step}) => {
                                }else if(step === 'accountDetailType'){
                                    updateAccountTypeId(row.accountDetailTypeId)
                                    manageActionLayout()
-                               }else if(step === "accountPerson"){
+                               }else if(step === "accountDetailDefault"){
                                    manageActionLayout()
-                                   updateAccountPersonId(row.defaultPersonId)
+                                   updateAccountPersonId(row.accountDetailDefaultId)
                                }else if(step === 'revenueModel'){
                                    updateRevenueModelId(row.revenueModelId)
                                    manageRevenueActionLayout()

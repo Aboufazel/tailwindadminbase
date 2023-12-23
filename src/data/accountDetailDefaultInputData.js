@@ -1,11 +1,11 @@
-export const addAccountPersonInputs = [
+export const addAccountDetailDefaultInputs = [
     {
         inputLabel:"کد *",
         inputPlaceholder:"کد را وارد نمایید...",
         required:true,
         type:"input",
-        inputType:"text",
-        inputName:"accountPersonCode",
+        inputType:"number",
+        inputName:"accountDetailDefaultCode",
         width:'w-1/2'
     },{
         inputLabel:"نام حساب تفضیلی *",
@@ -13,7 +13,7 @@ export const addAccountPersonInputs = [
         required:true,
         type:"input",
         inputType:"text",
-        inputName:"accountPersonName",
+        inputName:"accountDetailDefaultName",
         width:'w-1/2'
     }
 
