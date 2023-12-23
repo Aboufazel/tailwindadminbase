@@ -85,6 +85,7 @@ const AccountDetailDefaultActionLayout = () => {
                                                 :
                                                 defaultLink.data.accountDetailDefaultLinks.map((items, index) => (
                                                     <AccountSpecShowCard
+                                                        refetch={linkRefetch}
                                                         key={'account-type-spec' + index + items.accountTypeSpecId}
                                                         step={'account-detail-default-link'}
                                                         data={items}/>

@@ -1,11 +1,15 @@
 import Buttons from "../../globals/Buttons";
 import React, {useState} from "react";
 import useAccountTypeStore from "../../../zustand/accountTypeStore";
-import {CloseSquare, Delete} from "react-iconly";
+import {CloseSquare, Delete, Edit} from "react-iconly";
 import LoadingText from "../../loadingText/loadingText";
-import {deleteAccountDetailTypeSubsidiary} from "../../../api/accountDetailTypeApi";
+import {deleteAccountDetailTypeSubsidiary, editAccountDetailTypeSubsidiary} from "../../../api/accountDetailTypeApi";
 import {toast} from "react-toastify";
-import {deleteNewLinkForAccountDetailDefaultSubsidiary} from "../../../api/accountDetailDefaultsApi";
+import {
+    deleteNewLinkForAccountDetailDefaultSubsidiary,
+    editNewLinkForAccountDetailDefaultSubsidiary
+} from "../../../api/accountDetailDefaultsApi";
+import formStore from "../../../zustand/formStore";
 
 const AccountSpecShowCard = ({data , refetch , step='account-detail-type'}) =>{
     const [loading , setLaoding] = useState(false)
@@ -13,7 +17,11 @@ const AccountSpecShowCard = ({data , refetch , step='account-detail-type'}) =>{
     const manageSpecCardAction = useAccountTypeStore(state => state.manageSpecCardAction)
     const updateAccountSubsidiaryId = useAccountTypeStore(state => state.updateAccountSpecId)
     const subsidiaryId = useAccountTypeStore(state => state.accountSpecId)
-
+    const editLinkAction = useAccountTypeStore(state => state.editLinkAction)
+    const canDeleteButton = formStore(state => state.canDeleteButton)
+    const manageEditLinkAction = useAccountTypeStore(state => state.manageEditLinkAction)
+    const canDeleteData = useAccountTypeStore(state => state.canDeleteData)
+    const updateCanDeleteData = useAccountTypeStore(state => state.updateCanDeleteData)
     const manageDeleteLink = async ()=>{
         setLaoding(true)
         const res = await deleteAccountDetailTypeSubsidiary(data.accountDetailTypeSubsidiaryId).catch(()=>{
@@ -47,9 +55,59 @@ const AccountSpecShowCard = ({data , refetch , step='account-detail-type'}) =>{
         setLaoding(false)
     }
 
+
+    console.log(data , "subsidiary link data")
+
+    const editAccountDetailTypeLink = async ()=>{
+        setLaoding(true)
+        const res = await editAccountDetailTypeSubsidiary(
+            `${data.accountDetailTypeSubsidiaryId}` ,
+            `${data.accountDetailTypeId}` ,
+            `${data.accountSubsidiaryId}` ,
+            `${canDeleteData}` ).catch((e)=>{
+            return(
+                toast.error(e.response.data.value.message)
+            )
+        })
+        if (res.status === 200){
+            refetch()
+            toast.success("لینک با موفقیت ویرایش شد!")
+        }
+        updateAccountSubsidiaryId()
+        manageEditLinkAction()
+        updateCanDeleteData()
+        setLaoding(false)
+    }
+
+    const editAccountDetailDefaultLink = async ()=>{
+        setLaoding(true)
+        const res = await editNewLinkForAccountDetailDefaultSubsidiary(
+            `${data.accountDetailDefaultLinkId}` ,
+            `${data.accountDetailDefaultId}` ,
+            `${data.accountSubsidiaryId}` ,
+            `${canDeleteData}` ).catch((e)=>{
+            return(
+                toast.error(e.response.data.value.message)
+            )
+        })
+        if (res.status === 200){
+            refetch()
+            toast.success("لینک با موفقیت ویرایش شد!")
+        }
+        updateAccountSubsidiaryId()
+        manageEditLinkAction()
+        updateCanDeleteData()
+        setLaoding(false)
+    }
+
     const deleteLinkFunction = {
         'account-detail-type' : manageDeleteLink,
         'account-detail-default-link' : manageDeleteDefaultLink,
+    }
+
+    const editLinkFunction = {
+        'account-detail-type' : editAccountDetailTypeLink,
+        'account-detail-default-link' : editAccountDetailDefaultLink,
     }
 
     return(
@@ -84,13 +142,51 @@ const AccountSpecShowCard = ({data , refetch , step='account-detail-type'}) =>{
                                 </Buttons>
                             </div>
                         </div>
-                    :
-                        <Buttons onClick={()=>{
-                            manageSpecCardAction()
-                            updateAccountSubsidiaryId(data.accountDetailTypeSubsidiaryId)
-                        }} light={true} color={'danger'} rounded={true} icon={true}>
-                            <Delete/>
-                        </Buttons>
+                    : (editLinkAction && data.accountDetailTypeSubsidiaryId === subsidiaryId) ?
+
+                            <div className={"flex flex-row items-center w-full"}>
+                                <div className={"flex flex-row items-center gap-3 justify-start w-1/2"}>
+                                    {
+                                        canDeleteButton.map((items, index) => (
+                                            <div key={items.id + index} onClick={() => updateCanDeleteData(items.value)}
+                                                 className={`cursor-pointer 
+                                     ${canDeleteData === items.value ? 'bg-primary-extraLight border-primary-main' : 'border-text-color-3'} 
+                                      w-[135px] py-2 rounded-[8px] text-center border`}>
+                                                {items.title}
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                                <div className={"flex flex-row items-center gap-3 justify-end w-1/2"}>
+                                    <Buttons onClick={manageEditLinkAction} light={true} rounded={true} icon={true}>
+                                        <CloseSquare/>
+                                    </Buttons>
+                                    <Buttons onClick={editLinkFunction[step]} light={true} color={'warning'} rounded={true} icon={true}>
+                                        {
+                                            loading ?
+                                                <LoadingText text={<Edit/>}/>
+                                                :
+                                                <Edit/>
+                                        }
+                                    </Buttons>
+                                </div>
+                            </div>
+
+
+                       : <div className={'flex flex-row items-center gap-3'}>
+                            <Buttons onClick={()=>{
+                                manageEditLinkAction()
+                                updateAccountSubsidiaryId(data.accountDetailTypeSubsidiaryId)
+                            }} light={true} color={'warning'} rounded={true} icon={true}>
+                                <Edit/>
+                            </Buttons>
+                            <Buttons onClick={()=>{
+                                manageSpecCardAction()
+                                updateAccountSubsidiaryId(data.accountDetailTypeSubsidiaryId)
+                            }} light={true} color={'danger'} rounded={true} icon={true}>
+                                <Delete/>
+                            </Buttons>
+                        </div>
                 }
             </div>
         </div>

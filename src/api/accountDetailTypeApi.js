@@ -137,8 +137,8 @@ export const editAccountDetailTypeSubsidiary = (accountDetailTypeSubsidiaryId , 
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
     return BaseUrl({
-        method:"delete",
-        url:'/AccountDetailTypeService/api/AccountDetailTypeSubsidiaries/delete',
+        method:"put",
+        url:'/AccountDetailTypeService/api/AccountDetailTypeSubsidiaries/edit',
         headers:{
             "selfUserId": userAuthData.userId,
             "Authorization": userAuthData.accessToken,

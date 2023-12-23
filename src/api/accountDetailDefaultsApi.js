@@ -158,6 +158,26 @@ export const addNewLinkForAccountDetailDefaultSubsidiary = (defaultId , subsidia
     })
 }
 
+export const editNewLinkForAccountDetailDefaultSubsidiary = (accountDetailDefaultLinkId , accountDetailDefaultId , accountSubsidiaryId , canDelete )=>{
+    const storageData = localStorage.getItem("auth")
+    const userAuthData = JSON.parse(storageData);
+    return BaseUrl({
+        method: 'put',
+        url: '/AccountDetailService/api/AccountDetailDefaultLinks/edit',
+        headers: {
+            "selfUserId": userAuthData.userId,
+            "Authorization": userAuthData.accessToken,
+            'Content-Type': 'application/json'
+        },
+        data:{
+            "accountDetailDefaultLinkId": Number(accountDetailDefaultLinkId),
+            "accountDetailDefaultId": Number(accountDetailDefaultId),
+            "accountSubsidiaryId": Number(accountSubsidiaryId),
+            "canDelete": Number(canDelete)
+        }
+    })
+}
+
 export const deleteNewLinkForAccountDetailDefaultSubsidiary = (linkId)=>{
     const storageData = localStorage.getItem("auth")
     const userAuthData = JSON.parse(storageData);
