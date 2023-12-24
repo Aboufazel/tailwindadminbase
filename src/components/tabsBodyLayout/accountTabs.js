@@ -40,7 +40,7 @@ const AccountTabs = () => {
         actionLayout ?
             <AccountDetailTypeAction/>
             :
-            <Tables bodyId={'coding'} step={'accountDetailType'} headers={codingAccountTypesTableHead} data={data.data.accountDetailTypes}/>
+            <Tables step={'accountDetailType'} headers={codingAccountTypesTableHead} data={data.data.accountDetailTypes}/>
     )
 }
 
